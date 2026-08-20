@@ -1,0 +1,147 @@
+---
+import Base from '../layouts/Base.astro';
+import { me } from '../data.js';
+
+const title = 'Ahmet Emin Tayfur';
+const description =
+  'Statistics graduate in Istanbul working toward product management. Currently building GrammarLens, an English grammar app for iOS.';
+---
+
+<Base title={title} description={description}>
+  <section class="row">
+    <aside class="note">
+      <strong>Index</strong>
+      Istanbul<br />
+      BSc Statistics, Ege Üniversitesi<br />
+      June 2026
+    </aside>
+    <div class="body">
+      <h1 class="display">Ahmet Emin Tayfur</h1>
+      <p class="lede">
+        I studied statistics and I build products. Right now that means GrammarLens — an English
+        grammar app for iOS that I researched, specced, and wrote myself. I'm looking for a product
+        management role.
+      </p>
+      <p>
+        This site is the short version. It's here to show how I work rather than list everything
+        I've done.
+      </p>
+    </div>
+  </section>
+
+  <section class="row">
+    <aside class="note">
+      <strong>Now</strong>
+      4 user interviews<br />
+      2 iteration rounds<br />
+      Not yet released
+    </aside>
+    <div class="body">
+      <h2>Building GrammarLens</h2>
+      <p>
+        GrammarLens explains why an English sentence is wrong instead of just marking it wrong. It's
+        built in Flutter and calls a language model to generate the explanation in context.
+      </p>
+      <p>
+        I did the user research, wrote the PRD, built the app, tested it with four people, and made
+        two rounds of changes based on what they said. It isn't in the App Store yet.
+      </p>
+      <p>
+        <a href="/products/grammarlens">See the product</a> &nbsp;·&nbsp;
+        <a href="/products/grammarlens/case-study">Read how it was built</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="row">
+    <aside class="note">
+      <strong>How I work</strong>
+      Three things that are<br />
+      true about me, with<br />
+      the evidence attached
+    </aside>
+    <div class="body">
+      <h3>I state the real number</h3>
+      <p>
+        I tested GrammarLens with four people, not forty. Four was what I could actually get, and it
+        was enough to cut two features I was attached to. I'd rather tell you the real sample size
+        than round it into something that sounds better.
+      </p>
+
+      <h3>I build to find out what I'm wrong about</h3>
+      <p>
+        I taught myself Flutter because I wanted to know whether my idea survived contact with a
+        real screen. Writing the spec was the easy part. Shipping it is where I found out that my
+        assumption about how people would use it was wrong.
+      </p>
+
+      <h3>I treat cost as a product constraint</h3>
+      <p>
+        GrammarLens calls a model on every check, and every call costs money. So I batched
+        evaluations and let users choose question length. That's not a technical detail — it's the
+        difference between a product I can run and one I can't.
+      </p>
+    </div>
+  </section>
+
+  <section class="row">
+    <aside class="note">
+      <strong>Background</strong>
+      Full history is on<br />
+      LinkedIn. This is the<br />
+      compressed version.
+    </aside>
+    <div class="body">
+      <div class="entry">
+        <span class="entry-role">Junior Business Development Specialist</span>
+        <span class="entry-when">1 year</span>
+        <span class="entry-org">
+          Auratech Consultancy — B2B sales funnel, HubSpot, data collection and cleaning
+        </span>
+      </div>
+      <div class="entry">
+        <span class="entry-role">SAP Consulting Intern</span>
+        <span class="entry-when">Internship</span>
+        <span class="entry-org">GOERZ-IT</span>
+      </div>
+      <div class="entry">
+        <span class="entry-role">Data Analyst Intern</span>
+        <span class="entry-when">Internship</span>
+        <span class="entry-org">Konak İlçe Milli Eğitim Müdürlüğü</span>
+      </div>
+      <div class="entry">
+        <span class="entry-role">BSc Statistics</span>
+        <span class="entry-when">June 2026</span>
+        <span class="entry-org">Ege Üniversitesi</span>
+      </div>
+      <p style="margin-top: 20px">
+        Tools I use regularly: Flutter and Dart, SQL, Power BI, Excel, statistical modelling.
+      </p>
+    </div>
+  </section>
+
+  <section class="row">
+    <aside class="note">
+      <strong>Contact</strong>
+      Happy to talk about<br />
+      product roles or the<br />
+      app itself
+    </aside>
+    <div class="body">
+      <ul class="links">
+        <li>
+          <span class="links-label">Email</span>
+          <a href={`mailto:${me.email}`}>{me.email}</a>
+        </li>
+        <li>
+          <span class="links-label">LinkedIn</span>
+          <a href={me.linkedin}>Full work history</a>
+        </li>
+        <li>
+          <span class="links-label">GitHub</span>
+          <a href={me.github}>svactrion</a>
+        </li>
+      </ul>
+    </div>
+  </section>
+</Base>

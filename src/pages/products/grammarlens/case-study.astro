@@ -1,0 +1,182 @@
+---
+import Base from '../../../layouts/Base.astro';
+
+const title = 'GrammarLens case study — Ahmet Emin Tayfur';
+const description =
+  'How GrammarLens went from a research question to a finished iOS app: interviews, PRD, scope cuts, two iteration rounds, and the constraints that shaped it.';
+---
+
+<Base title={title} description={description}>
+  <section class="row">
+    <aside class="note">
+      <strong>Case study</strong>
+      Solo project<br />
+      Research → PRD → build<br />
+      → test → 2 iterations
+    </aside>
+    <div class="body">
+      <h1 class="display">Building GrammarLens</h1>
+      <p class="lede">
+        I built this app to find out whether I could take something from a question to a finished
+        product on my own. This is what actually happened, including the parts that didn't work.
+      </p>
+      <p><a href="/products/grammarlens">Back to the product</a></p>
+    </div>
+  </section>
+
+  <section class="row">
+    <aside class="note">
+      <strong>01 — Problem</strong>
+      Why this, and why<br />
+      an app rather than<br />
+      anything else
+    </aside>
+    <div class="body">
+      <h2>The problem I picked</h2>
+      <p>
+        Grammar checkers correct you. They rarely teach you. Someone can accept the same correction
+        fifty times and still not know why their version was wrong — the tool has removed the
+        mistake but left the misunderstanding in place.
+      </p>
+      <p>
+        The bet was that an explanation delivered at the moment of the mistake is worth more than a
+        correction, and that a language model makes that explanation cheap enough to give away on
+        every check.
+      </p>
+      <div class="todo">
+        <p>
+          <strong>To fill in:</strong> one or two sentences on what made you choose this problem
+          specifically — your own experience, something you noticed, a gap you kept running into.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="row">
+    <aside class="note">
+      <strong>02 — Research</strong>
+      4 participants<br />
+      Small on purpose:<br />
+      it's what I could get
+    </aside>
+    <div class="body">
+      <h2>What four people told me</h2>
+      <p>
+        I interviewed four people who use English regularly but aren't native speakers. Four is a
+        small number and I won't pretend otherwise — it's not enough to size a market. It was enough
+        to test whether my assumptions about behaviour held up, which is what I needed at that
+        stage.
+      </p>
+      <div class="todo">
+        <p>
+          <strong>To fill in:</strong> the two or three findings that actually changed the product.
+          The most useful thing you can write here is a belief you held going in that turned out to
+          be wrong.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="row">
+    <aside class="note">
+      <strong>03 — Scope</strong>
+      What went in the PRD,<br />
+      and more importantly<br />
+      what stayed out
+    </aside>
+    <div class="body">
+      <h2>Deciding what not to build</h2>
+      <p>
+        I wrote a PRD before writing code, mostly so that I'd have something to argue with later.
+        The useful half of it was the list of things I deliberately left out.
+      </p>
+      <div class="todo">
+        <p>
+          <strong>To fill in:</strong> two or three features you cut, and the reason for each. Cuts
+          are the strongest signal on this page — they show judgement under constraint, which is the
+          actual job.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="row">
+    <aside class="note">
+      <strong>04 — Constraints</strong>
+      Every check costs<br />
+      money. That shaped<br />
+      the product.
+    </aside>
+    <div class="body">
+      <h2>Cost as a design input</h2>
+      <p>
+        GrammarLens calls a language model to produce each explanation, so usage has a direct
+        marginal cost. As a solo project with no revenue, that meant the economics had to be part of
+        the design rather than something to solve later.
+      </p>
+      <p>Three decisions came out of that:</p>
+      <ul>
+        <li>
+          <strong>Batched evaluation.</strong> Grouping checks into a single request instead of
+          firing one per sentence, which cut the number of calls substantially.
+        </li>
+        <li>
+          <strong>User-selectable practice length.</strong> Framed to the user as a convenience —
+          pick a short or long set. It's also the main lever on cost per session.
+        </li>
+        <li>
+          <strong>Local storage with sqflite.</strong> Practice history lives on the device. No
+          backend to run, no server bill, and a much simpler privacy story.
+        </li>
+      </ul>
+      <p>
+        Each of these has a real trade-off. Batching adds latency. Local-only storage means history
+        doesn't follow the user to a new phone. I took both, because a product I can afford to run
+        beats a better one I can't.
+      </p>
+    </div>
+  </section>
+
+  <section class="row">
+    <aside class="note">
+      <strong>05 — Iteration</strong>
+      Two rounds after<br />
+      testing with real<br />
+      users
+    </aside>
+    <div class="body">
+      <h2>What changed after testing</h2>
+      <p>
+        I put the build in front of testers and ran two rounds of changes based on what came back.
+        The second round included a full visual pass, moving the interface to Material 3 for
+        consistency and legibility.
+      </p>
+      <div class="todo">
+        <p>
+          <strong>To fill in:</strong> what specifically changed in round one and round two, and
+          what prompted each. Concrete before-and-after beats a general statement that you iterated.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="row">
+    <aside class="note">
+      <strong>06 — Now</strong>
+      Finished, unreleased,<br />
+      preparing for App<br />
+      Store review
+    </aside>
+    <div class="body">
+      <h2>Where it stands</h2>
+      <p>
+        The app is complete and going through App Store submission preparation. The next milestone
+        is a public build and usage data from people I've never met — which is the point at which
+        most of what I currently believe about this product becomes testable.
+      </p>
+      <p>
+        <a href="/products/grammarlens">Product page</a>
+      </p>
+    </div>
+  </section>
+</Base>

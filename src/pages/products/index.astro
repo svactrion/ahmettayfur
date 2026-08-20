@@ -1,0 +1,41 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const title = 'Products — Ahmet Emin Tayfur';
+const description = 'Products built and put in front of real users by Ahmet Emin Tayfur.';
+---
+
+<Base title={title} description={description}>
+  <section class="row">
+    <aside class="note">
+      <strong>Products</strong>
+      1 shipped to testers<br />
+      0 in the App Store
+    </aside>
+    <div class="body">
+      <h1 class="display">Products</h1>
+      <p class="lede">
+        Things I've built far enough to put in front of someone who wasn't obliged to be nice about
+        it.
+      </p>
+    </div>
+  </section>
+
+  <section class="row">
+    <aside class="note">
+      <strong>01</strong>
+      Flutter · iOS<br />
+      In review prep
+    </aside>
+    <div class="body">
+      <a class="card" href="/products/grammarlens">
+        <span class="card-title">GrammarLens</span>
+        <span class="card-text">
+          An English grammar app that explains why a sentence is wrong, in context, instead of just
+          flagging it.
+        </span>
+        <span class="card-status">Preparing App Store submission</span>
+      </a>
+    </div>
+  </section>
+</Base>

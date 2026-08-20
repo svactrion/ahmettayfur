@@ -1,0 +1,97 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { grammarlens } from '../../../data.js';
+
+const title = 'GrammarLens — an English grammar app for iOS';
+const description =
+  'GrammarLens explains why an English sentence is wrong, in context, instead of just marking it. Built in Flutter for iOS.';
+---
+
+<Base title={title} description={description}>
+  <section class="row">
+    <aside class="note">
+      <strong>GrammarLens</strong>
+      iOS<br />
+      Built in Flutter<br />
+      Solo project
+    </aside>
+    <div class="body">
+      <span class="status">Not released yet</span>
+      <h1 class="display">GrammarLens</h1>
+      <p class="lede">
+        Most grammar tools tell you a sentence is wrong and hand you a correction. GrammarLens tells
+        you which rule you broke and why the correct version works — so the next sentence is easier.
+      </p>
+      {
+        grammarlens.released ? (
+          <p><a href={grammarlens.appStoreUrl}>Download on the App Store</a></p>
+        ) : (
+          <p>
+            The app is finished and being prepared for App Store review. There's nothing to download
+            yet.
+          </p>
+        )
+      }
+    </div>
+  </section>
+
+  <section class="row">
+    <aside class="note">
+      <strong>What it does</strong>
+    </aside>
+    <div class="body">
+      <h3>Explains, not just corrects</h3>
+      <p>
+        You write or paste a sentence. GrammarLens identifies the mistake, names the rule behind it,
+        and shows a corrected version alongside a short explanation of the difference.
+      </p>
+
+      <h3>Practice that adapts to your time</h3>
+      <p>
+        You choose how long a practice set should be. A short set when you have five minutes, a
+        longer one when you don't.
+      </p>
+
+      <h3>Your work stays on your phone</h3>
+      <p>
+        Practice history is stored locally on your device, not on a server.
+        <a href="/products/grammarlens/privacy">Full privacy policy</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="row">
+    <aside class="note">
+      <strong>Who it's for</strong>
+    </aside>
+    <div class="body">
+      <p>
+        People who already speak some English and keep making the same handful of mistakes — usually
+        articles, tenses, and prepositions. If you're starting from zero, a course will serve you
+        better than this app.
+      </p>
+    </div>
+  </section>
+
+  <section class="row">
+    <aside class="note">
+      <strong>More</strong>
+    </aside>
+    <div class="body">
+      <ul class="links">
+        <li>
+          <span class="links-label">Process</span>
+          <a href="/products/grammarlens/case-study">How GrammarLens was researched and built</a>
+        </li>
+        <li>
+          <span class="links-label">Support</span>
+          <a href="/products/grammarlens/support">Get help or report a problem</a>
+        </li>
+        <li>
+          <span class="links-label">Privacy</span>
+          <a href="/products/grammarlens/privacy">Privacy policy</a>
+        </li>
+      </ul>
+    </div>
+  </section>
+</Base>

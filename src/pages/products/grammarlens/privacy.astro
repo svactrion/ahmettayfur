@@ -1,0 +1,155 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { me } from '../../../data.js';
+
+const title = 'GrammarLens privacy policy';
+const description = 'What data GrammarLens collects, where it goes, and how long it is kept.';
+const updated = 'August 2026';
+---
+
+<Base title={title} description={description}>
+  <section class="row">
+    <aside class="note">
+      <strong>Privacy</strong>
+      GrammarLens for iOS<br />
+      Last updated {updated}
+    </aside>
+    <div class="body">
+      <h1 class="display">Privacy policy</h1>
+      <p class="lede">
+        This describes what GrammarLens does with your information. It is written to be read, not to
+        cover me legally.
+      </p>
+      <div class="todo">
+        <p>
+          <strong>Before publishing:</strong> every claim below has to match what the app actually
+          does. Check each section against the code. An inaccurate privacy policy is worse than a
+          vague one — and Apple's review team does read this page.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="row">
+    <aside class="note">
+      <strong>01</strong>
+      Who runs this
+    </aside>
+    <div class="body">
+      <h2>Who I am</h2>
+      <p>
+        GrammarLens is made by {me.name}, an independent developer based in Istanbul, Turkey. There
+        is no company behind it. If you have a question about anything on this page, email
+        <a href={`mailto:${me.email}`}>{me.email}</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="row">
+    <aside class="note">
+      <strong>02</strong>
+      What is stored,<br />
+      and where
+    </aside>
+    <div class="body">
+      <h2>What GrammarLens stores</h2>
+      <p>
+        Your practice history and settings are stored in a database on your own device. They are not
+        uploaded to a server that I control, and I cannot read them.
+      </p>
+      <p>
+        Deleting the app deletes this data. There is no backup on my side to delete separately.
+      </p>
+      <div class="todo">
+        <p>
+          <strong>Confirm:</strong> does the app create an account, use iCloud sync, or collect an
+          email address anywhere? If yes, that has to be described here.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="row">
+    <aside class="note">
+      <strong>03</strong>
+      What leaves<br />
+      your device
+    </aside>
+    <div class="body">
+      <h2>Text sent for analysis</h2>
+      <p>
+        To explain a mistake, GrammarLens sends the sentence you entered to a language model API run
+        by Anthropic. That request is what produces the explanation you see. Without it the app
+        cannot work.
+      </p>
+      <p>
+        Do not enter passwords, financial details, medical information, or anything else you would
+        not want processed by a third party. Enter sentences you want checked, and nothing more.
+      </p>
+      <div class="todo">
+        <p>
+          <strong>Confirm and complete:</strong> exactly what is included in each request — just the
+          sentence, or also history and settings? Then read Anthropic's current API data-retention
+          terms and state their retention period here, with a link.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="row">
+    <aside class="note">
+      <strong>04</strong>
+      Analytics and<br />
+      tracking
+    </aside>
+    <div class="body">
+      <h2>Analytics</h2>
+      <div class="todo">
+        <p>
+          <strong>Decide, then write one of two things:</strong> if the app contains no analytics or
+          crash-reporting SDK, say plainly that it collects no usage data and does not track you
+          across apps. If it does contain one, name the tool, say what it collects, and link to its
+          policy. This section must also match your App Store Connect privacy answers exactly.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="row">
+    <aside class="note">
+      <strong>05</strong>
+      Children
+    </aside>
+    <div class="body">
+      <h2>Children</h2>
+      <p>
+        GrammarLens is not designed for children and I do not knowingly collect information from
+        them.
+      </p>
+    </div>
+  </section>
+
+  <section class="row">
+    <aside class="note">
+      <strong>06</strong>
+      Your rights and<br />
+      changes to this page
+    </aside>
+    <div class="body">
+      <h2>Your data, and changes here</h2>
+      <p>
+        Because your practice data stays on your device, you already control it — deleting the app
+        removes it. If you want to ask anything about data handling, email
+        <a href={`mailto:${me.email}`}>{me.email}</a> and I'll answer.
+      </p>
+      <p>
+        If this policy changes, I'll update the date at the top of this page. Meaningful changes will
+        also be noted in the app's release notes.
+      </p>
+      <p>
+        <a href="/products/grammarlens/support">Support page</a> &nbsp;·&nbsp;
+        <a href="/products/grammarlens">GrammarLens</a>
+      </p>
+    </div>
+  </section>
+</Base>

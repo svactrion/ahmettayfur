@@ -1,0 +1,564 @@
+---
+import { ClientRouter } from 'astro:transitions';
+const { title, description } = Astro.props;
+const path = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#EDE3D0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <ClientRouter />
+    <script is:inline>
+      // Arm motion styles only when JS runs and motion is welcome. Without this,
+      // a JS failure would leave the page permanently invisible.
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('motion');
+      }
+    </script>
+  </head>
+
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="masthead">
+      <nav class="nav" aria-label="Primary">
+        <a class="nav-home" href="/">AET</a>
+        <ul class="nav-list">
+          <li><a href="/" aria-current={path === '/' ? 'page' : undefined}>Index</a></li>
+          <li>
+            <a href="/products" aria-current={path.startsWith('/products') ? 'page' : undefined}
+              >Products</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main" class="shell">
+      <slot />
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <span class="footer-name">Ahmet Emin Tayfur</span>
+        <span class="footer-meta">Istanbul &middot; Last updated August 2026</span>
+      </div>
+    </footer>
+
+    <script is:inline>
+      // Reveal each row as it scrolls into view. Re-runs after every view
+      // transition, because navigation replaces the DOM.
+      function armReveals() {
+        if (!document.documentElement.classList.contains('motion')) return;
+        var rows = document.querySelectorAll('.row');
+        if (!('IntersectionObserver' in window)) {
+          rows.forEach(function (r) {
+            r.classList.add('is-in');
+          });
+          return;
+        }
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-in');
+                io.unobserve(entry.target);
+              }
+            });
+          },
+          { rootMargin: '0px 0px -8% 0px', threshold: 0.05 }
+        );
+        rows.forEach(function (r) {
+          io.observe(r);
+        });
+      }
+
+      armReveals();
+      document.addEventListener('astro:page-load', armReveals);
+    </script>
+
+    <style is:global>
+      :root {
+        /* Typewriter ribbon: warm manila paper, brown-black ink, ribbon red */
+        --paper: #ede3d0;
+        --paper-deep: #e4d7bf;
+        --ink: #1c1714;
+        --muted: #6e6152;
+        --rule: #d0bf9f;
+        --ribbon: #a32e24;
+        --ribbon-wash: rgba(163, 46, 36, 0.08);
+        --ribbon-line: rgba(163, 46, 36, 0.35);
+
+        --mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+        --sans: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+
+        --col-note: 168px;
+        --gap: 40px;
+        --measure: 640px;
+
+        --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        -webkit-text-size-adjust: 100%;
+      }
+
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: var(--sans);
+        font-size: 17px;
+        line-height: 1.65;
+      }
+
+      /* ---------- links: the ribbon thickens under the word ---------- */
+
+      a {
+        color: var(--ribbon);
+        text-decoration: none;
+        background-image: linear-gradient(var(--ribbon), var(--ribbon));
+        background-repeat: no-repeat;
+        background-position: 0 100%;
+        background-size: 100% 1px;
+        padding-bottom: 1px;
+        transition: background-size 0.28s var(--ease), color 0.2s var(--ease);
+      }
+
+      .motion a:hover {
+        background-size: 100% 2px;
+      }
+
+      a:focus-visible {
+        outline: 2px solid var(--ribbon);
+        outline-offset: 3px;
+        border-radius: 1px;
+      }
+
+      .skip {
+        position: absolute;
+        left: -9999px;
+      }
+
+      .skip:focus {
+        left: 16px;
+        top: 16px;
+        z-index: 10;
+        background: var(--paper);
+        padding: 8px 12px;
+      }
+
+      /* ---------- masthead ---------- */
+
+      .masthead {
+        border-bottom: 1px solid var(--rule);
+      }
+
+      .nav {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 18px 28px;
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .nav a {
+        background-image: none;
+        padding-bottom: 0;
+      }
+
+      .nav-home {
+        font-family: var(--mono);
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 0.14em;
+        color: var(--ink);
+      }
+
+      .nav-home:hover {
+        color: var(--ribbon);
+      }
+
+      .nav-list {
+        display: flex;
+        gap: 22px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .nav-list a {
+        font-family: var(--mono);
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      .nav-list a:hover {
+        color: var(--ribbon);
+      }
+
+      .nav-list a[aria-current='page'] {
+        color: var(--ink);
+        box-shadow: 0 1px 0 0 var(--ink);
+      }
+
+      /* ---------- shell + annotated rows ---------- */
+
+      .shell {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 72px 28px 96px;
+      }
+
+      .row {
+        display: grid;
+        grid-template-columns: var(--col-note) minmax(0, var(--measure));
+        gap: var(--gap);
+        padding: 34px 0;
+        border-top: 1px solid var(--rule);
+      }
+
+      .row:first-of-type {
+        border-top: none;
+        padding-top: 0;
+      }
+
+      /* scroll reveal: content lifts, annotation follows a beat later */
+      .motion .row > * {
+        opacity: 0;
+        transform: translateY(14px);
+        transition: opacity 0.55s var(--ease), transform 0.55s var(--ease);
+      }
+
+      .motion .row > .note {
+        transform: translateX(-10px);
+        transition-delay: 0.09s;
+      }
+
+      .motion .row.is-in > * {
+        opacity: 1;
+        transform: none;
+      }
+
+      .note {
+        font-family: var(--mono);
+        font-size: 12px;
+        line-height: 1.6;
+        color: var(--muted);
+        padding-top: 6px;
+      }
+
+      .note strong {
+        display: block;
+        color: var(--ribbon);
+        font-weight: 500;
+        letter-spacing: 0.11em;
+        text-transform: uppercase;
+        font-size: 11px;
+        margin-bottom: 6px;
+      }
+
+      .body > *:first-child {
+        margin-top: 0;
+      }
+
+      .body > *:last-child {
+        margin-bottom: 0;
+      }
+
+      /* ---------- type ---------- */
+
+      .display {
+        font-family: var(--mono);
+        font-weight: 500;
+        font-size: clamp(30px, 5.4vw, 46px);
+        line-height: 1.08;
+        letter-spacing: -0.035em;
+        margin: 0 0 20px;
+      }
+
+      .lede {
+        font-size: 19px;
+        line-height: 1.6;
+        margin: 0 0 18px;
+        max-width: 34em;
+      }
+
+      h2 {
+        font-family: var(--mono);
+        font-weight: 500;
+        font-size: 21px;
+        letter-spacing: -0.02em;
+        line-height: 1.25;
+        margin: 0 0 14px;
+      }
+
+      h3 {
+        font-family: var(--sans);
+        font-weight: 600;
+        font-size: 17px;
+        margin: 26px 0 6px;
+      }
+
+      p {
+        margin: 0 0 16px;
+        max-width: 36em;
+      }
+
+      ul,
+      ol {
+        margin: 0 0 16px;
+        padding-left: 20px;
+        max-width: 36em;
+      }
+
+      li {
+        margin-bottom: 7px;
+      }
+
+      strong {
+        font-weight: 600;
+      }
+
+      /* ---------- entries ---------- */
+
+      .entry {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px 14px;
+        padding: 11px 0;
+        border-bottom: 1px solid var(--rule);
+      }
+
+      .entry:last-of-type {
+        border-bottom: none;
+      }
+
+      .entry-role {
+        font-weight: 600;
+        flex: 1 1 auto;
+      }
+
+      .entry-org {
+        color: var(--muted);
+        flex: 1 1 100%;
+        font-size: 15px;
+      }
+
+      .entry-when {
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--muted);
+        white-space: nowrap;
+        padding-top: 3px;
+      }
+
+      /* ---------- product card ---------- */
+
+      .card {
+        display: block;
+        border: 1px solid var(--rule);
+        padding: 22px 24px;
+        background-color: var(--paper-deep);
+        background-image: none;
+        transition: border-color 0.25s var(--ease), transform 0.25s var(--ease),
+          box-shadow 0.25s var(--ease);
+      }
+
+      .motion .card:hover {
+        border-color: var(--ribbon);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 0 -3px var(--ribbon-line);
+      }
+
+      .card-title {
+        display: block;
+        font-family: var(--mono);
+        font-weight: 500;
+        font-size: 19px;
+        color: var(--ink);
+        letter-spacing: -0.02em;
+        margin-bottom: 6px;
+      }
+
+      .card-text {
+        display: block;
+        color: var(--ink);
+        margin-bottom: 12px;
+        font-size: 16px;
+      }
+
+      .card-status {
+        display: block;
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--ribbon);
+      }
+
+      /* ---------- status pill ---------- */
+
+      .status {
+        display: inline-block;
+        font-family: var(--mono);
+        font-size: 12px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--ribbon);
+        border: 1px solid var(--ribbon-line);
+        padding: 3px 9px;
+        margin-bottom: 18px;
+      }
+
+      /* ---------- link lists ---------- */
+
+      .links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .links li {
+        margin-bottom: 9px;
+      }
+
+      .links-label {
+        display: inline-block;
+        min-width: 88px;
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      /* ---------- editing note ---------- */
+
+      .todo {
+        border-left: 3px solid var(--ribbon);
+        background: var(--ribbon-wash);
+        padding: 12px 16px;
+        margin: 0 0 18px;
+        font-size: 15px;
+      }
+
+      .todo p {
+        margin: 0;
+      }
+
+      /* ---------- footer ---------- */
+
+      .footer {
+        border-top: 1px solid var(--rule);
+      }
+
+      .footer-inner {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 22px 28px 40px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px 20px;
+        justify-content: space-between;
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .footer-name {
+        color: var(--ink);
+      }
+
+      /* ---------- view transitions: a fresh sheet feeding in ---------- */
+
+      @keyframes sheet-in {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      @keyframes sheet-out {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+        }
+      }
+
+      ::view-transition-old(root) {
+        animation: sheet-out 0.16s var(--ease) both;
+      }
+
+      ::view-transition-new(root) {
+        animation: sheet-in 0.34s var(--ease) both;
+      }
+
+      /* ---------- responsive ---------- */
+
+      @media (max-width: 800px) {
+        body {
+          font-size: 16px;
+        }
+
+        .shell {
+          padding: 44px 22px 64px;
+        }
+
+        .row {
+          grid-template-columns: minmax(0, 1fr);
+          gap: 14px;
+          padding: 26px 0;
+        }
+
+        .note {
+          padding-top: 0;
+          order: -1;
+        }
+
+        .motion .row > .note {
+          transform: translateY(10px);
+        }
+
+        .nav {
+          padding: 15px 22px;
+        }
+
+        .footer-inner {
+          padding: 20px 22px 32px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        ::view-transition-old(root),
+        ::view-transition-new(root) {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
+    </style>
+  </body>
+</html>
