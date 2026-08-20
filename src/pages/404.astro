@@ -1,0 +1,31 @@
+---
+import Base from '../layouts/Base.astro';
+
+const title = 'Page not found — Ahmet Emin Tayfur';
+const description = 'That page does not exist.';
+---
+
+<Base title={title} description={description}>
+  <section class="row">
+    <aside class="note">
+      <strong>404</strong>
+      Nothing at this address
+    </aside>
+    <div class="body">
+      <h1 class="display">Page not found</h1>
+      <p class="lede">
+        There's nothing at this address. It may have moved, or the link may have been mistyped.
+      </p>
+      <ul class="links">
+        <li>
+          <span class="links-label">Start</span>
+          <a href="/">Home</a>
+        </li>
+        <li>
+          <span class="links-label">Products</span>
+          <a href="/products">GrammarLens</a>
+        </li>
+      </ul>
+    </div>
+  </section>
+</Base>

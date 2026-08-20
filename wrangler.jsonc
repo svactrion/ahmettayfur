@@ -1,0 +1,11 @@
+{
+  // This site is 100% static. There is no server code.
+  // Declaring that here stops Wrangler from guessing and trying to
+  // convert the project into a server-rendered Worker.
+  "name": "ahmettayfur",
+  "compatibility_date": "2026-08-21",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  }
+}
