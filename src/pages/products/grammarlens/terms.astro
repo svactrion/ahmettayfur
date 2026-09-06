@@ -1,0 +1,161 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { me } from '../../../data.js';
+
+const title = 'GrammarLens terms of use';
+const description = 'The terms that apply when you use GrammarLens.';
+---
+
+<Base title={title} description={description}>
+  <section class="row">
+    <aside class="note">
+      <strong>Terms</strong>
+      GrammarLens for iOS<br />
+      Draft — not in force
+    </aside>
+    <div class="body">
+      <h1 class="display">Terms of use</h1>
+      <p class="lede">
+        This address is reserved for the GrammarLens terms of use. The text is still being written.
+        Nothing on this page is in force yet.
+      </p>
+      <p>
+        Questions in the meantime: <a href={`mailto:${me.email}`}>{me.email}</a>
+      </p>
+      <div class="todo">
+        <p>
+          <strong>Must be finished before the App Store submission.</strong> Apple requires a
+          terms-of-use link for apps with auto-renewing subscriptions, and the review team opens this
+          URL. The address itself is final — only the text below changes.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="row">
+    <aside class="note">
+      <strong>01</strong>
+      Who provides<br />
+      the service
+    </aside>
+    <div class="body">
+      <h2>The agreement</h2>
+      <div class="todo">
+        <p>
+          State who provides the app (individual developer, Istanbul, no company), that installing or
+          using the app means accepting these terms, and that the agreement is between the user and
+          you — not Apple.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="row">
+    <aside class="note">
+      <strong>02</strong>
+      What you may<br />
+      do with the app
+    </aside>
+    <div class="body">
+      <h2>Licence</h2>
+      <div class="todo">
+        <p>
+          Describe the licence: personal, non-transferable, for use on devices the user owns. State
+          what is not allowed — reselling access, automating requests, using the app as a proxy to
+          the underlying API.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="row">
+    <aside class="note">
+      <strong>03</strong>
+      Subscriptions<br />
+      and billing
+    </aside>
+    <div class="body">
+      <h2>Paid features</h2>
+      <div class="todo">
+        <p>
+          The section Apple reads most closely. Cover: what the free tier includes, what the
+          subscription unlocks, the billing period, that payment is charged to the Apple ID, that it
+          renews automatically unless cancelled at least 24 hours before the period ends, and that
+          cancellation is done in App Store settings. Refunds are handled by Apple, not by you.
+          Every claim here must match the App Store Connect product setup exactly.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="row">
+    <aside class="note">
+      <strong>04</strong>
+      Accuracy of<br />
+      the output
+    </aside>
+    <div class="body">
+      <h2>What the app does not promise</h2>
+      <div class="todo">
+        <p>
+          State plainly that explanations are produced by a language model and can be wrong, and that
+          the app is a practice tool rather than certified exam preparation or professional language
+          instruction. Write this honestly, not as a wall of disclaimers.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="row">
+    <aside class="note">
+      <strong>05</strong>
+      Your text
+    </aside>
+    <div class="body">
+      <h2>The sentences you enter</h2>
+      <div class="todo">
+        <p>
+          Confirm the user keeps ownership of what they write, and point to the privacy policy for
+          where that text goes. Keep this section consistent with section 03 of the privacy policy —
+          if the two pages disagree, that is a review risk.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="row">
+    <aside class="note">
+      <strong>06</strong>
+      Availability,<br />
+      changes, ending
+    </aside>
+    <div class="body">
+      <h2>Changes and termination</h2>
+      <div class="todo">
+        <p>
+          Cover: the service may be interrupted or discontinued, terms may change with notice on this
+          page, and either side may end the agreement — the user by deleting the app. Add the
+          governing law (Turkey) and a contact address for disputes.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="row">
+    <aside class="note">
+      <strong>07</strong>
+      Contact
+    </aside>
+    <div class="body">
+      <h2>Getting in touch</h2>
+      <p>
+        Email <a href={`mailto:${me.email}`}>{me.email}</a> with anything about these terms.
+      </p>
+      <p>
+        <a href="/products/grammarlens/privacy">Privacy policy</a> &nbsp;·&nbsp;
+        <a href="/products/grammarlens/support">Support page</a> &nbsp;·&nbsp;
+        <a href="/products/grammarlens">GrammarLens</a>
+      </p>
+    </div>
+  </section>
+</Base>

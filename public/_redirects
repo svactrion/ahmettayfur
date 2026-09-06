@@ -1,0 +1,8 @@
+# Short aliases for the GrammarLens legal pages.
+# The addresses under /products/ are the real ones; these only catch
+# anyone who typed or linked the short form. Server-side 301, not a
+# client-side redirect, so Apple's review team lands on real content.
+/grammarlens          /products/grammarlens          301
+/grammarlens/privacy  /products/grammarlens/privacy  301
+/grammarlens/terms    /products/grammarlens/terms    301
+/grammarlens/support  /products/grammarlens/support  301
