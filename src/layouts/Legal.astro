@@ -1,0 +1,75 @@
+---
+// Layout for the GrammarLens legal and support pages only.
+//
+// These three addresses are given to Apple in the App Store submission and
+// are opened directly by the review team and by links inside the app. So:
+//
+//   - no view transitions, no scroll animation, no JavaScript at all
+//   - no cookie banner, no dialog, nothing the text can hide behind
+//   - the content is in the HTML and is visible the moment the page loads
+//
+// It deliberately does NOT share a layout file with the rest of the site,
+// so a future redesign of the home page cannot change these pages.
+// It does share the design tokens, so it still looks like the same site.
+import { me } from '../data.js';
+import '../styles/nocturne.css';
+import '../styles/site.css';
+
+const { title, description, noindex = false } = Astro.props;
+const path = Astro.url.pathname;
+// Strip the trailing slash so the canonical URL matches the addresses given
+// to Apple exactly (e.g. .../privacy, not .../privacy/).
+const canonical = new URL(path.replace(/(.)\/$/, '$1'), Astro.site).href;
+const year = new Date().getFullYear();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL('/og.jpg', Astro.site).href} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="ahmettayfur.com" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#161826" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div class="shell shell-narrow">
+      <header class="masthead">
+        <nav class="nav" aria-label="Primary">
+          <a class="nav-brand" href="/">{me.name}</a>
+          <a href="/products/grammarlens">GrammarLens</a>
+        </nav>
+      </header>
+
+      <main id="main" class="legal-body">
+        <slot />
+      </main>
+
+      <footer class="footer">
+        <span>&copy; {year} {me.name}</span>
+        <span class="footer-links">
+          <a href="/products/grammarlens/privacy">Privacy</a>
+          <a href="/products/grammarlens/terms">Terms</a>
+          <a href="/products/grammarlens/support">Support</a>
+        </span>
+      </footer>
+    </div>
+  </body>
+</html>

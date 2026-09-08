@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/nocturne-0338c266-dd68-496f-b66e-925890bee0a0/styles.css">
+<script src="_ds/nocturne-0338c266-dd68-496f-b66e-925890bee0a0/_ds_bundle.js"></script>
+<style>
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  :root { --fig-h: clamp(280px, 32vw, 420px); }
+  body { margin: 0; text-wrap: pretty; background: var(--color-bg); color: var(--color-text); }
+  a { color: var(--color-accent-300); }
+  a:hover { color: var(--color-accent-200); }
+  @media (max-width: 860px) {
+    [data-r="hero"] { grid-template-columns: minmax(0,1fr) !important; }
+    [data-r="hero-fig"] { order: -1; }
+    [data-r="prod-fig"] { display: none !important; }
+    [data-r="bg-track"] { grid-auto-columns: min(86vw, 420px) !important; }
+    [data-r="who"] { grid-template-columns: minmax(0,1fr) !important; gap: 26px !important; }
+    [data-r="who-fig"] { order: 2 }
+    [data-r="who-fig"] img, [data-r="bye-fig"] img { height: clamp(260px,50vw,360px) !important; }
+    [data-r="art-hero"] { grid-template-columns: minmax(0,1fr) !important; }
+    [data-r="bye"] { flex-wrap: wrap; justify-content: center }
+    [data-r="desk-fig"] { justify-self: center !important; max-width: 460px }
+  }
+  @media (max-width: 560px) {
+    [data-r="nav"] { gap: 10px 14px !important; font-size: 14px; }
+    [data-r="card-head"] { gap: 12px !important; }
+    [data-r="art-row"] { grid-template-columns: minmax(0,1fr) !important; }
+  }
+  [data-r="bg-track"]::-webkit-scrollbar { height: 6px; }
+  [data-r="bg-track"]::-webkit-scrollbar-thumb { background: var(--color-neutral-800); border-radius: 999px; }
+</style>
+<template id="__bundler_thumbnail">
+  <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect width="120" height="120" fill="#161826"></rect><text x="24" y="74" font-family="Inter,sans-serif" font-size="40" font-weight="500" fill="#9184d9">AT</text></svg>
+</template>
+</helmet>
+
+<div style="max-width:1200px; margin:0 auto; padding:0 clamp(18px,5vw,64px)">
+
+  <nav class="nav" data-r="nav" style="padding-inline:0; gap:clamp(12px,2.4vw,22px); flex-wrap:wrap">
+    <a class="nav-brand" href="#top" style="display:flex; align-items:center; gap:10px; color:var(--color-text); text-decoration:none">
+      <img src="assets/hero-face.png" alt="" aria-hidden="true" style="width:32px; height:32px; border-radius:50%; background:var(--color-accent-900); object-fit:cover; object-position:50% 8%">
+      Ahmet Emin Tayfur
+    </a>
+    <a href="#products" style="color:var(--color-neutral-300)">{{ t.nav2 }}</a>
+    <a href="#who" style="color:var(--color-neutral-300)">{{ t.nav1 }}</a>
+    <a href="#articles" style="color:var(--color-neutral-300)">{{ t.nav3 }}</a>
+    <a href="#contact" style="color:var(--color-neutral-300)">{{ t.nav4 }}</a>
+    <button type="button" class="btn btn-secondary" onClick="{{ toggleLang }}" style="font-size:12px; letter-spacing:0.06em; text-transform:uppercase">{{ t.langLabel }}</button>
+  </nav>
+
+  <section id="top" data-r="hero" style="display:grid; grid-template-columns:minmax(0,7fr) minmax(0,4fr); gap:34px clamp(24px,5vw,64px); align-items:center; padding:clamp(32px,5vw,80px) 0 clamp(44px,6vw,84px)">
+    <div>
+      <p style="display:inline-flex; align-items:center; gap:8px; margin:0 0 22px; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--color-accent-300)">
+        <span style="width:22px; height:1px; background:var(--color-accent); display:block"></span>{{ t.eyebrow }}
+      </p>
+      <h1 style="font-family:var(--font-heading); font-weight:500; font-size:clamp(36px,5.2vw,64px); line-height:1.06; letter-spacing:-0.03em; margin:0">
+        <sc-if value="{{ isEn }}" hint-placeholder-val="{{ true }}">I ship the products<br>I want to use.</sc-if>
+        <sc-if value="{{ isTr }}">Kullanmak istediğim<br>ürünleri yapıyorum.</sc-if>
+      </h1>
+      <p style="font-size:17px; line-height:1.7; max-width:52ch; margin:24px 0 0; color:var(--color-neutral-300)">
+        <sc-if value="{{ isEn }}" hint-placeholder-val="{{ true }}">I finished my statistics degree this June and I am building my own products to grow into product management: user research, PRD, MVP, testing and iteration, all of it hands-on. Looking for a role where I can keep learning at that pace.</sc-if>
+        <sc-if value="{{ isTr }}">Bu yılın haziran ayında istatistik bölümünden mezun oldum ve ürün yöneticiliğine kendi ürünlerimi geliştirerek hazırlanıyorum: kullanıcı araştırması, PRD, MVP, test ve iterasyon — hepsini bizzat yürütüyorum. Aynı hızda öğrenmeye devam edebileceğim bir ürün rolü arıyorum.</sc-if>
+      </p>
+      <div style="display:flex; gap:var(--space-4); flex-wrap:wrap; margin-top:26px">
+        <a class="btn btn-primary" href="#products" style="height:auto; white-space:nowrap">{{ t.cta1 }}</a>
+        <a class="btn btn-ghost" href="#articles" style="height:auto; white-space:nowrap">{{ t.cta2 }}</a>
+      </div>
+    </div>
+    <div data-r="hero-fig" style="position:relative; justify-self:center; display:flex; justify-content:center; width:100%">
+      <div style="position:absolute; left:50%; top:4%; width:min(300px,90%); aspect-ratio:1/1; transform:translateX(-50%); border-radius:50%; background:radial-gradient(circle, var(--color-accent-800) 0%, transparent 66%); opacity:0.55; filter:blur(10px)"></div>
+      <img src="assets/hero-arms.png" alt="Illustrated portrait of Ahmet Emin Tayfur" style="position:relative; display:block; width:auto; max-width:100%; height:var(--fig-h); object-fit:contain">
+      <div style="position:absolute; left:50%; bottom:-6px; width:110px; height:12px; transform:translateX(-50%); border-radius:50%; background:radial-gradient(ellipse, rgba(0,0,0,0.5) 0%, transparent 72%)"></div>
+    </div>
+  </section>
+
+  <div aria-hidden="true" data-r="rule" style="height:1px; margin:0 0 clamp(40px,5vw,72px); background:linear-gradient(to right, transparent 0, var(--color-divider) 48px, var(--color-divider) calc(100% - 48px), transparent 100%)"></div>
+
+  <section id="products" style="padding:0 0 clamp(40px,5vw,72px)">
+    <div style="display:flex; align-items:baseline; justify-content:space-between; gap:20px; flex-wrap:wrap; padding-bottom:16px; border-bottom:1px solid var(--color-divider)">
+      <h2 style="font-size:clamp(24px,3vw,34px); line-height:1.1; letter-spacing:-0.025em; margin:0">{{ t.prodTitle }}</h2>
+      <p style="margin:0; font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:var(--color-neutral-400)">{{ t.prodCount }}</p>
+    </div>
+
+    <div style="display:flex; align-items:stretch; gap:clamp(16px,3vw,40px); margin-top:22px; flex-wrap:wrap">
+    <div aria-hidden="true" data-r="prod-fig" style="position:relative; flex:0 0 auto; align-self:flex-end; display:flex; justify-content:center">
+      <div style="position:absolute; left:50%; top:8%; width:min(300px,96%); aspect-ratio:1/1; transform:translateX(-50%); border-radius:50%; background:radial-gradient(circle, var(--color-accent-800) 0%, transparent 66%); opacity:0.5; filter:blur(14px)"></div>
+      <img src="assets/hero-present.png" alt="" style="position:relative; display:block; width:auto; height:var(--fig-h); object-fit:contain">
+    </div>
+    <div style="flex:1 1 420px; min-width:0; display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr)); gap:var(--space-6); align-content:start">
+      <sc-for list="{{ products }}" as="p" hint-placeholder-count="1">
+        <article style="display:flex; flex-direction:column; gap:var(--space-4); padding:clamp(20px,2.4vw,28px); border-radius:var(--radius-lg); background:var(--color-surface); box-shadow:var(--shadow-sm)">
+          <div data-r="card-head" style="display:flex; align-items:flex-start; gap:16px">
+            <sc-if value="{{ p.noIcon }}" hint-placeholder-val="{{ true }}">
+              <span style="flex:0 0 auto; width:56px; height:56px; border-radius:14px; border:1px dashed var(--color-neutral-700); display:flex; align-items:center; justify-content:center; font-family:var(--font-heading); font-size:20px; font-weight:500; color:var(--color-accent-300)">{{ p.initial }}</span>
+            </sc-if>
+            <div style="flex:1 1 auto; min-width:0">
+              <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap">
+                <h3 style="font-size:22px; line-height:1.2; letter-spacing:-0.02em; margin:0">{{ p.name }}</h3>
+                <span class="tag tag-outline" style="white-space:nowrap">{{ p.status }}</span>
+              </div>
+              <p style="margin:6px 0 0; font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--color-accent-300)">{{ p.kicker }}</p>
+            </div>
+          </div>
+          <p style="margin:0; font-size:15px; line-height:1.7; max-width:60ch; color:var(--color-neutral-300)">{{ p.desc }}</p>
+          <p style="margin:0; display:flex; align-items:center; gap:4px 8px; flex-wrap:wrap; font-size:13px; line-height:1.5; color:var(--color-neutral-400)">
+            <sc-for list="{{ p.facts }}" as="f" hint-placeholder-count="3">
+              <span>{{ f }}</span>
+            </sc-for>
+          </p>
+          <div style="display:flex; gap:6px; flex-wrap:wrap">
+            <sc-for list="{{ p.stack }}" as="s" hint-placeholder-count="3">
+              <span class="tag tag-neutral" style="white-space:nowrap">{{ s }}</span>
+            </sc-for>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-top:var(--space-2); padding-top:var(--space-4); border-top:1px solid var(--color-divider)">
+            <a href="{{ p.caseHref }}" target="_blank" rel="noopener" style="font-size:15px; text-decoration:none; color:var(--color-accent-300)">{{ t.caseStudy }} →</a>
+            <span style="display:flex; align-items:center; gap:12px; font-size:13px; color:var(--color-neutral-500)">
+              <sc-for list="{{ p.docs }}" as="l" hint-placeholder-count="3">
+                <a href="{{ l.href }}" style="color:var(--color-neutral-400); text-decoration:none" style-hover="color:var(--color-accent-300)">{{ l.label }}</a>
+              </sc-for>
+            </span>
+          </div>
+        </article>
+      </sc-for>
+
+      <article style="display:flex; flex-direction:column; justify-content:center; gap:var(--space-2); padding:clamp(20px,2.4vw,28px); border-radius:var(--radius-lg); border:1px dashed var(--color-neutral-800)">
+        <span style="font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--color-accent-300)">{{ t.nextKicker }}</span>
+        <h3 style="font-size:18px; line-height:1.3; letter-spacing:-0.02em; margin:6px 0 0; color:var(--color-neutral-300)">{{ t.nextTitle }}</h3>
+        <p style="margin:8px 0 0; font-size:14px; line-height:1.6; max-width:44ch; color:var(--color-neutral-400)">{{ t.nextBody }}</p>
+      </article>
+    </div>
+    </div>
+  </section>
+
+  <div aria-hidden="true" data-r="rule" style="height:1px; margin:0 0 clamp(40px,5vw,72px); background:linear-gradient(to right, transparent 0, var(--color-divider) 48px, var(--color-divider) calc(100% - 48px), transparent 100%)"></div>
+
+  <section id="who" style="padding:0 0 clamp(40px,5vw,72px)">
+    <div style="display:grid; grid-template-columns:clamp(260px,30vw,420px) minmax(0,1fr); gap:34px clamp(28px,5vw,64px); align-items:end" data-r="who">
+      <div aria-hidden="true" data-r="who-fig" style="position:relative; display:flex; justify-content:center; width:100%">
+        <div style="position:absolute; left:50%; top:6%; width:min(320px,94%); aspect-ratio:1/1; transform:translateX(-50%); border-radius:50%; background:radial-gradient(circle, var(--color-accent-800) 0%, transparent 66%); opacity:0.5; filter:blur(14px)"></div>
+        <img src="assets/work.png" alt="" style="position:relative; display:block; width:auto; max-width:100%; height:var(--fig-h); object-fit:contain">
+        <div style="position:absolute; left:50%; bottom:-4px; width:120px; height:13px; transform:translateX(-50%); border-radius:50%; background:radial-gradient(ellipse, rgba(0,0,0,0.5) 0%, transparent 72%)"></div>
+      </div>
+      <div>
+        <h2 style="font-size:clamp(24px,3vw,34px); line-height:1.12; letter-spacing:-0.025em; margin:0">{{ t.nav1 }}</h2>
+        <p style="font-size:16px; line-height:1.75; margin:20px 0 0; color:var(--color-neutral-200)">
+          <sc-if value="{{ isEn }}" hint-placeholder-val="{{ true }}">I finished a statistics degree in June 2026. Four years of it left me with one habit that stuck: before believing a number, ask how it was collected. Most of what I bring to product work comes from that.</sc-if>
+          <sc-if value="{{ isTr }}">Haziran 2026'da istatistik bölümünden mezun oldum. Dört yılın bana bıraktığı en kalıcı alışkanlık şu: bir sayıya inanmadan önce nasıl toplandığını sormak. Ürün işine getirdiğim şeyin büyük kısmı buradan geliyor.</sc-if>
+        </p>
+        <p style="font-size:16px; line-height:1.75; margin:16px 0 0; color:var(--color-neutral-300)">
+          <sc-if value="{{ isEn }}" hint-placeholder-val="{{ true }}">The rest I learned by building. GrammarLens started as my own problem: I kept correcting my English without ever understanding what I had done wrong. So I talked to people with the same problem, wrote the PRD, taught myself Flutter and built the app on my own. Four testers made me cut two features I was attached to.</sc-if>
+          <sc-if value="{{ isTr }}">Geri kalanını geliştirerek öğrendim. GrammarLens kendi problemim olarak başladı: İngilizcemi sürekli düzeltiyordum ama neyi yanlış yaptığımı bir türlü anlamıyordum. Aynı sorunu yaşayan insanlarla konuştum, PRD'yi yazdım, Flutter'ı kendi kendime öğrendim ve uygulamayı tek başıma geliştirdim. Dört test kullanıcısı, çok sevdiğim iki özelliği kesmemi sağladı.</sc-if>
+        </p>
+        <p style="font-size:16px; line-height:1.75; margin:16px 0 0; color:var(--color-neutral-300)">
+          <sc-if value="{{ isEn }}" hint-placeholder-val="{{ true }}">This site is the short version. It is here to show how I work rather than list everything I have done. Tools I use regularly: Flutter and Dart, SQL, Power BI, Excel, statistical modelling. I am looking for a product management role where the learning stays this fast.</sc-if>
+          <sc-if value="{{ isTr }}">Bu site kısa versiyon. Amacı yaptığım her şeyi sıralamak değil, nasıl çalıştığımı göstermek. Düzenli kullandığım araçlar: Flutter ve Dart, SQL, Power BI, Excel, istatistiksel modelleme. Öğrenmenin bu hızda kaldığı bir ürün yöneticiliği rolü arıyorum.</sc-if>
+        </p>
+      </div>
+    </div>
+
+    <div data-r="prin" style="margin-top:clamp(30px,4vw,52px)">
+      <p style="margin:0 0 6px; font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:var(--color-neutral-400)">{{ t.principlesLabel }}</p>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:0 clamp(28px,5vw,64px)">
+        <sc-for list="{{ principles }}" as="p" hint-placeholder-count="4">
+          <div style="padding:16px 0; border-top:1px solid var(--color-divider)">
+            <h3 style="font-size:17px; line-height:1.3; letter-spacing:-0.015em; margin:0">{{ p.title }}</h3>
+            <p style="margin:8px 0 0; font-size:15px; line-height:1.65; max-width:52ch; color:var(--color-neutral-400)">{{ p.body }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div aria-hidden="true" style="height:1px; margin:clamp(40px,5vw,72px) 0 0; background:linear-gradient(to right, transparent 0, var(--color-divider) 48px, var(--color-divider) calc(100% - 48px), transparent 100%)"></div>
+    <div style="margin-top:clamp(30px,4vw,52px)">
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; padding-bottom:14px">
+        <p style="margin:0; font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:var(--color-neutral-400)">{{ t.backgroundLabel }}</p>
+        <div style="display:flex; align-items:center; gap:8px">
+          <span style="font-size:12px; letter-spacing:0.06em; color:var(--color-neutral-500)">{{ t.scrollHint }}</span>
+          <button type="button" class="btn btn-icon" aria-label="Previous" onClick="{{ scrollPrev }}">←</button>
+          <button type="button" class="btn btn-icon" aria-label="Next" onClick="{{ scrollNext }}">→</button>
+        </div>
+      </div>
+      <div ref="{{ trackRef }}" data-r="bg-track" style="display:grid; grid-auto-flow:column; grid-auto-columns:minmax(min(360px,84vw),1fr); gap:clamp(14px,2vw,22px); overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:thin; padding-bottom:10px">
+        <sc-for list="{{ groups }}" as="g" hint-placeholder-count="3">
+          <section style="scroll-snap-align:start; min-width:0; padding:clamp(16px,2vw,22px); border-radius:var(--radius-lg); background:var(--color-surface); border-top:2px solid var(--color-accent-700)" style-hover="border-top-color:var(--color-accent)">
+            <div style="display:flex; align-items:baseline; justify-content:space-between; gap:10px">
+              <h3 style="font-size:15px; letter-spacing:0.06em; text-transform:uppercase; margin:0; color:var(--color-accent-300)">{{ g.title }}</h3>
+              <span style="font-size:12px; color:var(--color-neutral-500)">{{ g.count }}</span>
+            </div>
+            <sc-for list="{{ g.items }}" as="e" hint-placeholder-count="3">
+              <div style="padding:14px 0 0; margin-top:14px; border-top:1px solid var(--color-divider)">
+                <span style="display:block; font-size:12px; letter-spacing:0.06em; color:var(--color-neutral-500)">{{ e.when }}</span>
+                <span style="display:block; font-size:16px; line-height:1.35; margin-top:4px">{{ e.what }}</span>
+                <span style="display:block; font-size:14px; line-height:1.6; margin-top:6px; color:var(--color-neutral-400)">{{ e.note }}</span>
+              </div>
+            </sc-for>
+          </section>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <div aria-hidden="true" data-r="rule" style="height:1px; margin:0 0 clamp(40px,5vw,72px); background:linear-gradient(to right, transparent 0, var(--color-divider) 48px, var(--color-divider) calc(100% - 48px), transparent 100%)"></div>
+
+  <section id="articles" style="padding:0 0 clamp(40px,5vw,72px)">
+    <div style="display:flex; align-items:baseline; justify-content:space-between; gap:20px; flex-wrap:wrap; padding-bottom:16px; border-bottom:1px solid var(--color-divider)">
+      <h2 style="font-size:clamp(24px,3vw,34px); line-height:1.1; letter-spacing:-0.025em; margin:0">{{ t.nav3 }}</h2>
+      <p style="margin:0; font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:var(--color-neutral-400)">{{ t.artFeed }}</p>
+    </div>
+    <div data-r="art-hero" style="display:grid; grid-template-columns:minmax(0,1fr) clamp(280px,38vw,540px); gap:18px clamp(20px,4vw,56px); align-items:start; margin-top:20px">
+      <p style="font-size:15px; line-height:1.7; margin:0; max-width:62ch; color:var(--color-neutral-300)">{{ t.artSub }}</p>
+      <div aria-hidden="true" data-r="desk-fig" style="position:relative; justify-self:end; width:100%">
+        <div style="position:absolute; right:10%; top:8%; width:64%; aspect-ratio:1/1; border-radius:50%; background:radial-gradient(circle, var(--color-accent-800) 0%, transparent 66%); opacity:0.45; filter:blur(16px)"></div>
+        <img src="assets/desk.png" alt="" style="position:relative; display:block; width:100%; height:auto; margin-bottom:-2px; object-fit:contain">
+      </div>
+    </div>
+
+    <sc-if value="{{ loading }}">
+      <p style="font-size:15px; line-height:1.65; margin:18px 0 0; color:var(--color-neutral-400)">{{ t.artLoading }}</p>
+    </sc-if>
+    <sc-if value="{{ empty }}">
+      <p style="font-size:15px; line-height:1.65; margin:18px 0 0; max-width:56ch; color:var(--color-neutral-400)">{{ t.artEmpty }}</p>
+    </sc-if>
+
+    <div style="margin-top:20px">
+      <sc-for list="{{ posts }}" as="p" hint-placeholder-count="2">
+        <a href="{{ p.link }}" target="_blank" rel="noopener" data-r="art-row" style="display:grid; grid-template-columns:minmax(0,1fr) auto; gap:6px 22px; padding:20px 0; border-top:1px solid var(--color-divider); text-decoration:none; color:var(--color-text)">
+          <h3 style="font-size:19px; line-height:1.35; letter-spacing:-0.02em; margin:0">{{ p.title }}</h3>
+          <span style="font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--color-accent-300); align-self:center; white-space:nowrap">{{ p.source }}</span>
+          <p style="grid-column:1/-1; margin:0; font-size:15px; line-height:1.6; max-width:70ch; color:var(--color-neutral-300)">{{ p.excerpt }}</p>
+          <span style="grid-column:1/-1; font-size:12px; letter-spacing:0.06em; color:var(--color-neutral-500)">{{ p.date }}</span>
+        </a>
+      </sc-for>
+    </div>
+  </section>
+
+  <div aria-hidden="true" data-r="rule" style="height:1px; margin:0 0 clamp(40px,5vw,72px); background:linear-gradient(to right, transparent 0, var(--color-divider) 48px, var(--color-divider) calc(100% - 48px), transparent 100%)"></div>
+
+  <section id="contact" style="padding:0 0 clamp(30px,4vw,52px)">
+    <p style="margin:0 0 16px; font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:var(--color-neutral-400)">{{ t.nav4 }}</p>
+    <a href="mailto:support@ahmettayfur.com" style="display:inline-block; font-family:var(--font-heading); font-weight:500; font-size:clamp(24px,3.4vw,42px); line-height:1.1; letter-spacing:-0.03em; text-decoration:none; color:var(--color-text)" style-hover="color:var(--color-accent-300)">support@ahmettayfur.com</a>
+    <p style="font-size:15px; line-height:1.7; margin:18px 0 0; max-width:52ch; color:var(--color-neutral-300)">{{ t.contactNote }}</p>
+    <div style="display:flex; gap:var(--space-4); flex-wrap:wrap; margin-top:22px">
+      <a class="btn btn-secondary" href="https://www.linkedin.com/in/ahmettayfur/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn-secondary" href="https://ahmet-tayfur.medium.com/" target="_blank" rel="noopener">Medium</a>
+      <a class="btn btn-secondary" href="https://github.com/svactrion" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </section>
+
+  <section data-r="bye" style="display:flex; align-items:stretch; justify-content:space-between; gap:clamp(20px,4vw,56px); margin:0 0 clamp(28px,4vw,48px); padding:clamp(24px,3vw,40px) clamp(24px,3vw,44px) 0; border-radius:var(--radius-lg); background:var(--color-neutral-900); border:1px solid var(--color-divider); overflow:hidden">
+    <div style="flex:1 1 320px; min-width:0; align-self:center; padding-bottom:clamp(24px,3vw,40px)">
+      <h2 style="font-family:var(--font-heading); font-weight:500; font-size:clamp(26px,3.6vw,44px); line-height:1.1; letter-spacing:-0.03em; margin:0">{{ t.byeTitle }}</h2>
+      <p style="font-size:15px; line-height:1.7; margin:16px 0 0; max-width:46ch; color:var(--color-neutral-400)">{{ t.byeNote }}</p>
+    </div>
+    <div aria-hidden="true" data-r="bye-fig" style="position:relative; flex:0 0 auto; align-self:flex-end; display:flex; justify-content:center">
+      <div style="position:absolute; left:50%; top:8%; width:min(300px,96%); aspect-ratio:1/1; transform:translateX(-50%); border-radius:50%; background:radial-gradient(circle, var(--color-accent-800) 0%, transparent 66%); opacity:0.5; filter:blur(14px)"></div>
+      <img src="assets/bye.png" alt="" style="position:relative; display:block; width:auto; height:calc(var(--fig-h) * 0.86); margin-bottom:-2px; object-fit:contain">
+    </div>
+  </section>
+
+  <footer style="padding:22px 0 44px; border-top:1px solid var(--color-divider); display:flex; flex-wrap:wrap; gap:12px; justify-content:space-between; font-size:13px; color:var(--color-neutral-500)">
+    <span>© 2026 Ahmet Emin Tayfur</span>
+    <span>ahmettayfur.com</span>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;mediumHandle&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;ahmet-tayfur&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Articles&quot;},&quot;defaultLang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;en&quot;,&quot;tr&quot;],&quot;default&quot;:&quot;en&quot;,&quot;tsType&quot;:&quot;'en' | 'tr'&quot;}}">
+const LINKEDIN_POSTS = [
+  // LinkedIn has no public feed or API for member posts — add entries by hand:
+  // { title: "", link: "", excerpt: "", date: "2026-09-01" }
+];
+
+const COPY = {
+  en: {
+    langLabel: "TR", nav1: "Who am I", nav2: "Products", nav3: "Articles", nav4: "Contact",
+    eyebrow: "Product management · new graduate",
+    cta1: "See the products", cta2: "Read the writing",
+    prodTitle: "Products", prodCount: "One in the works · more to come",
+    caseStudy: "Read how it was built",
+    nextKicker: "Next", nextTitle: "Product 02 is in discovery",
+    nextBody: "The next one starts the same way: a problem I keep running into myself, then research before a line of code.",
+    principlesLabel: "How I work",
+    backgroundLabel: "Background", scrollHint: "Swipe",
+    artFeed: "Live from Medium",
+    artSub: "This list reads my Medium feed directly, so a new piece appears here the moment it is published. LinkedIn has no public feed for member posts, so those are added by hand.",
+    artLoading: "Fetching the feed…",
+    artEmpty: "Nothing to show from the feed yet. Once a post is live on Medium, it appears in this list on its own.",
+    contactNote: "Support requests for the apps, work conversations and everything else. I answer from here first.",
+    byeTitle: "That is the whole site.",
+    byeNote: "If any of it was worth a conversation, the address above reaches me.",
+    products: [
+      {
+        name: "GrammarLens", status: "Not yet released", icon: null,
+        kicker: "AI-powered learning app",
+        desc: "GrammarLens explains why an English sentence is wrong instead of just marking it wrong. It's built in Flutter and calls a language model to generate the explanation in context. I did the user research, wrote the PRD, built the app, tested it with four people, and made two rounds of changes based on what they said. Gamified practice is next on the roadmap.",
+        facts: ["4 user interviews", "·", "2 iteration rounds", "·", "Built solo"],
+        stack: ["Flutter / Dart", "Claude API", "Material 3"],
+        caseHref: "https://github.com/svactrion/GrammarLens",
+        docs: [
+          { label: "Privacy", href: "#" },
+          { label: "Terms", href: "#" },
+          { label: "Support", href: "mailto:support@ahmettayfur.com" }
+        ]
+      }
+    ],
+    principles: [
+      { title: "I start from the problem, not the feature", body: "GrammarLens began because I kept making the same English mistakes without learning anything from them. I talked to people with that habit before I opened an editor, so the PRD came out of those conversations rather than my own wish list." },
+      { title: "I state the real number", body: "I tested with four people, not forty. Four was what I could actually reach, and it was enough to cut two features I was attached to. I would rather give you the real sample size than round it into something that sounds better." },
+      { title: "I treat cost as a product decision", body: "Every grammar check calls a language model, and every call costs money. Batching the evaluations and letting the user choose question length was not a technical detail; it decided whether the product could exist at all." },
+      { title: "I finish things", body: "Learning Flutter was never the goal — shipping was. An idea that has not reached a real screen has not been tested, only described." }
+    ],
+    groups: [
+      {
+        title: "Projects",
+        items: [
+          { when: "2026 –", what: "GrammarLens", note: "My own mobile product: user research, PRD, MVP, testing with four people, two rounds of changes. Not in the App Store yet." }
+        ]
+      },
+      {
+        title: "Experience",
+        items: [
+          { when: "2024 – 2025", what: "Junior Business Development Specialist", note: "Auratech Consultancy — B2B sales funnel, HubSpot, data collection and cleaning." },
+          { when: "2024", what: "SAP Consulting Intern", note: "GOERZ-IT — SD and MM module configuration, documenting B2B process flows." },
+          { when: "2023", what: "Data Analyst Intern", note: "Konak İlçe Milli Eğitim Müdürlüğü — processing and validating large educational datasets before official reporting." }
+        ]
+      },
+      {
+        title: "Learning",
+        items: [
+          { when: "June 2026", what: "BSc Statistics", note: "Ege Üniversitesi — graduated in June 2026. Thesis modelled Consumer Price Index trends through regression analysis." },
+          { when: "2025", what: "Product Management Bootcamp", note: "Coderspace — discovery, prioritisation, A/B testing and experiment design." },
+          { when: "2025", what: "Flutter and Digital Marketing Bootcamps", note: "Techcareer.net — mobile development, plus acquisition, conversion and retention metrics across the user journey." },
+          { when: "2024", what: "Data Summer Camp", note: "Intellica — SQL and Oracle Data Integrator applied to real business intelligence cases." }
+        ]
+      }
+    ]
+  },
+  tr: {
+    langLabel: "EN", nav1: "Ben kimim", nav2: "Ürünler", nav3: "Yazılar", nav4: "İletişim",
+    eyebrow: "Ürün yönetimi · yeni mezun",
+    cta1: "Ürünlere bak", cta2: "Yazıları oku",
+    prodTitle: "Ürünler", prodCount: "Biri geliştirmede · yenileri yolda",
+    caseStudy: "Nasıl geliştirdiğimi oku",
+    nextKicker: "Sıradaki", nextTitle: "İkinci ürün keşif aşamasında",
+    nextBody: "Sıradaki de aynı şekilde başlıyor: kendimin sürekli takıldığı bir problem, sonra tek satır kod yazmadan önce araştırma.",
+    principlesLabel: "Nasıl çalışıyorum",
+    backgroundLabel: "Geçmiş", scrollHint: "Kaydır",
+    artFeed: "Medium'dan canlı",
+    artSub: "Bu liste Medium akışımı doğrudan okuyor; yeni bir yazı yayınlandığı anda burada görünür. LinkedIn gönderileri için herkese açık bir akış olmadığı için onlar elle ekleniyor.",
+    artLoading: "Akış getiriliyor…",
+    artEmpty: "Akıştan gösterilecek bir şey henüz yok. Medium'da bir yazı yayına girdiği anda bu listede kendiliğinden görünür.",
+    contactNote: "Uygulamalarla ilgili destek talepleri, iş görüşmeleri ve geri kalan her şey. İlk olarak buradan yanıt veriyorum.",
+    byeTitle: "Sitenin tamamı bu kadar.",
+    byeNote: "Buradaki bir şey konuşmaya değerse, yukarıdaki adresten bana ulaşabilirsin.",
+    products: [
+      {
+        name: "GrammarLens", status: "Henüz yayında değil", icon: null,
+        kicker: "Yapay zekâ destekli öğrenme uygulaması",
+        desc: "GrammarLens bir İngilizce cümleyi yanlış diye işaretlemekle kalmıyor, neden yanlış olduğunu açıklıyor. Flutter ile yazıldı ve açıklamayı bağlam içinde üretmek için bir dil modeline başvuruyor. Kullanıcı araştırmasını ben yaptım, PRD'yi ben yazdım, uygulamayı ben geliştirdim, dört kişiyle test ettim ve söylediklerine göre iki tur değişiklik yaptım. Yol haritasındaki sıradaki adım oyunlaştırılmış pratik.",
+        facts: ["4 kullanıcı görüşmesi", "·", "2 iterasyon turu", "·", "Tek kişi geliştirdi"],
+        stack: ["Flutter / Dart", "Claude API", "Material 3"],
+        caseHref: "https://github.com/svactrion/GrammarLens",
+        docs: [
+          { label: "Gizlilik", href: "#" },
+          { label: "Koşullar", href: "#" },
+          { label: "Destek", href: "mailto:support@ahmettayfur.com" }
+        ]
+      }
+    ],
+    principles: [
+      { title: "Özellikten değil problemden başlarım", body: "GrammarLens, aynı İngilizce hatalarını sürekli yapıp bunlardan hiçbir şey öğrenmediğim için başladı. Editörü açmadan önce aynı alışkanlığa sahip insanlarla konuştum; PRD benim istek listemden değil, o konuşmalardan çıktı." },
+      { title: "Gerçek sayıyı söylerim", body: "Kırk kişiyle değil, dört kişiyle test ettim. Dört, gerçekten ulaşabildiğim sayıydı ve çok sevdiğim iki özelliği kesmeye yetti. Kulağa daha iyi gelen bir sayıya yuvarlamak yerine gerçek örneklem büyüklüğünü söylemeyi tercih ederim." },
+      { title: "Maliyeti bir ürün kararı olarak görürüm", body: "Her dilbilgisi kontrolü bir dil modeline istek atıyor ve her istek para demek. Değerlendirmeleri toplu hâle getirmek ve soru uzunluğunu kullanıcıya bırakmak teknik bir detay değildi; ürünün var olup olamayacağını belirledi." },
+      { title: "İşi bitiririm", body: "Amaç Flutter öğrenmek değildi, ürünü yayına hazır hâle getirmekti. Gerçek bir ekrana ulaşmamış bir fikir test edilmiş sayılmaz, yalnızca anlatılmış olur." }
+    ],
+    groups: [
+      {
+        title: "Projeler",
+        items: [
+          { when: "2026 –", what: "GrammarLens", note: "Kendi mobil ürünüm: kullanıcı araştırması, PRD, MVP, dört kişiyle test ve iki tur değişiklik. Henüz App Store'da değil." }
+        ]
+      },
+      {
+        title: "Deneyim",
+        items: [
+          { when: "2024 – 2025", what: "Junior Business Development Specialist", note: "Auratech Consultancy — B2B satış funnel'ı, HubSpot, veri toplama ve temizleme." },
+          { when: "2024", what: "SAP Danışmanlığı Stajyeri", note: "GOERZ-IT — SD ve MM modül konfigürasyonu, B2B süreç akışlarının belgelenmesi." },
+          { when: "2023", what: "Veri Analisti Stajyeri", note: "Konak İlçe Milli Eğitim Müdürlüğü — resmî raporlama öncesinde büyük eğitim veri setlerinin işlenmesi ve doğrulanması." }
+        ]
+      },
+      {
+        title: "Öğrenme",
+        items: [
+          { when: "Haziran 2026", what: "İstatistik Lisansı", note: "Ege Üniversitesi — Haziran 2026'da mezun oldum. Tezimde TÜFE eğilimlerini regresyon analiziyle modelledim." },
+          { when: "2025", what: "Ürün Yönetimi Bootcamp'i", note: "Coderspace — keşif, önceliklendirme, A/B testi ve deney tasarımı." },
+          { when: "2025", what: "Flutter ve Dijital Pazarlama Bootcamp'leri", note: "Techcareer.net — mobil geliştirme; kullanıcı yolculuğu boyunca kazanım, dönüşüm ve elde tutma metrikleri." },
+          { when: "2024", what: "Data Summer Camp", note: "Intellica — gerçek iş zekâsı vakalarında SQL ve Oracle Data Integrator." }
+        ]
+      }
+    ]
+  }
+};
+
+function stripTags(html) {
+  const d = document.createElement("div");
+  d.innerHTML = html || "";
+  return (d.textContent || "").replace(/\s+/g, " ").trim();
+}
+
+class Component extends DCLogic {
+  state = { lang: null, medium: [], status: "idle" };
+  track = React.createRef();
+
+  scrollBy(dir) {
+    const el = this.track.current;
+    if (!el) return;
+    el.scrollBy({ left: dir * Math.max(260, el.clientWidth * 0.45), behavior: "smooth" });
+  }
+
+  componentDidMount() { this.loadMedium(); }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.mediumHandle !== this.props.mediumHandle) this.loadMedium();
+  }
+
+  async loadMedium() {
+    const handle = (this.props.mediumHandle ?? "").trim().replace(/^@/, "");
+    if (!handle) { this.setState({ status: "idle", medium: [] }); return; }
+    // Medium publishes an RSS feed per account, on the custom subdomain and the
+    // canonical /feed/@handle path. Try both, through two CORS proxies.
+    const feeds = ["https://" + handle + ".medium.com/feed", "https://medium.com/feed/@" + handle];
+    this.setState({ status: "loading" });
+    for (const feed of feeds) {
+      const items = (await this.viaJsonProxy(feed)) || (await this.viaXmlProxy(feed));
+      if (items && items.length) { this.setState({ medium: items, status: "ok" }); return; }
+    }
+    this.setState({ medium: [], status: "unavailable" });
+  }
+
+  async viaJsonProxy(feed) {
+    try {
+      const res = await fetch("https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent(feed));
+      const json = await res.json();
+      if (json.status !== "ok" || !Array.isArray(json.items)) return null;
+      return json.items.slice(0, 6).map((it) => ({
+        title: it.title,
+        link: it.link,
+        excerpt: stripTags(it.description || it.content).slice(0, 190),
+        raw: it.pubDate,
+        source: "Medium"
+      }));
+    } catch (e) { return null; }
+  }
+
+  async viaXmlProxy(feed) {
+    try {
+      const res = await fetch("https://api.allorigins.win/raw?url=" + encodeURIComponent(feed));
+      const xml = new DOMParser().parseFromString(await res.text(), "text/xml");
+      const nodes = [...xml.querySelectorAll("item")].slice(0, 6);
+      if (!nodes.length) return null;
+      return nodes.map((n) => {
+        const get = (tag) => (n.querySelector(tag) ? n.querySelector(tag).textContent : "");
+        return {
+          title: get("title"),
+          link: get("link"),
+          excerpt: stripTags(get("description")).slice(0, 190),
+          raw: get("pubDate"),
+          source: "Medium"
+        };
+      });
+    } catch (e) { return null; }
+  }
+
+  renderVals() {
+    const lang = this.state.lang ?? (this.props.defaultLang === "tr" ? "tr" : "en");
+    const c = COPY[lang];
+    const fmt = (d) => {
+      const t = new Date(d);
+      return isNaN(t) ? "" : t.toLocaleDateString(lang === "tr" ? "tr-TR" : "en-GB", { day: "numeric", month: "long", year: "numeric" });
+    };
+    const manual = LINKEDIN_POSTS.map((p) => ({ ...p, source: p.source || "LinkedIn", raw: p.date }));
+    const posts = [...this.state.medium, ...manual]
+      .sort((a, b) => new Date(b.raw || 0) - new Date(a.raw || 0))
+      .map((p) => ({ ...p, date: fmt(p.raw) }));
+    return {
+      t: c,
+      trackRef: this.track,
+      scrollPrev: () => this.scrollBy(-1),
+      scrollNext: () => this.scrollBy(1),
+      isEn: lang === "en",
+      isTr: lang === "tr",
+      products: c.products.map((p) => ({
+        ...p,
+        hasIcon: !!p.icon,
+        noIcon: !p.icon,
+        initial: (p.name || "?").slice(0, 1)
+      })),
+      principles: c.principles,
+      groups: c.groups.map((g) => ({ ...g, count: String(g.items.length).padStart(2, "0") })),
+      posts,
+      loading: this.state.status === "loading",
+      empty: posts.length === 0 && this.state.status !== "loading",
+      toggleLang: () => this.setState({ lang: lang === "en" ? "tr" : "en" })
+    };
+  }
+}
+</script>
+</body>
+</html>

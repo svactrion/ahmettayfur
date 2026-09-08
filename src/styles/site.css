@@ -1,0 +1,393 @@
+/* Site styles that sit on top of the Nocturne design system.
+   Two jobs:
+   1. the shared chrome (page shell, masthead, footer)
+   2. the content classes the inner pages use (.row / .note / .body / ...)
+      — these existed before the redesign and every inner page still uses
+      them, so they are re-tuned for the dark theme rather than removed. */
+
+:root {
+  /* Height of the illustrated figures on the home page. */
+  --fig-h: clamp(280px, 32vw, 420px);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+
+img {
+  max-width: 100%;
+}
+
+a {
+  color: var(--color-accent-300);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-accent-200);
+}
+
+/* Body copy links keep an underline — inside a paragraph, colour alone is
+   not enough to mark a link. */
+.body a,
+.legal-body a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in srgb, var(--color-accent-300) 45%, transparent);
+}
+
+.skip {
+  position: absolute;
+  left: -9999px;
+}
+
+.skip:focus {
+  left: 16px;
+  top: 16px;
+  z-index: 10;
+  background: var(--color-surface);
+  color: var(--color-text);
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+}
+
+/* ---------- page shell ---------- */
+
+.shell {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(18px, 5vw, 64px);
+}
+
+.shell-narrow {
+  max-width: 860px;
+}
+
+/* ---------- masthead ---------- */
+
+.masthead .nav {
+  padding-inline: 0;
+  gap: clamp(12px, 2.4vw, 22px);
+  flex-wrap: wrap;
+  padding-block: 18px;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--color-text);
+  text-decoration: none;
+  margin-right: auto;
+}
+
+.nav-brand img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--color-accent-900);
+  object-fit: cover;
+  object-position: 50% 8%;
+}
+
+.masthead .nav a:not(.nav-brand) {
+  color: var(--color-neutral-300);
+}
+
+.masthead .nav a:not(.nav-brand):hover,
+.masthead .nav a[aria-current='page'] {
+  color: var(--color-accent-300);
+}
+
+/* ---------- footer ---------- */
+
+.footer {
+  padding: 22px 0 44px;
+  margin-top: clamp(40px, 6vw, 80px);
+  border-top: 1px solid var(--color-divider);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--color-neutral-500);
+}
+
+.footer a {
+  color: var(--color-neutral-400);
+}
+
+.footer a:hover {
+  color: var(--color-accent-300);
+}
+
+.footer-links {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* ---------- fading rule ---------- */
+
+.rule {
+  height: 1px;
+  border: 0;
+  margin: 0 0 clamp(40px, 5vw, 72px);
+  background: linear-gradient(
+    to right,
+    transparent 0,
+    var(--color-divider) 48px,
+    var(--color-divider) calc(100% - 48px),
+    transparent 100%
+  );
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   Content classes used by the inner pages
+   ════════════════════════════════════════════════════════════════════ */
+
+.row {
+  display: grid;
+  grid-template-columns: 168px minmax(0, 1fr);
+  gap: clamp(20px, 4vw, 48px);
+  padding: clamp(26px, 3.5vw, 44px) 0;
+  border-top: 1px solid var(--color-divider);
+}
+
+.row:first-of-type {
+  border-top: 0;
+}
+
+.note {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  line-height: 1.6;
+  letter-spacing: 0.04em;
+  color: var(--color-neutral-500);
+}
+
+.note strong {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent-300);
+}
+
+.body {
+  min-width: 0;
+  max-width: 68ch;
+}
+
+.body > * + * {
+  margin-top: 1em;
+}
+
+.body p {
+  margin: 0;
+  color: var(--color-neutral-300);
+}
+
+.body h2 {
+  font-size: clamp(21px, 2.4vw, 27px);
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: var(--color-text);
+}
+
+.body h3 {
+  font-size: 18px;
+  letter-spacing: -0.015em;
+  margin: 0;
+  color: var(--color-text);
+}
+
+.body > * + h2 {
+  margin-top: 1.8em;
+}
+
+.body > * + h3 {
+  margin-top: 1.6em;
+}
+
+.display {
+  font-size: clamp(30px, 4.4vw, 46px);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+.lede {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--color-neutral-200) !important;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: calc(var(--radius-md) * 0.75);
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* An unfinished section. Deliberately loud: it must be impossible to
+   publish a page with one of these still on it by accident. */
+.todo {
+  border: 1px dashed var(--color-accent-600);
+  border-left: 3px solid var(--color-accent);
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--color-accent) 8%, transparent);
+  padding: 14px 18px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.todo p {
+  margin: 0;
+  color: var(--color-neutral-200);
+}
+
+.todo strong {
+  color: var(--color-accent-300);
+}
+
+/* ---------- link lists ---------- */
+
+.links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.links li {
+  padding: 12px 0;
+  border-top: 1px solid var(--color-divider);
+}
+
+.links-label {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-neutral-500);
+  margin-bottom: 3px;
+}
+
+/* ---------- entries (case study timeline) ---------- */
+
+.entry {
+  padding: 14px 0;
+  border-top: 1px solid var(--color-divider);
+}
+
+.entry-when {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--color-neutral-500);
+}
+
+.entry-role {
+  display: block;
+  font-size: 16px;
+  line-height: 1.35;
+  margin-top: 4px;
+  color: var(--color-text);
+}
+
+.entry-org {
+  display: block;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-top: 6px;
+  color: var(--color-neutral-400);
+}
+
+/* ---------- product card (the /products directory) ---------- */
+
+a.card {
+  padding: clamp(18px, 2.2vw, 26px);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+  color: var(--color-text);
+  transition: box-shadow 0.2s ease;
+}
+
+a.card:hover {
+  box-shadow: var(--shadow-md);
+  color: var(--color-text);
+}
+
+.card-title {
+  font-size: 20px;
+}
+
+.card-text {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--color-neutral-300);
+}
+
+.card-status {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-accent-300);
+}
+
+/* ---------- scroll reveal ---------- */
+
+.motion .row {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.motion .row.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- narrow screens ---------- */
+
+@media (max-width: 760px) {
+  .row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .note {
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--color-divider);
+  }
+}
+
+@media (max-width: 560px) {
+  .masthead .nav {
+    gap: 10px 14px;
+    font-size: 14px;
+  }
+}
