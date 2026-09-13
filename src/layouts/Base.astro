@@ -3,29 +3,58 @@
 // Those use Legal.astro so that changes made here can never affect them.
 import { ClientRouter } from 'astro:transitions';
 import { me } from '../data.js';
+import { copy } from '../content/home.js';
+import { otherLocalePath, toEnPath, isTranslated, localizeHref } from '../i18n.js';
 import '../styles/nocturne.css';
 import '../styles/site.css';
 
 const { title, description, noindex = false } = Astro.props;
 const path = Astro.url.pathname;
-// Strip the trailing slash so the canonical URL matches the addresses given
-// to Apple exactly (e.g. .../privacy, not .../privacy/).
+// Astro resolves this from the URL: 'tr' under /tr/, 'en' (the default)
+// everywhere else. See src/i18n.js for which pages exist in both.
+const lang = Astro.currentLocale ?? 'en';
+const t = copy[lang];
+
+// These three addresses (privacy, terms, support) are compiled into the
+// shipped app in lib/utils/app_links.dart WITH a trailing slash
+// (e.g. https://ahmettayfur.com/products/grammarlens/privacy/), and that
+// exact URL returns 200 live today, with no redirect. They are pinned to
+// the released app binary — changing the path here does not reach
+// installs already in the wild, only a new app version does.
 const canonical = new URL(path.replace(/(.)\/$/, '$1'), Astro.site).href;
 const year = new Date().getFullYear();
 
-// On the home page the section links are plain hashes, so the browser just
-// scrolls. From any other page they need the full path.
-const home = path === '/' ? '' : '/';
+// On a home page the section links are plain hashes, so the browser just
+// scrolls. From any other page they need the full path, locale prefix
+// included.
+const homePath = lang === 'tr' ? '/tr/' : '/';
+const home = path === homePath ? '' : homePath;
+
+// hreflang: every page advertises its English address; only pages listed
+// in src/i18n.js also have a Turkish one.
+const enPath = toEnPath(path);
+const hreflangEn = new URL(enPath.replace(/(.)\/$/, '$1'), Astro.site).href;
+const hreflangTr = isTranslated(path)
+  ? new URL(`/tr${enPath === '/' ? '/' : enPath}`.replace(/(.)\/$/, '$1'), Astro.site).href
+  : null;
+
+// Language switch: only a real link when this exact page also exists in
+// the other language. Otherwise it renders disabled rather than risking a
+// 404.
+const switchHref = otherLocalePath(path, lang);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="en" href={hreflangEn} />
+    {hreflangTr && <link rel="alternate" hreflang="tr" href={hreflangTr} />}
+    <link rel="alternate" hreflang="x-default" href={hreflangEn} />
     {noindex && <meta name="robots" content="noindex, follow" />}
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -37,7 +66,9 @@ const home = path === '/' ? '' : '/';
     <meta property="og:site_name" content="ahmettayfur.com" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="theme-color" content="#161826" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -55,21 +86,41 @@ const home = path === '/' ? '' : '/';
   </head>
 
   <body>
-    <a class="skip" href="#main">Skip to content</a>
+    <a class="skip" href="#main">{t.chrome.skip}</a>
 
     <div class="shell">
       <header class="masthead">
         <nav class="nav" aria-label="Primary">
-          <a class="nav-brand" href="/">
+          <a class="nav-brand" href={homePath}>
             <img src="/img/hero-face.webp" alt="" aria-hidden="true" width="32" height="32" />
-            {me.name}
+            {me.shortName}
           </a>
-          <a href="/products" aria-current={path.startsWith('/products') ? 'page' : undefined}>
-            Products
+          <a
+            href={localizeHref('/products', lang)}
+            aria-current={enPath.startsWith('/products') ? 'page' : undefined}
+          >
+            {t.nav.products}
           </a>
-          <a href={`${home}#who`}>Who am I</a>
-          <a href={`${home}#articles`}>Writing</a>
-          <a href={`${home}#contact`}>Contact</a>
+          <a href={`${home}#who`}>{t.nav.who}</a>
+          <a href={`${home}#articles`}>{t.nav.articles}</a>
+          <a href={`${home}#contact`}>{t.nav.contact}</a>
+          {
+            switchHref ? (
+              <a class="lang-switch" href={switchHref} hreflang={lang === 'en' ? 'tr' : 'en'} aria-label={t.chrome.langSwitchAria}>
+                <span class={`lang-switch-item${lang === 'en' ? ' is-active' : ''}`} aria-hidden="true">
+                  EN
+                </span>
+                <span class={`lang-switch-item${lang === 'tr' ? ' is-active' : ''}`} aria-hidden="true">
+                  TR
+                </span>
+              </a>
+            ) : (
+              <span class="lang-switch lang-switch-off" aria-hidden="true">
+                <span class={`lang-switch-item${lang === 'en' ? ' is-active' : ''}`}>EN</span>
+                <span class={`lang-switch-item${lang === 'tr' ? ' is-active' : ''}`}>TR</span>
+              </span>
+            )
+          }
         </nav>
       </header>
 
@@ -79,11 +130,6 @@ const home = path === '/' ? '' : '/';
 
       <footer class="footer">
         <span>&copy; {year} {me.name}</span>
-        <span class="footer-links">
-          <a href="/products/grammarlens/privacy">Privacy</a>
-          <a href="/products/grammarlens/terms">Terms</a>
-          <a href="/products/grammarlens/support">Support</a>
-        </span>
         <span>ahmettayfur.com</span>
       </footer>
     </div>

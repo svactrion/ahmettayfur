@@ -1,0 +1,39 @@
+---
+// The /products listing page, shared by the English and Turkish routes.
+// Astro.currentLocale picks the language — see src/content/products.js.
+import Base from '../layouts/Base.astro';
+import { productsCopy } from '../content/products.js';
+import { localizeHref } from '../i18n.js';
+
+const lang = Astro.currentLocale ?? 'en';
+const t = productsCopy[lang];
+---
+
+<Base title={t.meta.title} description={t.meta.description}>
+  <section class="row">
+    <aside class="note">
+      <strong>{t.intro.note.label}</strong>
+      {t.intro.note.line1}<br />
+      {t.intro.note.line2}
+    </aside>
+    <div class="body">
+      <h1 class="display">{t.intro.title}</h1>
+      <p class="lede">{t.intro.lede}</p>
+    </div>
+  </section>
+
+  <section class="row">
+    <aside class="note">
+      <strong>{t.grammarlensEntry.note.label}</strong>
+      {t.grammarlensEntry.note.line1}<br />
+      {t.grammarlensEntry.note.line2}
+    </aside>
+    <div class="body">
+      <a class="card" href={localizeHref('/products/grammarlens', lang)}>
+        <span class="card-title">{t.grammarlensEntry.cardTitle}</span>
+        <span class="card-text">{t.grammarlensEntry.cardText}</span>
+        <span class="card-status">{t.grammarlensEntry.cardStatus}</span>
+      </a>
+    </div>
+  </section>
+</Base>

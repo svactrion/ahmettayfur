@@ -1,0 +1,1130 @@
+---
+// The home page, shared by the English ("/") and Turkish ("/tr/") routes.
+// Both src/pages/index.astro and src/pages/tr/index.astro just render this
+// component — Astro.currentLocale tells it which language to use, so there
+// is exactly one copy of the markup, styles, and scripts to maintain.
+import Base from '../layouts/Base.astro';
+import { me } from '../data.js';
+import { copy } from '../content/home.js';
+import { getPosts } from '../lib/medium.js';
+import { localizeHref } from '../i18n.js';
+
+const lang = Astro.currentLocale ?? 'en';
+const t = copy[lang];
+
+// Read once, while the site is built. See src/lib/medium.js. The feed is
+// English-language regardless of the page's locale — there is no separate
+// Turkish feed.
+const posts = await getPosts(me.mediumHandle);
+---
+
+<Base title={t.meta.title} description={t.meta.description}>
+  <!-- ══════════════ hero ══════════════ -->
+  <section id="top" class="hero">
+    <div>
+      <p class="eyebrow"><span class="eyebrow-dash"></span>{t.eyebrow}</p>
+      <h1 class="hero-title">
+        {t.heroTitle[0]}<br />{t.heroTitle[1]}
+      </h1>
+      <p class="hero-tagline">{t.heroTagline}</p>
+      <p class="hero-body">{t.heroBody}</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="#products">{t.cta1}</a>
+        <a class="btn btn-ghost" href="#articles">{t.cta2}</a>
+      </div>
+    </div>
+    <div class="fig hero-fig">
+      <span class="glow" aria-hidden="true"></span>
+      <img
+        src="/img/hero-arms.webp"
+        width="266"
+        height="840"
+        alt="Illustrated portrait of Ahmet Emin Tayfur"
+      />
+      <span class="shadow" aria-hidden="true"></span>
+    </div>
+  </section>
+
+  <hr class="rule" />
+
+  <!-- ══════════════ products ══════════════ -->
+  <section id="products" class="band">
+    <div class="band-head">
+      <h2>{t.prodTitle}</h2>
+      <p class="kicker">{t.prodCount}</p>
+    </div>
+
+    <div class="prod-wrap">
+      <div class="fig prod-fig" aria-hidden="true">
+        <span class="glow" aria-hidden="true"></span>
+        <img src="/img/hero-present.webp" width="449" height="840" alt="" />
+      </div>
+
+      <div class="prod-list">
+        {
+          t.products.map((p) => (
+            <article class="prod">
+              <div class="prod-head">
+                <span class={p.icon ? 'prod-mark prod-mark-icon' : 'prod-mark'}>
+                  {p.icon ? (
+                    <picture>
+                      <source srcset={p.icon.webp} type="image/webp" />
+                      <img src={p.icon.png} alt={p.icon.alt} width="56" height="56" loading="lazy" />
+                    </picture>
+                  ) : (
+                    p.name.slice(0, 1)
+                  )}
+                </span>
+                <div class="prod-headings">
+                  <div class="prod-name-row">
+                    <h3>{p.name}</h3>
+                    <span class="tag tag-outline">{p.status}</span>
+                  </div>
+                  <p class="kicker kicker-accent">{p.kicker}</p>
+                </div>
+              </div>
+
+              <p class="prod-desc">{p.desc}</p>
+
+              <p class="prod-facts">
+                {p.facts.map((f, i) => (
+                  <>
+                    {i > 0 && <span aria-hidden="true">·</span>}
+                    <span>{f}</span>
+                  </>
+                ))}
+              </p>
+
+              <div class="prod-stack">
+                {p.stack.map((s) => (
+                  <span class="tag tag-neutral">{s}</span>
+                ))}
+              </div>
+
+              <div class="prod-foot">
+                <a class="prod-case" href={localizeHref(p.caseHref, lang)}>
+                  {t.caseStudy} &larr;
+                </a>
+                <span class="prod-docs">
+                  {p.docs.map((l) => (
+                    <a href={localizeHref(l.href, lang)}>{l.label}</a>
+                  ))}
+                </span>
+              </div>
+            </article>
+          ))
+        }
+
+        <article class="prod-next">
+          <span class="kicker kicker-accent">{t.nextKicker}</span>
+          <h3>{t.nextTitle}</h3>
+          <p>{t.nextBody}</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule" />
+
+  <!-- ══════════════ who am I ══════════════ -->
+  <section id="who" class="band">
+    <div class="who">
+      <div class="fig who-fig" aria-hidden="true">
+        <span class="glow" aria-hidden="true"></span>
+        <img src="/img/work.webp" width="469" height="840" alt="" />
+        <span class="shadow" aria-hidden="true"></span>
+      </div>
+      <div>
+        <h2>{t.whoTitle}</h2>
+        {t.whoBody.map((para, i) => <p class={i === 0 ? 'who-lede' : 'who-para'}>{para}</p>)}
+      </div>
+    </div>
+
+    <div class="principles">
+      <p class="kicker">{t.principlesLabel}</p>
+      <div class="principles-grid">
+        {
+          t.principles.map((p) => (
+            <div class="principle">
+              <h3>{p.title}</h3>
+              <p>{p.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <hr class="rule rule-inset" />
+
+    <div class="background">
+      <div class="background-head">
+        <p class="kicker">{t.backgroundLabel}</p>
+        <div class="background-controls">
+          <span class="hint">{t.scrollHint}</span>
+          <button type="button" class="btn btn-icon" data-track="prev" aria-label="Previous"
+            >&larr;</button
+          >
+          <button type="button" class="btn btn-icon" data-track="next" aria-label="Next"
+            >&rarr;</button
+          >
+        </div>
+      </div>
+
+      <div class="track" id="bg-track">
+        {
+          t.groups.map((g) => (
+            <section class="track-card">
+              <div class="track-card-head">
+                <h3>{g.title}</h3>
+                <span>{String(g.items.length).padStart(2, '0')}</span>
+              </div>
+              {g.items.map((e) => (
+                <div class="entry">
+                  <span class="entry-when">{e.when}</span>
+                  <span class="entry-role">{e.what}</span>
+                  <span class="entry-org">{e.note}</span>
+                </div>
+              ))}
+            </section>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule" />
+
+  <!-- ══════════════ writing ══════════════ -->
+  <section id="articles" class="band">
+    <div class="band-head">
+      <h2>{t.articlesTitle}</h2>
+      <p class="kicker">{t.artFeed}</p>
+    </div>
+
+    <div class="art-hero">
+      <p class="art-sub">{t.artSub}</p>
+      <div class="fig desk-fig" aria-hidden="true">
+        <span class="glow glow-right" aria-hidden="true"></span>
+        <img src="/img/desk.webp" width="1080" height="602" alt="" />
+      </div>
+    </div>
+
+    {posts.length === 0 && <p class="art-empty">{t.artEmpty}</p>}
+
+    <div class="art-list">
+      {
+        posts.map((p) => (
+          <a class="art-row" href={p.link} target="_blank" rel="noopener">
+            <h3>{p.title}</h3>
+            <span class="art-source">{p.source}</span>
+            <p class="art-excerpt">{p.excerpt}</p>
+            <span class="art-date">{p.dateLabel}</span>
+          </a>
+        ))
+      }
+    </div>
+
+    <p class="art-all">
+      <a href={me.medium} target="_blank" rel="noopener">{t.artAll} &rarr;</a>
+    </p>
+  </section>
+
+  <hr class="rule" />
+
+  <!-- ══════════════ contact ══════════════ -->
+  <section id="contact" class="band band-tight">
+    <p class="kicker">{t.contactTitle}</p>
+    <a class="contact-mail" href={`mailto:${me.email}`}>{me.email}</a>
+    <p class="contact-note">{t.contactNote}</p>
+    <div class="btn-row">
+      <a class="btn btn-secondary" href={me.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn-secondary" href={me.medium} target="_blank" rel="noopener">Medium</a>
+      <a class="btn btn-secondary" href={me.github} target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-secondary" href={`mailto:${me.directEmail}`}>Direct contact</a>
+    </div>
+  </section>
+
+  <!-- ══════════════ sign off ══════════════ -->
+  <section class="bye">
+    <div class="bye-text">
+      <h2>{t.byeTitle}</h2>
+      <p>{t.byeNote}</p>
+    </div>
+    <a class="bye-fig-link" href="#top" aria-label="Back to top">
+      <div class="fig bye-fig" aria-hidden="true">
+        <span class="glow" aria-hidden="true"></span>
+        <img src="/img/bye.webp" width="424" height="760" alt="" />
+      </div>
+      <span class="bye-fig-hint" aria-hidden="true">Back to top</span>
+      <span class="hint bye-fig-caption">{t.backToTopHint}</span>
+    </a>
+  </section>
+</Base>
+
+<script is:inline>
+  // Arrow buttons for the background track. The track is swipeable and
+  // scrollable without this — the buttons are an extra, not a requirement.
+  function armTrack() {
+    var track = document.getElementById('bg-track');
+    if (!track) return;
+    document.querySelectorAll('[data-track]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var dir = btn.getAttribute('data-track') === 'next' ? 1 : -1;
+        track.scrollBy({
+          left: dir * Math.max(260, track.clientWidth * 0.45),
+          behavior: 'smooth',
+        });
+      });
+    });
+
+    // Mouse drag-to-scroll. Touch already scrolls natively, so this only
+    // binds mouse events.
+    var isDown = false;
+    var dragged = false;
+    var startX = 0;
+    var startScroll = 0;
+
+    function endDrag() {
+      isDown = false;
+      track.classList.remove('dragging');
+    }
+
+    track.addEventListener('mousedown', function (e) {
+      isDown = true;
+      dragged = false;
+      startX = e.pageX;
+      startScroll = track.scrollLeft;
+      track.classList.add('dragging');
+    });
+
+    track.addEventListener('mousemove', function (e) {
+      if (!isDown) return;
+      var delta = e.pageX - startX;
+      if (Math.abs(delta) > 4) dragged = true;
+      e.preventDefault();
+      track.scrollLeft = startScroll - delta;
+    });
+
+    track.addEventListener('mouseup', endDrag);
+    track.addEventListener('mouseleave', endDrag);
+    window.addEventListener('mouseup', endDrag);
+
+    // A drag that actually moved the track shouldn't also fire a click on
+    // whatever was under the cursor (a link or button inside a card).
+    track.addEventListener(
+      'click',
+      function (e) {
+        if (dragged) {
+          e.preventDefault();
+          e.stopPropagation();
+          dragged = false;
+        }
+      },
+      true
+    );
+  }
+  armTrack();
+  document.addEventListener('astro:page-load', armTrack);
+</script>
+
+<style>
+  /* ---------- shared bits ---------- */
+
+  .fig {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .fig img {
+    position: relative;
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: var(--fig-h);
+    object-fit: contain;
+  }
+
+  .glow {
+    position: absolute;
+    left: 50%;
+    top: 6%;
+    width: min(300px, 94%);
+    aspect-ratio: 1 / 1;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--color-accent-800) 0%, transparent 66%);
+    opacity: 0.5;
+    filter: blur(14px);
+  }
+
+  .shadow {
+    position: absolute;
+    left: 50%;
+    bottom: -6px;
+    width: 115px;
+    height: 12px;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(0, 0, 0, 0.5) 0%, transparent 72%);
+  }
+
+  .kicker {
+    margin: 0;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-neutral-400);
+  }
+
+  .kicker-accent {
+    color: var(--color-accent-300);
+  }
+
+  .btn-row {
+    display: flex;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    margin-top: 24px;
+  }
+
+  .btn-row .btn {
+    height: auto;
+    white-space: nowrap;
+  }
+
+  .band {
+    padding: 0 0 clamp(40px, 5vw, 72px);
+  }
+
+  .band-tight {
+    padding-bottom: clamp(30px, 4vw, 52px);
+  }
+
+  .band-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--color-divider);
+  }
+
+  .band-head h2 {
+    font-size: clamp(24px, 3vw, 34px);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    margin: 0;
+  }
+
+  .rule-inset {
+    margin: clamp(40px, 5vw, 72px) 0 0;
+  }
+
+  /* ---------- hero ---------- */
+
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+    gap: 34px clamp(24px, 5vw, 64px);
+    align-items: center;
+    padding: clamp(32px, 5vw, 80px) 0 clamp(44px, 6vw, 84px);
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 22px;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-accent-300);
+  }
+
+  .eyebrow-dash {
+    width: 22px;
+    height: 1px;
+    background: var(--color-accent);
+    display: block;
+  }
+
+  .hero-title {
+    font-size: clamp(36px, 5.2vw, 64px);
+    line-height: 1.06;
+    letter-spacing: -0.03em;
+    margin: 0;
+  }
+
+  .hero-tagline {
+    font-size: 15px;
+    line-height: 1.5;
+    max-width: 48ch;
+    margin: 14px 0 0;
+    color: var(--color-neutral-400);
+  }
+
+  .hero-body {
+    font-size: 17px;
+    line-height: 1.7;
+    max-width: 52ch;
+    margin: 24px 0 0;
+    color: var(--color-neutral-300);
+  }
+
+  /* ---------- products ---------- */
+
+  .prod-wrap {
+    display: flex;
+    align-items: stretch;
+    gap: clamp(16px, 3vw, 40px);
+    margin-top: 22px;
+    flex-wrap: wrap;
+  }
+
+  .prod-fig {
+    flex: 0 0 auto;
+    align-self: flex-end;
+    width: auto;
+  }
+
+  .prod-list {
+    flex: 1 1 420px;
+    min-width: 0;
+    display: grid;
+    gap: var(--space-6);
+    align-content: start;
+  }
+
+  .prod {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding: clamp(20px, 2.4vw, 28px);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .prod-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .prod-mark {
+    flex: 0 0 auto;
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    border: 1px dashed var(--color-neutral-700);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--color-accent-300);
+  }
+
+  .prod-mark-icon {
+    border-style: solid;
+    border-color: var(--color-divider);
+    overflow: hidden;
+    padding: 0;
+  }
+
+  .prod-mark-icon img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .prod-headings {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .prod-name-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .prod-name-row h3 {
+    font-size: 22px;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+
+  .prod-headings .kicker {
+    margin-top: 6px;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+  }
+
+  .prod-desc {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.7;
+    max-width: 60ch;
+    color: var(--color-neutral-300);
+  }
+
+  .prod-facts {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 4px 8px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--color-neutral-400);
+  }
+
+  .prod-stack {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .prod-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: var(--space-2);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-divider);
+  }
+
+  .prod-case {
+    font-size: 15px;
+    color: var(--color-accent-300);
+  }
+
+  .prod-docs {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+  }
+
+  .prod-docs a {
+    color: var(--color-neutral-400);
+  }
+
+  .prod-docs a:hover {
+    color: var(--color-accent-300);
+  }
+
+  .prod-next {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: clamp(20px, 2.4vw, 28px);
+    border-radius: var(--radius-lg);
+    border: 1px dashed var(--color-neutral-800);
+  }
+
+  .prod-next h3 {
+    font-size: 18px;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    margin: 6px 0 0;
+    color: var(--color-neutral-300);
+  }
+
+  .prod-next p {
+    margin: 8px 0 0;
+    font-size: 14px;
+    line-height: 1.6;
+    max-width: 44ch;
+    color: var(--color-neutral-400);
+  }
+
+  /* ---------- who am I ---------- */
+
+  .who {
+    display: grid;
+    grid-template-columns: clamp(260px, 30vw, 420px) minmax(0, 1fr);
+    gap: 34px clamp(28px, 5vw, 64px);
+    align-items: end;
+  }
+
+  .who h2 {
+    font-size: clamp(24px, 3vw, 34px);
+    line-height: 1.12;
+    letter-spacing: -0.025em;
+    margin: 0;
+  }
+
+  .who-lede {
+    font-size: 16px;
+    line-height: 1.75;
+    margin: 20px 0 0;
+    color: var(--color-neutral-200);
+  }
+
+  .who-para {
+    font-size: 16px;
+    line-height: 1.75;
+    margin: 16px 0 0;
+    color: var(--color-neutral-300);
+  }
+
+  .principles {
+    margin-top: clamp(30px, 4vw, 52px);
+  }
+
+  .principles-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 clamp(28px, 5vw, 64px);
+    margin-top: 6px;
+  }
+
+  .principle {
+    padding: 16px 0;
+    border-top: 1px solid var(--color-divider);
+  }
+
+  .principle h3 {
+    font-size: 17px;
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+    margin: 0;
+  }
+
+  .principle p {
+    margin: 8px 0 0;
+    font-size: 15px;
+    line-height: 1.65;
+    max-width: 52ch;
+    color: var(--color-neutral-400);
+  }
+
+  /* ---------- background track ---------- */
+
+  .background {
+    margin-top: clamp(30px, 4vw, 52px);
+  }
+
+  .background-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-bottom: 14px;
+  }
+
+  .background-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* The shared .btn-icon size (36px, nocturne.css) is under the 44px touch
+     target minimum; only used here, so widened locally rather than in the
+     shared design system file. */
+  .background-controls .btn-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .hint {
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--color-neutral-500);
+  }
+
+  .track {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(min(360px, 84vw), 1fr);
+    gap: clamp(14px, 2vw, 22px);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    padding-bottom: 10px;
+    /* pan-x alone claims horizontal panning AND blocks the browser's
+       default vertical panning on this element, which is why a finger
+       swipe here couldn't scroll the page. pan-y lets that through — the
+       track has no vertical overflow of its own, so a vertical drag just
+       bubbles up and scrolls the page as normal. */
+    touch-action: pan-x pan-y;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    cursor: grab;
+  }
+
+  .track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .track.dragging {
+    cursor: grabbing;
+    scroll-snap-type: none;
+    user-select: none;
+  }
+
+  .track.dragging * {
+    user-select: none;
+  }
+
+  .track-card {
+    scroll-snap-align: start;
+    min-width: 0;
+    padding: clamp(16px, 2vw, 22px);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    border-top: 2px solid var(--color-accent-700);
+  }
+
+  .track-card-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .track-card-head h3 {
+    font-size: 15px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin: 0;
+    color: var(--color-accent-300);
+  }
+
+  .track-card-head span {
+    font-size: 12px;
+    color: var(--color-neutral-500);
+  }
+
+  .track-card .entry {
+    margin-top: 14px;
+  }
+
+  /* ---------- writing ---------- */
+
+  .art-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) clamp(280px, 38vw, 540px);
+    gap: 18px clamp(20px, 4vw, 56px);
+    align-items: start;
+    margin-top: 20px;
+  }
+
+  .art-sub {
+    align-self: center;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.6;
+    margin: 0;
+    max-width: 62ch;
+    color: var(--color-neutral-300);
+  }
+
+  .desk-fig {
+    justify-self: end;
+  }
+
+  .desk-fig img {
+    width: 100%;
+    height: auto;
+    margin-bottom: -2px;
+  }
+
+  .glow-right {
+    left: auto;
+    right: 10%;
+    top: 8%;
+    width: 64%;
+    transform: none;
+    opacity: 0.45;
+    filter: blur(16px);
+  }
+
+  .art-empty {
+    font-size: 15px;
+    line-height: 1.65;
+    margin: 18px 0 0;
+    max-width: 56ch;
+    color: var(--color-neutral-400);
+  }
+
+  .art-list {
+    margin-top: 20px;
+  }
+
+  .art-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 6px 22px;
+    padding: 20px 0;
+    border-top: 1px solid var(--color-divider);
+    color: var(--color-text);
+  }
+
+  .art-row:hover h3 {
+    color: var(--color-accent-300);
+  }
+
+  .art-row h3 {
+    font-size: 19px;
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+
+  .art-source {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-accent-300);
+    align-self: center;
+    white-space: nowrap;
+  }
+
+  .art-excerpt {
+    grid-column: 1 / -1;
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 70ch;
+    color: var(--color-neutral-300);
+  }
+
+  .art-date {
+    grid-column: 1 / -1;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--color-neutral-500);
+  }
+
+  .art-all {
+    margin: 22px 0 0;
+    font-size: 14px;
+  }
+
+  /* ---------- contact ---------- */
+
+  .contact-mail {
+    display: inline-block;
+    margin-top: 16px;
+    font-weight: 500;
+    font-size: clamp(22px, 3.4vw, 42px);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--color-text);
+    word-break: break-word;
+  }
+
+  .contact-mail:hover {
+    color: var(--color-accent-300);
+  }
+
+  .contact-note {
+    font-size: 15px;
+    line-height: 1.7;
+    margin: 18px 0 0;
+    max-width: 52ch;
+    color: var(--color-neutral-300);
+  }
+
+  /* ---------- sign off ---------- */
+
+  .bye {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: clamp(20px, 4vw, 56px);
+    padding: clamp(24px, 3vw, 40px) clamp(24px, 3vw, 44px) 0;
+    border-radius: var(--radius-lg);
+    background: var(--color-neutral-900);
+    border: 1px solid var(--color-divider);
+    overflow: hidden;
+  }
+
+  .bye-text {
+    flex: 1 1 320px;
+    min-width: 0;
+    align-self: center;
+    padding-bottom: clamp(24px, 3vw, 40px);
+  }
+
+  .bye-text h2 {
+    font-size: clamp(26px, 3.6vw, 44px);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin: 0;
+  }
+
+  .bye-text p {
+    font-size: 15px;
+    line-height: 1.7;
+    margin: 16px 0 0;
+    max-width: 46ch;
+    color: var(--color-neutral-400);
+  }
+
+  .bye-fig-link {
+    /* Height of the actual figure inside the artwork's canvas — the source
+       image has empty space above the head, so the hint is anchored to
+       this, not to the image's own box, to sit close to the raised hand
+       instead of floating above empty canvas. Kept in sync with the
+       height rule on .bye-fig img below (including its mobile override). */
+    --bye-fig-h: calc(var(--fig-h) * 0.86);
+    position: relative;
+    display: block;
+    flex: 0 0 auto;
+    align-self: flex-end;
+    width: auto;
+    cursor: pointer;
+    border-radius: var(--radius-lg);
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .bye-fig-link:hover {
+    transform: translateY(-4px);
+    opacity: 0.9;
+  }
+
+  /* Always-visible version of the hover hint above — hovering only helps
+     people with a mouse, so this spells the same action out permanently,
+     in the site's existing secondary-text style (.hint, already used for
+     the "Swipe" label). */
+  .bye-fig-caption {
+    display: block;
+    margin-top: 8px;
+    text-align: center;
+  }
+
+  .bye-fig-hint {
+    position: absolute;
+    /* The raised hand starts ~8% down the canvas; this lands the badge
+       6px above it, with a consistent gap across every --bye-fig-h. */
+    top: calc(var(--bye-fig-h) * 0.079 - 29px);
+    right: 0;
+    transform: translateY(6px);
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--color-neutral-900);
+    border: 1px solid var(--color-divider);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-neutral-300);
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .bye-fig-link:hover .bye-fig-hint,
+  .bye-fig-link:focus-visible .bye-fig-hint {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .bye-fig-link:focus-visible {
+    outline: 2px solid var(--color-accent-300);
+    outline-offset: 4px;
+  }
+
+  .bye-fig img {
+    height: var(--bye-fig-h);
+    margin-bottom: -2px;
+  }
+
+  /* ---------- narrow screens ----------
+     768px matches the one shared breakpoint now used site-wide (site.css,
+     CaseStudyPage.astro) — this used to be 860px here while the .row-based
+     pages switched at 760px, so the same viewport could show a mobile
+     layout on this page and a desktop layout on, say, /products/. */
+
+  @media (max-width: 768px) {
+    .hero {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .hero-fig {
+      order: -1;
+    }
+
+    /* The figure points at the product cards with its hand, so it has to
+       stay above them (not below) once the row collapses to one column —
+       stacking in DOM order (figure first, then the card list) already
+       does that; this just switches the wrap's own axis to match and
+       gives the figure a sensible size instead of the ~150px-wide sliver
+       it'd get from the desktop --fig-h floor. */
+    .prod-wrap {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .prod-fig {
+      align-self: center;
+    }
+
+    .prod-fig img {
+      height: clamp(220px, 45vw, 320px);
+    }
+
+    .track {
+      grid-auto-columns: min(86vw, 420px);
+    }
+
+    .who {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 26px;
+    }
+
+    .principles-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .who-fig {
+      order: 2;
+    }
+
+    .who-fig img {
+      height: clamp(260px, 50vw, 360px);
+    }
+
+    .bye-fig-link {
+      --bye-fig-h: clamp(260px, 50vw, 360px);
+    }
+
+    .art-hero {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .bye {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .desk-fig {
+      justify-self: center;
+      max-width: 460px;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .prod-head {
+      gap: 12px;
+    }
+
+    .art-row {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

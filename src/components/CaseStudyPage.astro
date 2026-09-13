@@ -1,0 +1,196 @@
+---
+// The GrammarLens case study, shared by the English and Turkish routes.
+// Astro.currentLocale picks the language — see src/content/caseStudy.js.
+// The legal pages this links out to (privacy/terms/support) stay
+// English-only, so this page never links to them; it only links back to
+// the product page, in whichever language that page exists.
+import Base from '../layouts/Base.astro';
+import { caseStudyCopy } from '../content/caseStudy.js';
+import { localizeHref } from '../i18n.js';
+
+const lang = Astro.currentLocale ?? 'en';
+const t = caseStudyCopy[lang];
+const productHref = localizeHref('/products/grammarlens', lang);
+---
+
+<Base title={t.meta.title} description={t.meta.description}>
+  <section class="row">
+    <aside class="note">
+      <strong>{t.aside.label}</strong>
+      {t.aside.lines[0]}<br />
+      {t.aside.lines[1]}<br />
+      {t.aside.lines[2]}
+    </aside>
+    <div class="body">
+      <h1 class="display">{t.title}</h1>
+      {t.lede.map((p) => <p class="lede" set:html={p} />)}
+      <p>
+        <a class="tap-link" href={productHref}>{t.backLinkText}</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="row">
+    <aside class="note">
+      <strong>{t.section1.asideLabel}</strong>
+      {t.section1.asideLines[0]}<br />
+      {t.section1.asideLines[1]}
+    </aside>
+    <div class="body">
+      <h2>{t.section1.heading}</h2>
+      {t.section1.paragraphs.map((p) => <p set:html={p} />)}
+    </div>
+  </section>
+
+  <section class="row">
+    <aside class="note">
+      <strong>{t.section2.asideLabel}</strong>
+      {t.section2.asideLines[0]}<br />
+      {t.section2.asideLines[1]}
+    </aside>
+    <div class="body">
+      <h2>{t.section2.heading}</h2>
+      {t.section2.intro.map((p) => <p set:html={p} />)}
+      <ul>
+        {t.section2.list.map((item) => <li set:html={item} />)}
+      </ul>
+      {t.section2.after.map((p) => <p set:html={p} />)}
+    </div>
+  </section>
+
+  <section class="row">
+    <aside class="note">
+      <strong>{t.section3.asideLabel}</strong>
+      {t.section3.asideLines[0]}<br />
+      {t.section3.asideLines[1]}
+    </aside>
+    <div class="body">
+      <h2>{t.section3.heading}</h2>
+      {t.section3.retroPoints.map((p) => <p class="retro-point" set:html={p} />)}
+      <p set:html={t.section3.closing} />
+      <p>
+        <a class="tap-link" href={productHref}>{t.section3.endLinkText}</a>
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* Reading rhythm for this one long-form page. Astro scopes this style to
+     the elements rendered by this component only (via its own
+     data-astro-cid attribute), so it cannot reach the legal pages, the home
+     page, or any other page that also uses .row/.body/.lede. Spacing and
+     measure only — no new color, font, or element. Applies the same way
+     regardless of language, since it's pure structure.
+
+     Each section here is one .row, with exactly one h2 at the very top of
+     its .body. So "space above the heading" is the row's own top padding
+     (shared with the previous row's bottom padding across the divider),
+     and "space below the heading" is the gap to the paragraph right after
+     it — pulling those apart, rather than fighting the grid, is what makes
+     the asymmetry in requirement 3 actually work. */
+
+  .body {
+    max-width: 66ch;
+  }
+
+  /* Paragraph rhythm: clearly more than the 1.65 line-height, not just a
+     hair more. */
+  .body > * + * {
+    margin-top: 1.75em;
+  }
+
+  /* h2 sits close to what follows it... */
+  .body > h2 {
+    margin-top: 0;
+  }
+
+  .body > h2 + * {
+    margin-top: 0.85em;
+  }
+
+  /* ...and far from what came before it — most of the pause between
+     sections now lives in the top padding of the section that's starting,
+     not the bottom padding of the one that just ended. */
+  .row {
+    padding-top: clamp(56px, 8vw, 100px);
+    padding-bottom: clamp(20px, 2.5vw, 32px);
+  }
+
+  .row:first-of-type {
+    padding-top: clamp(26px, 3.5vw, 44px);
+  }
+
+  /* Intro paragraphs read as an intro: a size step up from body text, and
+     heavier, not just "the same paragraph in a lighter color." */
+  .lede {
+    font-size: 19px;
+    font-weight: 500;
+  }
+
+  /* The cost list gets more room than a paragraph break, on both sides,
+     and its own items get to breathe. */
+  .body ul {
+    margin-top: 2.4em;
+    margin-bottom: 2.4em;
+  }
+
+  .body ul + * {
+    margin-top: 2.4em;
+  }
+
+  .body li + li {
+    margin-top: 0.6em;
+  }
+
+  /* The four bold-led retrospective points are separate ideas — a bit more
+     air between them than a normal paragraph gap. The gap from the heading
+     to the first one stays governed by ".body > h2 + *" above. */
+  .retro-point + .retro-point {
+    margin-top: 2.2em;
+  }
+
+  /* "Back to the product" / "Product page" are plain inline text links —
+     an invisible tap-target expansion rather than real padding, so the
+     surrounding paragraph spacing doesn't move. */
+  .tap-link {
+    position: relative;
+  }
+
+  .tap-link::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: max(44px, 100%);
+    height: 44px;
+    transform: translateY(-50%);
+  }
+
+  /* 768px matches the one shared breakpoint used site-wide (site.css,
+     HomePage.astro) — this used to be 760px, which happened to be close
+     enough to the sitewide 860/760 mismatch to hide it, but the two are
+     now the same value everywhere on purpose. */
+  @media (max-width: 768px) {
+    .row {
+      padding-top: clamp(36px, 9vw, 56px);
+    }
+
+    .body > * + * {
+      margin-top: 1.4em;
+    }
+
+    .body > h2 + * {
+      margin-top: 0.7em;
+    }
+
+    .body ul,
+    .body ul + * {
+      margin-top: 1.8em;
+    }
+
+    .retro-point + .retro-point {
+      margin-top: 1.6em;
+    }
+  }
+</style>

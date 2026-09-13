@@ -1,0 +1,92 @@
+---
+// The /products/grammarlens detail page, shared by the English and
+// Turkish routes. Astro.currentLocale picks the language — see
+// src/content/products.js. Every internal link is resolved through
+// localizeHref, which only adds the /tr prefix for routes listed in
+// src/i18n.js's translatedPaths — privacy, terms and support aren't
+// listed (no Turkish version), so those links stay English on both
+// language versions of this page automatically.
+import Base from '../layouts/Base.astro';
+import { grammarlens } from '../data.js';
+import { grammarlensPageCopy } from '../content/products.js';
+import { localizeHref } from '../i18n.js';
+
+const lang = Astro.currentLocale ?? 'en';
+const t = grammarlensPageCopy[lang];
+---
+
+<Base title={t.meta.title} description={t.meta.description}>
+  <section class="row">
+    <aside class="note">
+      <strong>{t.note.label}</strong>
+      {t.note.line1}<br />
+      {t.note.line2}<br />
+      {t.note.line3}
+    </aside>
+    <div class="body">
+      <span class="status">{t.status}</span>
+      <h1 class="display">{t.title}</h1>
+      <p class="lede">{t.lede}</p>
+      {
+        grammarlens.released ? (
+          <p>
+            <a href={grammarlens.appStoreUrl}>{t.downloadLink}</a>
+          </p>
+        ) : (
+          <p>{t.notReleasedNote}</p>
+        )
+      }
+    </div>
+  </section>
+
+  <section class="row">
+    <aside class="note">
+      <strong>{t.whatItDoes.label}</strong>
+    </aside>
+    <div class="body">
+      {
+        t.whatItDoes.items.map((item) => (
+          <>
+            <h3>{item.title}</h3>
+            <p>
+              {item.body}
+              {item.linkText && (
+                <>
+                  {' '}
+                  <a href={localizeHref(grammarlens.privacyUrl, lang)}>{item.linkText}</a>.
+                </>
+              )}
+            </p>
+          </>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="row">
+    <aside class="note">
+      <strong>{t.whoFor.label}</strong>
+    </aside>
+    <div class="body">
+      <p>{t.whoFor.body}</p>
+    </div>
+  </section>
+
+  <section class="row">
+    <aside class="note">
+      <strong>{t.more.label}</strong>
+    </aside>
+    <div class="body">
+      <ul class="links">
+        {
+          t.more.links.map((l) => (
+            <li>
+              <span class="links-label">{l.label}</span>
+              <a href={localizeHref(l.href, lang)}>{l.text}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</Base>

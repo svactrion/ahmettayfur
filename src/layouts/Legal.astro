@@ -17,9 +17,14 @@ import '../styles/site.css';
 
 const { title, description, noindex = false } = Astro.props;
 const path = Astro.url.pathname;
-// Strip the trailing slash so the canonical URL matches the addresses given
-// to Apple exactly (e.g. .../privacy, not .../privacy/).
-const canonical = new URL(path.replace(/(.)\/$/, '$1'), Astro.site).href;
+// These three addresses are compiled into the shipped app in
+// lib/utils/app_links.dart WITH a trailing slash
+// (e.g. https://ahmettayfur.com/products/grammarlens/privacy/), and that
+// exact URL returns 200 live today, with no redirect. Force the trailing
+// slash here so canonical matches the address the page is actually
+// published at. It is pinned to the released app binary — changing it
+// does not reach installs already in the wild, only a new app version does.
+const canonical = new URL(path.endsWith('/') ? path : `${path}/`, Astro.site).href;
 const year = new Date().getFullYear();
 ---
 
@@ -31,6 +36,8 @@ const year = new Date().getFullYear();
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="en" href={canonical} />
+    <link rel="alternate" hreflang="x-default" href={canonical} />
     {noindex && <meta name="robots" content="noindex, follow" />}
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -42,7 +49,9 @@ const year = new Date().getFullYear();
     <meta property="og:site_name" content="ahmettayfur.com" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="theme-color" content="#161826" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
       rel="stylesheet"
@@ -53,8 +62,12 @@ const year = new Date().getFullYear();
     <div class="shell shell-narrow">
       <header class="masthead">
         <nav class="nav" aria-label="Primary">
-          <a class="nav-brand" href="/">{me.name}</a>
+          <a class="nav-brand" href="/">{me.shortName}</a>
           <a href="/products/grammarlens">GrammarLens</a>
+          <span class="lang-switch lang-switch-off" aria-hidden="true">
+            <span class="lang-switch-item is-active">EN</span>
+            <span class="lang-switch-item">TR</span>
+          </span>
         </nav>
       </header>
 
@@ -65,11 +78,31 @@ const year = new Date().getFullYear();
       <footer class="footer">
         <span>&copy; {year} {me.name}</span>
         <span class="footer-links">
-          <a href="/products/grammarlens/privacy">Privacy</a>
-          <a href="/products/grammarlens/terms">Terms</a>
-          <a href="/products/grammarlens/support">Support</a>
+          <a class="tap-link" href="/products/grammarlens/privacy">Privacy</a>
+          <a class="tap-link" href="/products/grammarlens/terms">Terms</a>
+          <a class="tap-link" href="/products/grammarlens/support">Support</a>
         </span>
       </footer>
     </div>
   </body>
 </html>
+
+<style>
+  /* Invisible tap-target expansion for the three footer links — the
+     visible text stays the same size, only the clickable area grows to
+     the 44x44 minimum. Scoped to this layout, so it only ever applies to
+     these three legal pages' own footer. */
+  .tap-link {
+    position: relative;
+  }
+
+  .tap-link::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: max(44px, 100%);
+    height: 44px;
+    transform: translate(-50%, -50%);
+  }
+</style>

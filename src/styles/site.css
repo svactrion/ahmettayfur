@@ -50,6 +50,15 @@ a:hover {
   text-decoration-color: color-mix(in srgb, var(--color-accent-300) 45%, transparent);
 }
 
+/* Safety net for long unbroken strings (a URL, a long identifier) that would
+   otherwise force the page wider than the viewport on narrow phones. Normal
+   prose wraps at word boundaries as before; this only ever engages for a
+   single "word" too long to fit. */
+.body,
+.legal-body {
+  overflow-wrap: anywhere;
+}
+
 .skip {
   position: absolute;
   left: -9999px;
@@ -111,6 +120,76 @@ a:hover {
 .masthead .nav a:not(.nav-brand):hover,
 .masthead .nav a[aria-current='page'] {
   color: var(--color-accent-300);
+}
+
+/* Same recipe as the .seg / .seg-opt segmented control in the design
+   system (nocturne.css), sized for the nav bar: a bordered pill holding
+   both language codes, the current one picked out with the accent inset
+   ring the rest of the site already uses for a selected option.
+
+   The whole pill is a single tap target (the .lang-switch element itself
+   is the <a>, or a <span> when there's nowhere to switch to) — either
+   label activates it, not just its own half. Each item still gets its own
+   corner radius (rather than clipping the container) so the hover fill
+   and the active ring never square off past the pill's rounded ends. */
+.masthead .nav .lang-switch {
+  display: inline-flex;
+  position: relative;
+  border: 1px solid var(--color-divider);
+  border-radius: var(--radius-md);
+}
+
+.masthead .nav .lang-switch-item {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 9px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--color-neutral-400);
+}
+
+.masthead .nav .lang-switch-item:first-child {
+  border-top-left-radius: calc(var(--radius-md) - 1px);
+  border-bottom-left-radius: calc(var(--radius-md) - 1px);
+}
+
+.masthead .nav .lang-switch-item:last-child {
+  border-top-right-radius: calc(var(--radius-md) - 1px);
+  border-bottom-right-radius: calc(var(--radius-md) - 1px);
+}
+
+.masthead .nav .lang-switch-item + .lang-switch-item {
+  border-left: 1px solid var(--color-divider);
+}
+
+.masthead .nav .lang-switch-item.is-active {
+  color: var(--color-accent-300);
+  box-shadow: inset 0 0 0 1px var(--color-accent);
+}
+
+/* Hovering hints at what tapping anywhere on the pill will switch to. */
+.masthead .nav a.lang-switch:hover .lang-switch-item:not(.is-active) {
+  color: var(--color-accent-300);
+  background: color-mix(in srgb, var(--color-text) 7%, transparent);
+}
+
+.masthead .nav .lang-switch-off .lang-switch-item:not(.is-active) {
+  color: var(--color-neutral-600);
+}
+
+/* Invisible tap-target expansion: the visible pill stays exactly the size
+   it was, but the clickable area is pulled out to the 44x44 minimum,
+   centered on the whole pill. Only the actual link needs this — the
+   disabled span isn't interactive. */
+.masthead .nav a.lang-switch::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: max(44px, 100%);
+  height: max(44px, 100%);
+  transform: translate(-50%, -50%);
 }
 
 /* ---------- footer ---------- */
@@ -201,6 +280,8 @@ a:hover {
 .body p {
   margin: 0;
   color: var(--color-neutral-300);
+  text-align: justify;
+  hyphens: auto;
 }
 
 .body h2 {
@@ -371,9 +452,15 @@ a.card:hover {
   transform: none;
 }
 
-/* ---------- narrow screens ---------- */
+/* ---------- narrow screens ----------
+   One shared threshold for every "mobile" layout on the site — the hero,
+   the products/case-study/legal .row grid, and the nav all used to switch
+   at different widths (760 vs 860px), which meant a page could be in
+   mobile layout while another was still in desktop layout at the same
+   viewport size. 768px was picked because it's the conventional tablet
+   breakpoint and one of the four widths this site is tested at. */
 
-@media (max-width: 760px) {
+@media (max-width: 768px) {
   .row {
     grid-template-columns: minmax(0, 1fr);
     gap: 14px;
@@ -382,6 +469,45 @@ a.card:hover {
   .note {
     padding-bottom: 4px;
     border-bottom: 1px solid var(--color-divider);
+  }
+}
+
+/* The nav's own wrap point is a separate, wider threshold from the page
+   layout above: the full nav (brand + links + language switch) needs
+   about 900px of content width before it fits on one line, so on anything
+   from a phone up to a fairly narrow laptop window it's already wrapping
+   to two lines — the page-layout switch to a single column happens later,
+   at 768px. Tying this to that same 768px would have left the awkward
+   split (see below) un-fixed for that whole in-between range. */
+@media (max-width: 1000px) {
+  /* Force the brand onto its own line so the rest of the nav — links and
+     the language switch — always wraps together as one group underneath
+     it, instead of the first link getting stranded next to the brand
+     while the rest wrap (flex-wrap splits wherever items stop fitting,
+     which used to land mid-group). */
+  .nav-brand {
+    flex: 1 0 100%;
+    margin-right: 0;
+  }
+
+  /* Nav links are plain inline text with no padding, so their tappable
+     area is just the text's line-height (~23px) — real padding here (not
+     an invisible tap-target trick) so the wrapped nav row itself grows to
+     match, and stacked lines don't end up overlapping each other. The
+     language switch is excluded: it has its own fixed small size and its
+     own tap-target fix above. */
+  .masthead .nav a:not(.nav-brand):not(.lang-switch) {
+    display: inline-flex;
+    align-items: center;
+    padding-block: 11px;
+  }
+
+  /* On the wrapped second line, keep the four links packed to the left and
+     push the language switch to the right edge instead of it trailing
+     right after "Contact" — the same left/right split the brand row above
+     already has, just one line down. */
+  .masthead .nav .lang-switch {
+    margin-left: auto;
   }
 }
 

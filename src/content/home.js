@@ -1,8 +1,8 @@
 // All home page copy, in both languages.
 //
-// The page currently renders `copy.en`. The Turkish version is kept here
-// complete, so a /tr page can be added later without rewriting anything.
-// Edit text here, never in index.astro.
+// src/components/HomePage.astro renders whichever of these matches
+// Astro.currentLocale — copy.en at "/", copy.tr at "/tr/". Edit text here,
+// never in HomePage.astro.
 
 import { grammarlens } from '../data.js';
 
@@ -20,14 +20,27 @@ const productDocsTr = [
 
 export const copy = {
   en: {
-    nav: { who: 'Who am I', products: 'Products', articles: 'Writing', contact: 'Contact' },
+    meta: {
+      title: 'Ahmet Emin Tayfur — product management',
+      description:
+        'Statistics graduate building his own products to grow into product management: user research, PRD, MVP, testing and iteration.',
+    },
+
+    chrome: {
+      skip: 'Skip to content',
+      langSwitchAria: 'Switch to Turkish',
+    },
+
+    nav: { who: 'Who am I', products: 'Products', articles: 'Articles', contact: 'Contact' },
 
     eyebrow: 'Product management · new graduate',
     heroTitle: ['I ship the products', 'I want to use.'],
+    heroTagline:
+      'Building for myself is where it starts; shipping is where I learn what the market actually wants.',
     heroBody:
-      'I finished my statistics degree this June and I am building my own products to grow into product management: user research, PRD, MVP, testing and iteration, all of it hands-on. Looking for a role where I can keep learning at that pace.',
+      'I finished my statistics degree this June 2026 and I am building my own products to grow into product management: user research, PRD, MVP, testing and iteration, all of it hands-on. Looking for a role where I can keep learning at that pace.',
     cta1: 'See the products',
-    cta2: 'Read the writing',
+    cta2: 'Read the articles',
 
     prodTitle: 'Products',
     prodCount: 'One in the works · more to come',
@@ -48,10 +61,10 @@ export const copy = {
     backgroundLabel: 'Background',
     scrollHint: 'Swipe',
 
-    articlesTitle: 'Writing',
+    articlesTitle: 'Articles',
     artFeed: 'From Medium',
     artSub:
-      'This list is read from my Medium feed when the site is built, so a new piece appears here on the next deploy. LinkedIn has no public feed for member posts, so those are added by hand.',
+      "Notes on what I'm building, what I'm learning, and where I'm still wrong — on Medium and LinkedIn.",
     artEmpty:
       'Nothing to show from the feed yet. Once a post is live on Medium, it appears in this list after the next deploy.',
     artAll: 'Everything on Medium',
@@ -62,6 +75,7 @@ export const copy = {
 
     byeTitle: 'That is the whole site.',
     byeNote: 'If any of it was worth a conversation, the address above reaches me.',
+    backToTopHint: 'Tap to go back to the top.',
 
     products: [
       {
@@ -73,6 +87,7 @@ export const copy = {
         stack: ['Flutter / Dart', 'Claude API', 'Material 3'],
         caseHref: grammarlens.caseStudyUrl,
         docs: productDocsEn,
+        icon: { ...grammarlens.icon, alt: 'GrammarLens app icon' },
       },
     ],
 
@@ -155,10 +170,23 @@ export const copy = {
   },
 
   tr: {
+    meta: {
+      title: 'Ahmet Emin Tayfur — ürün yönetimi',
+      description:
+        'Kendi ürünlerini geliştirerek ürün yönetimine hazırlanan bir istatistik mezunu: kullanıcı araştırması, PRD, MVP, test ve iterasyon.',
+    },
+
+    chrome: {
+      skip: 'İçeriğe geç',
+      langSwitchAria: 'İngilizceye geç',
+    },
+
     nav: { who: 'Ben kimim', products: 'Ürünler', articles: 'Yazılar', contact: 'İletişim' },
 
     eyebrow: 'Ürün yönetimi · yeni mezun',
     heroTitle: ['Kullanmak istediğim', 'ürünleri yapıyorum.'],
+    heroTagline:
+      'Kendim için üretmek başlangıç noktası; piyasanın gerçekte ne istediğini asıl yayına aldığımda öğreniyorum.',
     heroBody:
       'Bu yılın haziran ayında istatistik bölümünden mezun oldum ve ürün yöneticiliğine kendi ürünlerimi geliştirerek hazırlanıyorum: kullanıcı araştırması, PRD, MVP, test ve iterasyon — hepsini bizzat yürütüyorum. Aynı hızda öğrenmeye devam edebileceğim bir ürün rolü arıyorum.',
     cta1: 'Ürünlere bak',
@@ -186,7 +214,7 @@ export const copy = {
     articlesTitle: 'Yazılar',
     artFeed: "Medium'dan",
     artSub:
-      "Bu liste site derlenirken Medium akışımdan okunuyor; yeni bir yazı bir sonraki yayında burada görünür. LinkedIn gönderileri için herkese açık bir akış olmadığı için onlar elle ekleniyor.",
+      'Ne geliştirdiğim, ne öğrendiğim ve hâlâ nerede yanıldığım üzerine notlar — Medium ve LinkedIn’de.',
     artEmpty:
       "Akıştan gösterilecek bir şey henüz yok. Medium'da bir yazı yayına girdikten sonra, bir sonraki yayında bu listede görünür.",
     artAll: "Medium'daki her şey",
@@ -197,6 +225,7 @@ export const copy = {
 
     byeTitle: 'Sitenin tamamı bu kadar.',
     byeNote: 'Buradaki bir şey konuşmaya değerse, yukarıdaki adresten bana ulaşabilirsin.',
+    backToTopHint: 'Başa dönmek için dokun.',
 
     products: [
       {
@@ -208,6 +237,7 @@ export const copy = {
         stack: ['Flutter / Dart', 'Claude API', 'Material 3'],
         caseHref: grammarlens.caseStudyUrl,
         docs: productDocsTr,
+        icon: { ...grammarlens.icon, alt: 'GrammarLens uygulama simgesi' },
       },
     ],
 
