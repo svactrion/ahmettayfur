@@ -52,9 +52,9 @@ export const productsCopy = {
 export const grammarlensPageCopy = {
   en: {
     meta: {
-      title: 'GrammarLens — an English grammar app for iOS',
+      title: 'GrammarLens — AI-Powered Grammar Coach',
       description:
-        'GrammarLens explains why an English sentence is wrong, in context, instead of just marking it. Built in Flutter for iOS.',
+        'An AI-powered mobile grammar coach built from user research and problem discovery through MVP, testing, and iteration.',
     },
     note: { label: 'GrammarLens', line1: 'iOS', line2: 'Built in Flutter', line3: 'Solo project' },
     status: 'Not released yet',

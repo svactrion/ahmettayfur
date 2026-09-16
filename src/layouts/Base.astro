@@ -38,6 +38,16 @@ const hreflangTr = isTranslated(path)
   ? new URL(`/tr${enPath === '/' ? '/' : enPath}`.replace(/(.)\/$/, '$1'), Astro.site).href
   : null;
 
+// GrammarLens pages (index, case study, and their /tr counterparts) get a
+// dedicated share image instead of the site-wide og.jpg. og:image:alt and
+// twitter:image only exist on those pages — everywhere else keeps exactly
+// the tags it had before.
+const isGrammarLens = enPath.startsWith('/products/grammarlens');
+const ogImagePath = isGrammarLens ? '/grammarlens-og.png' : '/og.jpg';
+const ogImageWidth = isGrammarLens ? 1672 : 1200;
+const ogImageHeight = isGrammarLens ? 941 : 630;
+const ogImageAlt = isGrammarLens ? 'GrammarLens — AI-Powered Grammar Coach' : null;
+
 // Language switch: only a real link when this exact page also exists in
 // the other language. Otherwise it renders disabled rather than risking a
 // 404.
@@ -60,11 +70,13 @@ const switchHref = otherLocalePath(path, lang);
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={new URL('/og.jpg', Astro.site).href} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+    <meta property="og:image" content={new URL(ogImagePath, Astro.site).href} />
+    <meta property="og:image:width" content={ogImageWidth} />
+    <meta property="og:image:height" content={ogImageHeight} />
+    {ogImageAlt && <meta property="og:image:alt" content={ogImageAlt} />}
     <meta property="og:site_name" content="ahmettayfur.com" />
     <meta name="twitter:card" content="summary_large_image" />
+    {isGrammarLens && <meta name="twitter:image" content={new URL(ogImagePath, Astro.site).href} />}
     <meta name="theme-color" content="#161826" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
