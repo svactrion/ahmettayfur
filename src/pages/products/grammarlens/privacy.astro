@@ -4,7 +4,7 @@ import { me } from '../../../data.js';
 
 const title = 'GrammarLens privacy policy';
 const description = 'What data GrammarLens collects, where it goes, and how long it is kept.';
-const updated = '13 September 2026';
+const updated = '22 September 2026';
 ---
 
 <Legal title={title} description={description} noindex>
@@ -18,24 +18,25 @@ const updated = '13 September 2026';
       <h1 class="display">Privacy Policy</h1>
       <p class="lede">
         GrammarLens has no accounts, never asks for your email, and shows no ads. Your
-        name, your learning goal and your entire practice history stay on your phone.
-        What leaves your device is the practice text itself — the sentence you typed and
-        the exercise it belongs to — which goes to our server and then to Anthropic so
-        that Claude can generate exercises and explain your mistakes. Nothing you write
-        is used to train an AI model.
+        name, your learning goal, your avatar and your entire practice history —
+        including the Daily Test — stay on your phone; the Daily Test is scored on the
+        device and never leaves it. If you turn on AI feedback for Topic Practice, the
+        answer you type and the question it responds to are sent through our server to
+        Anthropic (Claude) so it can check your work — only after you've agreed to it
+        in the app, and you can withdraw that agreement at any time.
       </p>
 
       <p class="links-label">Contents</p>
       <ul class="links toc-list">
         <li><a href="#who-is-responsible">Who is responsible</a></li>
-        <li><a href="#what-stays-on-your-device-only">What stays on your device only</a></li>
-        <li><a href="#what-is-sent-when-you-practise">What is sent when you practise</a></li>
-        <li><a href="#the-anonymous-device-identifier">The anonymous device identifier</a></li>
+        <li><a href="#what-stays-on-your-device">What stays on your device</a></li>
+        <li><a href="#the-daily-test">The Daily Test</a></li>
+        <li><a href="#permission-for-ai-feedback">Permission for AI feedback (Topic Practice)</a></li>
         <li><a href="#what-our-server-keeps">What our server keeps</a></li>
         <li><a href="#anthropic-as-a-processor">Anthropic as a processor</a></li>
         <li><a href="#analytics-and-crash-reporting">Analytics and crash reporting</a></li>
         <li><a href="#subscriptions">Subscriptions</a></li>
-        <li><a href="#what-we-do-not-do">What we do not do</a></li>
+        <li><a href="#what-we-never-send">What we never send</a></li>
         <li><a href="#keeping-and-deleting-data">Keeping and deleting data</a></li>
         <li><a href="#children">Children</a></li>
         <li><a href="#your-rights">Your rights</a></li>
@@ -54,7 +55,7 @@ const updated = '13 September 2026';
     <div class="body">
       <h2 id="who-is-responsible">Who is responsible</h2>
       <p>
-        GrammarLens is made by Ahmet Tayfur, Istanbul, Turkey. For anything in this
+        GrammarLens is made by {me.name}, Istanbul, Turkey. For anything in this
         policy, write to <a href={`mailto:${me.email}`}>{me.email}</a>.
       </p>
     </div>
@@ -67,50 +68,53 @@ const updated = '13 September 2026';
       your device
     </aside>
     <div class="body">
-      <h2 id="what-stays-on-your-device-only">What stays on your device only</h2>
+      <h2 id="what-stays-on-your-device">What stays on your device</h2>
       <p>
-        The following never leaves your phone. It is stored in the app's local database
-        and is removed when you delete the app.
+        Everything below is stored in the app's local database and is removed when you
+        delete the app. None of it is ever sent anywhere:
       </p>
       <ul>
         <li>Your first name and your stated learning goal, from onboarding</li>
-        <li>Your chosen avatar and your app settings, including the theme</li>
-        <li>Every practice session, question, answer and score</li>
-        <li>Your weak-spot profile — which grammar topics you get wrong and how often</li>
+        <li>Your chosen avatar and your app settings, including text size and theme</li>
+        <li>
+          Your weak-spot profile — which grammar topics you get wrong and how often,
+          worked out entirely on your device
+        </li>
+        <li>
+          Every Daily Test question and answer — the Daily Test is scored on your
+          device and never leaves it
+        </li>
       </ul>
+      <p>
+        Your practice history for Topic Practice — the questions you're given and the
+        answers you type — is also stored on your device. The one exception: if you've
+        turned on AI feedback, the answers and matching questions from the session you
+        submit are sent off-device for scoring; see <a href="#permission-for-ai-feedback">Permission for AI feedback</a> for exactly what that involves and how to control it.
+      </p>
+      <p>
+        Separately, your text-size preference and totals about your sessions — like how
+        many questions you answered or skipped — are sent to our analytics provider as
+        numbers and category labels, never as text; see
+        <a href="#analytics-and-crash-reporting">Analytics and crash reporting</a>.
+      </p>
     </div>
   </section>
 
   <section class="row">
     <aside class="note">
       <strong>03</strong>
-      What is sent<br />
-      when you practise
+      The Daily Test
     </aside>
     <div class="body">
-      <h2 id="what-is-sent-when-you-practise">What is sent when you practise</h2>
+      <h2 id="the-daily-test">The Daily Test</h2>
       <p>
-        When you start an exercise or submit an answer, the app sends a small,
-        structured request to our own server at api.ahmettayfur.com, which then calls
-        Anthropic's Claude API. The request contains:
-      </p>
-      <ul>
-        <li>
-          The name of the operation (generate a practice set, generate a daily test, or
-          score answers)
-        </li>
-        <li>A grammar topic identifier and the number of questions</li>
-        <li>
-          Which grammar topics you have been getting wrong, as topic identifiers and
-          counts
-        </li>
-        <li>For scoring: the exercise prompt and <strong>the answer you typed</strong></li>
-        <li>An anonymous device identifier, used only for daily usage limits (see below)</li>
-      </ul>
-      <p>
-        That is the complete list. The app does not send your name, your learning goal,
-        your practice history, your contacts, your location, or any advertising
-        identifier.
+        The very first day's test is built into the app itself, so it needs no network
+        request at all. On later days, the app asks our server for a new set — that
+        request includes only the anonymous device identifier used for daily limits
+        (see <a href="#what-our-server-keeps">What our server keeps</a>) and carries
+        nothing else about you or your history; the identifier itself is never
+        forwarded to Anthropic. Every Daily Test, on any day, is scored entirely on
+        your device.
       </p>
     </div>
   </section>
@@ -118,24 +122,34 @@ const updated = '13 September 2026';
   <section class="row">
     <aside class="note">
       <strong>04</strong>
-      The anonymous<br />
-      device ID
+      Permission for<br />
+      AI feedback
     </aside>
     <div class="body">
-      <h2 id="the-anonymous-device-identifier">The anonymous device identifier</h2>
+      <h2 id="permission-for-ai-feedback">Permission for AI feedback (Topic Practice)</h2>
       <p>
-        The app generates a random identifier the first time it runs. It is not your
-        device's serial number, advertising ID, or any other hardware or system value —
-        it is a random string the app makes up, and it identifies nothing about you or
-        your phone.
+        Topic Practice — where GrammarLens checks what you write and explains your
+        mistakes — is the only place your own words leave your device, and only once
+        you say yes.
       </p>
       <p>
-        It exists for one reason: to enforce a daily cap on how many exercises a single
-        installation can generate, which is what keeps the service affordable to run. It
-        is stored on our server only as a counter for the current day, and it is
-        <strong>never sent to Anthropic</strong> — the request that reaches Anthropic does not contain it.
+        Before you use it for the first time, the app shows a permission screen that
+        states what is sent (the answer you type, together with the question it
+        responds to), who receives it (Anthropic, the company that makes Claude,
+        reached through our own server), and what is never sent (your name, your
+        learning goal or your avatar — Daily Test answers stay on your device
+        regardless). You can decline and still use the Daily Test.
       </p>
-      <p>Deleting and reinstalling the app produces a new identifier.</p>
+      <p>
+        You can review or withdraw this permission at any time in Profile → Data.
+        Turning it off takes effect immediately; Topic Practice will ask again the next
+        time you use it.
+      </p>
+      <p>
+        Please don't type personal details — such as your full name, address or
+        contact information — into your answers, since we can't screen what you write
+        before it's sent.
+      </p>
     </div>
   </section>
 
@@ -148,24 +162,38 @@ const updated = '13 September 2026';
     <div class="body">
       <h2 id="what-our-server-keeps">What our server keeps</h2>
       <p>
-        Our server does not store your practice text. It passes the request to Anthropic
-        and returns the result.
+        Our server (a Cloudflare Worker) never stores the text of your questions or
+        answers — it passes each request to Anthropic and returns the result. It keeps
+        three things, briefly, as operational records only:
       </p>
-      <p>Two things are kept, briefly:</p>
       <ul>
         <li>
-          <strong>Usage counters.</strong> The daily cap is counted against the anonymous identifier
-          and the calendar day. These counters delete themselves automatically 48 hours
-          after they are written. They are not a record of what you practised.
+          <strong>Usage counters.</strong> A random, anonymous identifier — created by the app on
+          your device, not your device's serial number, advertising ID, or any other
+          hardware or system value — is used only to enforce a daily limit on how many
+          exercises one installation can generate, which is what keeps the service
+          affordable to run. Limits are scoped to the calendar day (UTC) and counters
+          delete themselves automatically 48 hours after they are last written. This
+          identifier is <strong>never sent to Anthropic</strong>. Deleting and reinstalling the
+          app produces a new identifier.
+        </li>
+        <li>
+          <strong>A request log, for every completed call.</strong> Which kind of operation it was, how
+          many questions it covered, how many tokens were used, and how long it took —
+          never the questions or answers themselves.
         </li>
         <li>
           <strong>Error logs.</strong> When something goes wrong — the AI service is unreachable, or
           returns something the app cannot read — our server records the failure so the
           problem can be found and fixed. These records do not contain the text you
-          wrote. They are retained for roughly three days by our hosting provider,
-          Cloudflare, and are then deleted.
+          wrote either.
         </li>
       </ul>
+      <p>
+        Both logs are kept only as long as our hosting provider, Cloudflare, retains
+        Workers log output on our current (free) plan — about three days — and are
+        then deleted.
+      </p>
     </div>
   </section>
 
@@ -178,11 +206,13 @@ const updated = '13 September 2026';
     <div class="body">
       <h2 id="anthropic-as-a-processor">Anthropic as a processor</h2>
       <p>
-        Your typed answers and the exercise text are processed by Anthropic in order to
-        generate exercises and produce feedback. Under Anthropic's commercial terms, API
-        inputs and outputs are <strong>not used to train models</strong>, and are retained for a
-        limited period under Anthropic's own data retention policy. See
-        <a href="https://www.anthropic.com/legal/privacy">Anthropic's privacy policy</a> for the current terms.
+        When you use Topic Practice with permission on, the answer you typed and the
+        matching question are processed by Anthropic to generate your feedback. How
+        Anthropic retains that data, and whether it is used for training, is governed
+        by Anthropic's own terms and policies, not ours to restate here. See
+        <a href="https://www.anthropic.com/legal/commercial-terms">Anthropic's Commercial Terms of Service</a>
+        and <a href="https://privacy.claude.com/en/articles/7996868-is-my-data-used-for-model-training">Anthropic's explanation of API data and training</a>
+        for the current terms.
       </p>
     </div>
   </section>
@@ -199,31 +229,36 @@ const updated = '13 September 2026';
         GrammarLens uses Google's Firebase Analytics and Firebase Crashlytics to
         understand how the app is used and to find crashes.
       </p>
-      <p><strong>What we send deliberately.</strong> Three events, and nothing else:</p>
+      <p><strong>What we send deliberately</strong> falls into a few categories:</p>
       <ul>
-        <li>That onboarding was completed</li>
-        <li>Which mode you opened (daily test, topic practice, or the premium screen)</li>
+        <li>Which screens and modes you open</li>
         <li>
-          That a practice session finished, with the topic identifier and how many
-          questions it had
+          How practice sessions and the Daily Test go — like how many questions were
+          answered or skipped
         </li>
+        <li>Progress milestones, such as medals</li>
+        <li>Steps through the paywall and purchase flow</li>
+        <li>Your text-size preference</li>
+        <li>Your AI-feedback permission decision (see <a href="#permission-for-ai-feedback">Permission for AI feedback</a>)</li>
       </ul>
       <p>
-        None of these contain your name, your learning goal, the sentences you write, or
-        any of your answers.
+        The exact events inside these categories may change as the app evolves; what
+        doesn't change is the boundary — none of them ever carry your name, your
+        learning goal, or the text of any question or answer.
       </p>
       <p>
         <strong>What Firebase collects automatically.</strong> Independently of the events above,
         Firebase records a randomly generated app instance identifier, your device model
         and operating system version, your app version, your approximate region and
         language, and session counts and durations. Crashlytics additionally records
-        technical details about a crash when one happens — what the app was doing and
-        where the failure occurred.
+        technical details about a crash when one happens — device and app information,
+        the error message, and where in the app it occurred.
       </p>
       <p>
-        This is not linked to your identity, and we do not use it to track you across
-        other apps or websites. If you would rather not send this, iOS settings let you
-        limit app tracking and diagnostics at the system level.
+        This is not linked to your identity. GrammarLens does not use an advertising
+        identifier (IDFA), and we do not use this data to track you across other apps or
+        websites. If you would rather not send this, iOS settings let you limit app
+        tracking and diagnostics at the system level.
       </p>
     </div>
   </section>
@@ -254,10 +289,25 @@ const updated = '13 September 2026';
     <aside class="note">
       <strong>09</strong>
       What we<br />
-      do not do
+      never send
     </aside>
     <div class="body">
-      <h2 id="what-we-do-not-do">What we do not do</h2>
+      <h2 id="what-we-never-send">What we never send</h2>
+      <p>Regardless of feature or permission state, GrammarLens never sends:</p>
+      <ul>
+        <li>Your name, your learning goal or your avatar</li>
+        <li>
+          Your stored practice history (other than the Topic Practice answers you
+          choose to submit for feedback — see <a href="#permission-for-ai-feedback">Permission for AI feedback</a>)
+        </li>
+        <li>
+          Daily Test questions or answers — the Daily Test is scored entirely on your
+          device
+        </li>
+        <li>Your contacts, your precise location, or any advertising identifier</li>
+        <li>Your payment details — Apple handles those directly</li>
+      </ul>
+      <p>And more generally:</p>
       <ul>
         <li>No advertising, and no advertising identifiers</li>
         <li>No selling or sharing of personal data with anyone</li>
@@ -278,7 +328,7 @@ const updated = '13 September 2026';
       <ul>
         <li>Everything stored on your device is deleted when you delete the app.</li>
         <li>Usage counters on our server delete themselves after 48 hours.</li>
-        <li>Error logs are deleted after roughly three days.</li>
+        <li>Request and error logs are kept for about three days by Cloudflare.</li>
         <li>
           We do not hold a copy of your practice history, so there is nothing for us to
           send you or delete on request.
@@ -299,8 +349,9 @@ const updated = '13 September 2026';
     <div class="body">
       <h2 id="children">Children</h2>
       <p>
-        GrammarLens is not directed at children and is intended for users aged 13 and
-        over. We do not knowingly collect personal data from children.
+        GrammarLens is intended for users aged 13 or over, or the minimum age required
+        in your country, whichever is higher. We do not knowingly collect personal data
+        from anyone younger.
       </p>
     </div>
   </section>
