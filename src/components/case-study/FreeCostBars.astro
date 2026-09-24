@@ -46,7 +46,7 @@ function layout(W, name) {
   // Room right of the longest bar for its range label.
   const X1 = W - textWidth(range(drawn.at(-1).total), 16) - 18;
   const x = (v) => (v / xMax) * X1;
-  let y = 40; // first label baseline, below the legend
+  let y = 50; // first label baseline, a clear step below the legend
   const rows = drawn.map((bar) => {
     const lines = wrap(bar.label, charsFor(W));
     const labelY = y;
