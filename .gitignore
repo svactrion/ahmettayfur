@@ -5,3 +5,6 @@ dist/
 
 # Raw case study screenshots; web copies live in public/img/case-study/
 docs/case-study-screenshots/
+
+# Review screenshots for the owner, not part of the site
+docs/review-shots/

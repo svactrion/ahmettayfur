@@ -516,3 +516,38 @@ change.
     alignment, spacing, caption style or font size stands apart is brought
     under the same rules. The Reframe block (C1) looks the same in all six
     places.
+
+### Layout rebuild
+
+Decided after the owner reviewed the page on `npm run dev`. Where these
+conflict with 12–18, these win.
+
+19. **One content column.** Body text, every visual (C2–C9), Reframe
+    blocks, captions and "Show chart data" share the same left and right
+    edges. Nothing reaches into the aside column, which holds only the
+    section labels and the header meta lines; each section label sits on
+    the baseline of its body's first line.
+20. **Charts are drawn for the column's width** (viewBox, `width: 100%`),
+    and no text inside them renders below the caption size (14 px).
+21. **Screenshots.** The storyboard (C7) is a 2×2 grid in the body column
+    on desktop. Single screenshots (C8, C9) sit in the body column,
+    left-aligned, about 280–300 px wide, caption below.
+22. **Text alignment.** Body paragraphs follow the site rule (justified,
+    hyphenation on, page `lang="en"`); the case study's left-align
+    override is removed. Captions, Reframe text, labels and text inside
+    charts are left-aligned.
+23. **Vertical rhythm.** Space above and below a figure, figure to
+    caption, and caption to "Show chart data" use the same tokens
+    everywhere.
+24. **Mobile (below 768 px).** The aside label sits above the body;
+    everything is one column with the body's side gutter. No sideways
+    scrolling on the page or in charts: C3 and C5 switch to their own
+    stacked, simplified layouts rather than shrinking text; C2 stays
+    vertical. The one exception is the storyboard, a scroll-snap row
+    where each frame is about 75% of the screen and the next one peeks in
+    from the edge. Touch targets are at least 44 px; body text never
+    drops below 16 px.
+25. **Same result in dev and build.** Page styles never rely on
+    stylesheet order: in `astro dev` the site CSS loads before component
+    styles, in the build after them, so every page rule must out-rank
+    the site rule it overrides by specificity.
