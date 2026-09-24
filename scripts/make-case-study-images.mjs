@@ -7,10 +7,6 @@
 // docs/case-study-screenshots/ (git-ignored; never edited or moved by this
 // script). Output: public/img/case-study/grammarlens/<name>.webp, 600px
 // wide, which is what the page's <img> width/height attributes assume.
-//
-// day0-4-paywall is deliberately not listed: its comparison table has a
-// daily-session row, so it can't stand in for the post-climb Premium
-// screen (brief, Part E9). Add it here if a suitable shot replaces it.
 import sharp from 'sharp';
 import { mkdirSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
@@ -23,6 +19,7 @@ const NAMES = [
   'day0-1-test',
   'day0-2-result',
   'day0-3-climb',
+  'day0-4-paywall',
   'practice-offer-card',
   'daily-test-explanation',
 ];

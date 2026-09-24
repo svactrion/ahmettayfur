@@ -185,11 +185,9 @@ export const caseStudyCopy = {
       },
 
       // Screenshots: web copies made by scripts/make-case-study-images.mjs
-      // from the owner's raw shots. The Premium screen (day0-4-paywall) is
-      // left out on purpose: its comparison table shows a daily-session
-      // row, so it isn't the screen that opens after the climb (brief,
-      // Part E9). The third caption covers that moment instead; a fourth
-      // frame can be appended here once a suitable shot exists.
+      // from the owner's raw shots. The Premium frame was shot from the
+      // Premium button on Home, so its caption only claims what is
+      // verified about the post-climb moment (brief, Part E11).
       storyboard: {
         label: 'The first day, in order',
         frames: [
@@ -212,7 +210,14 @@ export const caseStudyCopy = {
             width: 600,
             height: 1298,
             alt: 'Home screen with the avatar on the first step of the mountain trail.',
-            caption: 'The avatar takes its first step. Premium opens once, right after.',
+            caption: 'The avatar takes its first step.',
+          },
+          {
+            src: '/img/case-study/grammarlens/day0-4-paywall.webp',
+            width: 600,
+            height: 1298,
+            alt: 'The Premium screen with monthly and annual plans.',
+            caption: 'The Premium screen. On day one it opens once, right after the climb.',
           },
         ],
       },

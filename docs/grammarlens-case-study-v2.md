@@ -483,3 +483,4 @@ Parts A–D, Part E wins.
     added to `.gitignore`; the raw PNGs are not committed. The old root
     files `grammarlens-case-study-final.md` and
     `grammarlens-case-study-tr.md` move to `docs/archive/` with `git mv`.
+11. **Correction to 9.** The "Practice your weak spots | 1 a day" row ships in 1.0 (the reverted row was "Practice sessions", 1 vs 5), so `day0-4-paywall` is the fourth storyboard frame, captioned "The Premium screen. On day one it opens once, right after the climb." (it was shot from Home, so the caption claims only what is verified); the third caption returns to "The avatar takes its first step."
