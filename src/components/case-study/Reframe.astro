@@ -1,0 +1,116 @@
+---
+// The case study's signature block: what a problem first looked like, and
+// what it turned out to be. Used once per decision, always the same way.
+//
+// The first framing is quiet but never struck through (it wasn't wrong to
+// see it, only incomplete); the actual problem is the strongest text in
+// its section. A rail on the left runs from a hollow marker to a filled
+// accent one, so the reading direction is visible, not just implied.
+const { first, actual } = Astro.props;
+---
+
+<dl class="reframe">
+  <div class="step first">
+    <dt>First framing</dt>
+    <dd>{first}</dd>
+  </div>
+  <div class="step actual">
+    <dt>Actual problem</dt>
+    <dd>{actual}</dd>
+  </div>
+</dl>
+
+<style>
+  /* Marker geometry: the label line is 20px tall, so markers center on
+     y = 10px, x = 6px. The rail is drawn by the first step and reaches
+     down past the step gap to the actual problem's marker; changing the
+     gap means changing the rail's bottom offset with it. */
+  .reframe {
+    --gap: 18px;
+    margin: 0;
+    padding: clamp(18px, 2.4vw, 26px) clamp(18px, 2.6vw, 28px);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-accent) 24%, transparent);
+  }
+
+  .step {
+    position: relative;
+    padding-left: 30px;
+  }
+
+  .step + .step {
+    margin-top: var(--gap);
+  }
+
+  .step::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    border-radius: 50%;
+    z-index: 1;
+  }
+
+  dt {
+    font-size: 13px;
+    line-height: 20px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+
+  dd {
+    margin: 4px 0 0;
+    text-wrap: pretty;
+  }
+
+  /* First framing: subordinate. */
+  .first::before {
+    top: 5px;
+    left: 1px;
+    width: 10px;
+    height: 10px;
+    border: 1.5px solid var(--color-neutral-500);
+  }
+
+  .first::after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    width: 2px;
+    top: 17px;
+    bottom: calc(-1 * var(--gap) - 4px);
+    border-radius: 1px;
+    background: linear-gradient(to bottom, var(--color-neutral-600), var(--color-accent));
+  }
+
+  .first dt {
+    color: var(--color-neutral-500);
+  }
+
+  .first dd {
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--color-neutral-400);
+  }
+
+  /* Actual problem: the strongest text in the section. */
+  .actual::before {
+    top: 4px;
+    width: 12px;
+    height: 12px;
+    background: var(--color-accent);
+    box-shadow: 0 0 0 4px var(--color-surface);
+  }
+
+  .actual dt {
+    color: var(--color-accent-300);
+  }
+
+  .actual dd {
+    font-size: clamp(19px, 2.1vw, 22px);
+    line-height: 1.35;
+    font-weight: 600;
+    letter-spacing: -0.012em;
+    color: var(--color-text);
+  }
+</style>

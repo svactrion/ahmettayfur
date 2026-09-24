@@ -1,78 +1,220 @@
 ---
 // The GrammarLens case study, shared by the English and Turkish routes.
 // Astro.currentLocale picks the language — see src/content/caseStudy.js.
+//
+// The two languages render differently: English is the v2 case study,
+// built from typed blocks (brief: docs/grammarlens-case-study-v2.md);
+// Turkish keeps the earlier MVP-only text in its original markup, with a
+// notice at the top pointing to the English page.
+//
 // The legal pages this links out to (privacy/terms/support) stay
 // English-only, so this page never links to them; it only links back to
 // the product page, in whichever language that page exists.
 import Base from '../layouts/Base.astro';
+import Reframe from './case-study/Reframe.astro';
 import { caseStudyCopy } from '../content/caseStudy.js';
 import { localizeHref } from '../i18n.js';
 
 const lang = Astro.currentLocale ?? 'en';
 const t = caseStudyCopy[lang];
 const productHref = localizeHref('/products/grammarlens', lang);
+
+// Charts, diagrams and screenshots, by the name a { type: 'figure' } block
+// uses. A name missing from this map renders nothing, so copy can mark a
+// figure's place before the figure exists.
+const figures = {};
+
+// Splits a block list into runs of prose and the figures between them.
+// Prose runs become .body columns; figures sit between them and span both
+// grid columns on wide screens.
+function group(blocks) {
+  const groups = [];
+  for (const block of blocks) {
+    if (block.type === 'figure') {
+      if (figures[block.name]) groups.push({ figure: block.name });
+    } else if (groups.length && groups.at(-1).blocks) {
+      groups.at(-1).blocks.push(block);
+    } else {
+      groups.push({ blocks: [block] });
+    }
+  }
+  return groups;
+}
+
+// One .row per entry: the summary (no heading of its own, so its aside
+// label names it) and then the numbered sections.
+const rows =
+  lang === 'en'
+    ? [
+        { label: t.summary.label, id: 'summary', groups: group(t.summary.blocks) },
+        ...t.sections.map((section, i) => ({
+          label: section.label,
+          heading: section.heading,
+          id: `section-${i + 1}`,
+          groups: group(section.blocks),
+        })),
+      ]
+    : [];
 ---
 
 <Base title={t.meta.title} description={t.meta.description}>
-  <section class="row">
-    <aside class="note">
-      <strong>{t.aside.label}</strong>
-      {t.aside.lines[0]}<br />
-      {t.aside.lines[1]}<br />
-      {t.aside.lines[2]}
-    </aside>
-    <div class="body">
-      <h1 class="display">{t.title}</h1>
-      {t.lede.map((p) => <p class="lede" set:html={p} />)}
-      <p>
-        <a class="tap-link" href={productHref}>{t.backLinkText}</a>
-      </p>
-    </div>
-  </section>
+  {
+    lang === 'en' ? (
+      <>
+        <section class="row v2">
+          <aside class="note">
+            <strong>{t.aside.label}</strong>
+            {t.aside.lines.map((line) => (
+              <span class="note-line">{line}</span>
+            ))}
+            <span class="note-status">{t.aside.status}</span>
+            <span class="note-updated">{t.aside.updated}</span>
+          </aside>
+          <div class="body">
+            <h1 class="display">{t.title}</h1>
+            <p class="lede">{t.subtitle}</p>
+            <p>
+              <a class="tap-link" href={productHref}>
+                {t.backLinkText}
+              </a>
+            </p>
+          </div>
+        </section>
 
-  <section class="row">
-    <aside class="note">
-      <strong>{t.section1.asideLabel}</strong>
-      {t.section1.asideLines[0]}<br />
-      {t.section1.asideLines[1]}
-    </aside>
-    <div class="body">
-      <h2>{t.section1.heading}</h2>
-      {t.section1.paragraphs.map((p) => <p set:html={p} />)}
-    </div>
-  </section>
+        {rows.map((row, ri) => (
+          <section class="row v2" aria-labelledby={row.heading ? row.id : `${row.id}-label`}>
+            <aside class="note">
+              <strong id={row.heading ? undefined : `${row.id}-label`}>{row.label}</strong>
+            </aside>
+            {row.groups.map((g, gi) => {
+              if (g.figure) {
+                const Figure = figures[g.figure];
+                return (
+                  <div class="wide">
+                    <Figure />
+                  </div>
+                );
+              }
+              const isPageEnd = ri === rows.length - 1 && gi === row.groups.length - 1;
+              return (
+                <div class="body">
+                  {gi === 0 && row.heading && <h2 id={row.id}>{row.heading}</h2>}
+                  {g.blocks.map((b) =>
+                    b.type === 'p' ? (
+                      <p set:html={b.html} />
+                    ) : b.type === 'h3' ? (
+                      <h3>{b.text}</h3>
+                    ) : b.type === 'reframe' ? (
+                      <Reframe first={b.first} actual={b.actual} />
+                    ) : b.type === 'ol' ? (
+                      <ol>
+                        {b.items.map((item) => (
+                          <li set:html={item} />
+                        ))}
+                      </ol>
+                    ) : null
+                  )}
+                  {isPageEnd && (
+                    <p>
+                      <a class="tap-link" href={productHref}>
+                        {t.endLinkText}
+                      </a>
+                    </p>
+                  )}
+                </div>
+              );
+            })}
+          </section>
+        ))}
+      </>
+    ) : (
+      <>
+        <section class="row">
+          <aside class="note">
+            <strong>{t.aside.label}</strong>
+            {t.aside.lines[0]}
+            <br />
+            {t.aside.lines[1]}
+            <br />
+            {t.aside.lines[2]}
+          </aside>
+          <div class="body">
+            <p class="notice">
+              {t.notice.before}<a href={t.notice.href} hreflang="en">{t.notice.linkText}</a>{t.notice.after}
+            </p>
+            <h1 class="display">{t.title}</h1>
+            {t.lede.map((p) => (
+              <p class="lede" set:html={p} />
+            ))}
+            <p>
+              <a class="tap-link" href={productHref}>
+                {t.backLinkText}
+              </a>
+            </p>
+          </div>
+        </section>
 
-  <section class="row">
-    <aside class="note">
-      <strong>{t.section2.asideLabel}</strong>
-      {t.section2.asideLines[0]}<br />
-      {t.section2.asideLines[1]}
-    </aside>
-    <div class="body">
-      <h2>{t.section2.heading}</h2>
-      {t.section2.intro.map((p) => <p set:html={p} />)}
-      <ul>
-        {t.section2.list.map((item) => <li set:html={item} />)}
-      </ul>
-      {t.section2.after.map((p) => <p set:html={p} />)}
-    </div>
-  </section>
+        <section class="row">
+          <aside class="note">
+            <strong>{t.section1.asideLabel}</strong>
+            {t.section1.asideLines[0]}
+            <br />
+            {t.section1.asideLines[1]}
+          </aside>
+          <div class="body">
+            <h2>{t.section1.heading}</h2>
+            {t.section1.paragraphs.map((p) => (
+              <p set:html={p} />
+            ))}
+          </div>
+        </section>
 
-  <section class="row">
-    <aside class="note">
-      <strong>{t.section3.asideLabel}</strong>
-      {t.section3.asideLines[0]}<br />
-      {t.section3.asideLines[1]}
-    </aside>
-    <div class="body">
-      <h2>{t.section3.heading}</h2>
-      {t.section3.retroPoints.map((p) => <p class="retro-point" set:html={p} />)}
-      <p set:html={t.section3.closing} />
-      <p>
-        <a class="tap-link" href={productHref}>{t.section3.endLinkText}</a>
-      </p>
-    </div>
-  </section>
+        <section class="row">
+          <aside class="note">
+            <strong>{t.section2.asideLabel}</strong>
+            {t.section2.asideLines[0]}
+            <br />
+            {t.section2.asideLines[1]}
+          </aside>
+          <div class="body">
+            <h2>{t.section2.heading}</h2>
+            {t.section2.intro.map((p) => (
+              <p set:html={p} />
+            ))}
+            <ul>
+              {t.section2.list.map((item) => (
+                <li set:html={item} />
+              ))}
+            </ul>
+            {t.section2.after.map((p) => (
+              <p set:html={p} />
+            ))}
+          </div>
+        </section>
+
+        <section class="row">
+          <aside class="note">
+            <strong>{t.section3.asideLabel}</strong>
+            {t.section3.asideLines[0]}
+            <br />
+            {t.section3.asideLines[1]}
+          </aside>
+          <div class="body">
+            <h2>{t.section3.heading}</h2>
+            {t.section3.retroPoints.map((p) => (
+              <p class="retro-point" set:html={p} />
+            ))}
+            <p set:html={t.section3.closing} />
+            <p>
+              <a class="tap-link" href={productHref}>
+                {t.section3.endLinkText}
+              </a>
+            </p>
+          </div>
+        </section>
+      </>
+    )
+  }
 </Base>
 
 <style>
@@ -96,7 +238,7 @@ const productHref = localizeHref('/products/grammarlens', lang);
 
   /* Paragraph rhythm: clearly more than the 1.65 line-height, not just a
      hair more. */
-  .body > * + * {
+  .body > :global(*) + :global(*) {
     margin-top: 1.75em;
   }
 
@@ -105,7 +247,7 @@ const productHref = localizeHref('/products/grammarlens', lang);
     margin-top: 0;
   }
 
-  .body > h2 + * {
+  .body > h2 + :global(*) {
     margin-top: 0.85em;
   }
 
@@ -135,7 +277,7 @@ const productHref = localizeHref('/products/grammarlens', lang);
     margin-bottom: 2.4em;
   }
 
-  .body ul + * {
+  .body ul + :global(*) {
     margin-top: 2.4em;
   }
 
@@ -176,21 +318,146 @@ const productHref = localizeHref('/products/grammarlens', lang);
       padding-top: clamp(36px, 9vw, 56px);
     }
 
-    .body > * + * {
+    .body > :global(*) + :global(*) {
       margin-top: 1.4em;
     }
 
-    .body > h2 + * {
+    .body > h2 + :global(*) {
       margin-top: 0.7em;
     }
 
     .body ul,
-    .body ul + * {
+    .body ul + :global(*) {
       margin-top: 1.8em;
     }
 
     .retro-point + .retro-point {
       margin-top: 1.6em;
+    }
+  }
+
+  /* ---------- v2 (English) ----------
+     Rules below only reach rows marked .v2, so the Turkish page keeps the
+     look it had. */
+
+  /* No scroll-triggered entrance on this page (brief, Part A2). Base.astro
+     still arms the reveal on every .row site-wide; this puts rows back to
+     their resting state here and drops the transition. */
+  :global(.motion) .row {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  /* Aside labels in sentence case, as written in the copy. */
+  .v2 .note strong {
+    text-transform: none;
+    letter-spacing: 0.02em;
+    font-size: 13px;
+  }
+
+  .note-line,
+  .note-status,
+  .note-updated {
+    display: block;
+  }
+
+  .note-status {
+    margin-top: 12px;
+    color: var(--color-accent-300);
+  }
+
+  .note-updated {
+    margin-top: 8px;
+  }
+
+  .v2 .lede {
+    color: var(--color-neutral-200);
+  }
+
+  /* Prose runs sit in the second column; figures between them span both.
+     Only above the shared 768px breakpoint, where there are two columns
+     to span. */
+  @media (min-width: 769px) {
+    .v2 {
+      row-gap: clamp(32px, 4vw, 48px);
+    }
+
+    .v2 > .body {
+      grid-column: 2;
+    }
+
+    .v2 > .wide {
+      grid-column: 1 / -1;
+    }
+  }
+
+  .wide {
+    min-width: 0;
+  }
+
+  @media (max-width: 768px) {
+    .wide {
+      margin-block: 18px;
+    }
+  }
+
+  /* Subsections within a numbered section. */
+  .v2 .body > h3 {
+    margin-top: 2.8em;
+    font-size: 20px;
+  }
+
+  .v2 .body > h3 + :global(*) {
+    margin-top: 1em;
+  }
+
+  /* Bold lead-ins ("How I'll know.") come from set:html, so they need
+     :global to be styled at all. */
+  .v2 .body p :global(strong) {
+    color: var(--color-text);
+    font-weight: 600;
+  }
+
+  /* Provenance tag: .tag .tag-neutral from Nocturne, sized to sit in a
+     line of body text without pushing the line apart. */
+  .v2 .body :global(.prov) {
+    display: inline-block;
+    padding: 0 7px;
+    margin-inline: 1px;
+    font-size: 12px;
+    line-height: 1.6;
+    vertical-align: 0.08em;
+    white-space: nowrap;
+  }
+
+  .v2 .body ol {
+    margin: 0;
+    padding-left: 1.5em;
+    color: var(--color-neutral-300);
+  }
+
+  .v2 .body ol li + li {
+    margin-top: 0.6em;
+  }
+
+  .v2 .body ol li::marker {
+    color: var(--color-neutral-500);
+  }
+
+  /* ---------- Turkish notice ---------- */
+
+  .notice {
+    font-size: 14px;
+    color: var(--color-neutral-400) !important;
+    text-align: left !important;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--color-divider);
+  }
+
+  @media (max-width: 768px) {
+    .v2 .body > h3 {
+      margin-top: 2.2em;
     }
   }
 </style>
