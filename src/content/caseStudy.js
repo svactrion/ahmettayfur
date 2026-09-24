@@ -184,6 +184,55 @@ export const caseStudyCopy = {
         },
       },
 
+      // Screenshots: web copies made by scripts/make-case-study-images.mjs
+      // from the owner's raw shots. The Premium screen (day0-4-paywall) is
+      // left out on purpose: its comparison table shows a daily-session
+      // row, so it isn't the screen that opens after the climb (brief,
+      // Part E9). The third caption covers that moment instead; a fourth
+      // frame can be appended here once a suitable shot exists.
+      storyboard: {
+        label: 'The first day, in order',
+        frames: [
+          {
+            src: '/img/case-study/grammarlens/day0-1-test.webp',
+            width: 600,
+            height: 1298,
+            alt: 'The first Daily Test, showing a fill-in-the-blank question.',
+            caption: 'A hand-written first test, no loading.',
+          },
+          {
+            src: '/img/case-study/grammarlens/day0-2-result.webp',
+            width: 600,
+            height: 1298,
+            alt: 'First test results with a Start my climb button at the bottom.',
+            caption: 'One button: Start my climb.',
+          },
+          {
+            src: '/img/case-study/grammarlens/day0-3-climb.webp',
+            width: 600,
+            height: 1298,
+            alt: 'Home screen with the avatar on the first step of the mountain trail.',
+            caption: 'The avatar takes its first step. Premium opens once, right after.',
+          },
+        ],
+      },
+
+      offerCard: {
+        src: '/img/case-study/grammarlens/practice-offer-card.webp',
+        width: 600,
+        height: 1298,
+        alt: 'Practice results screen with a Premium offer card and a Back to topics button below it.',
+        caption: 'The offer card shows what Premium adds. Back to topics stays where it was.',
+      },
+
+      explanation: {
+        src: '/img/case-study/grammarlens/daily-test-explanation.webp',
+        width: 600,
+        height: 1298,
+        alt: 'A Daily Test result card showing a wrong answer, the correct answer and a one-sentence explanation.',
+        caption: 'Every answer now comes with a reason.',
+      },
+
       tokenBudget: {
         label: 'Daily Test output-token limit and worst measured response',
         caption: 'Five test runs each, measured on the local server.',

@@ -17,6 +17,8 @@ import ModelCalls from './case-study/ModelCalls.astro';
 import FreeCostBars from './case-study/FreeCostBars.astro';
 import CapChart from './case-study/CapChart.astro';
 import TokenBudget from './case-study/TokenBudget.astro';
+import Storyboard from './case-study/Storyboard.astro';
+import Screenshot from './case-study/Screenshot.astro';
 import { caseStudyCopy } from '../content/caseStudy.js';
 import { localizeHref } from '../i18n.js';
 
@@ -34,6 +36,9 @@ const figures = {
   freeCost: FreeCostBars,
   capMath: CapChart,
   tokenBudget: TokenBudget,
+  storyboard: Storyboard,
+  offerCard: Screenshot,
+  explanation: Screenshot,
 };
 
 // Splits a block list into runs of prose and the figures between them.
