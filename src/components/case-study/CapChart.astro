@@ -1,0 +1,254 @@
+---
+// C5: model cost per month against practice sessions per day, with what
+// each plan nets per month and the old and new session caps. The cost line
+// is an estimate throughout, so it is dashed and labelled "estimated".
+//
+// Props:
+//   costPerSession, days     cost line = sessions × costPerSession × days
+//   xMax, yMax, yStep        axis ranges (sessions, USD)
+//   plans: [{ label, value }]         horizontal reference lines
+//   caps:  [{ label, value, current }] vertical markers
+//   text: { xAxis, yAxis, line, estimated, breakEven: [..lines] }
+//   caption, label
+import ChartFigure from './ChartFigure.astro';
+
+const { costPerSession, days, xMax, yMax, yStep, plans, caps, text, caption, label } = Astro.props;
+
+const W = 960;
+const H = 470;
+const L = 64; // plot left
+const R = 930; // plot right
+const T = 44; // plot top
+const B = 400; // plot bottom
+
+const x = (s) => L + (s / xMax) * (R - L);
+const y = (usd) => B - (usd / yMax) * (B - T);
+const cost = (s) => s * costPerSession * days;
+const usd = (v) => `$${v.toFixed(2)}`;
+
+const yTicks = Array.from({ length: Math.floor(yMax / yStep) + 1 }, (_, i) => i * yStep);
+const xTicks = Array.from({ length: xMax + 1 }, (_, i) => i);
+
+// Break-even against the lowest plan (the annual one): where the cost line
+// crosses its net-per-month line.
+const lowest = plans.reduce((a, b) => (b.value < a.value ? b : a));
+const breakEven = lowest.value / (costPerSession * days);
+
+// Where the "estimated" label sits, below the line and right of the new cap.
+const tagS = 7.6;
+const tagY = y(cost(tagS)) + 40;
+
+// Table rows: the points the copy names, in order.
+const tableSessions = [1, breakEven, ...caps.map((c) => c.value)].sort((a, b) => a - b);
+---
+
+<ChartFigure caption={caption} label={label} minWidth={800}>
+  <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={label} class="cap-chart">
+    <text class="axis-title" x={L - 8} y={T - 22}>{text.yAxis}</text>
+
+    {
+      yTicks.map((v) => (
+        <g>
+          <line class="grid" x1={L} x2={R} y1={y(v)} y2={y(v)} />
+          <text class="tick" x={L - 10} y={y(v) + 4} text-anchor="end">
+            ${v}
+          </text>
+        </g>
+      ))
+    }
+    {
+      xTicks.map((s) => (
+        <text class="tick" x={x(s)} y={B + 22} text-anchor="middle">
+          {s}
+        </text>
+      ))
+    }
+    <text class="axis-title" x={(L + R) / 2} y={B + 52} text-anchor="middle">{text.xAxis}</text>
+
+    {
+      caps.map((c) => (
+        <g class={`cap${c.current ? ' current' : ''}`}>
+          <line x1={x(c.value)} x2={x(c.value)} y1={T - 6} y2={B} />
+          <text x={x(c.value)} y={T - 12} text-anchor={c.value === xMax ? 'end' : 'middle'}>
+            {c.label}
+          </text>
+        </g>
+      ))
+    }
+
+    {
+      plans.map((p) => (
+        <g class="plan">
+          <line x1={L} x2={R} y1={y(p.value)} y2={y(p.value)} />
+          <text x={L + 10} y={y(p.value) - 8}>
+            {p.label}
+          </text>
+        </g>
+      ))
+    }
+
+    <line class="cost" x1={x(0)} y1={y(0)} x2={x(xMax)} y2={y(cost(xMax))} />
+
+    <g class="tag">
+      <text class="line-label" x={x(tagS)} y={tagY}>{text.line}</text>
+      <rect x={x(tagS)} y={tagY + 10} width="70" height="20" rx="6" />
+      <text class="tag-text" x={x(tagS) + 35} y={tagY + 24} text-anchor="middle">{text.estimated}</text>
+    </g>
+
+    {
+      caps.map((c) => (
+        <g class="point">
+          <circle cx={x(c.value)} cy={y(cost(c.value))} r="5" />
+          <text x={x(c.value) - 10} y={y(cost(c.value)) - 10} text-anchor="end">
+            {usd(cost(c.value))}
+          </text>
+        </g>
+      ))
+    }
+
+    <g class="break-even">
+      <circle cx={x(breakEven)} cy={y(lowest.value)} r="6.5" />
+      <line x1={x(breakEven)} x2={x(breakEven)} y1={y(lowest.value) + 8} y2={y(lowest.value) + 34} />
+      {text.breakEven.map((line, li) => (
+        <text x={x(breakEven)} y={y(lowest.value) + 52 + li * 18} text-anchor="middle">
+          {line}
+        </text>
+      ))}
+    </g>
+  </svg>
+
+  <Fragment slot="table">
+    <thead>
+      <tr>
+        <th scope="col">Sessions per day</th>
+        <th scope="col">Model cost per month (estimated)</th>
+        <th scope="col">Note</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        tableSessions.map((s) => {
+          const cap = caps.find((c) => c.value === s);
+          return (
+            <tr>
+              <td>{s === breakEven ? `about ${s.toFixed(1)}` : s}</td>
+              <td>{usd(cost(s))}</td>
+              <td>{cap ? cap.label : s === breakEven ? text.breakEven.join(' ') : ''}</td>
+            </tr>
+          );
+        })
+      }
+      {
+        plans.map((p) => (
+          <tr>
+            <td />
+            <td>{usd(p.value)}</td>
+            <td>{p.label}</td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </Fragment>
+</ChartFigure>
+
+<style>
+  svg text {
+    font-family: var(--font-body);
+    font-size: 14px;
+    fill: var(--color-neutral-400);
+  }
+
+  .tick {
+    font-size: 13px;
+    fill: var(--color-neutral-500);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .axis-title {
+    font-size: 13px;
+    fill: var(--color-neutral-500);
+  }
+
+  .grid {
+    stroke: var(--color-divider);
+    stroke-width: 1;
+  }
+
+  .plan line {
+    stroke: var(--color-neutral-400);
+    stroke-width: 1.5;
+  }
+
+  .plan text {
+    fill: var(--color-neutral-300);
+  }
+
+  .cap line {
+    stroke: var(--color-neutral-600);
+    stroke-width: 1.25;
+    stroke-dasharray: 2 5;
+    stroke-linecap: round;
+  }
+
+  .cap text {
+    fill: var(--color-neutral-500);
+  }
+
+  .cap.current line {
+    stroke: var(--color-accent-400);
+    stroke-width: 1.5;
+  }
+
+  .cap.current text {
+    fill: var(--color-accent-300);
+    font-weight: 600;
+  }
+
+  .cost {
+    stroke: var(--color-accent);
+    stroke-width: 3;
+    stroke-dasharray: 10 7;
+    stroke-linecap: round;
+  }
+
+  .line-label {
+    fill: var(--color-accent-300);
+  }
+
+  .tag rect {
+    fill: var(--color-neutral-800);
+  }
+
+  .tag-text {
+    font-size: 12px !important;
+    fill: var(--color-neutral-100) !important;
+  }
+
+  .point circle {
+    fill: var(--color-bg);
+    stroke: var(--color-accent);
+    stroke-width: 2.5;
+  }
+
+  .point text {
+    fill: var(--color-accent-200);
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .break-even circle {
+    fill: var(--color-accent);
+    stroke: var(--color-bg);
+    stroke-width: 3;
+  }
+
+  .break-even line {
+    stroke: var(--color-neutral-500);
+    stroke-width: 1;
+  }
+
+  .break-even text {
+    fill: var(--color-text);
+    font-weight: 500;
+  }
+</style>

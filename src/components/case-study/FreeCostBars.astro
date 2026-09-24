@@ -1,0 +1,186 @@
+---
+// C4: what an engaged free user costs per month, as ranges on one scale.
+//
+// Each bar is a measured part plus an optional estimated part laid end to
+// end. The measured part is solid, the estimated part hatched. Each part's
+// own uncertainty shows as a lighter stretch at the end of the bar: the
+// measured range [measured[0], measured[1]], then the same width again at
+// the far end once the estimate is added on top.
+//
+// Props:
+//   bars: [{ label: [..lines], measured: [lo, hi], estimatedAdd, provenance }]
+//   xMax, xStep              USD scale
+//   legend: { measured, estimated }
+//   caption, label
+import ChartFigure from './ChartFigure.astro';
+
+const { bars, xMax, xStep, legend, caption, label } = Astro.props;
+
+const W = 960;
+const X0 = 270;
+const X1 = 850;
+const TOP = 58;
+const BAR_H = 30;
+const PITCH = 70;
+const AXIS_Y = TOP + bars.length * PITCH + 4;
+const H = AXIS_Y + 26;
+
+const x = (v) => X0 + (v / xMax) * (X1 - X0);
+const usd = (v) => `$${v.toFixed(2)}`;
+const range = ([lo, hi]) => `$${lo.toFixed(2)}–${hi.toFixed(2)}`;
+const ticks = Array.from({ length: Math.round(xMax / xStep) + 1 }, (_, i) => i * xStep);
+
+const drawn = bars.map((bar) => {
+  const [mLo, mHi] = bar.measured;
+  const e = bar.estimatedAdd ?? 0;
+  const total = [mLo + e, mHi + e];
+  // [from, to, kind] segments, left to right.
+  const segments = [
+    [0, mLo, 'measured'],
+    [mLo, mHi, 'measured range'],
+  ];
+  if (e > 0) {
+    segments.push([mHi, total[0], 'estimated'], [total[0], total[1], 'estimated range']);
+  }
+  return { ...bar, total, segments };
+});
+---
+
+<ChartFigure caption={caption} label={label} minWidth={800}>
+  <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={label} class="free-cost">
+    <defs>
+      <pattern id="free-cost-hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+        <rect class="hatch-bg" width="8" height="8" />
+        <line class="hatch-line" x1="0" y1="0" x2="0" y2="8" />
+      </pattern>
+    </defs>
+
+    <g class="legend" transform={`translate(${X0} 12)`}>
+      <rect class="seg measured" x="0" y="0" width="22" height="14" rx="3" />
+      <text x="30" y="12">{legend.measured}</text>
+      <rect class="seg estimated" x="120" y="0" width="22" height="14" rx="3" />
+      <text x="150" y="12">{legend.estimated}</text>
+    </g>
+
+    {
+      ticks.map((v) => (
+        <g>
+          <line class="grid" x1={x(v)} x2={x(v)} y1={TOP - 10} y2={AXIS_Y - 14} />
+          <text class="tick" x={x(v)} y={AXIS_Y + 4} text-anchor="middle">
+            {usd(v)}
+          </text>
+        </g>
+      ))
+    }
+
+    {
+      drawn.map((bar, i) => {
+        const y = TOP + i * PITCH;
+        return (
+          <g>
+            {bar.label.map((line, li) => (
+              <text
+                class="bar-label"
+                x="0"
+                y={y + BAR_H / 2 + 5 - ((bar.label.length - 1) * 19) / 2 + li * 19}
+              >
+                {line}
+              </text>
+            ))}
+            {bar.segments.map(([from, to, kind]) => (
+              <rect class={`seg ${kind}`} x={x(from)} y={y} width={Math.max(0, x(to) - x(from))} height={BAR_H} />
+            ))}
+            <line class="range-tick" x1={x(bar.total[0])} x2={x(bar.total[0])} y1={y - 4} y2={y + BAR_H + 4} />
+            <line class="range-tick" x1={x(bar.total[1])} x2={x(bar.total[1])} y1={y - 4} y2={y + BAR_H + 4} />
+            <text class="value" x={x(bar.total[1]) + 10} y={y + BAR_H / 2 + 5}>
+              {range(bar.total)}
+            </text>
+          </g>
+        );
+      })
+    }
+  </svg>
+
+  <Fragment slot="table">
+    <thead>
+      <tr>
+        <th scope="col">Free user, 30 days</th>
+        <th scope="col">Cost per month</th>
+        <th scope="col">Provenance</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        drawn.map((bar) => (
+          <tr>
+            <th scope="row">{bar.label.join(' ')}</th>
+            <td>{range(bar.total)}</td>
+            <td>{bar.provenance}</td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </Fragment>
+</ChartFigure>
+
+<style>
+  svg text {
+    font-family: var(--font-body);
+    font-size: 14px;
+    fill: var(--color-neutral-400);
+  }
+
+  .bar-label {
+    font-size: 15px;
+    fill: var(--color-neutral-200);
+  }
+
+  .tick {
+    font-size: 13px;
+    fill: var(--color-neutral-500);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .grid {
+    stroke: var(--color-divider);
+    stroke-width: 1;
+  }
+
+  .seg.measured {
+    fill: var(--color-accent);
+  }
+
+  .seg.estimated {
+    fill: url(#free-cost-hatch);
+  }
+
+  .seg.measured.range,
+  .seg.estimated.range {
+    opacity: 0.45;
+  }
+
+  .hatch-bg {
+    fill: var(--color-accent-900);
+  }
+
+  .hatch-line {
+    stroke: var(--color-accent-400);
+    stroke-width: 3;
+  }
+
+  .range-tick {
+    stroke: var(--color-neutral-300);
+    stroke-width: 1.5;
+  }
+
+  .value {
+    font-size: 15px;
+    font-weight: 600;
+    fill: var(--color-text);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .legend text {
+    fill: var(--color-neutral-300);
+  }
+</style>

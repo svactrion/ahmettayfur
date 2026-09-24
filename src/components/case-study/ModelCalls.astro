@@ -1,0 +1,197 @@
+---
+// C3: one row per user flow, its steps left to right, and which of those
+// steps call the language model. Model calls are filled boxes in the
+// accent color; steps that stay on the device are outlined. A row may
+// carry one dashed annotation after its last step.
+//
+// Props:
+//   flows: [{ name, calls, steps: [{ lines: [..], model: bool }], note?: [..lines] }]
+//   legend: { model, device }
+//   caption, label
+import ChartFigure from './ChartFigure.astro';
+
+const { flows, legend, caption, label } = Astro.props;
+
+const W = 960;
+const LABEL_W = 230;
+const BOX_W = 214;
+const BOX_H = 64;
+const SLOT = 244; // box width + room for the arrow between boxes
+const ROW_H = 104;
+const TOP = 52; // legend band above the first row
+const H = TOP + flows.length * ROW_H - 12;
+const LINE_H = 19;
+
+const callsText = (n) => (n === 1 ? '1 model call' : `${n} model calls`);
+const slotX = (i) => LABEL_W + i * SLOT;
+// First baseline for `n` centered lines in a box whose top is `y`.
+const firstBaseline = (y, n) => y + BOX_H / 2 - ((n - 1) * LINE_H) / 2 + 5;
+---
+
+<ChartFigure caption={caption} label={label} minWidth={780}>
+  <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={label} class="model-calls">
+    <g class="legend" transform="translate(0 14)">
+      <rect class="box model" x="0" y="0" width="22" height="16" rx="4" />
+      <text x="32" y="13">{legend.model}</text>
+      <rect class="box device" x="150" y="0" width="22" height="16" rx="4" />
+      <text x="182" y="13">{legend.device}</text>
+    </g>
+
+    {
+      flows.map((flow, r) => {
+        const y = TOP + r * ROW_H;
+        return (
+          <g>
+            {r > 0 && <line class="row-rule" x1="0" x2={W} y1={y - 20} y2={y - 20} />}
+            <text class="flow-name" x="0" y={y + 28}>
+              {flow.name}
+            </text>
+            <text class={`flow-calls${flow.calls ? '' : ' none'}`} x="0" y={y + 50}>
+              {callsText(flow.calls)}
+            </text>
+
+            {flow.steps.map((step, i) => {
+              const x = slotX(i);
+              return (
+                <g>
+                  {i > 0 && (
+                    <g class="arrow">
+                      <line x1={x - SLOT + BOX_W + 6} x2={x - 8} y1={y + BOX_H / 2} y2={y + BOX_H / 2} />
+                      <path d={`M ${x - 14} ${y + BOX_H / 2 - 5} L ${x - 7} ${y + BOX_H / 2} L ${x - 14} ${y + BOX_H / 2 + 5}`} />
+                    </g>
+                  )}
+                  <rect class={`box ${step.model ? 'model' : 'device'}`} x={x} y={y} width={BOX_W} height={BOX_H} rx="8" />
+                  {step.lines.map((line, li) => (
+                    <text
+                      class={`step-text${step.model ? ' on-model' : ''}`}
+                      x={x + BOX_W / 2}
+                      y={firstBaseline(y, step.lines.length) + li * LINE_H}
+                      text-anchor="middle"
+                    >
+                      {line}
+                    </text>
+                  ))}
+                </g>
+              );
+            })}
+
+            {flow.note &&
+              (() => {
+                const x = slotX(flow.steps.length);
+                return (
+                  <g class="note">
+                    <line class="note-link" x1={x - SLOT + BOX_W + 6} x2={x - 4} y1={y + BOX_H / 2} y2={y + BOX_H / 2} />
+                    <rect x={x} y={y - 4} width={W - x} height={BOX_H + 8} rx="8" />
+                    {flow.note.map((line, li) => (
+                      <text x={x + 14} y={y + 20 + li * 18}>
+                        {line}
+                      </text>
+                    ))}
+                  </g>
+                );
+              })()}
+          </g>
+        );
+      })
+    }
+  </svg>
+
+  <Fragment slot="table">
+    <thead>
+      <tr>
+        <th scope="col">Flow</th>
+        <th scope="col">Steps</th>
+        <th scope="col">Model calls</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        flows.map((flow) => (
+          <tr>
+            <th scope="row">{flow.name}</th>
+            <td>
+              {flow.steps.map((s) => `${s.lines.join(' ')}${s.model ? ' (model)' : ''}`).join(', then ')}
+              {flow.note && `. ${flow.note.join(' ')}`}
+            </td>
+            <td>{flow.calls}</td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </Fragment>
+</ChartFigure>
+
+<style>
+  svg text {
+    font-family: var(--font-body);
+    fill: var(--color-neutral-300);
+  }
+
+  .legend text {
+    font-size: 14px;
+    fill: var(--color-neutral-400);
+  }
+
+  .flow-name {
+    font-size: 16px;
+    font-weight: 600;
+    fill: var(--color-text) !important;
+  }
+
+  .flow-calls {
+    font-size: 14px;
+    fill: var(--color-accent-300) !important;
+  }
+
+  .flow-calls.none {
+    fill: var(--color-neutral-500) !important;
+  }
+
+  .box.model {
+    fill: var(--color-accent-800);
+    stroke: var(--color-accent);
+    stroke-width: 1.5;
+  }
+
+  .box.device {
+    fill: none;
+    stroke: var(--color-neutral-600);
+    stroke-width: 1.25;
+  }
+
+  .step-text {
+    font-size: 15px;
+  }
+
+  .step-text.on-model {
+    fill: var(--color-accent-100) !important;
+    font-weight: 500;
+  }
+
+  .arrow line,
+  .arrow path {
+    stroke: var(--color-neutral-500);
+    stroke-width: 1.5;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .row-rule {
+    stroke: var(--color-divider);
+    stroke-width: 1;
+  }
+
+  .note rect,
+  .note-link {
+    fill: none;
+    stroke: var(--color-neutral-600);
+    stroke-width: 1.25;
+    stroke-dasharray: 4 4;
+  }
+
+  .note text {
+    font-size: 13.5px;
+    fill: var(--color-neutral-400);
+  }
+</style>

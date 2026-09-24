@@ -1,0 +1,244 @@
+---
+// C2: the project from first commit to submission.
+//
+// Markers sit on a true date scale, so the quiet month between the MVP
+// week and late August shows as empty axis, and the September cluster
+// shows as a cluster. Labels can't sit at those positions without
+// colliding, so they are laid out evenly in date order and joined to
+// their marker by a leader line; both run in the same order, so leaders
+// never cross.
+//
+// Two drawings of the same data: horizontal above the shared 768px
+// breakpoint, vertical below it. Only one is displayed at a time, so
+// only one reaches assistive tech.
+//
+// Props:
+//   events: [{ date, start: 'YYYY-MM-DD', end?: 'YYYY-MM-DD', label }]
+//   caption, label
+import ChartFigure from './ChartFigure.astro';
+
+const { events, caption, label } = Astro.props;
+
+const day = (iso) => Date.UTC(...iso.split('-').map((n, i) => (i === 1 ? n - 1 : +n))) / 86400000;
+const first = day(events[0].start);
+const last = Math.max(...events.map((e) => day(e.end ?? e.start)));
+
+// Greedy word wrap by character count; the site's Inter at 13px averages
+// close to 6.6px a character, which is what the limits below assume.
+function wrap(text, maxChars) {
+  const lines = [];
+  for (const word of text.split(' ')) {
+    const current = lines.at(-1);
+    if (current && current.length + 1 + word.length <= maxChars) {
+      lines[lines.length - 1] = `${current} ${word}`;
+    } else {
+      lines.push(word);
+    }
+  }
+  // Don't leave one short word alone on the last line: pull the previous
+  // line's last word down to keep it company.
+  const lastLine = lines.at(-1);
+  if (lines.length > 1 && !lastLine.includes(' ') && lastLine.length < 8) {
+    const prev = lines[lines.length - 2].split(' ');
+    if (prev.length > 1) {
+      lines[lines.length - 1] = `${prev.pop()} ${lastLine}`;
+      lines[lines.length - 2] = prev.join(' ');
+    }
+  }
+  return lines;
+}
+
+const LINE = 17;
+
+// ---- horizontal ----
+const HW = 1000;
+const AX0 = 30;
+const AX1 = 970;
+const AXIS_Y = 200;
+const LABEL_W = 150;
+const hx = (d) => AX0 + ((d - first) / (last - first)) * (AX1 - AX0);
+
+const above = events.filter((_, i) => i % 2 === 0);
+const below = events.filter((_, i) => i % 2 === 1);
+const aboveStep = (AX1 - AX0 - LABEL_W) / (above.length - 1);
+const aboveX = (k) => AX0 + LABEL_W / 2 + k * aboveStep;
+const belowX = (k) => aboveX(k) + aboveStep / 2;
+
+const horizontal = events.map((e, i) => {
+  const isAbove = i % 2 === 0;
+  const k = Math.floor(i / 2);
+  return {
+    ...e,
+    isAbove,
+    mx: hx(day(e.start)),
+    mx2: e.end ? hx(day(e.end)) : null,
+    lx: isAbove ? aboveX(k) : belowX(k),
+    lines: wrap(e.label, 23),
+  };
+});
+const maxBelowLines = Math.max(...horizontal.filter((e) => !e.isAbove).map((e) => e.lines.length));
+const HH = AXIS_Y + 74 + maxBelowLines * LINE + 12;
+
+// ---- vertical ----
+const VW = 340;
+const VX = 12; // axis x
+const TEXT_X = 58;
+const ROW_GAP = 14;
+const vRows = [];
+let cursor = 8;
+for (const e of events) {
+  const lines = wrap(e.label, 36);
+  vRows.push({ ...e, lines, top: cursor });
+  cursor += (1 + lines.length) * LINE + ROW_GAP;
+}
+const VH = cursor - ROW_GAP + 8;
+const V0 = 14;
+const V1 = VH - 14;
+const vy = (d) => V0 + ((d - first) / (last - first)) * (V1 - V0);
+const vertical = vRows.map((e) => ({
+  ...e,
+  my: vy(day(e.start)),
+  my2: e.end ? vy(day(e.end)) : null,
+  ly: e.top + 12, // vertical middle of the date line
+}));
+const isLast = (i) => i === events.length - 1;
+---
+
+<ChartFigure caption={caption} label={label}>
+  <svg class="timeline horizontal" viewBox={`0 0 ${HW} ${HH}`} role="img" aria-label={label} style="min-width: 880px">
+    <line class="axis" x1={AX0} x2={AX1} y1={AXIS_Y} y2={AXIS_Y} />
+    {
+      horizontal.map((e, i) => {
+        const dir = e.isAbove ? -1 : 1;
+        const blockLines = [e.date, ...e.lines];
+        const firstBaseline = e.isAbove ? AXIS_Y - 64 - (blockLines.length - 1) * LINE : AXIS_Y + 74;
+        return (
+          <g class={isLast(i) ? 'event last' : 'event'}>
+            <polyline
+              class="leader"
+              points={`${e.mx},${AXIS_Y + dir * 9} ${e.mx},${AXIS_Y + dir * 22} ${e.lx},${AXIS_Y + dir * 44} ${e.lx},${AXIS_Y + dir * 52}`}
+            />
+            {e.mx2 ? (
+              <rect class="span" x={e.mx - 5} y={AXIS_Y - 5} width={e.mx2 - e.mx + 10} height="10" rx="5" />
+            ) : (
+              <circle class="dot" cx={e.mx} cy={AXIS_Y} r="5.5" />
+            )}
+            {blockLines.map((line, li) => (
+              <text class={li === 0 ? 'date' : 'label'} x={e.lx} y={firstBaseline + li * LINE} text-anchor="middle">
+                {line}
+              </text>
+            ))}
+          </g>
+        );
+      })
+    }
+  </svg>
+
+  <svg class="timeline vertical" viewBox={`0 0 ${VW} ${VH}`} role="img" aria-label={label}>
+    <line class="axis" x1={VX} x2={VX} y1={V0} y2={V1} />
+    {
+      vertical.map((e, i) => (
+        <g class={isLast(i) ? 'event last' : 'event'}>
+          <polyline class="leader" points={`${VX + 9},${e.my} ${VX + 18},${e.my} ${TEXT_X - 14},${e.ly} ${TEXT_X - 6},${e.ly}`} />
+          {e.my2 ? (
+            <rect class="span" x={VX - 5} y={e.my - 5} width="10" height={e.my2 - e.my + 10} rx="5" />
+          ) : (
+            <circle class="dot" cx={VX} cy={e.my} r="5.5" />
+          )}
+          <text class="date" x={TEXT_X} y={e.top + 17}>
+            {e.date}
+          </text>
+          {e.lines.map((line, li) => (
+            <text class="label" x={TEXT_X} y={e.top + 17 + (li + 1) * LINE}>
+              {line}
+            </text>
+          ))}
+        </g>
+      ))
+    }
+  </svg>
+
+  <Fragment slot="table">
+    <thead>
+      <tr>
+        <th scope="col">Date (2026)</th>
+        <th scope="col">Event</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        events.map((e) => (
+          <tr>
+            <td>{e.date}</td>
+            <td>{e.label}</td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </Fragment>
+</ChartFigure>
+
+<style>
+  .vertical {
+    display: none !important;
+  }
+
+  @media (max-width: 768px) {
+    .horizontal {
+      display: none !important;
+    }
+
+    .vertical {
+      display: block !important;
+      max-width: 420px;
+    }
+  }
+
+  text {
+    font-family: var(--font-body);
+    font-size: 13px;
+  }
+
+  .date {
+    font-weight: 600;
+    fill: var(--color-text);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .label {
+    fill: var(--color-neutral-400);
+  }
+
+  .axis {
+    stroke: var(--color-neutral-700);
+    stroke-width: 2;
+    stroke-linecap: round;
+  }
+
+  .leader {
+    fill: none;
+    stroke: var(--color-neutral-700);
+    stroke-width: 1;
+  }
+
+  .dot {
+    fill: var(--color-bg);
+    stroke: var(--color-accent-400);
+    stroke-width: 2;
+  }
+
+  .span {
+    fill: var(--color-accent-700);
+    stroke: var(--color-accent-400);
+    stroke-width: 1.5;
+  }
+
+  .last .dot {
+    fill: var(--color-accent);
+    stroke: var(--color-accent-300);
+  }
+
+  .last .date {
+    fill: var(--color-accent-300);
+  }
+</style>

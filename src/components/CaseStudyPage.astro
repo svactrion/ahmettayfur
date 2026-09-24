@@ -12,6 +12,11 @@
 // the product page, in whichever language that page exists.
 import Base from '../layouts/Base.astro';
 import Reframe from './case-study/Reframe.astro';
+import Timeline from './case-study/Timeline.astro';
+import ModelCalls from './case-study/ModelCalls.astro';
+import FreeCostBars from './case-study/FreeCostBars.astro';
+import CapChart from './case-study/CapChart.astro';
+import TokenBudget from './case-study/TokenBudget.astro';
 import { caseStudyCopy } from '../content/caseStudy.js';
 import { localizeHref } from '../i18n.js';
 
@@ -20,9 +25,16 @@ const t = caseStudyCopy[lang];
 const productHref = localizeHref('/products/grammarlens', lang);
 
 // Charts, diagrams and screenshots, by the name a { type: 'figure' } block
-// uses. A name missing from this map renders nothing, so copy can mark a
-// figure's place before the figure exists.
-const figures = {};
+// uses; their props come from t.figures under the same name. A name
+// missing from this map renders nothing, so copy can mark a figure's place
+// before the figure exists.
+const figures = {
+  timeline: Timeline,
+  modelCalls: ModelCalls,
+  freeCost: FreeCostBars,
+  capMath: CapChart,
+  tokenBudget: TokenBudget,
+};
 
 // Splits a block list into runs of prose and the figures between them.
 // Prose runs become .body columns; figures sit between them and span both
@@ -74,9 +86,7 @@ const rows =
             <h1 class="display">{t.title}</h1>
             <p class="lede">{t.subtitle}</p>
             <p>
-              <a class="tap-link" href={productHref}>
-                {t.backLinkText}
-              </a>
+              <a class="tap-link" href={productHref}>{t.backLinkText}</a>
             </p>
           </div>
         </section>
@@ -91,7 +101,7 @@ const rows =
                 const Figure = figures[g.figure];
                 return (
                   <div class="wide">
-                    <Figure />
+                    <Figure {...t.figures[g.figure]} />
                   </div>
                 );
               }
@@ -116,9 +126,7 @@ const rows =
                   )}
                   {isPageEnd && (
                     <p>
-                      <a class="tap-link" href={productHref}>
-                        {t.endLinkText}
-                      </a>
+                      <a class="tap-link" href={productHref}>{t.endLinkText}</a>
                     </p>
                   )}
                 </div>
@@ -147,9 +155,7 @@ const rows =
               <p class="lede" set:html={p} />
             ))}
             <p>
-              <a class="tap-link" href={productHref}>
-                {t.backLinkText}
-              </a>
+              <a class="tap-link" href={productHref}>{t.backLinkText}</a>
             </p>
           </div>
         </section>
@@ -206,9 +212,7 @@ const rows =
             ))}
             <p set:html={t.section3.closing} />
             <p>
-              <a class="tap-link" href={productHref}>
-                {t.section3.endLinkText}
-              </a>
+              <a class="tap-link" href={productHref}>{t.section3.endLinkText}</a>
             </p>
           </div>
         </section>

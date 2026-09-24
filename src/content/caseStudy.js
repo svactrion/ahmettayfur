@@ -73,6 +73,127 @@ export const caseStudyCopy = {
       ],
     },
 
+    // Props for each { type: 'figure' } block, by name. Every number here
+    // is the one given in the brief (Part C); nothing is derived from a
+    // guess.
+    figures: {
+      timeline: {
+        label: 'Project timeline, 19 July to 24 September 2026',
+        caption: 'About ten weeks from first commit to submission.',
+        events: [
+          { date: '19 Jul', start: '2026-07-19', label: 'First commit' },
+          { date: '20–25 Jul', start: '2026-07-20', end: '2026-07-25', label: 'MVP week: first build, interviews, iteration 2' },
+          { date: '24 Aug', start: '2026-08-24', label: 'Onboarding, Home and Premium screen' },
+          { date: '2 Sep', start: '2026-09-02', label: 'Free and paid split' },
+          { date: '6 Sep', start: '2026-09-06', label: 'API key moved behind a server proxy' },
+          { date: '14 Sep', start: '2026-09-14', label: 'First run on a physical iPhone' },
+          { date: '15 Sep', start: '2026-09-15', label: 'Paywall leak closed; free tier defined' },
+          { date: '19 Sep', start: '2026-09-19', label: 'Monthly Climb moves into the first release' },
+          {
+            date: '21–22 Sep',
+            start: '2026-09-21',
+            end: '2026-09-22',
+            label: 'Cap 10 → 5, AI permission, fixed first test, paywall after the climb',
+          },
+          { date: '23 Sep', start: '2026-09-23', label: 'Merged; first TestFlight build' },
+          { date: '24 Sep', start: '2026-09-24', label: 'Submitted to App Store review' },
+        ],
+      },
+
+      modelCalls: {
+        label: 'Where each flow calls the language model',
+        caption:
+          'Every model call is a cost that scales with users. The free modes make at most one; the paid mode makes two.',
+        legend: { model: 'Model call', device: 'On the device' },
+        flows: [
+          {
+            name: 'First Daily Test',
+            calls: 0,
+            steps: [
+              { lines: ['Hand-written questions'], model: false },
+              { lines: ['Answers graded', 'on the device'], model: false },
+            ],
+          },
+          {
+            name: 'Daily Test',
+            calls: 1,
+            steps: [
+              { lines: ['Model generates questions', 'and explanations'], model: true },
+              { lines: ['Answers graded', 'on the device'], model: false },
+            ],
+            note: ['Finishing a test prepares', "tomorrow's set in the", 'background.'],
+          },
+          {
+            name: 'Topic Practice',
+            calls: 2,
+            steps: [
+              { lines: ['Model generates', 'questions'], model: true },
+              { lines: ['User answers'], model: false },
+              { lines: ['Model grades', 'and explains'], model: true },
+            ],
+          },
+        ],
+      },
+
+      freeCost: {
+        label: 'Monthly cost of a free user who opens the app every day',
+        caption: 'The daily free practice session more than doubles what an engaged free user costs.',
+        legend: { measured: 'measured', estimated: 'estimated' },
+        xMax: 2,
+        xStep: 0.5,
+        bars: [
+          {
+            label: ['Daily Test only'],
+            measured: [0.7, 0.84],
+            provenance: 'Measured token counts × list price',
+          },
+          {
+            label: ['Daily Test + one free', 'practice session a day'],
+            measured: [0.7, 0.84],
+            // One practice session a day for 30 days at the estimated
+            // $0.034 a session.
+            estimatedAdd: 1.02,
+            provenance: 'Daily Test part measured, practice part estimated',
+          },
+        ],
+      },
+
+      capMath: {
+        label: 'Model cost per month against practice sessions per day',
+        caption:
+          'At about $0.034 a session (estimated), the old cap let a heavy subscriber cost roughly three times what the annual plan brings in.',
+        costPerSession: 0.034,
+        days: 30,
+        xMax: 10,
+        yMax: 11,
+        yStep: 2,
+        plans: [
+          { label: 'Annual plan, net per month: $3.54', value: 3.54 },
+          { label: 'Monthly plan, net: $5.09', value: 5.09 },
+        ],
+        caps: [
+          { label: 'New cap: 5', value: 5, current: true },
+          { label: 'Old cap: 10', value: 10 },
+        ],
+        text: {
+          yAxis: 'Model cost per month (USD)',
+          xAxis: 'Practice sessions per day',
+          line: 'Cost at $0.034 a session',
+          estimated: 'estimated',
+          breakEven: ['Break-even: about', '3.5 sessions a day'],
+        },
+      },
+
+      tokenBudget: {
+        label: 'Daily Test output-token limit and worst measured response',
+        caption: 'Five test runs each, measured on the local server.',
+        rows: [
+          { label: 'Before explanations', limit: 2048, worst: 1632 },
+          { label: 'With explanations, own limit', limit: 3072, worst: 1496 },
+        ],
+      },
+    },
+
     sections: [
       {
         label: 'Research',

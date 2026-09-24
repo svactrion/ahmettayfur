@@ -1,0 +1,100 @@
+---
+// Shared frame for the case study's charts and diagrams: the drawing, its
+// caption, and the same data as text in a collapsed table.
+//
+// The drawing scrolls sideways inside its own container once the page is
+// narrower than `minWidth` (px), so the SVG's text never shrinks below
+// legible size and the page itself never scrolls sideways. `label` names
+// that scroll region for keyboard and screen reader users.
+//
+// Slots: default = the SVG; "table" = <thead>/<tbody> for the data table.
+const { caption, label, minWidth = 0, dataSummary = 'Chart data', maxWidth } = Astro.props;
+---
+
+<figure class="chart" style={maxWidth ? `--max-w: ${maxWidth}px` : undefined}>
+  <div class="frame" role="region" aria-label={label} tabindex="0" style={`--min-w: ${minWidth}px`}>
+    <slot />
+  </div>
+  <figcaption>{caption}</figcaption>
+  <details>
+    <summary>{dataSummary}</summary>
+    <div class="table-wrap">
+      <table class="table">
+        <slot name="table" />
+      </table>
+    </div>
+  </details>
+</figure>
+
+<style>
+  .chart {
+    margin: 0;
+    max-width: var(--max-w, none);
+  }
+
+  .frame {
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    border-radius: var(--radius-md);
+  }
+
+  .frame > :global(svg) {
+    display: block;
+    width: 100%;
+    min-width: var(--min-w);
+    height: auto;
+    overflow: visible;
+  }
+
+  /* Nocturne's figcaption is an 11px footnote; here the caption carries
+     the chart's point, so it reads at body-adjacent size. */
+  figcaption {
+    max-width: 66ch;
+    margin-top: 14px;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--color-neutral-400);
+  }
+
+  details {
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--color-neutral-400);
+  }
+
+  summary {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    cursor: pointer;
+    color: var(--color-neutral-500);
+  }
+
+  summary:hover {
+    color: var(--color-accent-300);
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+    max-width: 720px;
+  }
+
+  .table {
+    font-size: 13px;
+  }
+
+  /* Nocturne's table headers are all caps; this page keeps labels in
+     sentence case. */
+  .table :global(th) {
+    text-transform: none;
+    letter-spacing: 0.01em;
+    font-size: 12px;
+    color: var(--color-neutral-500);
+    white-space: nowrap;
+  }
+
+  .table :global(td) {
+    color: var(--color-neutral-300);
+    vertical-align: top;
+  }
+</style>

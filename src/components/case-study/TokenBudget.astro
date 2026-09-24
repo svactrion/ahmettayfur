@@ -1,0 +1,96 @@
+---
+// C6: two Daily Test output budgets on one token scale. Each track is the
+// full output-token limit; the fill is the worst response measured under
+// it, and the text says how much headroom was left.
+//
+// Props:
+//   rows: [{ label, limit, worst }]
+//   caption, label
+import ChartFigure from './ChartFigure.astro';
+
+const { rows, caption, label } = Astro.props;
+
+const W = 760;
+const X0 = 0;
+const X1 = 480;
+const TRACK_H = 18;
+const PITCH = 70;
+const H = rows.length * PITCH - 8;
+
+const maxLimit = Math.max(...rows.map((r) => r.limit));
+const x = (tokens) => X0 + (tokens / maxLimit) * (X1 - X0);
+const n = (v) => v.toLocaleString('en-US');
+const headroom = (r) => Math.round((1 - r.worst / r.limit) * 100);
+---
+
+<ChartFigure caption={caption} label={label} minWidth={640} maxWidth={760}>
+  <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={label} class="token-budget">
+    {
+      rows.map((r, i) => {
+        const y = i * PITCH;
+        return (
+          <g>
+            <text class="row-label" x={X0} y={y + 16}>
+              {r.label}
+            </text>
+            <rect class="track" x={x(0)} y={y + 28} width={x(r.limit) - x(0)} height={TRACK_H} rx="4" />
+            <rect class="fill" x={x(0)} y={y + 28} width={x(r.worst) - x(0)} height={TRACK_H} rx="4" />
+            <text class="value" x={x(r.limit) + 12} y={y + 42}>
+              {`${n(r.worst)} of ${n(r.limit)} tokens, ${headroom(r)}% headroom`}
+            </text>
+          </g>
+        );
+      })
+    }
+  </svg>
+
+  <Fragment slot="table">
+    <thead>
+      <tr>
+        <th scope="col">Version</th>
+        <th scope="col">Limit</th>
+        <th scope="col">Worst response</th>
+        <th scope="col">Headroom</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        rows.map((r) => (
+          <tr>
+            <th scope="row">{r.label}</th>
+            <td>{n(r.limit)}</td>
+            <td>{n(r.worst)}</td>
+            <td>{headroom(r)}%</td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </Fragment>
+</ChartFigure>
+
+<style>
+  text {
+    font-family: var(--font-body);
+    font-size: 14px;
+  }
+
+  .row-label {
+    fill: var(--color-neutral-200);
+  }
+
+  .value {
+    font-size: 13px;
+    fill: var(--color-neutral-400);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .track {
+    fill: none;
+    stroke: var(--color-neutral-600);
+    stroke-width: 1.25;
+  }
+
+  .fill {
+    fill: var(--color-accent);
+  }
+</style>
