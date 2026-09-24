@@ -1,100 +1,153 @@
 ---
-// C3: one row per user flow, its steps left to right, and which of those
+// C3: one block per user flow, its steps in order, and which of those
 // steps call the language model. Model calls are filled boxes in the
-// accent color; steps that stay on the device are outlined. A row may
-// carry one dashed annotation after its last step.
+// accent color; steps that stay on the device are outlined. A flow may
+// carry one dashed note after its last step.
+//
+// Drawn at the three ChartFigure widths. At m and l the steps run left to
+// right; at s (phones) they stack top to bottom, so the text keeps its
+// size instead of shrinking (brief, Part E24). All text is left-aligned.
 //
 // Props:
-//   flows: [{ name, calls, steps: [{ lines: [..], model: bool }], note?: [..lines] }]
+//   flows: [{ name, calls, steps: [{ text, model: bool }], note?: text }]
 //   legend: { model, device }
 //   caption, label
 import ChartFigure from './ChartFigure.astro';
+import { VARIANTS, textWidth, charsFor, wrap } from './chart-utils.js';
 
 const { flows, legend, caption, label } = Astro.props;
 
-const W = 800;
-const LABEL_W = 168;
-const BOX_W = 182;
-const BOX_H = 70;
-const SLOT = 208; // box width + room for the arrow between boxes
-const ROW_H = 110;
-const TOP = 52; // legend band above the first row
-const H = TOP + flows.length * ROW_H - 12;
-const LINE_H = 18;
-
+const LINE = 19; // line height inside boxes and notes
+const PAD = 12; // text inset inside a box
+const ARROW = 24; // room between boxes for an arrow
 const callsText = (n) => (n === 1 ? '1 model call' : `${n} model calls`);
-const slotX = (i) => LABEL_W + i * SLOT;
-// First baseline for `n` centered lines in a box whose top is `y`.
-const firstBaseline = (y, n) => y + BOX_H / 2 - ((n - 1) * LINE_H) / 2 + 5;
+
+function layout(W, stacked) {
+  const maxSteps = Math.max(...flows.map((f) => f.steps.length));
+  const boxW = stacked ? W : (W - (maxSteps - 1) * ARROW) / maxSteps;
+  const chars = charsFor(boxW - 2 * PAD);
+  const noteChars = charsFor(W - 2 * PAD);
+
+  let y = 34; // below the legend
+  const rows = flows.map((flow, r) => {
+    const top = y + (r > 0 ? 26 : 0);
+    const nameY = top + 18;
+    let cursor = top + 34;
+    const boxes = [];
+    const arrows = [];
+
+    if (stacked) {
+      flow.steps.forEach((step, i) => {
+        const lines = wrap(step.text, chars);
+        const h = lines.length * LINE + 2 * PAD - 4;
+        if (i > 0) {
+          arrows.push({ x1: 22, y1: cursor - 20, x2: 22, y2: cursor - 4, dir: 'down' });
+        }
+        boxes.push({ x: 0, y: cursor, w: W, h, lines, model: step.model });
+        cursor += h + 24;
+      });
+      cursor -= 24;
+    } else {
+      const wrapped = flow.steps.map((s) => wrap(s.text, chars));
+      const h = Math.max(...wrapped.map((l) => l.length)) * LINE + 2 * PAD - 4;
+      flow.steps.forEach((step, i) => {
+        const x = i * (boxW + ARROW);
+        if (i > 0) {
+          arrows.push({ x1: x - ARROW + 5, y1: cursor + h / 2, x2: x - 5, y2: cursor + h / 2, dir: 'right' });
+        }
+        boxes.push({ x, y: cursor, w: boxW, h, lines: wrapped[i], model: step.model });
+      });
+      cursor += h;
+    }
+
+    let note = null;
+    if (flow.note) {
+      const last = boxes.at(-1);
+      const lines = wrap(flow.note, noteChars);
+      const noteTop = cursor + 18;
+      const linkX = stacked ? 22 : last.x + PAD;
+      note = {
+        y: noteTop,
+        h: lines.length * LINE + 2 * PAD - 4,
+        lines,
+        link: { x: linkX, y1: cursor + 2, y2: noteTop - 2 },
+      };
+      cursor = noteTop + note.h;
+    }
+
+    y = cursor;
+    return { flow, top, nameY, boxes, arrows, note };
+  });
+
+  return { W, H: y + 2, rows };
+}
+
+const drawings = VARIANTS.map((v) => ({ ...v, ...layout(v.width, v.name === 's') }));
 ---
 
-<ChartFigure caption={caption} label={label} minWidth={680}>
-  <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={label} class="model-calls">
-    <g class="legend" transform="translate(0 14)">
-      <rect class="box model" x="0" y="0" width="22" height="16" rx="4" />
-      <text x="32" y="13">{legend.model}</text>
-      <rect class="box device" x="150" y="0" width="22" height="16" rx="4" />
-      <text x="182" y="13">{legend.device}</text>
-    </g>
+<ChartFigure caption={caption} label={label}>
+  {
+    drawings.map((d) => (
+      <svg class={`model-calls v v-${d.name}`} viewBox={`0 0 ${d.W} ${d.H}`} role="img" aria-label={label}>
+        <g class="legend">
+          <rect class="box model" x="0" y="2" width="22" height="16" rx="4" />
+          <text x="30" y="15">
+            {legend.model}
+          </text>
+          <rect class="box device" x={52 + textWidth(legend.model)} y="2" width="22" height="16" rx="4" />
+          <text x={82 + textWidth(legend.model)} y="15">
+            {legend.device}
+          </text>
+        </g>
 
-    {
-      flows.map((flow, r) => {
-        const y = TOP + r * ROW_H;
-        return (
+        {d.rows.map((row, r) => (
           <g>
-            {r > 0 && <line class="row-rule" x1="0" x2={W} y1={y - 20} y2={y - 20} />}
-            <text class="flow-name" x="0" y={y + 28}>
-              {flow.name}
+            {r > 0 && <line class="row-rule" x1="0" x2={d.W} y1={row.top - 13} y2={row.top - 13} />}
+            <text class="flow-name" x="0" y={row.nameY}>
+              {row.flow.name}
             </text>
-            <text class={`flow-calls${flow.calls ? '' : ' none'}`} x="0" y={y + 50}>
-              {callsText(flow.calls)}
+            <text class={`flow-calls${row.flow.calls ? '' : ' none'}`} x={d.W} y={row.nameY} text-anchor="end">
+              {callsText(row.flow.calls)}
             </text>
 
-            {flow.steps.map((step, i) => {
-              const x = slotX(i);
-              return (
-                <g>
-                  {i > 0 && (
-                    <g class="arrow">
-                      <line x1={x - SLOT + BOX_W + 6} x2={x - 8} y1={y + BOX_H / 2} y2={y + BOX_H / 2} />
-                      <path d={`M ${x - 14} ${y + BOX_H / 2 - 5} L ${x - 7} ${y + BOX_H / 2} L ${x - 14} ${y + BOX_H / 2 + 5}`} />
-                    </g>
-                  )}
-                  <rect class={`box ${step.model ? 'model' : 'device'}`} x={x} y={y} width={BOX_W} height={BOX_H} rx="8" />
-                  {step.lines.map((line, li) => (
-                    <text
-                      class={`step-text${step.model ? ' on-model' : ''}`}
-                      x={x + BOX_W / 2}
-                      y={firstBaseline(y, step.lines.length) + li * LINE_H}
-                      text-anchor="middle"
-                    >
-                      {line}
-                    </text>
-                  ))}
-                </g>
-              );
-            })}
+            {row.arrows.map((a) => (
+              <g class="arrow">
+                <line x1={a.x1} y1={a.y1} x2={a.x2} y2={a.y2} />
+                {a.dir === 'right' ? (
+                  <path d={`M ${a.x2 - 6} ${a.y2 - 5} L ${a.x2} ${a.y2} L ${a.x2 - 6} ${a.y2 + 5}`} />
+                ) : (
+                  <path d={`M ${a.x2 - 5} ${a.y2 - 6} L ${a.x2} ${a.y2} L ${a.x2 + 5} ${a.y2 - 6}`} />
+                )}
+              </g>
+            ))}
 
-            {flow.note &&
-              (() => {
-                const x = slotX(flow.steps.length);
-                return (
-                  <g class="note">
-                    <line class="note-link" x1={x - SLOT + BOX_W + 6} x2={x - 4} y1={y + BOX_H / 2} y2={y + BOX_H / 2} />
-                    <rect x={x} y={y - 4} width={W - x} height={BOX_H + 8} rx="8" />
-                    {flow.note.map((line, li) => (
-                      <text x={x + 12} y={y + 22 + li * 18}>
-                        {line}
-                      </text>
-                    ))}
-                  </g>
-                );
-              })()}
+            {row.boxes.map((b) => (
+              <g>
+                <rect class={`box ${b.model ? 'model' : 'device'}`} x={b.x} y={b.y} width={b.w} height={b.h} rx="8" />
+                {b.lines.map((line, li) => (
+                  <text class={`step-text${b.model ? ' on-model' : ''}`} x={b.x + PAD} y={b.y + PAD + 12 + li * LINE}>
+                    {line}
+                  </text>
+                ))}
+              </g>
+            ))}
+
+            {row.note && (
+              <g class="note">
+                <line class="note-link" x1={row.note.link.x} x2={row.note.link.x} y1={row.note.link.y1} y2={row.note.link.y2} />
+                <rect x="0.75" y={row.note.y} width={d.W - 1.5} height={row.note.h} rx="8" />
+                {row.note.lines.map((line, li) => (
+                  <text x={PAD} y={row.note.y + PAD + 12 + li * LINE}>
+                    {line}
+                  </text>
+                ))}
+              </g>
+            )}
           </g>
-        );
-      })
-    }
-  </svg>
+        ))}
+      </svg>
+    ))
+  }
 
   <Fragment slot="table">
     <thead>
@@ -110,8 +163,8 @@ const firstBaseline = (y, n) => y + BOX_H / 2 - ((n - 1) * LINE_H) / 2 + 5;
           <tr>
             <th scope="row">{flow.name}</th>
             <td>
-              {flow.steps.map((s) => `${s.lines.join(' ')}${s.model ? ' (model)' : ''}`).join(', then ')}
-              {flow.note && `. ${flow.note.join(' ')}`}
+              {flow.steps.map((s) => `${s.text}${s.model ? ' (model)' : ''}`).join(', then ')}
+              {flow.note && `. ${flow.note}`}
             </td>
             <td>{flow.calls}</td>
           </tr>
@@ -122,29 +175,29 @@ const firstBaseline = (y, n) => y + BOX_H / 2 - ((n - 1) * LINE_H) / 2 + 5;
 </ChartFigure>
 
 <style>
+  /* 15.5px is TEXT in chart-utils.js: the smallest size in any drawing. */
   svg text {
     font-family: var(--font-body);
+    font-size: 15.5px;
     fill: var(--color-neutral-300);
   }
 
   .legend text {
-    font-size: 14px;
     fill: var(--color-neutral-400);
   }
 
   .flow-name {
-    font-size: 16px;
+    font-size: 16.5px;
     font-weight: 600;
-    fill: var(--color-text) !important;
+    fill: var(--color-text);
   }
 
   .flow-calls {
-    font-size: 14px;
-    fill: var(--color-accent-300) !important;
+    fill: var(--color-accent-300);
   }
 
   .flow-calls.none {
-    fill: var(--color-neutral-500) !important;
+    fill: var(--color-neutral-500);
   }
 
   .box.model {
@@ -159,12 +212,8 @@ const firstBaseline = (y, n) => y + BOX_H / 2 - ((n - 1) * LINE_H) / 2 + 5;
     stroke-width: 1.25;
   }
 
-  .step-text {
-    font-size: 14px;
-  }
-
   .step-text.on-model {
-    fill: var(--color-accent-100) !important;
+    fill: var(--color-accent-100);
     font-weight: 500;
   }
 
@@ -191,7 +240,6 @@ const firstBaseline = (y, n) => y + BOX_H / 2 - ((n - 1) * LINE_H) / 2 + 5;
   }
 
   .note text {
-    font-size: 13px;
     fill: var(--color-neutral-400);
   }
 </style>

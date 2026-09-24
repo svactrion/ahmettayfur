@@ -2,24 +2,29 @@
 // Shared frame for the case study's charts and diagrams: the drawing, its
 // caption, and the same data as text in a collapsed table.
 //
-// The drawing scrolls sideways inside its own container once the space is
-// narrower than `minWidth` (px), so the SVG's text never shrinks below
-// legible size and the page itself never scrolls sideways. `label` names
-// that scroll region for keyboard and screen reader users. `maxWidth`
-// (px) keeps a small drawing from being scaled up past its natural size;
-// it stays left-aligned.
+// Each chart draws itself at three widths and marks each SVG with the
+// size it was drawn for: .v-s (360 wide), .v-m (480) and .v-l (620). The
+// frame is a size container and shows only the one that matches the
+// column it sits in, so the SVG always fills the column (viewBox,
+// width: 100%) and is scaled by at most a little either way. That keeps
+// every piece of text at or above the 14px caption size without any
+// sideways scrolling (brief, Part E20, E24):
 //
-// Where the figure sits (both columns or the body column) is decided by
-// the page, not here; this component always fills the width it is given.
+//   column < 440px          .v-s   phones
+//   440px ≤ column < 560px  .v-m   narrow desktop windows
+//   column ≥ 560px          .v-l   desktop, tablets
 //
-// Slots: default = the SVG; "table" = <thead>/<tbody> for the data table.
+// Only the displayed SVG reaches assistive tech; the others are
+// display: none.
+//
+// Slots: default = the SVGs; "table" = <thead>/<tbody> for the data table.
 import './figures.css';
 
-const { caption, label, minWidth = 0, maxWidth } = Astro.props;
+const { caption, label } = Astro.props;
 ---
 
 <figure class="chart">
-  <div class="frame" role="region" aria-label={label} tabindex="0" style={`--min-w: ${minWidth}px${maxWidth ? `; --max-w: ${maxWidth}px` : ''}`}>
+  <div class="frame" role="group" aria-label={label}>
     <slot />
   </div>
   <figcaption class="cs-caption">{caption}</figcaption>
@@ -44,28 +49,41 @@ const { caption, label, minWidth = 0, maxWidth } = Astro.props;
   }
 
   .frame {
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    border-radius: var(--radius-md);
+    container-type: inline-size;
   }
 
   .frame > :global(svg) {
-    display: block;
+    display: none;
     width: 100%;
-    min-width: var(--min-w);
-    max-width: var(--max-w, none);
     height: auto;
     overflow: visible;
   }
 
+  @container (max-width: 439.98px) {
+    .frame > :global(svg.v-s) {
+      display: block;
+    }
+  }
+
+  @container (min-width: 440px) and (max-width: 559.98px) {
+    .frame > :global(svg.v-m) {
+      display: block;
+    }
+  }
+
+  @container (min-width: 560px) {
+    .frame > :global(svg.v-l) {
+      display: block;
+    }
+  }
+
+  /* The data table wraps its text instead of scrolling. */
   .table-wrap {
-    overflow-x: auto;
-    max-width: 66ch;
     margin-top: var(--space-2);
   }
 
   .table {
-    font-size: 13px;
+    font-size: 14px;
   }
 
   /* Nocturne's table headers are all caps; this page keeps labels in
@@ -73,15 +91,14 @@ const { caption, label, minWidth = 0, maxWidth } = Astro.props;
   .table :global(thead th) {
     text-transform: none;
     letter-spacing: 0.01em;
-    font-size: 12px;
+    font-size: 13px;
     color: var(--color-neutral-500);
-    white-space: nowrap;
   }
 
   .table :global(tbody th) {
     text-transform: none;
     letter-spacing: normal;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 400;
     text-align: left;
     color: var(--color-neutral-200);

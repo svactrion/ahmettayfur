@@ -1,121 +1,196 @@
 ---
 // C5: model cost per month against practice sessions per day, with what
-// each plan nets per month and the old and new session caps. The cost line
-// is an estimate throughout, so it is dashed and labelled "estimated".
+// each plan nets per month and the old and new session caps. The cost is
+// an estimate throughout, so it is drawn dashed and keyed "estimated".
+//
+// Drawn at the three ChartFigure widths. m and l: a line chart. s
+// (phones): the same numbers as three horizontal bars (break-even, new
+// cap, old cap) against the two plan lines, so nothing has to shrink
+// (brief, Part E24). On the line chart, labels are placed where the cost
+// line can't reach them and carry a background-colored halo so the dotted
+// cap markers pass behind them cleanly.
 //
 // Props:
-//   costPerSession, days     cost line = sessions × costPerSession × days
+//   costPerSession, days     cost = sessions × costPerSession × days
 //   xMax, yMax, yStep        axis ranges (sessions, USD)
-//   plans: [{ label, value }]         horizontal reference lines
-//   caps:  [{ label, value, current }] vertical markers
+//   plans: [{ label: [..lines], value, style: 'solid' | 'dashed' }]
+//   caps:  [{ label, value, current }]
 //   text: { xAxis, yAxis, line, estimated, breakEven: [..lines] }
 //   caption, label
 import ChartFigure from './ChartFigure.astro';
+import { VARIANTS, textWidth } from './chart-utils.js';
 
 const { costPerSession, days, xMax, yMax, yStep, plans, caps, text, caption, label } = Astro.props;
 
-const W = 800;
-const H = 470;
-const L = 64; // plot left
-const R = 776; // plot right
-const T = 44; // plot top
-const B = 400; // plot bottom
-
-const x = (s) => L + (s / xMax) * (R - L);
-const y = (usd) => B - (usd / yMax) * (B - T);
 const cost = (s) => s * costPerSession * days;
 const usd = (v) => `$${v.toFixed(2)}`;
+const LINE = 19;
 
-const yTicks = Array.from({ length: Math.floor(yMax / yStep) + 1 }, (_, i) => i * yStep);
-const xTicks = Array.from({ length: xMax + 1 }, (_, i) => i);
-
-// Break-even against the lowest plan (the annual one): where the cost line
-// crosses its net-per-month line.
+// Break-even against the lowest plan (the annual one).
 const lowest = plans.reduce((a, b) => (b.value < a.value ? b : a));
 const breakEven = lowest.value / (costPerSession * days);
 
-// Where the "estimated" label sits, below the line and right of the new cap.
-const tagS = 7.6;
-const tagY = y(cost(tagS)) + 40;
+// The key at the top: a dashed sample, the line's name, the tag.
+const key = {
+  nameX: 34,
+  tagX: 34 + textWidth(text.line) + 10,
+  tagW: textWidth(text.estimated) + 16,
+};
 
-// Table rows: the points the copy names, in order.
+function lineChart(W) {
+  const L = 42;
+  const R = W - 2;
+  const T = 86;
+  // Taller at m, so the annual label's two lines fit under the monthly
+  // line: the gap between the plans is only 1.55 of 11 dollars.
+  const B = T + Math.round(W * (W <= 480 ? 0.7 : 0.58));
+  const x = (s) => L + (s / xMax) * (R - L);
+  const y = (v) => B - (v / yMax) * (B - T);
+  return { kind: 'line', W, H: B + 58, L, R, T, B, x, y };
+}
+
+function barChart(W) {
+  const rows = [
+    { label: text.breakEven.join(' '), value: lowest.value },
+    ...caps
+      .slice()
+      .sort((a, b) => a.value - b.value)
+      .map((c) => ({ label: c.label, value: cost(c.value), current: c.current })),
+  ];
+  const top = 48;
+  const pitch = 64;
+  const x = (v) => (v / yMax) * W;
+  const barsBottom = top + rows.length * pitch - 18;
+  return { kind: 'bars', W, H: barsBottom + 34 + plans.length * 26, rows, top, pitch, x, barsBottom };
+}
+
+const drawings = VARIANTS.map((v) => ({ ...v, ...(v.name === 's' ? barChart(v.width) : lineChart(v.width)) }));
+const yTicks = Array.from({ length: Math.floor(yMax / yStep) + 1 }, (_, i) => i * yStep);
+const xTicks = Array.from({ length: xMax + 1 }, (_, i) => i);
 const tableSessions = [1, breakEven, ...caps.map((c) => c.value)].sort((a, b) => a - b);
 ---
 
-<ChartFigure caption={caption} label={label} minWidth={680}>
-  <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={label} class="cap-chart">
-    <text class="axis-title" x={L - 8} y={T - 22}>{text.yAxis}</text>
-
-    {
-      yTicks.map((v) => (
-        <g>
-          <line class="grid" x1={L} x2={R} y1={y(v)} y2={y(v)} />
-          <text class="tick" x={L - 10} y={y(v) + 4} text-anchor="end">
-            ${v}
+<ChartFigure caption={caption} label={label}>
+  {
+    drawings.map((d) => (
+      <svg class={`cap-chart v v-${d.name}`} viewBox={`0 0 ${d.W} ${d.H}`} role="img" aria-label={label}>
+        <g class="key">
+          <line class="cost" x1="0" x2="24" y1="11" y2="11" />
+          <text x={key.nameX} y="16">
+            {text.line}
+          </text>
+          <rect class="tag-bg" x={key.tagX} y="0" width={key.tagW} height="22" rx="6" />
+          <text class="tag-text" x={key.tagX + 8} y="16">
+            {text.estimated}
           </text>
         </g>
-      ))
-    }
-    {
-      xTicks.map((s) => (
-        <text class="tick" x={x(s)} y={B + 22} text-anchor="middle">
-          {s}
-        </text>
-      ))
-    }
-    <text class="axis-title" x={(L + R) / 2} y={B + 52} text-anchor="middle">{text.xAxis}</text>
 
-    {
-      caps.map((c) => (
-        <g class={`cap${c.current ? ' current' : ''}`}>
-          <line x1={x(c.value)} x2={x(c.value)} y1={T - 6} y2={B} />
-          <text x={x(c.value)} y={T - 12} text-anchor={c.value === xMax ? 'end' : 'middle'}>
-            {c.label}
-          </text>
-        </g>
-      ))
-    }
+        {d.kind === 'line' ? (
+          <g>
+            <text class="axis-title" x="0" y={d.T - 42}>
+              {text.yAxis}
+            </text>
+            {yTicks.map((v) => (
+              <g>
+                <line class="grid" x1={d.L} x2={d.R} y1={d.y(v)} y2={d.y(v)} />
+                <text class="tick" x={d.L - 8} y={d.y(v) + 5} text-anchor="end">
+                  ${v}
+                </text>
+              </g>
+            ))}
+            {xTicks.map((s) => (
+              <text class="tick" x={d.x(s)} y={d.B + 24} text-anchor="middle">
+                {s}
+              </text>
+            ))}
+            <text class="axis-title" x={d.L} y={d.B + 52}>
+              {text.xAxis}
+            </text>
 
-    {
-      plans.map((p) => (
-        <g class="plan">
-          <line x1={L} x2={R} y1={y(p.value)} y2={y(p.value)} />
-          <text x={L + 10} y={y(p.value) - 8}>
-            {p.label}
-          </text>
-        </g>
-      ))
-    }
+            {caps.map((c) => (
+              <g class={`cap${c.current ? ' current' : ''}`}>
+                <line x1={d.x(c.value)} x2={d.x(c.value)} y1={d.T - 8} y2={d.B} />
+                <text class="halo" x={d.x(c.value)} y={d.T - 14} text-anchor={c.value === xMax ? 'end' : 'middle'}>
+                  {c.label}
+                </text>
+              </g>
+            ))}
 
-    <line class="cost" x1={x(0)} y1={y(0)} x2={x(xMax)} y2={y(cost(xMax))} />
+            {plans.map((p) => (
+              <g class={`plan ${p.style}`}>
+                <line x1={d.L} x2={d.R} y1={d.y(p.value)} y2={d.y(p.value)} />
+                {p.label.map((line, li) => (
+                  <text class="halo" x={d.L + 8} y={d.y(p.value) - 8 - (p.label.length - 1 - li) * LINE}>
+                    {line}
+                  </text>
+                ))}
+              </g>
+            ))}
 
-    <g class="tag">
-      <text class="line-label" x={x(tagS)} y={tagY}>{text.line}</text>
-      <rect x={x(tagS)} y={tagY + 10} width="70" height="20" rx="6" />
-      <text class="tag-text" x={x(tagS) + 35} y={tagY + 24} text-anchor="middle">{text.estimated}</text>
-    </g>
+            <line class="cost" x1={d.x(0)} y1={d.y(0)} x2={d.x(xMax)} y2={d.y(cost(xMax))} />
 
-    {
-      caps.map((c) => (
-        <g class="point">
-          <circle cx={x(c.value)} cy={y(cost(c.value))} r="5" />
-          <text x={x(c.value) - 10} y={y(cost(c.value)) - 10} text-anchor="end">
-            {usd(cost(c.value))}
-          </text>
-        </g>
-      ))
-    }
+            {caps.map((c) => (
+              <g class="point">
+                <circle cx={d.x(c.value)} cy={d.y(cost(c.value))} r="5" />
+                {c.value === xMax ? (
+                  <text class="halo" x={d.x(c.value) - 10} y={d.y(cost(c.value)) - 10} text-anchor="end">
+                    {usd(cost(c.value))}
+                  </text>
+                ) : (
+                  <text class="halo" x={d.x(c.value) + 10} y={d.y(cost(c.value)) + 24}>
+                    {usd(cost(c.value))}
+                  </text>
+                )}
+              </g>
+            ))}
 
-    <g class="break-even">
-      <circle cx={x(breakEven)} cy={y(lowest.value)} r="6.5" />
-      <line x1={x(breakEven)} x2={x(breakEven)} y1={y(lowest.value) + 8} y2={y(lowest.value) + 34} />
-      {text.breakEven.map((line, li) => (
-        <text x={x(breakEven)} y={y(lowest.value) + 52 + li * 18} text-anchor="middle">
-          {line}
-        </text>
-      ))}
-    </g>
-  </svg>
+            <g class="break-even">
+              <circle cx={d.x(breakEven)} cy={d.y(lowest.value)} r="6.5" />
+              {text.breakEven.map((line, li) => (
+                <text class="halo" x={d.x(breakEven) + 6} y={d.y(lowest.value) + 26 + li * LINE}>
+                  {line}
+                </text>
+              ))}
+            </g>
+          </g>
+        ) : (
+          <g>
+            {d.rows.map((row, i) => {
+              const y = d.top + i * d.pitch;
+              return (
+                <g class={row.current ? 'bar current' : 'bar'}>
+                  <text class="bar-label" x="0" y={y + 16}>
+                    {row.label}
+                  </text>
+                  <text class="value" x={d.W} y={y + 16} text-anchor="end">
+                    {usd(row.value)}
+                  </text>
+                  {/* Plan lines as short ticks on each bar's track only, so
+                      they never cross the labels above. */}
+                  {plans.map((p) => (
+                    <line class={`plan-ref ${p.style}`} x1={d.x(p.value)} x2={d.x(p.value)} y1={y + 22} y2={y + 42} />
+                  ))}
+                  <line class="cost" x1="0" x2={d.x(row.value)} y1={y + 32} y2={y + 32} />
+                  <circle cx={d.x(row.value)} cy={y + 32} r="5" />
+                </g>
+              );
+            })}
+            {plans.map((p, i) => {
+              const y = d.barsBottom + 34 + i * 26;
+              return (
+                <g class={`plan-key ${p.style}`}>
+                  <line x1="0" x2="24" y1={y - 5} y2={y - 5} />
+                  <text x="34" y={y}>
+                    {p.label.join(' ')}
+                  </text>
+                </g>
+              );
+            })}
+          </g>
+        )}
+      </svg>
+    ))
+  }
 
   <Fragment slot="table">
     <thead>
@@ -143,7 +218,7 @@ const tableSessions = [1, breakEven, ...caps.map((c) => c.value)].sort((a, b) =>
           <tr>
             <td />
             <td>{usd(p.value)}</td>
-            <td>{p.label}</td>
+            <td>{p.label.join(' ')}</td>
           </tr>
         ))
       }
@@ -152,21 +227,26 @@ const tableSessions = [1, breakEven, ...caps.map((c) => c.value)].sort((a, b) =>
 </ChartFigure>
 
 <style>
+  /* 15.5px is TEXT in chart-utils.js: the smallest size in any drawing. */
   svg text {
     font-family: var(--font-body);
-    font-size: 14px;
-    fill: var(--color-neutral-400);
+    font-size: 15.5px;
+    fill: var(--color-neutral-300);
   }
 
-  .tick {
-    font-size: 13px;
+  /* A halo in the page color, drawn under the glyphs, so lines passing
+     behind a label never cut through it. */
+  .halo {
+    paint-order: stroke;
+    stroke: var(--color-bg);
+    stroke-width: 5px;
+    stroke-linejoin: round;
+  }
+
+  .tick,
+  .axis-title {
     fill: var(--color-neutral-500);
     font-variant-numeric: tabular-nums;
-  }
-
-  .axis-title {
-    font-size: 13px;
-    fill: var(--color-neutral-500);
   }
 
   .grid {
@@ -174,13 +254,17 @@ const tableSessions = [1, breakEven, ...caps.map((c) => c.value)].sort((a, b) =>
     stroke-width: 1;
   }
 
-  .plan line {
+  .plan line,
+  .plan-ref,
+  .plan-key line {
     stroke: var(--color-neutral-400);
     stroke-width: 1.5;
   }
 
-  .plan text {
-    fill: var(--color-neutral-300);
+  .plan.dashed line,
+  .plan-ref.dashed,
+  .plan-key.dashed line {
+    stroke-dasharray: 7 5;
   }
 
   .cap line {
@@ -211,26 +295,27 @@ const tableSessions = [1, breakEven, ...caps.map((c) => c.value)].sort((a, b) =>
     stroke-linecap: round;
   }
 
-  .line-label {
-    fill: var(--color-accent-300);
+  .key .cost {
+    stroke-dasharray: 8 5;
   }
 
-  .tag rect {
+  .tag-bg {
     fill: var(--color-neutral-800);
   }
 
   .tag-text {
-    font-size: 12px !important;
-    fill: var(--color-neutral-100) !important;
+    fill: var(--color-neutral-100);
   }
 
-  .point circle {
+  .point circle,
+  .bar circle {
     fill: var(--color-bg);
     stroke: var(--color-accent);
     stroke-width: 2.5;
   }
 
-  .point text {
+  .point text,
+  .value {
     fill: var(--color-accent-200);
     font-weight: 500;
     font-variant-numeric: tabular-nums;
@@ -242,13 +327,14 @@ const tableSessions = [1, breakEven, ...caps.map((c) => c.value)].sort((a, b) =>
     stroke-width: 3;
   }
 
-  .break-even line {
-    stroke: var(--color-neutral-500);
-    stroke-width: 1;
-  }
-
-  .break-even text {
+  .break-even text,
+  .bar-label {
     fill: var(--color-text);
     font-weight: 500;
+  }
+
+  .bar.current .bar-label {
+    fill: var(--color-accent-300);
+    font-weight: 600;
   }
 </style>

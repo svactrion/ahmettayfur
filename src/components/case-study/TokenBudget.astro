@@ -3,50 +3,52 @@
 // full output-token limit; the fill is the worst response measured under
 // it, and the text says how much headroom was left.
 //
+// Drawn at the three ChartFigure widths. Each row: label, track, then
+// the numbers, all left-aligned. Tracks share one token scale, so the
+// longer limit draws the longer track.
+//
 // Props:
 //   rows: [{ label, limit, worst }]
 //   caption, label
 import ChartFigure from './ChartFigure.astro';
+import { VARIANTS } from './chart-utils.js';
 
 const { rows, caption, label } = Astro.props;
 
-// Drawn at phone width, so it fits a 375px screen without scrolling;
-// on wide screens it keeps this natural size. Each row: label, track,
-// then the numbers. Tracks share one token scale, so the longer limit
-// draws the longer track.
-const W = 400;
-const X0 = 0;
-const X1 = 400;
 const TRACK_H = 18;
-const PITCH = 88;
-const H = rows.length * PITCH - 16;
+const PITCH = 90;
+const H = rows.length * PITCH - 18;
 
 const maxLimit = Math.max(...rows.map((r) => r.limit));
-const x = (tokens) => X0 + (tokens / maxLimit) * (X1 - X0);
 const n = (v) => v.toLocaleString('en-US');
 const headroom = (r) => Math.round((1 - r.worst / r.limit) * 100);
 ---
 
-<ChartFigure caption={caption} label={label} maxWidth={W}>
-  <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={label} class="token-budget">
-    {
-      rows.map((r, i) => {
-        const y = i * PITCH;
-        return (
-          <g>
-            <text class="row-label" x={X0} y={y + 16}>
-              {r.label}
-            </text>
-            <rect class="track" x={x(0)} y={y + 26} width={x(r.limit) - x(0)} height={TRACK_H} rx="4" />
-            <rect class="fill" x={x(0)} y={y + 26} width={x(r.worst) - x(0)} height={TRACK_H} rx="4" />
-            <text class="value" x={X0} y={y + 66}>
-              {`${n(r.worst)} of ${n(r.limit)} tokens, ${headroom(r)}% headroom`}
-            </text>
-          </g>
-        );
-      })
-    }
-  </svg>
+<ChartFigure caption={caption} label={label}>
+  {
+    VARIANTS.map(({ name, width: W }) => {
+      const x = (tokens) => (tokens / maxLimit) * W;
+      return (
+        <svg class={`token-budget v v-${name}`} viewBox={`0 0 ${W} ${H}`} role="img" aria-label={label}>
+          {rows.map((r, i) => {
+            const y = i * PITCH;
+            return (
+              <g>
+                <text class="row-label" x="0" y={y + 16}>
+                  {r.label}
+                </text>
+                <rect class="track" x="0.75" y={y + 27} width={x(r.limit) - 1.5} height={TRACK_H} rx="4" />
+                <rect class="fill" x="0" y={y + 27} width={x(r.worst)} height={TRACK_H} rx="4" />
+                <text class="value" x="0" y={y + 68}>
+                  {`${n(r.worst)} of ${n(r.limit)} tokens, ${headroom(r)}% headroom`}
+                </text>
+              </g>
+            );
+          })}
+        </svg>
+      );
+    })
+  }
 
   <Fragment slot="table">
     <thead>
@@ -73,18 +75,17 @@ const headroom = (r) => Math.round((1 - r.worst / r.limit) * 100);
 </ChartFigure>
 
 <style>
+  /* 15.5px is TEXT in chart-utils.js: the smallest size in any drawing. */
   text {
     font-family: var(--font-body);
-    font-size: 14px;
+    font-size: 15.5px;
   }
 
   .row-label {
-    font-size: 15px;
     fill: var(--color-neutral-200);
   }
 
   .value {
-    font-size: 14px;
     fill: var(--color-neutral-400);
     font-variant-numeric: tabular-nums;
   }

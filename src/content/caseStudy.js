@@ -110,26 +110,26 @@ export const caseStudyCopy = {
             name: 'First Daily Test',
             calls: 0,
             steps: [
-              { lines: ['Hand-written questions'], model: false },
-              { lines: ['Answers graded', 'on the device'], model: false },
+              { text: 'Hand-written questions', model: false },
+              { text: 'Answers graded on the device', model: false },
             ],
           },
           {
             name: 'Daily Test',
             calls: 1,
             steps: [
-              { lines: ['Model generates', 'questions and', 'explanations'], model: true },
-              { lines: ['Answers graded', 'on the device'], model: false },
+              { text: 'Model generates questions and explanations', model: true },
+              { text: 'Answers graded on the device', model: false },
             ],
-            note: ['Finishing a test prepares', "tomorrow's set in the", 'background.'],
+            note: "Finishing a test prepares tomorrow's set in the background.",
           },
           {
             name: 'Topic Practice',
             calls: 2,
             steps: [
-              { lines: ['Model generates', 'questions'], model: true },
-              { lines: ['User answers'], model: false },
-              { lines: ['Model grades', 'and explains'], model: true },
+              { text: 'Model generates questions', model: true },
+              { text: 'User answers', model: false },
+              { text: 'Model grades and explains', model: true },
             ],
           },
         ],
@@ -167,9 +167,10 @@ export const caseStudyCopy = {
         xMax: 10,
         yMax: 11,
         yStep: 2,
+        // Label lines are the brief's text, broken where the chart needs it.
         plans: [
-          { label: 'Annual plan, net per month: $3.54', value: 3.54 },
-          { label: 'Monthly plan, net: $5.09', value: 5.09 },
+          { label: ['Annual plan, net', 'per month: $3.54'], value: 3.54, style: 'solid' },
+          { label: ['Monthly plan, net: $5.09'], value: 5.09, style: 'dashed' },
         ],
         caps: [
           { label: 'New cap: 5', value: 5, current: true },
