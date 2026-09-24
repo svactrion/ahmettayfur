@@ -590,3 +590,29 @@ only the positions named below move.
     exit.", so that paragraph and "A smaller cut belongs here too…" flow
     beside it; "The mistake: two variables in one release." starts clear
     of it, as the next decision.
+
+### Owner review 3
+
+Where these conflict with earlier items, these win. Copy is unchanged.
+
+29. **One screenshot size.** Every screenshot on the page (the four
+    storyboard frames, C8, C9) shows at the same width at any given
+    screen width: 300 px from 768 px up, `min(300px, 76vw)` below. Frame,
+    corner radius and caption style are the same everywhere. No image is
+    shrunk on its own to fit a column; when it doesn't fit, the layout
+    changes instead (30, 31).
+30. **Storyboard (C7).** When the body column holds two 300 px frames and
+    the gap between them: a 2×2 grid, left edge on the body text, each
+    caption led by its frame number (1–4) in the caption style.
+    Otherwise (narrow tablet widths, and below 768 px): a scroll-snap
+    row of same-width frames with the next one peeking in.
+31. **Single screenshots (C8, C9)** float as in E27, now 300 px wide, and
+    only when at least about 320 px of text column remains beside them.
+    Otherwise no float: the image stays 300 px (or the mobile width),
+    left-aligned, caption below, text continuing underneath. This
+    replaces E27's centered 70% mobile layout.
+32. **Section 3 flow:** intro → "After the win" → storyboard → C8 floated
+    before "An exit stays an exit." → "A smaller cut belongs here too…"
+    beside it → "The mistake: two variables in one release." clearing
+    the float at full width. A more balanced placement may be tried
+    without breaking 29 or reordering the text.
