@@ -1,8 +1,8 @@
 ---
-// C8 / C9: one app screenshot with its caption underneath. It sits in the
-// body column (the page places it), at a fixed phone width, left-aligned
-// with the body text. Caption and frame share the storyboard's styles
-// (figures.css).
+// C8 / C9: one app screenshot with its caption underneath. The page
+// decides its width and whether text flows beside it (brief, Part E27);
+// this component fills the width it is given. Caption and frame share
+// the storyboard's styles (figures.css).
 //
 // Props: { src, width, height, alt, caption }
 import './figures.css';
@@ -17,7 +17,6 @@ const { src, width, height, alt, caption } = Astro.props;
 
 <style>
   .screenshot {
-    width: min(288px, 100%);
     margin: 0;
   }
 </style>

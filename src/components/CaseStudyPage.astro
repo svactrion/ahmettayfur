@@ -33,16 +33,17 @@ const productHref = localizeHref('/products/grammarlens', lang);
 //
 // Every figure sits inside its section's .body, in the same single column
 // as the text (brief, Part E19): same left and right edge, nothing in the
-// aside column.
+// aside column. The two single screenshots float, so the text beside them
+// flows around them (Part E27).
 const figures = {
-  timeline: Timeline,
-  modelCalls: ModelCalls,
-  capMath: CapChart,
-  storyboard: Storyboard,
-  freeCost: FreeCostBars,
-  tokenBudget: TokenBudget,
-  offerCard: Screenshot,
-  explanation: Screenshot,
+  timeline: { component: Timeline },
+  modelCalls: { component: ModelCalls },
+  capMath: { component: CapChart },
+  storyboard: { component: Storyboard },
+  freeCost: { component: FreeCostBars },
+  tokenBudget: { component: TokenBudget },
+  offerCard: { component: Screenshot, float: true },
+  explanation: { component: Screenshot, float: true },
 };
 
 // One .row per entry: the summary (no heading of its own, so its aside
@@ -92,17 +93,17 @@ const rows =
               {row.heading && <h2 id={row.id}>{row.heading}</h2>}
               {row.blocks.map((b) => {
                 if (b.type === 'figure') {
-                  const Figure = figures[b.name];
+                  const fig = figures[b.name];
+                  if (!fig) return null;
+                  const Figure = fig.component;
                   return (
-                    Figure && (
-                      <div class="fig">
-                        <Figure {...t.figures[b.name]} />
-                      </div>
-                    )
+                    <div class={fig.float ? 'fig fig-float' : 'fig'}>
+                      <Figure {...t.figures[b.name]} />
+                    </div>
                   );
                 }
                 return b.type === 'p' ? (
-                  <p set:html={b.html} />
+                  <p class={b.clear ? 'clear' : undefined} set:html={b.html} />
                 ) : b.type === 'h3' ? (
                   <h3>{b.text}</h3>
                 ) : b.type === 'reframe' ? (
@@ -412,6 +413,58 @@ const rows =
 
   .v2 .body > .fig:last-child {
     margin-bottom: 0;
+  }
+
+  /* ---------- floating screenshots (C8, C9) ----------
+     Text flows beside a single screenshot, like "square" text wrapping
+     (brief, Part E27). The body is a size container, so the float starts
+     only when the text beside the image keeps a readable measure: a
+     240px image plus 32px leaves 288px of text at the 560px threshold,
+     about 36 characters a line. It also never floats below the shared
+     768px breakpoint. flow-root keeps a float inside its own section. */
+  .v2 .body {
+    display: flow-root;
+    container: cs-body / inline-size;
+  }
+
+  .v2 .body > .fig-float {
+    width: min(70%, 280px);
+    margin-inline: auto;
+  }
+
+  .v2 .body > .fig-float :global(.cs-caption) {
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    @container cs-body (min-width: 560px) {
+      .v2 .body > .fig-float {
+        float: left;
+        width: 240px;
+        margin: var(--figure-space) 32px var(--figure-space) 0;
+      }
+
+      .v2 .body > .fig-float :global(.cs-caption) {
+        text-align: left;
+      }
+
+      /* A float doesn't take part in margin collapsing: after a figure
+         (which already ends in --figure-space) its own top margin would
+         stack on top and drop it below the paragraph beside it. */
+      .v2 .body > .fig + .fig.fig-float {
+        margin-top: 0;
+      }
+    }
+  }
+
+  /* What a float may never run past: Reframe blocks, every other figure,
+     subheadings, and a paragraph that starts the next decision. */
+  .v2 .body > .fig:not(.fig-float),
+  .v2 .body > :global(.reframe),
+  .v2 .body > h3,
+  .v2 .body > h4,
+  .v2 .body > .clear {
+    clear: both;
   }
 
   /* Subsections within a numbered section. */

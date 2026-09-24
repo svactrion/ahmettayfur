@@ -13,7 +13,8 @@
 // plain string can't carry.
 //
 // English block types:
-//   { type: 'p', html }            a paragraph
+//   { type: 'p', html, clear? }    a paragraph; clear: true starts it below
+//                                  a floated screenshot
 //   { type: 'h3', text }           a subsection heading
 //   { type: 'reframe', first, actual }
 //                                  the "First framing / Actual problem"
@@ -80,23 +81,30 @@ export const caseStudyCopy = {
       timeline: {
         label: 'Project timeline, 19 July to 24 September 2026',
         caption: 'About ten weeks from first commit to submission.',
-        events: [
-          { date: '19 Jul', start: '2026-07-19', label: 'First commit' },
-          { date: '20–25 Jul', start: '2026-07-20', end: '2026-07-25', label: 'MVP week: first build, interviews, iteration 2' },
-          { date: '24 Aug', start: '2026-08-24', label: 'Onboarding, Home and Premium screen' },
-          { date: '2 Sep', start: '2026-09-02', label: 'Free and paid split' },
-          { date: '6 Sep', start: '2026-09-06', label: 'API key moved behind a server proxy' },
-          { date: '14 Sep', start: '2026-09-14', label: 'First run on a physical iPhone' },
-          { date: '15 Sep', start: '2026-09-15', label: 'Paywall leak closed; free tier defined' },
-          { date: '19 Sep', start: '2026-09-19', label: 'Monthly Climb moves into the first release' },
+        // The C2 table, in two groups. Order only: no scale, and nothing
+        // between the groups (brief, Part E26).
+        groups: [
           {
-            date: '21–22 Sep',
-            start: '2026-09-21',
-            end: '2026-09-22',
-            label: 'Cap 10 → 5, AI permission, fixed first test, paywall after the climb',
+            title: 'July: the MVP week',
+            events: [
+              { date: '19 Jul', label: 'First commit' },
+              { date: '20–25 Jul', label: 'MVP week: first build, interviews, iteration 2' },
+            ],
           },
-          { date: '23 Sep', start: '2026-09-23', label: 'Merged; first TestFlight build' },
-          { date: '24 Sep', start: '2026-09-24', label: 'Submitted to App Store review' },
+          {
+            title: 'August–September: to the App Store',
+            events: [
+              { date: '24 Aug', label: 'Onboarding, Home and Premium screen' },
+              { date: '2 Sep', label: 'Free and paid split' },
+              { date: '6 Sep', label: 'API key moved behind a server proxy' },
+              { date: '14 Sep', label: 'First run on a physical iPhone' },
+              { date: '15 Sep', label: 'Paywall leak closed; free tier defined' },
+              { date: '19 Sep', label: 'Monthly Climb moves into the first release' },
+              { date: '21–22 Sep', label: 'Cap 10 → 5, AI permission, fixed first test, paywall after the climb' },
+              { date: '23 Sep', label: 'Merged; first TestFlight build' },
+              { date: '24 Sep', label: 'Submitted to App Store review' },
+            ],
+          },
         ],
       },
 
@@ -412,6 +420,7 @@ export const caseStudyCopy = {
             first: 'A wrong answer shows no explanation. Missing text.',
             actual: "The store page promises something the product doesn't do.",
           },
+          { type: 'figure', name: 'explanation' },
           {
             type: 'p',
             html: "On the day of submission I noticed that a wrong Daily Test answer showed the correct answer and nothing else. My first read was a missing piece of text. It wasn't. The Daily Test is graded on the device, and the generated set only carried comments for the wrong answers the model had predicted. Correct answers, skipped ones and any unexpected mistake got no explanation at all.",
@@ -425,7 +434,6 @@ export const caseStudyCopy = {
             html: `The fix was one explanation per question, generated in the same call as the questions, under 25 words. That needed more room, so the Daily Test got its own output budget: the worst response went from using 80% of a 2,048-token limit to using 49% of a 3,072-token one ${measured}. The average explanation dropped from about 29 words to 20. Five of 25 still ran slightly over the limit, which I accepted: nothing depends on the exact length.`,
           },
           { type: 'figure', name: 'tokenBudget' },
-          { type: 'figure', name: 'explanation' },
           {
             type: 'p',
             html: `<strong>What it cost.</strong> A Daily Test set now costs about $0.023–0.028 ${measured}, above my earlier $0.021 estimate. <strong>How I'll know.</strong> I've seen the new explanations on a device only on the hand-written first test so far; the first generated set on a real device is the next check.`,
@@ -446,17 +454,19 @@ export const caseStudyCopy = {
             html: '<strong>After the win, not after the list.</strong> The first test used to end in a paywall card on the result screen, right after the first score and before anything had visibly changed. I moved it. Now the result screen ends in one button, "Start my climb". The user\'s avatar climbs its first step on Home, and the Premium screen appears about 600 ms later, once. The hypothesis is that the moment after a visible win converts better than the moment after a list of results. It is a hypothesis, not a finding.',
           },
           { type: 'figure', name: 'storyboard' },
+          { type: 'figure', name: 'offerCard' },
           {
             type: 'p',
             html: '<strong>An exit stays an exit.</strong> A free user who has used the day\'s practice session lands on a results screen whose only way out was "Back to topics". The obvious move was to make that button open the paywall. I didn\'t: a button that says one thing and does another is a dark pattern, and someone who wants to leave shouldn\'t have to get past a sales pitch to do it. Instead, the screen got an offer card showing what Premium adds, with its own "See Premium" button. "Back to topics" stays exactly as it was, underneath.',
           },
-          { type: 'figure', name: 'offerCard' },
           {
             type: 'p',
             html: `A smaller cut belongs here too. I added a row to the Premium comparison table showing the daily session difference, free versus Premium. On a 375-point-wide phone it pushed the plan cards almost off the screen: their visible part fell from 78 points to about 30 at default text size, and to nothing at large text ${measured}. I reverted it the same day. Hiding the thing people buy to explain the thing they'd get is the wrong trade. The cost is a real gap: the offer card promises more daily sessions, and the Premium screen can't show it yet.`,
           },
           {
             type: 'p',
+            // The next decision: starts below the offer card, never beside it.
+            clear: true,
             html: "<strong>The mistake: two variables in one release.</strong> The new first-day paywall shipped in the same release as Monthly Climb, the habit layer. My own gamification spec had warned against exactly this: launched together, their effects can't be separated. There is no earlier baseline to compare against. So when I read first-day conversion after launch, I'll be able to report it, but not to say how much of it comes from the timing. I defined what to build before I defined what I needed to learn.",
           },
         ],
