@@ -1,12 +1,16 @@
 ---
 // C7: the first day as real app screenshots, in order, each with its own
-// one-line caption. Adding a frame is a data change only.
+// one-line caption led by its frame number. Adding a frame is a data
+// change only.
 //
-// Desktop: a 2×2 grid in the body column (brief, Part E21). Below the
-// shared 768px breakpoint: a scroll-snap row where each frame takes about
-// three quarters of the width, so the next one peeks in from the edge and
-// the row reads as scrollable (Part E24). Caption and frame styles are
-// shared with the single screenshots (figures.css).
+// Every frame is --cs-shot-w wide, the one screenshot width on the page
+// (figures.css, brief Part E29); the layout changes around it instead of
+// shrinking it (Part E30):
+//   - a 2×2 grid, left-aligned with the body text, when the column holds
+//     two frames and the gap (2 × 300 + 22.4 = 623px) and the screen is
+//     768px or wider;
+//   - otherwise a scroll-snap row, the next frame peeking in from the
+//     edge so the row reads as scrollable.
 //
 // Props:
 //   frames: [{ src, width, height, alt, caption }]
@@ -33,42 +37,49 @@ const { frames, label } = Astro.props;
 
 <style>
   .storyboard {
+    container-type: inline-size;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
     border-radius: var(--radius-md);
   }
 
+  /* Default: one row, frames side by side, scrolling. */
   ol {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: calc(var(--space-8) * 2) var(--space-8);
+    grid-auto-flow: column;
+    grid-auto-columns: var(--cs-shot-w);
+    gap: var(--space-6);
     margin: 0;
     padding: 0;
     list-style: none;
+    counter-reset: frame;
   }
 
   li {
     min-width: 0;
+    scroll-snap-align: start;
+    counter-increment: frame;
   }
 
   figure {
     margin: 0;
   }
 
-  @media (max-width: 768px) {
-    .storyboard {
-      overflow-x: auto;
-      overscroll-behavior-x: contain;
-      scroll-snap-type: x mandatory;
-    }
+  /* Frame numbers: the frames are a sequence, and in the scrolling row
+     only part of it is in view. Plain, in the caption's own style. */
+  figcaption::before {
+    content: counter(frame) '. ';
+    font-variant-numeric: tabular-nums;
+  }
 
-    ol {
-      grid-template-columns: none;
-      grid-auto-flow: column;
-      grid-auto-columns: 76%;
-      gap: var(--space-6);
-    }
-
-    li {
-      scroll-snap-align: start;
+  @media (min-width: 768px) {
+    @container (min-width: 623px) {
+      ol {
+        grid-auto-flow: row;
+        grid-template-columns: repeat(2, var(--cs-shot-w));
+        gap: calc(var(--space-8) * 2) var(--space-8);
+      }
     }
   }
 </style>

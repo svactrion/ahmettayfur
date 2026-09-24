@@ -13,6 +13,18 @@
   /* Every screenshot's frame: the same hairline the cards use. */
   --cs-shot-radius: 18px;
   --cs-shot-border: var(--shadow-sm);
+  /* One width for every screenshot on the page, storyboard frames and
+     single images alike (brief, Part E29). Layouts change around it;
+     nothing shrinks it to fit. */
+  --cs-shot-w: 300px;
+}
+
+/* Matches the site's shared 768px breakpoint (max-width: 768px there is
+   the single-column layout; the page's own rules treat 768 as desktop). */
+@media (max-width: 767.98px) {
+  :root {
+    --cs-shot-w: min(300px, 76vw);
+  }
 }
 
 .cs-caption {

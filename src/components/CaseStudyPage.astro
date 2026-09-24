@@ -417,35 +417,27 @@ const rows =
 
   /* ---------- floating screenshots (C8, C9) ----------
      Text flows beside a single screenshot, like "square" text wrapping
-     (brief, Part E27). The body is a size container, so the float starts
-     only when the text beside the image keeps a readable measure: a
-     240px image plus 32px leaves 288px of text at the 560px threshold,
-     about 36 characters a line. It also never floats below the shared
-     768px breakpoint. flow-root keeps a float inside its own section. */
+     (brief, Part E27, E31). The image is always --cs-shot-w wide, the one
+     screenshot width on the page (figures.css). The body is a size
+     container, so the float starts only when at least 320px of text is
+     left beside it: 300 + 32 + 320 = 652px of column. It also never
+     floats below 768px. Otherwise the image sits left-aligned at the same
+     width, caption below, text continuing underneath. flow-root keeps a
+     float inside its own section. */
   .v2 .body {
     display: flow-root;
     container: cs-body / inline-size;
   }
 
   .v2 .body > .fig-float {
-    width: min(70%, 280px);
-    margin-inline: auto;
-  }
-
-  .v2 .body > .fig-float :global(.cs-caption) {
-    text-align: center;
+    width: var(--cs-shot-w);
   }
 
   @media (min-width: 768px) {
-    @container cs-body (min-width: 560px) {
+    @container cs-body (min-width: 652px) {
       .v2 .body > .fig-float {
         float: left;
-        width: 240px;
         margin: var(--figure-space) 32px var(--figure-space) 0;
-      }
-
-      .v2 .body > .fig-float :global(.cs-caption) {
-        text-align: left;
       }
 
       /* A float doesn't take part in margin collapsing: after a figure
