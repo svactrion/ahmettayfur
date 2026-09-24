@@ -8,7 +8,7 @@
 // the far end once the estimate is added on top.
 //
 // Props:
-//   bars: [{ label: [..lines], measured: [lo, hi], estimatedAdd, provenance }]
+//   bars: [{ label, measured: [lo, hi], estimatedAdd, provenance }]
 //   xMax, xStep              USD scale
 //   legend: { measured, estimated }
 //   caption, label
@@ -16,14 +16,18 @@ import ChartFigure from './ChartFigure.astro';
 
 const { bars, xMax, xStep, legend, caption, label } = Astro.props;
 
-const W = 960;
-const X0 = 270;
-const X1 = 850;
-const TOP = 58;
-const BAR_H = 30;
-const PITCH = 70;
-const AXIS_Y = TOP + bars.length * PITCH + 4;
-const H = AXIS_Y + 26;
+// Drawn at phone width, so it fits a 375px screen without scrolling;
+// on wide screens it keeps this natural size. Each bar's label sits above
+// it, so the bars can use the full width.
+const W = 420;
+const X0 = 0;
+const X1 = 330;
+const TOP = 48; // first label baseline, below the legend
+const LABEL_GAP = 12; // label baseline to bar top
+const BAR_H = 28;
+const PITCH = 80;
+const AXIS_Y = TOP + bars.length * PITCH;
+const H = AXIS_Y + 8;
 
 const x = (v) => X0 + (v / xMax) * (X1 - X0);
 const usd = (v) => `$${v.toFixed(2)}`;
@@ -46,7 +50,7 @@ const drawn = bars.map((bar) => {
 });
 ---
 
-<ChartFigure caption={caption} label={label} minWidth={800}>
+<ChartFigure caption={caption} label={label} maxWidth={W}>
   <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={label} class="free-cost">
     <defs>
       <pattern id="free-cost-hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
@@ -55,7 +59,7 @@ const drawn = bars.map((bar) => {
       </pattern>
     </defs>
 
-    <g class="legend" transform={`translate(${X0} 12)`}>
+    <g class="legend" transform={`translate(${X0} 2)`}>
       <rect class="seg measured" x="0" y="0" width="22" height="14" rx="3" />
       <text x="30" y="12">{legend.measured}</text>
       <rect class="seg estimated" x="120" y="0" width="22" height="14" rx="3" />
@@ -65,8 +69,8 @@ const drawn = bars.map((bar) => {
     {
       ticks.map((v) => (
         <g>
-          <line class="grid" x1={x(v)} x2={x(v)} y1={TOP - 10} y2={AXIS_Y - 14} />
-          <text class="tick" x={x(v)} y={AXIS_Y + 4} text-anchor="middle">
+          <line class="grid" x1={x(v)} x2={x(v)} y1={TOP + LABEL_GAP - 6} y2={AXIS_Y - 18} />
+          <text class="tick" x={x(v)} y={AXIS_Y} text-anchor={v === 0 ? 'start' : 'middle'}>
             {usd(v)}
           </text>
         </g>
@@ -75,18 +79,13 @@ const drawn = bars.map((bar) => {
 
     {
       drawn.map((bar, i) => {
-        const y = TOP + i * PITCH;
+        const labelY = TOP + i * PITCH;
+        const y = labelY + LABEL_GAP;
         return (
           <g>
-            {bar.label.map((line, li) => (
-              <text
-                class="bar-label"
-                x="0"
-                y={y + BAR_H / 2 + 5 - ((bar.label.length - 1) * 19) / 2 + li * 19}
-              >
-                {line}
-              </text>
-            ))}
+            <text class="bar-label" x={X0} y={labelY}>
+              {bar.label}
+            </text>
             {bar.segments.map(([from, to, kind]) => (
               <rect class={`seg ${kind}`} x={x(from)} y={y} width={Math.max(0, x(to) - x(from))} height={BAR_H} />
             ))}
@@ -113,7 +112,7 @@ const drawn = bars.map((bar) => {
       {
         drawn.map((bar) => (
           <tr>
-            <th scope="row">{bar.label.join(' ')}</th>
+            <th scope="row">{bar.label}</th>
             <td>{range(bar.total)}</td>
             <td>{bar.provenance}</td>
           </tr>
@@ -136,7 +135,7 @@ const drawn = bars.map((bar) => {
   }
 
   .tick {
-    font-size: 13px;
+    font-size: 14px;
     fill: var(--color-neutral-500);
     font-variant-numeric: tabular-nums;
   }
@@ -181,6 +180,7 @@ const drawn = bars.map((bar) => {
   }
 
   .legend text {
+    font-size: 14px;
     fill: var(--color-neutral-300);
   }
 </style>

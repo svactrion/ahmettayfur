@@ -1,14 +1,18 @@
 ---
 // C7: the first day as a row of real app screenshots, in order, each with
-// its own one-line caption. Any number of frames: the row sizes itself to
-// the list, so adding a frame is a data change only.
+// its own one-line caption. Any number of frames: the row divides the
+// width it is given evenly, so adding a frame is a data change only.
 //
 // Side by side on desktop; below the shared 768px breakpoint the row
 // scrolls sideways inside its own container, one frame per snap point.
+// Caption and frame styles are shared with the single screenshots
+// (figures.css).
 //
 // Props:
 //   frames: [{ src, width, height, alt, caption }]
 //   label   names the list (and the scroll region)
+import './figures.css';
+
 const { frames, label } = Astro.props;
 ---
 
@@ -18,8 +22,8 @@ const { frames, label } = Astro.props;
       frames.map((f) => (
         <li>
           <figure>
-            <img src={f.src} width={f.width} height={f.height} alt={f.alt} loading="lazy" decoding="async" />
-            <figcaption>{f.caption}</figcaption>
+            <img class="cs-shot" src={f.src} width={f.width} height={f.height} alt={f.alt} loading="lazy" decoding="async" />
+            <figcaption class="cs-caption">{f.caption}</figcaption>
           </figure>
         </li>
       ))
@@ -37,35 +41,20 @@ const { frames, label } = Astro.props;
 
   ol {
     display: grid;
-    grid-template-columns: repeat(var(--frames), minmax(180px, 240px));
-    gap: clamp(20px, 3vw, 36px);
+    grid-template-columns: repeat(var(--frames), minmax(0, 1fr));
+    gap: var(--space-8);
     margin: 0;
     padding: 0;
     list-style: none;
   }
 
   li {
+    min-width: 0;
     scroll-snap-align: start;
   }
 
   figure {
     margin: 0;
-  }
-
-  img {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: 18px;
-    box-shadow: var(--shadow-sm);
-    background: var(--color-surface);
-  }
-
-  figcaption {
-    margin-top: 14px;
-    font-size: 14px;
-    line-height: 1.5;
-    color: var(--color-neutral-300);
   }
 
   @media (max-width: 768px) {

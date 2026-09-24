@@ -14,10 +14,10 @@ import ChartFigure from './ChartFigure.astro';
 
 const { costPerSession, days, xMax, yMax, yStep, plans, caps, text, caption, label } = Astro.props;
 
-const W = 960;
+const W = 800;
 const H = 470;
 const L = 64; // plot left
-const R = 930; // plot right
+const R = 776; // plot right
 const T = 44; // plot top
 const B = 400; // plot bottom
 
@@ -42,7 +42,7 @@ const tagY = y(cost(tagS)) + 40;
 const tableSessions = [1, breakEven, ...caps.map((c) => c.value)].sort((a, b) => a - b);
 ---
 
-<ChartFigure caption={caption} label={label} minWidth={800}>
+<ChartFigure caption={caption} label={label} minWidth={680}>
   <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={label} class="cap-chart">
     <text class="axis-title" x={L - 8} y={T - 22}>{text.yAxis}</text>
 

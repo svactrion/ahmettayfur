@@ -23,9 +23,12 @@ const day = (iso) => Date.UTC(...iso.split('-').map((n, i) => (i === 1 ? n - 1 :
 const first = day(events[0].start);
 const last = Math.max(...events.map((e) => day(e.end ?? e.start)));
 
-// Greedy word wrap by character count; the site's Inter at 13px averages
-// close to 6.6px a character, which is what the limits below assume.
-function wrap(text, maxChars) {
+// Word wrap by character count; the site's Inter at 13px averages close
+// to 6.6px a character, which is what the limits below assume. Greedy
+// wrapping at the limit sets the line count; the label is then re-wrapped
+// at the narrowest width that keeps that count, so its lines come out
+// even instead of leaving one short word hanging.
+function greedy(text, maxChars) {
   const lines = [];
   for (const word of text.split(' ')) {
     const current = lines.at(-1);
@@ -35,27 +38,27 @@ function wrap(text, maxChars) {
       lines.push(word);
     }
   }
-  // Don't leave one short word alone on the last line: pull the previous
-  // line's last word down to keep it company.
-  const lastLine = lines.at(-1);
-  if (lines.length > 1 && !lastLine.includes(' ') && lastLine.length < 8) {
-    const prev = lines[lines.length - 2].split(' ');
-    if (prev.length > 1) {
-      lines[lines.length - 1] = `${prev.pop()} ${lastLine}`;
-      lines[lines.length - 2] = prev.join(' ');
-    }
-  }
   return lines;
+}
+
+function wrap(text, maxChars) {
+  const count = greedy(text, maxChars).length;
+  const longestWord = Math.max(...text.split(' ').map((w) => w.length));
+  for (let width = longestWord; width < maxChars; width++) {
+    const lines = greedy(text, width);
+    if (lines.length === count) return lines;
+  }
+  return greedy(text, maxChars);
 }
 
 const LINE = 17;
 
 // ---- horizontal ----
-const HW = 1000;
+const HW = 800;
 const AX0 = 30;
-const AX1 = 970;
+const AX1 = 770;
 const AXIS_Y = 200;
-const LABEL_W = 150;
+const LABEL_W = 112;
 const hx = (d) => AX0 + ((d - first) / (last - first)) * (AX1 - AX0);
 
 const above = events.filter((_, i) => i % 2 === 0);
@@ -73,7 +76,7 @@ const horizontal = events.map((e, i) => {
     mx: hx(day(e.start)),
     mx2: e.end ? hx(day(e.end)) : null,
     lx: isAbove ? aboveX(k) : belowX(k),
-    lines: wrap(e.label, 23),
+    lines: wrap(e.label, 17),
   };
 });
 const maxBelowLines = Math.max(...horizontal.filter((e) => !e.isAbove).map((e) => e.lines.length));
@@ -105,7 +108,7 @@ const isLast = (i) => i === events.length - 1;
 ---
 
 <ChartFigure caption={caption} label={label}>
-  <svg class="timeline horizontal" viewBox={`0 0 ${HW} ${HH}`} role="img" aria-label={label} style="min-width: 880px">
+  <svg class="timeline horizontal" viewBox={`0 0 ${HW} ${HH}`} role="img" aria-label={label} style="min-width: 720px">
     <line class="axis" x1={AX0} x2={AX1} y1={AXIS_Y} y2={AXIS_Y} />
     {
       horizontal.map((e, i) => {

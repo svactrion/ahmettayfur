@@ -1,51 +1,23 @@
 ---
-// C8 / C9: one app screenshot with its caption. The caption sits beside
-// the image on wide screens and under it on narrow ones.
+// C8 / C9: one app screenshot with its caption underneath. It sits in the
+// body column (the page places it), at a fixed phone width, left-aligned
+// with the body text. Caption and frame share the storyboard's styles
+// (figures.css).
 //
 // Props: { src, width, height, alt, caption }
+import './figures.css';
+
 const { src, width, height, alt, caption } = Astro.props;
 ---
 
 <figure class="screenshot">
-  <img src={src} width={width} height={height} alt={alt} loading="lazy" decoding="async" />
-  <figcaption>{caption}</figcaption>
+  <img class="cs-shot" src={src} width={width} height={height} alt={alt} loading="lazy" decoding="async" />
+  <figcaption class="cs-caption">{caption}</figcaption>
 </figure>
 
 <style>
   .screenshot {
-    display: flex;
-    align-items: flex-end;
-    gap: clamp(20px, 3vw, 36px);
+    width: min(288px, 100%);
     margin: 0;
-  }
-
-  img {
-    display: block;
-    flex: none;
-    width: 240px;
-    height: auto;
-    border-radius: 18px;
-    box-shadow: var(--shadow-sm);
-    background: var(--color-surface);
-  }
-
-  figcaption {
-    max-width: 32ch;
-    margin: 0;
-    font-size: 14px;
-    line-height: 1.55;
-    color: var(--color-neutral-300);
-  }
-
-  @media (max-width: 768px) {
-    .screenshot {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 14px;
-    }
-
-    img {
-      width: min(240px, 70vw);
-    }
   }
 </style>

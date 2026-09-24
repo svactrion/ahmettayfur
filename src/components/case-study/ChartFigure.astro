@@ -2,22 +2,34 @@
 // Shared frame for the case study's charts and diagrams: the drawing, its
 // caption, and the same data as text in a collapsed table.
 //
-// The drawing scrolls sideways inside its own container once the page is
+// The drawing scrolls sideways inside its own container once the space is
 // narrower than `minWidth` (px), so the SVG's text never shrinks below
 // legible size and the page itself never scrolls sideways. `label` names
-// that scroll region for keyboard and screen reader users.
+// that scroll region for keyboard and screen reader users. `maxWidth`
+// (px) keeps a small drawing from being scaled up past its natural size;
+// it stays left-aligned.
+//
+// Where the figure sits (both columns or the body column) is decided by
+// the page, not here; this component always fills the width it is given.
 //
 // Slots: default = the SVG; "table" = <thead>/<tbody> for the data table.
-const { caption, label, minWidth = 0, dataSummary = 'Chart data', maxWidth } = Astro.props;
+import './figures.css';
+
+const { caption, label, minWidth = 0, maxWidth } = Astro.props;
 ---
 
-<figure class="chart" style={maxWidth ? `--max-w: ${maxWidth}px` : undefined}>
-  <div class="frame" role="region" aria-label={label} tabindex="0" style={`--min-w: ${minWidth}px`}>
+<figure class="chart">
+  <div class="frame" role="region" aria-label={label} tabindex="0" style={`--min-w: ${minWidth}px${maxWidth ? `; --max-w: ${maxWidth}px` : ''}`}>
     <slot />
   </div>
-  <figcaption>{caption}</figcaption>
-  <details>
-    <summary>{dataSummary}</summary>
+  <figcaption class="cs-caption">{caption}</figcaption>
+  <details class="cs-data">
+    <summary>
+      <svg class="cs-chevron" viewBox="0 0 16 16" aria-hidden="true">
+        <path d="M6 3.5 10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+      Show chart data
+    </summary>
     <div class="table-wrap">
       <table class="table">
         <slot name="table" />
@@ -29,7 +41,6 @@ const { caption, label, minWidth = 0, dataSummary = 'Chart data', maxWidth } = A
 <style>
   .chart {
     margin: 0;
-    max-width: var(--max-w, none);
   }
 
   .frame {
@@ -42,41 +53,15 @@ const { caption, label, minWidth = 0, dataSummary = 'Chart data', maxWidth } = A
     display: block;
     width: 100%;
     min-width: var(--min-w);
+    max-width: var(--max-w, none);
     height: auto;
     overflow: visible;
   }
 
-  /* Nocturne's figcaption is an 11px footnote; here the caption carries
-     the chart's point, so it reads at body-adjacent size. */
-  figcaption {
-    max-width: 66ch;
-    margin-top: 14px;
-    font-size: 14px;
-    line-height: 1.55;
-    color: var(--color-neutral-400);
-  }
-
-  details {
-    margin-top: 10px;
-    font-size: 13px;
-    color: var(--color-neutral-400);
-  }
-
-  summary {
-    display: inline-flex;
-    align-items: center;
-    min-height: 44px;
-    cursor: pointer;
-    color: var(--color-neutral-500);
-  }
-
-  summary:hover {
-    color: var(--color-accent-300);
-  }
-
   .table-wrap {
     overflow-x: auto;
-    max-width: 720px;
+    max-width: 66ch;
+    margin-top: var(--space-2);
   }
 
   .table {
@@ -85,12 +70,22 @@ const { caption, label, minWidth = 0, dataSummary = 'Chart data', maxWidth } = A
 
   /* Nocturne's table headers are all caps; this page keeps labels in
      sentence case. */
-  .table :global(th) {
+  .table :global(thead th) {
     text-transform: none;
     letter-spacing: 0.01em;
     font-size: 12px;
     color: var(--color-neutral-500);
     white-space: nowrap;
+  }
+
+  .table :global(tbody th) {
+    text-transform: none;
+    letter-spacing: normal;
+    font-size: 13px;
+    font-weight: 400;
+    text-align: left;
+    color: var(--color-neutral-200);
+    vertical-align: top;
   }
 
   .table :global(td) {

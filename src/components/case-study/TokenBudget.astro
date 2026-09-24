@@ -10,12 +10,16 @@ import ChartFigure from './ChartFigure.astro';
 
 const { rows, caption, label } = Astro.props;
 
-const W = 760;
+// Drawn at phone width, so it fits a 375px screen without scrolling;
+// on wide screens it keeps this natural size. Each row: label, track,
+// then the numbers. Tracks share one token scale, so the longer limit
+// draws the longer track.
+const W = 400;
 const X0 = 0;
-const X1 = 480;
+const X1 = 400;
 const TRACK_H = 18;
-const PITCH = 70;
-const H = rows.length * PITCH - 8;
+const PITCH = 88;
+const H = rows.length * PITCH - 16;
 
 const maxLimit = Math.max(...rows.map((r) => r.limit));
 const x = (tokens) => X0 + (tokens / maxLimit) * (X1 - X0);
@@ -23,7 +27,7 @@ const n = (v) => v.toLocaleString('en-US');
 const headroom = (r) => Math.round((1 - r.worst / r.limit) * 100);
 ---
 
-<ChartFigure caption={caption} label={label} minWidth={640} maxWidth={760}>
+<ChartFigure caption={caption} label={label} maxWidth={W}>
   <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={label} class="token-budget">
     {
       rows.map((r, i) => {
@@ -33,9 +37,9 @@ const headroom = (r) => Math.round((1 - r.worst / r.limit) * 100);
             <text class="row-label" x={X0} y={y + 16}>
               {r.label}
             </text>
-            <rect class="track" x={x(0)} y={y + 28} width={x(r.limit) - x(0)} height={TRACK_H} rx="4" />
-            <rect class="fill" x={x(0)} y={y + 28} width={x(r.worst) - x(0)} height={TRACK_H} rx="4" />
-            <text class="value" x={x(r.limit) + 12} y={y + 42}>
+            <rect class="track" x={x(0)} y={y + 26} width={x(r.limit) - x(0)} height={TRACK_H} rx="4" />
+            <rect class="fill" x={x(0)} y={y + 26} width={x(r.worst) - x(0)} height={TRACK_H} rx="4" />
+            <text class="value" x={X0} y={y + 66}>
               {`${n(r.worst)} of ${n(r.limit)} tokens, ${headroom(r)}% headroom`}
             </text>
           </g>
@@ -75,11 +79,12 @@ const headroom = (r) => Math.round((1 - r.worst / r.limit) * 100);
   }
 
   .row-label {
+    font-size: 15px;
     fill: var(--color-neutral-200);
   }
 
   .value {
-    font-size: 13px;
+    font-size: 14px;
     fill: var(--color-neutral-400);
     font-variant-numeric: tabular-nums;
   }

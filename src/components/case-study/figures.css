@@ -1,0 +1,90 @@
+/* Shared styles for every figure on the GrammarLens case study: captions,
+   the "Show chart data" disclosure, and the frame around app screenshots.
+
+   Imported by ChartFigure, Storyboard and Screenshot, so every caption and
+   every screenshot on the page comes from these few rules instead of each
+   component's own copy (brief, Part E13, E15, E16). Class names carry a
+   cs- prefix because this file is global. */
+
+:root {
+  /* Figure to caption, and caption to disclosure. */
+  --cs-caption-gap: var(--space-6);
+  --cs-disclosure-gap: var(--space-2);
+  /* Every screenshot's frame: the same hairline the cards use. */
+  --cs-shot-radius: 18px;
+  --cs-shot-border: var(--shadow-sm);
+}
+
+.cs-caption {
+  display: block;
+  max-width: 66ch;
+  margin: var(--cs-caption-gap) 0 0;
+  font-size: 14px;
+  line-height: 1.55;
+  text-align: left;
+  color: var(--color-neutral-400);
+}
+
+.cs-shot {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--cs-shot-radius);
+  box-shadow: var(--cs-shot-border);
+  background: var(--color-surface);
+}
+
+/* ---------- chart data disclosure ---------- */
+
+.cs-data {
+  margin-top: var(--cs-disclosure-gap);
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--color-neutral-400);
+}
+
+.cs-data > summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding-right: 6px;
+  cursor: pointer;
+  list-style: none;
+  color: var(--color-neutral-400);
+  border-radius: var(--radius-sm);
+}
+
+.cs-data > summary::-webkit-details-marker {
+  display: none;
+}
+
+.cs-data > summary:hover {
+  color: var(--color-accent-300);
+}
+
+.cs-data > summary:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.cs-data > summary .cs-chevron {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  color: var(--color-neutral-500);
+}
+
+.cs-data > summary:hover .cs-chevron {
+  color: var(--color-accent-300);
+}
+
+.cs-data[open] > summary .cs-chevron {
+  transform: rotate(90deg);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cs-data > summary .cs-chevron {
+    transition: transform 0.15s ease;
+  }
+}

@@ -118,7 +118,7 @@ export const caseStudyCopy = {
             name: 'Daily Test',
             calls: 1,
             steps: [
-              { lines: ['Model generates questions', 'and explanations'], model: true },
+              { lines: ['Model generates', 'questions and', 'explanations'], model: true },
               { lines: ['Answers graded', 'on the device'], model: false },
             ],
             note: ['Finishing a test prepares', "tomorrow's set in the", 'background.'],
@@ -143,12 +143,12 @@ export const caseStudyCopy = {
         xStep: 0.5,
         bars: [
           {
-            label: ['Daily Test only'],
+            label: 'Daily Test only',
             measured: [0.7, 0.84],
             provenance: 'Measured token counts × list price',
           },
           {
-            label: ['Daily Test + one free', 'practice session a day'],
+            label: 'Daily Test + one free practice session a day',
             measured: [0.7, 0.84],
             // One practice session a day for 30 days at the estimated
             // $0.034 a session.

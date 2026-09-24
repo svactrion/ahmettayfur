@@ -484,3 +484,35 @@ Parts A–D, Part E wins.
     files `grammarlens-case-study-final.md` and
     `grammarlens-case-study-tr.md` move to `docs/archive/` with `git mv`.
 11. **Correction to 9.** The "Practice your weak spots | 1 a day" row ships in 1.0 (the reverted row was "Practice sessions", 1 vs 5), so `day0-4-paywall` is the fourth storyboard frame, captioned "The Premium screen. On day one it opens once, right after the climb." (it was shot from Home, so the caption claims only what is verified); the third caption returns to "The avatar takes its first step."
+
+### Visual revision (owner review)
+
+Decided after the owner reviewed the page at 1280 px. The copy does not
+change.
+
+12. **One alignment rule.** Wide visuals (C7 storyboard, C2 timeline, C3
+    model calls, C5 cap chart) span both columns: left edge at the aside
+    column's left edge, right edge at the body column's right edge. Narrow
+    visuals (C4 free cost bars, C6 token budget, C8 and C9 single
+    screenshots) sit in the body column, left edge flush with the body
+    text. No visual starts anywhere else. Below 768 px everything is one
+    column, as before.
+13. **Single screenshots (C8, C9).** In the body column, about 280–300 px
+    wide, caption below the image and left-aligned, in the same style as
+    the storyboard captions. The same thin border on every screenshot.
+14. **Body text** on this page is left-aligned (`text-align: left`,
+    `hyphens: none`). Other pages are not touched.
+15. **Chart data disclosure.** Directly under each caption, in the same
+    style, visibly expandable (marker or chevron, hover and focus states,
+    keyboard operable). Its label is "Show chart data".
+16. **Vertical rhythm.** Every figure has the same space above and below,
+    one value taken from the site's tokens. The figure-to-caption gap and
+    the caption-to-disclosure gap are also the same everywhere.
+17. **Aside section labels** (Summary, Research, … Status) grow to a step
+    of the site's type scale above body text (about 20–24 px), sentence
+    case, so they read as the section's heading. The header aside's
+    meta, status and updated lines stay small.
+18. **Consistency pass.** After applying 12–17, any other element whose
+    alignment, spacing, caption style or font size stands apart is brought
+    under the same rules. The Reframe block (C1) looks the same in all six
+    places.

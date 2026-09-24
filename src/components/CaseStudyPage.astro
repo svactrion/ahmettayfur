@@ -30,20 +30,24 @@ const productHref = localizeHref('/products/grammarlens', lang);
 // uses; their props come from t.figures under the same name. A name
 // missing from this map renders nothing, so copy can mark a figure's place
 // before the figure exists.
+//
+// Every figure takes one of exactly two positions (brief, Part E12):
+// wide spans both grid columns, from the aside's left edge to the body
+// text's right edge; narrow sits in the body column, flush with the text.
 const figures = {
-  timeline: Timeline,
-  modelCalls: ModelCalls,
-  freeCost: FreeCostBars,
-  capMath: CapChart,
-  tokenBudget: TokenBudget,
-  storyboard: Storyboard,
-  offerCard: Screenshot,
-  explanation: Screenshot,
+  timeline: { component: Timeline, wide: true },
+  modelCalls: { component: ModelCalls, wide: true },
+  capMath: { component: CapChart, wide: true },
+  storyboard: { component: Storyboard, wide: true },
+  freeCost: { component: FreeCostBars, wide: false },
+  tokenBudget: { component: TokenBudget, wide: false },
+  offerCard: { component: Screenshot, wide: false },
+  explanation: { component: Screenshot, wide: false },
 };
 
 // Splits a block list into runs of prose and the figures between them.
-// Prose runs become .body columns; figures sit between them and span both
-// grid columns on wide screens.
+// Prose runs become .body columns; figures sit between them as their own
+// grid items, placed by the rule above.
 function group(blocks) {
   const groups = [];
   for (const block of blocks) {
@@ -103,9 +107,9 @@ const rows =
             </aside>
             {row.groups.map((g, gi) => {
               if (g.figure) {
-                const Figure = figures[g.figure];
+                const { component: Figure, wide } = figures[g.figure];
                 return (
-                  <div class="wide">
+                  <div class={wide ? 'fig fig-wide' : 'fig fig-narrow'}>
                     <Figure {...t.figures[g.figure]} />
                   </div>
                 );
@@ -358,11 +362,25 @@ const rows =
     transition: none;
   }
 
-  /* Aside labels in sentence case, as written in the copy. */
+  /* Aside labels name their section: sentence case, as written in the
+     copy, at 20px (Nocturne's h4 step), above the 16px body text and
+     below the section's own h2. The header aside's meta lines keep the
+     .note's 12px, so they never read as headings. */
   .v2 .note strong {
+    margin-bottom: 10px;
+    font-size: 20px;
+    line-height: 1.25;
+    font-weight: 500;
+    letter-spacing: -0.01em;
     text-transform: none;
-    letter-spacing: 0.02em;
-    font-size: 13px;
+  }
+
+  /* Share the h2's first line box, so label and heading start on one
+     line. */
+  @media (min-width: 769px) {
+    .v2 .note strong {
+      padding-top: 3px;
+    }
   }
 
   .note-line,
@@ -384,30 +402,65 @@ const rows =
     color: var(--color-neutral-200);
   }
 
-  /* Prose runs sit in the second column; figures between them span both.
-     Only above the shared 768px breakpoint, where there are two columns
-     to span. */
-  @media (min-width: 769px) {
-    .v2 {
-      row-gap: clamp(32px, 4vw, 48px);
-    }
+  /* Left-aligned, unhyphenated text on this page. site.css justifies
+     .body p site-wide; that stays as it is for the other pages. */
+  .v2 .body p,
+  .v2 .body li {
+    text-align: left;
+    hyphens: none;
+  }
 
-    .v2 > .body {
+  /* ---------- figures ----------
+     The grid's own column widths, named so the wide figures can match
+     them: the aside column and gap come from site.css's .row, the measure
+     from .body above. */
+  .v2 {
+    --aside-w: 168px;
+    --col-gap: clamp(20px, 4vw, 48px);
+    --measure: 66ch;
+    /* Space above and below every figure: two steps of Nocturne's
+       largest spacing token (2 × 22.4px). */
+    --figure-space: calc(var(--space-8) * 2);
+    column-gap: var(--col-gap);
+    row-gap: 0;
+  }
+
+  .fig {
+    min-width: 0;
+    margin-block: var(--figure-space);
+  }
+
+  /* Two figures in a row share one gap instead of stacking both margins. */
+  .fig + .fig {
+    margin-top: 0;
+  }
+
+  .fig:last-child {
+    margin-bottom: 0;
+  }
+
+  .fig-narrow {
+    max-width: var(--measure);
+  }
+
+  /* Prose runs and narrow figures sit in the second column; wide figures
+     span both, stopping at the body text's right edge. Only above the
+     shared 768px breakpoint, where there are two columns to span. */
+  @media (min-width: 769px) {
+    .v2 > .body,
+    .v2 > .fig-narrow {
       grid-column: 2;
     }
 
-    .v2 > .wide {
+    .v2 > .fig-wide {
       grid-column: 1 / -1;
+      max-width: calc(var(--aside-w) + var(--col-gap) + var(--measure));
     }
   }
 
-  .wide {
-    min-width: 0;
-  }
-
   @media (max-width: 768px) {
-    .wide {
-      margin-block: 18px;
+    .v2 > .note {
+      margin-bottom: 14px;
     }
   }
 
@@ -440,8 +493,10 @@ const rows =
     white-space: nowrap;
   }
 
+  /* Only the bottom margin: the top one comes from the paragraph rhythm
+     (.body > * + *) like every other block. */
   .v2 .body ol {
-    margin: 0;
+    margin-bottom: 0;
     padding-left: 1.5em;
     color: var(--color-neutral-300);
   }
