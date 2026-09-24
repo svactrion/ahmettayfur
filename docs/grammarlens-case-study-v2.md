@@ -551,3 +551,42 @@ conflict with 12–18, these win.
     stylesheet order: in `astro dev` the site CSS loads before component
     styles, in the build after them, so every page rule must out-rank
     the site rule it overrides by specificity.
+
+### Owner review 2
+
+Where these conflict with earlier items, these win. Copy is unchanged;
+only the positions named below move.
+
+26. **Timeline (C2), redesigned.** A vertical, unscaled timeline (order
+    only): one continuous vertical line at the left of the body column,
+    a dot per event on it, then the date (bold, fixed-width column) and
+    the label, all labels starting on one edge. Two groups, each under a
+    small title: "July: the MVP week" (19 Jul, 20–25 Jul) and
+    "August–September: to the App Store" (the nine events from 24 Aug to
+    24 Sep). The line runs unbroken between the groups: no gap, no
+    in-between label, no scale, so the unlogged stretch between late July
+    and late August is not implied to be idle. The last event (24 Sep) has
+    the accented dot and color; the others stay plain. Same layout on
+    desktop and mobile, labels wrap in place, no sideways scrolling. The
+    events are exactly the C2 table; the caption and "Show chart data"
+    stay. Semantic HTML (`<ol>` + CSS) is allowed instead of SVG.
+27. **Single screenshots (C8, C9) float beside the text** at 768 px and
+    up: `float: left`, 240 px wide, caption under the image inside the
+    float, about 32 px of space on the right and the figure spacing token
+    below. Body text flows to the right of the image and continues at
+    full width below it, keeping the site's justified, hyphenated text.
+    Floats are cleared by Reframe blocks, every chart figure, the
+    storyboard, subheadings and the section end, so a float never runs
+    into the next decision or section. Below 768 px: no float, the image
+    centered at about 70% width (at most 280 px) with its caption centered
+    below, text after it at full width. If the text beside the image
+    gets too narrow (under about 35 characters a line), the float starts
+    at a higher width.
+28. **Screenshot positions.** C9 (`daily-test-explanation`) moves to
+    directly after the Reframe block of "A promise the product didn't
+    keep", before "On the day of submission…"; C6 stays after "The fix
+    was one explanation per question…" and clears the float. C8
+    (`practice-offer-card`) moves to directly before "An exit stays an
+    exit.", so that paragraph and "A smaller cut belongs here too…" flow
+    beside it; "The mistake: two variables in one release." starts clear
+    of it, as the next decision.
