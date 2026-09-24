@@ -1,12 +1,12 @@
 ---
-// C7: the first day as a row of real app screenshots, in order, each with
-// its own one-line caption. Any number of frames: the row divides the
-// width it is given evenly, so adding a frame is a data change only.
+// C7: the first day as real app screenshots, in order, each with its own
+// one-line caption. Adding a frame is a data change only.
 //
-// Side by side on desktop; below the shared 768px breakpoint the row
-// scrolls sideways inside its own container, one frame per snap point.
-// Caption and frame styles are shared with the single screenshots
-// (figures.css).
+// Desktop: a 2×2 grid in the body column (brief, Part E21). Below the
+// shared 768px breakpoint: a scroll-snap row where each frame takes about
+// three quarters of the width, so the next one peeks in from the edge and
+// the row reads as scrollable (Part E24). Caption and frame styles are
+// shared with the single screenshots (figures.css).
 //
 // Props:
 //   frames: [{ src, width, height, alt, caption }]
@@ -17,7 +17,7 @@ const { frames, label } = Astro.props;
 ---
 
 <div class="storyboard" role="region" aria-label={label} tabindex="0">
-  <ol role="list" style={`--frames: ${frames.length}`}>
+  <ol role="list">
     {
       frames.map((f) => (
         <li>
@@ -33,16 +33,13 @@ const { frames, label } = Astro.props;
 
 <style>
   .storyboard {
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    scroll-snap-type: x mandatory;
     border-radius: var(--radius-md);
   }
 
   ol {
     display: grid;
-    grid-template-columns: repeat(var(--frames), minmax(0, 1fr));
-    gap: var(--space-8);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: calc(var(--space-8) * 2) var(--space-8);
     margin: 0;
     padding: 0;
     list-style: none;
@@ -50,7 +47,6 @@ const { frames, label } = Astro.props;
 
   li {
     min-width: 0;
-    scroll-snap-align: start;
   }
 
   figure {
@@ -58,8 +54,21 @@ const { frames, label } = Astro.props;
   }
 
   @media (max-width: 768px) {
+    .storyboard {
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scroll-snap-type: x mandatory;
+    }
+
     ol {
-      grid-template-columns: repeat(var(--frames), 200px);
+      grid-template-columns: none;
+      grid-auto-flow: column;
+      grid-auto-columns: 76%;
+      gap: var(--space-6);
+    }
+
+    li {
+      scroll-snap-align: start;
     }
   }
 </style>

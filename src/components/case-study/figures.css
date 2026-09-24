@@ -17,7 +17,6 @@
 
 .cs-caption {
   display: block;
-  max-width: 66ch;
   margin: var(--cs-caption-gap) 0 0;
   font-size: 14px;
   line-height: 1.55;

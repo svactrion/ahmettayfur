@@ -31,48 +31,31 @@ const productHref = localizeHref('/products/grammarlens', lang);
 // missing from this map renders nothing, so copy can mark a figure's place
 // before the figure exists.
 //
-// Every figure takes one of exactly two positions (brief, Part E12):
-// wide spans both grid columns, from the aside's left edge to the body
-// text's right edge; narrow sits in the body column, flush with the text.
+// Every figure sits inside its section's .body, in the same single column
+// as the text (brief, Part E19): same left and right edge, nothing in the
+// aside column.
 const figures = {
-  timeline: { component: Timeline, wide: true },
-  modelCalls: { component: ModelCalls, wide: true },
-  capMath: { component: CapChart, wide: true },
-  storyboard: { component: Storyboard, wide: true },
-  freeCost: { component: FreeCostBars, wide: false },
-  tokenBudget: { component: TokenBudget, wide: false },
-  offerCard: { component: Screenshot, wide: false },
-  explanation: { component: Screenshot, wide: false },
+  timeline: Timeline,
+  modelCalls: ModelCalls,
+  capMath: CapChart,
+  storyboard: Storyboard,
+  freeCost: FreeCostBars,
+  tokenBudget: TokenBudget,
+  offerCard: Screenshot,
+  explanation: Screenshot,
 };
-
-// Splits a block list into runs of prose and the figures between them.
-// Prose runs become .body columns; figures sit between them as their own
-// grid items, placed by the rule above.
-function group(blocks) {
-  const groups = [];
-  for (const block of blocks) {
-    if (block.type === 'figure') {
-      if (figures[block.name]) groups.push({ figure: block.name });
-    } else if (groups.length && groups.at(-1).blocks) {
-      groups.at(-1).blocks.push(block);
-    } else {
-      groups.push({ blocks: [block] });
-    }
-  }
-  return groups;
-}
 
 // One .row per entry: the summary (no heading of its own, so its aside
 // label names it) and then the numbered sections.
 const rows =
   lang === 'en'
     ? [
-        { label: t.summary.label, id: 'summary', groups: group(t.summary.blocks) },
+        { label: t.summary.label, id: 'summary', blocks: t.summary.blocks },
         ...t.sections.map((section, i) => ({
           label: section.label,
           heading: section.heading,
           id: `section-${i + 1}`,
-          groups: group(section.blocks),
+          blocks: section.blocks,
         })),
       ]
     : [];
@@ -105,42 +88,39 @@ const rows =
             <aside class="note">
               <strong id={row.heading ? undefined : `${row.id}-label`}>{row.label}</strong>
             </aside>
-            {row.groups.map((g, gi) => {
-              if (g.figure) {
-                const { component: Figure, wide } = figures[g.figure];
-                return (
-                  <div class={wide ? 'fig fig-wide' : 'fig fig-narrow'}>
-                    <Figure {...t.figures[g.figure]} />
-                  </div>
-                );
-              }
-              const isPageEnd = ri === rows.length - 1 && gi === row.groups.length - 1;
-              return (
-                <div class="body">
-                  {gi === 0 && row.heading && <h2 id={row.id}>{row.heading}</h2>}
-                  {g.blocks.map((b) =>
-                    b.type === 'p' ? (
-                      <p set:html={b.html} />
-                    ) : b.type === 'h3' ? (
-                      <h3>{b.text}</h3>
-                    ) : b.type === 'reframe' ? (
-                      <Reframe first={b.first} actual={b.actual} />
-                    ) : b.type === 'ol' ? (
-                      <ol>
-                        {b.items.map((item) => (
-                          <li set:html={item} />
-                        ))}
-                      </ol>
-                    ) : null
-                  )}
-                  {isPageEnd && (
-                    <p>
-                      <a class="tap-link" href={productHref}>{t.endLinkText}</a>
-                    </p>
-                  )}
-                </div>
-              );
-            })}
+            <div class="body">
+              {row.heading && <h2 id={row.id}>{row.heading}</h2>}
+              {row.blocks.map((b) => {
+                if (b.type === 'figure') {
+                  const Figure = figures[b.name];
+                  return (
+                    Figure && (
+                      <div class="fig">
+                        <Figure {...t.figures[b.name]} />
+                      </div>
+                    )
+                  );
+                }
+                return b.type === 'p' ? (
+                  <p set:html={b.html} />
+                ) : b.type === 'h3' ? (
+                  <h3>{b.text}</h3>
+                ) : b.type === 'reframe' ? (
+                  <Reframe first={b.first} actual={b.actual} />
+                ) : b.type === 'ol' ? (
+                  <ol>
+                    {b.items.map((item) => (
+                      <li set:html={item} />
+                    ))}
+                  </ol>
+                ) : null;
+              })}
+              {ri === rows.length - 1 && (
+                <p>
+                  <a class="tap-link" href={productHref}>{t.endLinkText}</a>
+                </p>
+              )}
+            </div>
           </section>
         ))}
       </>
@@ -351,15 +331,33 @@ const rows =
 
   /* ---------- v2 (English) ----------
      Rules below only reach rows marked .v2, so the Turkish page keeps the
-     look it had. */
+     look it had.
+
+     Load order differs between `astro dev` (site.css first, then these)
+     and the build (these first, then site.css), so every rule here that
+     overrides site.css must out-rank it by specificity, never tie with it
+     (brief, Part E25). Astro's scoping attribute already adds one step to
+     each compound selector; the notes below mark the places that needed
+     more. */
 
   /* No scroll-triggered entrance on this page (brief, Part A2). Base.astro
-     still arms the reveal on every .row site-wide; this puts rows back to
-     their resting state here and drops the transition. */
-  :global(.motion) .row {
+     still arms the reveal on every .row site-wide. html.motion out-ranks
+     site.css's ".motion .row.is-in" instead of tying with it. */
+  :global(html.motion) .row {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+
+  /* One content column (brief, Part E19): the aside holds only the
+     section label (and, in the header, the meta lines); everything else,
+     figures included, lives in .body. The label sits on the baseline of
+     the body's first line: the h2, the h1, or the summary's first
+     paragraph. */
+  @media (min-width: 769px) {
+    .row.v2 {
+      align-items: baseline;
+    }
   }
 
   /* Aside labels name their section: sentence case, as written in the
@@ -373,14 +371,6 @@ const rows =
     font-weight: 500;
     letter-spacing: -0.01em;
     text-transform: none;
-  }
-
-  /* Share the h2's first line box, so label and heading start on one
-     line. */
-  @media (min-width: 769px) {
-    .v2 .note strong {
-      padding-top: 3px;
-    }
   }
 
   .note-line,
@@ -402,66 +392,26 @@ const rows =
     color: var(--color-neutral-200);
   }
 
-  /* Left-aligned, unhyphenated text on this page. site.css justifies
-     .body p site-wide; that stays as it is for the other pages. */
-  .v2 .body p,
-  .v2 .body li {
-    text-align: left;
-    hyphens: none;
-  }
-
   /* ---------- figures ----------
-     The grid's own column widths, named so the wide figures can match
-     them: the aside column and gap come from site.css's .row, the measure
-     from .body above. */
+     One value above and below every figure: two steps of Nocturne's
+     largest spacing token (2 × 22.4px). Block margins collapse, so a
+     figure next to a paragraph, a heading or another figure is always
+     exactly this far away (brief, Part E23). */
   .v2 {
-    --aside-w: 168px;
-    --col-gap: clamp(20px, 4vw, 48px);
-    --measure: 66ch;
-    /* Space above and below every figure: two steps of Nocturne's
-       largest spacing token (2 × 22.4px). */
     --figure-space: calc(var(--space-8) * 2);
-    column-gap: var(--col-gap);
-    row-gap: 0;
   }
 
-  .fig {
-    min-width: 0;
-    margin-block: var(--figure-space);
+  .v2 .body > .fig {
+    margin-top: var(--figure-space);
+    margin-bottom: var(--figure-space);
   }
 
-  /* Two figures in a row share one gap instead of stacking both margins. */
-  .fig + .fig {
-    margin-top: 0;
+  .v2 .body > .fig + :global(*) {
+    margin-top: var(--figure-space);
   }
 
-  .fig:last-child {
+  .v2 .body > .fig:last-child {
     margin-bottom: 0;
-  }
-
-  .fig-narrow {
-    max-width: var(--measure);
-  }
-
-  /* Prose runs and narrow figures sit in the second column; wide figures
-     span both, stopping at the body text's right edge. Only above the
-     shared 768px breakpoint, where there are two columns to span. */
-  @media (min-width: 769px) {
-    .v2 > .body,
-    .v2 > .fig-narrow {
-      grid-column: 2;
-    }
-
-    .v2 > .fig-wide {
-      grid-column: 1 / -1;
-      max-width: calc(var(--aside-w) + var(--col-gap) + var(--measure));
-    }
-  }
-
-  @media (max-width: 768px) {
-    .v2 > .note {
-      margin-bottom: 14px;
-    }
   }
 
   /* Subsections within a numbered section. */
