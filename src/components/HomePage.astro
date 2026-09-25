@@ -1072,6 +1072,35 @@ const posts = await getPosts(me.mediumHandle);
     margin-bottom: -2px;
   }
 
+  /* ---------- tap targets on phones ----------
+     Every link and button is at least 44 x 44 to tap. Buttons grow to
+     44px; plain text links keep their size and get an invisible
+     expansion (the same recipe as the language switch in site.css), so
+     the text around them doesn't move. */
+  @media (max-width: 767.98px) {
+    .btn-row .btn {
+      min-height: 44px;
+    }
+
+    .art-all a,
+    .contact-mail,
+    .prod-docs a {
+      position: relative;
+    }
+
+    .art-all a::before,
+    .contact-mail::before,
+    .prod-docs a::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: max(44px, 100%);
+      height: max(44px, 100%);
+      transform: translate(-50%, -50%);
+    }
+  }
+
   /* ---------- narrow screens ----------
      768px matches the one shared breakpoint now used site-wide (site.css,
      CaseStudyPage.astro) — this used to be 860px here while the .row-based

@@ -192,6 +192,24 @@ a:hover {
   transform: translate(-50%, -50%);
 }
 
+/* The same invisible expansion for the brand link on phones: its 32px
+   row keeps its height, the tap area is 44px tall. */
+@media (max-width: 767.98px) {
+  .nav-brand {
+    position: relative;
+  }
+
+  .nav-brand::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: max(44px, 100%);
+    transform: translateY(-50%);
+  }
+}
+
 /* ---------- footer ---------- */
 
 .footer {
