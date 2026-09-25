@@ -83,6 +83,17 @@ function layout(W, stacked) {
 }
 
 const drawings = VARIANTS.map((v) => ({ ...v, ...layout(v.width, v.name === 's') }));
+
+// The data table's Steps cell as one sentence. The step labels are
+// capitalized for the diagram boxes; mid-sentence, every step after the
+// first starts lowercase.
+const stepsText = (flow) =>
+  flow.steps
+    .map((s, i) => {
+      const text = i === 0 ? s.text : s.text[0].toLowerCase() + s.text.slice(1);
+      return s.model ? `${text} (model)` : text;
+    })
+    .join(', then ') + (flow.note ? `. ${flow.note}` : '');
 ---
 
 <ChartFigure caption={caption} label={label}>
@@ -162,10 +173,7 @@ const drawings = VARIANTS.map((v) => ({ ...v, ...layout(v.width, v.name === 's')
         flows.map((flow) => (
           <tr>
             <th scope="row">{flow.name}</th>
-            <td>
-              {flow.steps.map((s) => `${s.text}${s.model ? ' (model)' : ''}`).join(', then ')}
-              {flow.note && `. ${flow.note}`}
-            </td>
+            <td>{stepsText(flow)}</td>
             <td>{flow.calls}</td>
           </tr>
         ))

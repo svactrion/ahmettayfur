@@ -86,6 +86,14 @@ const { caption, label } = Astro.props;
     font-size: 14px;
   }
 
+  /* .body's overflow-wrap: anywhere (site.css) lets the auto table
+     layout squeeze short columns down to one letter per line. Cells wrap
+     between words only. */
+  .table :global(th),
+  .table :global(td) {
+    overflow-wrap: normal;
+  }
+
   /* Nocturne's table headers are all caps; this page keeps labels in
      sentence case. */
   .table :global(thead th) {
