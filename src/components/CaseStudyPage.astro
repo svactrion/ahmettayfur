@@ -421,9 +421,9 @@ const rows =
      screenshot width on the page (figures.css). The body is a size
      container, so the float starts only when at least 320px of text is
      left beside it: 300 + 32 + 320 = 652px of column. It also never
-     floats below 768px. Otherwise the image sits left-aligned at the same
-     width, caption below, text continuing underneath. flow-root keeps a
-     float inside its own section. */
+     floats below 768px. Otherwise the image sits centered at the same
+     width, caption centered below, text continuing underneath. flow-root
+     keeps a float inside its own section. */
   .v2 .body {
     display: flow-root;
     container: cs-body / inline-size;
@@ -431,6 +431,11 @@ const rows =
 
   .v2 .body > .fig-float {
     width: var(--cs-shot-w);
+    margin-inline: auto;
+  }
+
+  .v2 .body > .fig-float :global(.cs-caption) {
+    text-align: center;
   }
 
   @media (min-width: 768px) {
@@ -438,6 +443,10 @@ const rows =
       .v2 .body > .fig-float {
         float: left;
         margin: var(--figure-space) 32px var(--figure-space) 0;
+      }
+
+      .v2 .body > .fig-float :global(.cs-caption) {
+        text-align: left;
       }
 
       /* A float doesn't take part in margin collapsing: after a figure
