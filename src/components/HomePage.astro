@@ -7,15 +7,15 @@ import Base from '../layouts/Base.astro';
 import { me } from '../data.js';
 import { copy } from '../content/home.js';
 import { getPosts } from '../lib/medium.js';
-import { localizeHref } from '../i18n.js';
+import { localizeHref, hreflangFor } from '../i18n.js';
 
 const lang = Astro.currentLocale ?? 'en';
 const t = copy[lang];
 
 // Read once, while the site is built. See src/lib/medium.js. The feed is
 // English-language regardless of the page's locale — there is no separate
-// Turkish feed.
-const posts = await getPosts(me.mediumHandle);
+// Turkish feed; only the dates follow the page's language.
+const posts = await getPosts(me.mediumHandle, lang);
 ---
 
 <Base title={t.meta.title} description={t.meta.description}>
@@ -118,7 +118,7 @@ const posts = await getPosts(me.mediumHandle);
                 </div>
                 <span class="prod-docs">
                   {p.docs.map((l) => (
-                    <a href={localizeHref(l.href, lang)}>{l.label}</a>
+                    <a href={localizeHref(l.href, lang)} hreflang={hreflangFor(l.href, lang)}>{l.label}</a>
                   ))}
                 </span>
               </div>

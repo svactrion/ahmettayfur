@@ -72,7 +72,9 @@ async function readFeed(url) {
 // { title: '', link: '', excerpt: '', date: '2026-09-01', source: 'LinkedIn' }
 export const manualPosts = [];
 
-export async function getPosts(handle) {
+// Dates read in the page's language: "29 July 2026" (en-GB) or
+// "29 Temmuz 2026" (tr-TR).
+export async function getPosts(handle, lang = 'en') {
   let fetched = [];
   for (const url of FEEDS(handle)) {
     const items = await readFeed(url);
@@ -88,7 +90,7 @@ export async function getPosts(handle) {
     const t = new Date(d);
     return isNaN(t)
       ? ''
-      : t.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+      : t.toLocaleDateString(lang === 'tr' ? 'tr-TR' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
   };
   return [...fetched, ...manualPosts]
     .sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0))

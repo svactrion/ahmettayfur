@@ -13,9 +13,9 @@ const productDocsEn = [
 ];
 
 const productDocsTr = [
-  { label: 'Gizlilik', href: grammarlens.privacyUrl },
-  { label: 'Koşullar', href: grammarlens.termsUrl },
-  { label: 'Destek', href: grammarlens.supportUrl },
+  { label: 'Gizlilik (İngilizce)', href: grammarlens.privacyUrl },
+  { label: 'Koşullar (İngilizce)', href: grammarlens.termsUrl },
+  { label: 'Destek (İngilizce)', href: grammarlens.supportUrl },
 ];
 
 export const copy = {

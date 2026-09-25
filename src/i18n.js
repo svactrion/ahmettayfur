@@ -30,6 +30,15 @@ export function otherLocalePath(path, lang) {
   return enPath === '/' ? '/tr/' : `/tr${enPath}`;
 }
 
+// hreflang for a link on a page in `lang`: "en" when a Turkish page links
+// to an internal page that has no Turkish version (the legal pages), so the
+// link says it leads to English. Undefined otherwise, which Astro leaves
+// out of the markup.
+export function hreflangFor(href, lang) {
+  if (lang !== 'tr' || !href.startsWith('/')) return undefined;
+  return isTranslated(href.endsWith('/') ? href : `${href}/`) ? undefined : 'en';
+}
+
 // Resolves an internal English path (e.g. a constant like
 // grammarlens.caseStudyUrl, or a plain path such as '/products/grammarlens')
 // to the address a link should actually point to for the given language.

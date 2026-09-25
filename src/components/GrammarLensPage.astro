@@ -9,7 +9,7 @@
 import Base from '../layouts/Base.astro';
 import { grammarlens } from '../data.js';
 import { grammarlensPageCopy } from '../content/products.js';
-import { localizeHref } from '../i18n.js';
+import { localizeHref, hreflangFor } from '../i18n.js';
 
 const lang = Astro.currentLocale ?? 'en';
 const t = grammarlensPageCopy[lang];
@@ -53,7 +53,7 @@ const t = grammarlensPageCopy[lang];
               {item.linkText && (
                 <>
                   {' '}
-                  <a href={localizeHref(grammarlens.privacyUrl, lang)}>{item.linkText}</a>.
+                  <a href={localizeHref(grammarlens.privacyUrl, lang)} hreflang={hreflangFor(grammarlens.privacyUrl, lang)}>{item.linkText}</a>.
                 </>
               )}
             </p>
@@ -82,7 +82,7 @@ const t = grammarlensPageCopy[lang];
           t.more.links.map((l) => (
             <li>
               <span class="links-label">{l.label}</span>
-              <a href={localizeHref(l.href, lang)}>{l.text}</a>
+              <a href={localizeHref(l.href, lang)} hreflang={hreflangFor(l.href, lang)}>{l.text}</a>
             </li>
           ))
         }

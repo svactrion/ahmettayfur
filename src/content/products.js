@@ -124,7 +124,7 @@ export const grammarlensPageCopy = {
         {
           title: 'Çalışmaların telefonunda kalır',
           body: 'Pratik geçmişin bir sunucuda değil, kendi cihazında saklanır.',
-          linkText: 'Tam gizlilik politikası',
+          linkText: 'Gizlilik politikasının tamamı (İngilizce)',
         },
       ],
     },
@@ -138,8 +138,8 @@ export const grammarlensPageCopy = {
       label: 'Daha fazlası',
       links: [
         { label: 'Süreç', text: 'GrammarLens nasıl araştırıldı ve geliştirildi', href: grammarlens.caseStudyUrl },
-        { label: 'Destek', text: 'Yardım al ya da bir sorun bildir', href: grammarlens.supportUrl },
-        { label: 'Gizlilik', text: 'Gizlilik politikası', href: grammarlens.privacyUrl },
+        { label: 'Destek', text: 'Yardım al ya da bir sorun bildir (İngilizce)', href: grammarlens.supportUrl },
+        { label: 'Gizlilik', text: 'Gizlilik politikası (İngilizce)', href: grammarlens.privacyUrl },
       ],
     },
   },
