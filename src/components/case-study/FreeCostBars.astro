@@ -133,7 +133,7 @@ const drawings = VARIANTS.map((v) => layout(v.width, v.name));
         drawn.map((bar) => (
           <tr>
             <th scope="row">{bar.label}</th>
-            <td>{range(bar.total)}</td>
+            <td class="money">{range(bar.total)}</td>
             <td>{bar.provenance}</td>
           </tr>
         ))
@@ -157,6 +157,11 @@ const drawings = VARIANTS.map((v) => layout(v.width, v.name));
   .tick {
     fill: var(--color-neutral-500);
     font-variant-numeric: tabular-nums;
+  }
+
+  /* A money range ("$0.70–0.84") stays on one line in the data table. */
+  .money {
+    white-space: nowrap;
   }
 
   .grid {
