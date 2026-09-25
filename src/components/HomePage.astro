@@ -102,9 +102,20 @@ const posts = await getPosts(me.mediumHandle);
               </div>
 
               <div class="prod-foot">
-                <a class="prod-case" href={localizeHref(p.caseHref, lang)}>
-                  {t.caseStudy} &larr;
-                </a>
+                <div class="prod-actions">
+                  <a class="btn btn-primary" href={localizeHref(p.caseHref, lang)}>
+                    {t.caseStudy} <span aria-hidden="true">&rarr;</span>
+                  </a>
+                  <a
+                    class="btn btn-secondary"
+                    href={p.sourceHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={t.sourceLabel}
+                  >
+                    {t.source} <span aria-hidden="true">&nearr;</span>
+                  </a>
+                </div>
                 <span class="prod-docs">
                   {p.docs.map((l) => (
                     <a href={localizeHref(l.href, lang)}>{l.label}</a>
@@ -593,20 +604,27 @@ const posts = await getPosts(me.mediumHandle);
     flex-wrap: wrap;
   }
 
+  /* Case study and source buttons, then the legal links on their own row.
+     Every link here is at least 44px tall to tap; the legal links keep
+     their 13px text and get the height from min-height. Below 768px the
+     buttons stack at the card's full width. */
   .prod-foot {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
     margin-top: var(--space-2);
     padding-top: var(--space-4);
     border-top: 1px solid var(--color-divider);
   }
 
-  .prod-case {
-    font-size: 15px;
-    color: var(--color-accent-300);
+  .prod-actions {
+    display: flex;
+    gap: var(--space-3);
+  }
+
+  .prod-actions .btn {
+    min-height: 44px;
   }
 
   .prod-docs {
@@ -617,11 +635,21 @@ const posts = await getPosts(me.mediumHandle);
   }
 
   .prod-docs a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
     color: var(--color-neutral-400);
   }
 
   .prod-docs a:hover {
     color: var(--color-accent-300);
+  }
+
+  @media (max-width: 767.98px) {
+    .prod-actions {
+      flex-direction: column;
+      align-self: stretch;
+    }
   }
 
   .prod-next {

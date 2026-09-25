@@ -36,6 +36,7 @@ export const grammarlens = {
   termsUrl: '/products/grammarlens/terms',
   supportUrl: '/products/grammarlens/support',
   caseStudyUrl: '/products/grammarlens/case-study',
+  sourceUrl: 'https://github.com/svactrion/GrammarLens',
 
   // Card icon on the home page. Source: public/img/grammarlens-icon.png
   // (the 1024×1024 App Store icon) — these are a 112×112 (2x of the 56px

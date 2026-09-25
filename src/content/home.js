@@ -44,7 +44,9 @@ export const copy = {
 
     prodTitle: 'Products',
     prodCount: 'One in the works · more to come',
-    caseStudy: 'Read how it was built',
+    caseStudy: 'Read the case study',
+    source: 'GitHub',
+    sourceLabel: 'GrammarLens source code on GitHub (opens in a new tab)',
     nextKicker: 'Next',
     nextTitle: 'Product 02 is in discovery',
     nextBody:
@@ -86,6 +88,7 @@ export const copy = {
         facts: ['4 user interviews', '2 iteration rounds', 'Built solo'],
         stack: ['Flutter / Dart', 'Claude API', 'Material 3'],
         caseHref: grammarlens.caseStudyUrl,
+        sourceHref: grammarlens.sourceUrl,
         docs: productDocsEn,
         icon: { ...grammarlens.icon, alt: 'GrammarLens app icon' },
       },
@@ -194,7 +197,9 @@ export const copy = {
 
     prodTitle: 'Ürünler',
     prodCount: 'Biri geliştirmede · yenileri yolda',
-    caseStudy: 'Nasıl geliştirdiğimi oku',
+    caseStudy: "Case study'yi oku",
+    source: 'GitHub',
+    sourceLabel: "GrammarLens kaynak kodu GitHub'da (yeni sekmede açılır)",
     nextKicker: 'Sıradaki',
     nextTitle: 'İkinci ürün keşif aşamasında',
     nextBody:
@@ -236,6 +241,7 @@ export const copy = {
         facts: ['4 kullanıcı görüşmesi', '2 iterasyon turu', 'Tek kişi geliştirdi'],
         stack: ['Flutter / Dart', 'Claude API', 'Material 3'],
         caseHref: grammarlens.caseStudyUrl,
+        sourceHref: grammarlens.sourceUrl,
         docs: productDocsTr,
         icon: { ...grammarlens.icon, alt: 'GrammarLens uygulama simgesi' },
       },
