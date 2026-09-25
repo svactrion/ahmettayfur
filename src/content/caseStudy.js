@@ -763,7 +763,7 @@ export const caseStudyCopy = {
         text: {
           yAxis: 'Aylık model maliyeti (USD)',
           xAxis: 'Günlük pratik oturumu',
-          line: 'Oturum başına $0.034 ile maliyet',
+          line: 'Oturum başına $0.034',
           estimated: 'tahmin',
           breakEven: ['Başa baş: yaklaşık', 'günde 3.5 oturum'],
         },

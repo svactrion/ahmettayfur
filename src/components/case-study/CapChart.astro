@@ -30,11 +30,14 @@ const LINE = 19;
 const lowest = plans.reduce((a, b) => (b.value < a.value ? b : a));
 const breakEven = lowest.value / (costPerSession * days);
 
-// The key at the top: a dashed sample, the line's name, the tag.
+// The key at the top: a dashed sample, the line's name, the tag. The
+// width estimate runs short for short words with wide letters ("tahmin"),
+// so the tag is never narrower than TAG_MIN.
+const TAG_MIN = 68;
 const key = {
   nameX: 34,
   tagX: 34 + textWidth(text.line) + 10,
-  tagW: textWidth(text.estimated) + 16,
+  tagW: Math.max(textWidth(text.estimated) + 16, TAG_MIN),
 };
 
 function lineChart(W) {
@@ -99,7 +102,7 @@ const tableSessions = [1, breakEven, ...caps.map((c) => c.value)].sort((a, b) =>
               </g>
             ))}
             {xTicks.map((s) => (
-              <text class="tick" x={d.x(s)} y={d.B + 24} text-anchor="middle">
+              <text class="tick" x={d.x(s)} y={d.B + 24} text-anchor={s === xMax ? 'end' : 'middle'}>
                 {s}
               </text>
             ))}

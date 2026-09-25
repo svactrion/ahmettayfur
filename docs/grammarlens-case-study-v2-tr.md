@@ -328,7 +328,7 @@ Sonuçlar geldiğinde bu sayfaya bir sonuçlar bölümü eklenecek.
 | caps[1].label | Eski sınır: 10 |
 | text.yAxis | Aylık model maliyeti (USD) |
 | text.xAxis | Günlük pratik oturumu |
-| text.line | Oturum başına $0.034 ile maliyet |
+| text.line | Oturum başına $0.034 |
 | text.estimated | tahmin |
 | text.breakEven[0] | Başa baş: yaklaşık |
 | text.breakEven[1] | günde 3.5 oturum |
