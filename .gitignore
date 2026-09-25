@@ -8,3 +8,6 @@ docs/case-study-screenshots/
 
 # Review screenshots for the owner, not part of the site
 docs/review-shots/
+
+# Local preview config for the Claude desktop app
+.claude/launch.json
