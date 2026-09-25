@@ -172,26 +172,9 @@ const rows = [
     font-weight: 500;
   }
 
-  /* The cost list gets more room than a paragraph break, on both sides,
-     and its own items get to breathe. */
-  .body ul {
-    margin-top: 2.4em;
-    margin-bottom: 2.4em;
-  }
-
-  .body ul + :global(*) {
-    margin-top: 2.4em;
-  }
-
+  /* List items get a little air between them. */
   .body li + li {
     margin-top: 0.6em;
-  }
-
-  /* The four bold-led retrospective points are separate ideas — a bit more
-     air between them than a normal paragraph gap. The gap from the heading
-     to the first one stays governed by ".body > h2 + *" above. */
-  .retro-point + .retro-point {
-    margin-top: 2.2em;
   }
 
   /* "Back to the product" / "Product page" are plain inline text links —
@@ -227,20 +210,11 @@ const rows = [
     .body > h2 + :global(*) {
       margin-top: 0.7em;
     }
-
-    .body ul,
-    .body ul + :global(*) {
-      margin-top: 1.8em;
-    }
-
-    .retro-point + .retro-point {
-      margin-top: 1.6em;
-    }
   }
 
-  /* ---------- v2 (English) ----------
-     Rules below only reach rows marked .v2, so the Turkish page keeps the
-     look it had.
+  /* ---------- v2 ----------
+     Rules below reach rows marked .v2: every row of this page, in both
+     languages.
 
      Load order differs between `astro dev` (site.css first, then these)
      and the build (these first, then site.css), so every rule here that
@@ -419,16 +393,6 @@ const rows = [
 
   .v2 .body ol li::marker {
     color: var(--color-neutral-500);
-  }
-
-  /* ---------- Turkish notice ---------- */
-
-  .notice {
-    font-size: 14px;
-    color: var(--color-neutral-400) !important;
-    text-align: left !important;
-    padding-bottom: 14px;
-    border-bottom: 1px solid var(--color-divider);
   }
 
   @media (max-width: 768px) {
