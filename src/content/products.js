@@ -37,7 +37,7 @@ export const productsCopy = {
     intro: {
       note: { label: 'Ürünler', line1: '1 ürün test aşamasında', line2: "App Store'da henüz yok" },
       title: 'Ürünler',
-      lede: 'Bana iltifat etmek zorunda olmayan birine gösterecek kadar ilerlettiğim şeyler.',
+      lede: 'Bana nazik davranmak zorunda olmayan birinin önüne koyabilecek kadar ilerlettiğim işler.',
     },
     grammarlensEntry: {
       note: { label: '01', line1: 'Flutter · iOS', line2: 'İnceleme hazırlığında' },
@@ -99,31 +99,31 @@ export const grammarlensPageCopy = {
 
   tr: {
     meta: {
-      title: 'GrammarLens — iOS için İngilizce dilbilgisi uygulaması',
+      title: 'GrammarLens — Yapay zekâ destekli dilbilgisi koçu',
       description:
-        'GrammarLens, bir İngilizce cümlenin neden yanlış olduğunu sadece işaretlemek yerine bağlamı içinde açıklar. Flutter ile iOS için geliştirildi.',
+        "Kullanıcı araştırması ve problem keşfinden MVP'ye, test ve iterasyona kadar adım adım geliştirilen, yapay zekâ destekli bir mobil dilbilgisi koçu.",
     },
     note: { label: 'GrammarLens', line1: 'iOS', line2: 'Flutter ile geliştirildi', line3: 'Tek kişilik proje' },
     status: 'Henüz yayında değil',
     title: 'GrammarLens',
-    lede: 'Çoğu dilbilgisi aracı bir cümlenin yanlış olduğunu söyler ve sana bir düzeltme sunar. GrammarLens hangi kuralı çiğnediğini ve doğru halinin neden işe yaradığını anlatır — böylece bir sonraki cümle daha kolay olur.',
+    lede: 'Çoğu dilbilgisi aracı bir cümlenin yanlış olduğunu söyler ve sana bir düzeltme sunar. GrammarLens ise hangi kuralı çiğnediğini ve doğru hâlinin neden doğru olduğunu anlatır; böylece bir sonraki cümleyi kurmak kolaylaşır.',
     downloadLink: "App Store'dan indir",
     notReleasedNote: 'Uygulama tamamlandı ve App Store incelemesine hazırlanıyor. Şu an indirilecek bir şey yok.',
 
     whatItDoes: {
-      label: 'Ne yapıyor',
+      label: 'Ne işe yarar',
       items: [
         {
           title: 'Sadece düzeltmez, açıklar',
-          body: 'Bir cümle yazar ya da yapıştırırsın. GrammarLens hatayı tespit eder, arkasındaki kuralı adlandırır ve farkı kısaca açıklayan düzeltilmiş bir sürüm gösterir.',
+          body: 'Bir cümle yazar ya da yapıştırırsın. GrammarLens hatayı bulur, arkasındaki kuralın adını verir ve cümlenin düzeltilmiş hâlini, farkı açıklayan kısa bir notla birlikte gösterir.',
         },
         {
-          title: 'Vaktine göre uyum sağlayan pratik',
-          body: 'Pratik setinin ne kadar süreceğini sen seçersin. Beş dakikan varsa kısa bir set, yoksa daha uzun bir tanesi.',
+          title: 'Vaktine göre ayarlanan pratik',
+          body: 'Pratik setinin ne kadar süreceğini sen seçersin. Beş dakikan varsa kısa bir set, daha fazla vaktin varsa uzun bir set.',
         },
         {
-          title: 'Çalışman telefonunda kalır',
-          body: 'Pratik geçmişi cihazında yerel olarak saklanır, bir sunucuda değil.',
+          title: 'Çalışmaların telefonunda kalır',
+          body: 'Pratik geçmişin bir sunucuda değil, kendi cihazında saklanır.',
           linkText: 'Tam gizlilik politikası',
         },
       ],
@@ -131,7 +131,7 @@ export const grammarlensPageCopy = {
 
     whoFor: {
       label: 'Kimin için',
-      body: 'İngilizceyi belli bir seviyede konuşan ve aynı birkaç hatayı sürekli tekrarlayan kişiler için — genellikle tanımlıklar, zamanlar ve edatlar. Sıfırdan başlıyorsan bir kurs bu uygulamadan daha işine yarar.',
+      body: "Biraz İngilizce konuşabilen ama aynı birkaç hatayı tekrar tekrar yapanlar için; bu hatalar genellikle article'lar (a/an/the), zamanlar ve edatlarla ilgili. Sıfırdan başlıyorsan bir kurs bu uygulamadan daha işine yarar.",
     },
 
     more: {

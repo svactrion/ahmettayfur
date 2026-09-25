@@ -180,18 +180,18 @@ export const copy = {
     },
 
     chrome: {
-      skip: 'İçeriğe geç',
+      skip: 'İçeriğe atla',
       langSwitchAria: 'İngilizceye geç',
     },
 
     nav: { who: 'Ben kimim', products: 'Ürünler', articles: 'Yazılar', contact: 'İletişim' },
 
     eyebrow: 'Ürün yönetimi · yeni mezun',
-    heroTitle: ['Kullanmak istediğim', 'ürünleri yapıyorum.'],
+    heroTitle: ['Kullanmak istediğim', 'ürünleri hayata geçiriyorum.'],
     heroTagline:
-      'Kendim için üretmek başlangıç noktası; piyasanın gerçekte ne istediğini asıl yayına aldığımda öğreniyorum.',
+      'Her şey kendim için üretmekle başlıyor; piyasanın gerçekte ne istediğini ise ürünü yayına aldığımda öğreniyorum.',
     heroBody:
-      'Bu yılın haziran ayında istatistik bölümünden mezun oldum ve ürün yöneticiliğine kendi ürünlerimi geliştirerek hazırlanıyorum: kullanıcı araştırması, PRD, MVP, test ve iterasyon — hepsini bizzat yürütüyorum. Aynı hızda öğrenmeye devam edebileceğim bir ürün rolü arıyorum.',
+      "Haziran 2026'da istatistik bölümünden mezun oldum. Ürün yöneticiliğine kendi ürünlerimi geliştirerek hazırlanıyorum; kullanıcı araştırmasından PRD'ye, MVP'den test ve iterasyona kadar her adımı kendim yürütüyorum. Bu hızla öğrenmeye devam edebileceğim bir ürün rolü arıyorum.",
     cta1: 'Ürünlere bak',
     cta2: 'Yazıları oku',
 
@@ -203,17 +203,17 @@ export const copy = {
     nextKicker: 'Sıradaki',
     nextTitle: 'İkinci ürün keşif aşamasında',
     nextBody:
-      'Sıradaki de aynı şekilde başlıyor: kendimin sürekli takıldığı bir problem, sonra tek satır kod yazmadan önce araştırma.',
+      'O da aynı yoldan başlıyor: önce benim de sürekli karşılaştığım bir problem, sonra tek satır kod yazmadan önce araştırma.',
 
     whoTitle: 'Ben kimim',
     whoBody: [
-      "Haziran 2026'da istatistik bölümünden mezun oldum. Dört yılın bana bıraktığı en kalıcı alışkanlık şu: bir sayıya inanmadan önce nasıl toplandığını sormak. Ürün işine getirdiğim şeyin büyük kısmı buradan geliyor.",
-      "Geri kalanını geliştirerek öğrendim. GrammarLens kendi problemim olarak başladı: İngilizcemi sürekli düzeltiyordum ama neyi yanlış yaptığımı bir türlü anlamıyordum. Aynı sorunu yaşayan insanlarla konuştum, PRD'yi yazdım, Flutter'ı kendi kendime öğrendim ve uygulamayı tek başıma geliştirdim. Dört test kullanıcısı, çok sevdiğim iki özelliği kesmemi sağladı.",
-      'Bu site kısa versiyon. Amacı yaptığım her şeyi sıralamak değil, nasıl çalıştığımı göstermek. Düzenli kullandığım araçlar: Flutter ve Dart, SQL, Power BI, Excel, istatistiksel modelleme. Öğrenmenin bu hızda kaldığı bir ürün yöneticiliği rolü arıyorum.',
+      "Haziran 2026'da istatistik bölümünden mezun oldum. Dört yıllık eğitimden bana kalan en kalıcı alışkanlık şu: bir sayıya inanmadan önce nasıl toplandığını sormak. Ürün tarafında yaptığım işlerin çoğu bu alışkanlıktan besleniyor.",
+      "Gerisini ürün geliştirirken öğrendim. GrammarLens kendi problemim olarak başladı: İngilizcemi sürekli düzeltiyordum ama neyi yanlış yaptığımı bir türlü anlamıyordum. Aynı sorunu yaşayan insanlarla konuştum, PRD'yi yazdım, Flutter'ı kendi kendime öğrendim ve uygulamayı tek başıma geliştirdim. Dört test kullanıcısı sayesinde çok bağlandığım iki özelliği çıkardım.",
+      'Bu site işin kısa hâli. Amacı yaptığım her şeyi sıralamak değil, nasıl çalıştığımı göstermek. Düzenli kullandığım araçlar: Flutter ve Dart, SQL, Power BI, Excel, istatistiksel modelleme. Öğrenmeye bu hızla devam edebileceğim bir ürün yöneticiliği rolü arıyorum.',
     ],
 
-    principlesLabel: 'Nasıl çalışıyorum',
-    backgroundLabel: 'Geçmiş',
+    principlesLabel: 'Nasıl çalışırım',
+    backgroundLabel: 'Özgeçmiş',
     scrollHint: 'Kaydır',
 
     articlesTitle: 'Yazılar',
@@ -221,15 +221,15 @@ export const copy = {
     artSub:
       'Ne geliştirdiğim, ne öğrendiğim ve hâlâ nerede yanıldığım üzerine notlar — Medium ve LinkedIn’de.',
     artEmpty:
-      "Akıştan gösterilecek bir şey henüz yok. Medium'da bir yazı yayına girdikten sonra, bir sonraki yayında bu listede görünür.",
-    artAll: "Medium'daki her şey",
+      "Henüz gösterilecek bir yazı yok. Medium'da yayımlanan yazılar, sitenin bir sonraki güncellemesinde bu listede görünür.",
+    artAll: "Medium'daki tüm yazılar",
 
     contactTitle: 'İletişim',
     contactNote:
-      'Uygulamalarla ilgili destek talepleri, iş görüşmeleri ve geri kalan her şey. İlk olarak buradan yanıt veriyorum.',
+      'Uygulamalarla ilgili destek talepleri, iş görüşmeleri ya da başka her şey için. En hızlı buradan dönüyorum.',
 
-    byeTitle: 'Sitenin tamamı bu kadar.',
-    byeNote: 'Buradaki bir şey konuşmaya değerse, yukarıdaki adresten bana ulaşabilirsin.',
+    byeTitle: 'Sitede anlatacaklarım bu kadar.',
+    byeNote: 'Konuşmaya değer bir şey bulduysan yukarıdaki adresten bana ulaşabilirsin.',
     backToTopHint: 'Başa dönmek için dokun.',
 
     products: [
@@ -237,8 +237,8 @@ export const copy = {
         name: 'GrammarLens',
         status: 'Henüz yayında değil',
         kicker: 'Yapay zekâ destekli öğrenme uygulaması',
-        desc: "GrammarLens bir İngilizce cümleyi yanlış diye işaretlemekle kalmıyor, neden yanlış olduğunu açıklıyor. Flutter ile yazıldı ve açıklamayı bağlam içinde üretmek için bir dil modeline başvuruyor. Kullanıcı araştırmasını ben yaptım, PRD'yi ben yazdım, uygulamayı ben geliştirdim, dört kişiyle test ettim ve söylediklerine göre iki tur değişiklik yaptım. Yol haritasındaki sıradaki adım oyunlaştırılmış pratik.",
-        facts: ['4 kullanıcı görüşmesi', '2 iterasyon turu', 'Tek kişi geliştirdi'],
+        desc: "GrammarLens, bir İngilizce cümleyi yalnızca yanlış diye işaretlemiyor; neden yanlış olduğunu açıklıyor. Flutter ile geliştirildi; açıklamaları cümlenin bağlamına göre bir dil modeli üretiyor. Kullanıcı araştırmasını yaptım, PRD'yi yazdım, uygulamayı geliştirdim, dört kişiyle test ettim ve geri bildirimlerine göre iki tur değişiklik yaptım. Yol haritasındaki sıradaki adım oyunlaştırılmış pratik.",
+        facts: ['4 kullanıcı görüşmesi', '2 iterasyon turu', 'Tek başıma geliştirdim'],
         stack: ['Flutter / Dart', 'Claude API', 'Material 3'],
         caseHref: grammarlens.caseStudyUrl,
         sourceHref: grammarlens.sourceUrl,
@@ -249,20 +249,20 @@ export const copy = {
 
     principles: [
       {
-        title: 'Özellikten değil problemden başlarım',
-        body: "GrammarLens, aynı İngilizce hatalarını sürekli yapıp bunlardan hiçbir şey öğrenmediğim için başladı. Editörü açmadan önce aynı alışkanlığa sahip insanlarla konuştum; PRD benim istek listemden değil, o konuşmalardan çıktı.",
+        title: 'Özellikten değil, problemden başlarım',
+        body: 'GrammarLens, aynı İngilizce hataları tekrar tekrar yapıp bunlardan hiçbir şey öğrenmediğimi fark ettiğimde başladı. Kod yazmaya başlamadan önce aynı sorunu yaşayan insanlarla konuştum; PRD benim istek listemden değil, bu konuşmalardan çıktı.',
       },
       {
         title: 'Gerçek sayıyı söylerim',
-        body: 'Kırk kişiyle değil, dört kişiyle test ettim. Dört, gerçekten ulaşabildiğim sayıydı ve çok sevdiğim iki özelliği kesmeye yetti. Kulağa daha iyi gelen bir sayıya yuvarlamak yerine gerçek örneklem büyüklüğünü söylemeyi tercih ederim.',
+        body: 'Kırk kişiyle değil, dört kişiyle test ettim. Dört, gerçekten ulaşabildiğim sayıydı ve çok bağlandığım iki özelliği çıkarmama yetti. Kulağa daha iyi gelen bir sayıya yuvarlamaktansa gerçek örneklem büyüklüğünü söylemeyi tercih ederim.',
       },
       {
         title: 'Maliyeti bir ürün kararı olarak görürüm',
-        body: 'Her dilbilgisi kontrolü bir dil modeline istek atıyor ve her istek para demek. Değerlendirmeleri toplu hâle getirmek ve soru uzunluğunu kullanıcıya bırakmak teknik bir detay değildi; ürünün var olup olamayacağını belirledi.',
+        body: 'Her dilbilgisi kontrolü bir dil modeline çağrı yapıyor ve her çağrının bir maliyeti var. Değerlendirmeleri toplu yapmak ve soru uzunluğunu kullanıcının seçimine bırakmak teknik bir ayrıntı değildi; ürünün var olup olamayacağını bu kararlar belirledi.',
       },
       {
         title: 'İşi bitiririm',
-        body: 'Amaç Flutter öğrenmek değildi, ürünü yayına hazır hâle getirmekti. Gerçek bir ekrana ulaşmamış bir fikir test edilmiş sayılmaz, yalnızca anlatılmış olur.',
+        body: 'Amacım Flutter öğrenmek değil, ürünü yayına çıkarmaktı. Gerçek bir ekrana ulaşmamış bir fikir test edilmiş sayılmaz, yalnızca anlatılmış olur.',
       },
     ],
 
@@ -287,8 +287,8 @@ export const copy = {
           },
           {
             when: '2024',
-            what: 'SAP Danışmanlığı Stajyeri',
-            note: 'GOERZ-IT — SD ve MM modül konfigürasyonu, B2B süreç akışlarının belgelenmesi.',
+            what: 'SAP Danışmanlık Stajyeri',
+            note: 'GOERZ-IT — SD ve MM modüllerinin konfigürasyonu, B2B süreç akışlarının belgelenmesi.',
           },
           {
             when: '2023',
@@ -298,11 +298,11 @@ export const copy = {
         ],
       },
       {
-        title: 'Öğrenme',
+        title: 'Eğitim',
         items: [
           {
             when: 'Haziran 2026',
-            what: 'İstatistik Lisansı',
+            what: 'İstatistik, Lisans',
             note: "Ege Üniversitesi — Haziran 2026'da mezun oldum. Tezimde TÜFE eğilimlerini regresyon analiziyle modelledim.",
           },
           {
@@ -318,7 +318,7 @@ export const copy = {
           {
             when: '2024',
             what: 'Data Summer Camp',
-            note: 'Intellica — gerçek iş zekâsı vakalarında SQL ve Oracle Data Integrator.',
+            note: 'Intellica — gerçek iş zekâsı projelerinde SQL ve Oracle Data Integrator kullanımı.',
           },
         ],
       },
