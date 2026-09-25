@@ -12,10 +12,12 @@ const productDocsEn = [
   { label: 'Support', href: grammarlens.supportUrl },
 ];
 
+// The legal pages are English only. "(EN)" keeps the three links on one
+// line in the card; the accessible name spells it out.
 const productDocsTr = [
-  { label: 'Gizlilik (İngilizce)', href: grammarlens.privacyUrl },
-  { label: 'Koşullar (İngilizce)', href: grammarlens.termsUrl },
-  { label: 'Destek (İngilizce)', href: grammarlens.supportUrl },
+  { label: 'Gizlilik (EN)', aria: 'Gizlilik (İngilizce)', href: grammarlens.privacyUrl },
+  { label: 'Koşullar (EN)', aria: 'Koşullar (İngilizce)', href: grammarlens.termsUrl },
+  { label: 'Destek (EN)', aria: 'Destek (İngilizce)', href: grammarlens.supportUrl },
 ];
 
 export const copy = {

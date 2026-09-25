@@ -118,7 +118,7 @@ const posts = await getPosts(me.mediumHandle, lang);
                 </div>
                 <span class="prod-docs">
                   {p.docs.map((l) => (
-                    <a href={localizeHref(l.href, lang)} hreflang={hreflangFor(l.href, lang)}>{l.label}</a>
+                    <a href={localizeHref(l.href, lang)} hreflang={hreflangFor(l.href, lang)} aria-label={l.aria}>{l.label}</a>
                   ))}
                 </span>
               </div>
