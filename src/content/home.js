@@ -129,7 +129,7 @@ export const copy = {
           {
             when: '2026 –',
             what: 'GrammarLens',
-            note: 'My own mobile product: user research, PRD, MVP, research and testing with seven people. Submitted for App Store review on 24 September 2026.',
+            note: 'My own mobile product: user research, PRD, MVP, testing with seven people. Submitted for App Store review on 24 September 2026.',
           },
         ],
       },
@@ -289,7 +289,7 @@ export const copy = {
           {
             when: '2026 –',
             what: 'GrammarLens',
-            note: "Kendi mobil ürünüm: kullanıcı araştırması, PRD, MVP, yedi kişiyle araştırma ve test. 24 Eylül 2026'da App Store incelemesine gönderildi.",
+            note: "Kendi mobil ürünüm: kullanıcı araştırması, PRD, MVP, yedi kişiyle test. 24 Eylül 2026'da App Store incelemesine gönderildi.",
           },
         ],
       },
