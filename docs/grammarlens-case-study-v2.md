@@ -195,7 +195,7 @@ The pattern paid off a week later. Apple's App Review rules require explicit per
 
 Premium allowed 10 practice sessions a day. Each session uses two server calls, and the proxy that protects the API key allows 15 calls per device per day. So a heavy subscriber would hit a generic "come back tomorrow" after about seven sessions. The options on the table were to raise the server limit to about 25 or lower the cap to 7.
 
-Framed that way, it was a configuration question. Framed as money, it wasn't. At about $0.034 per session `[estimated]`, 10 sessions a day is about $10.20 a month. The annual plan nets about $3.54 a month, assuming the 15% commission of Apple's Small Business Program, which I've applied for and not yet received. Break-even is about 3.5 sessions a day.
+Framed that way, it was a configuration question. Framed as money, it wasn't. At about $0.034 per session `[estimated]`, 10 sessions a day is about $10.20 a month. The annual plan nets about $3.54 a month at the 15% commission of Apple's Small Business Program, which approved GrammarLens in September 2026. Break-even is about 3.5 sessions a day.
 
 {C5 — Cap math}
 
@@ -616,3 +616,7 @@ Where these conflict with earlier items, these win. Copy is unchanged.
     beside it → "The mistake: two variables in one release." clearing
     the float at full width. A more balanced placement may be tried
     without breaking 29 or reordering the text.
+
+### Content updates
+
+33. **Small Business Program (26 September 2026).** Apple approved GrammarLens for the Small Business Program in September 2026; the cap-margin paragraph now states the 15% commission as fact instead of pending (EN and TR).

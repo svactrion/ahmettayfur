@@ -406,7 +406,7 @@ export const caseStudyCopy = {
           },
           {
             type: 'p',
-            html: `Framed that way, it was a configuration question. Framed as money, it wasn't. At about $0.034 per session ${estimated}, 10 sessions a day is about $10.20 a month. The annual plan nets about $3.54 a month, assuming the 15% commission of Apple's Small Business Program, which I've applied for and not yet received. Break-even is about 3.5 sessions a day.`,
+            html: `Framed that way, it was a configuration question. Framed as money, it wasn't. At about $0.034 per session ${estimated}, 10 sessions a day is about $10.20 a month. The annual plan nets about $3.54 a month at the 15% commission of Apple's Small Business Program, which approved GrammarLens in September 2026. Break-even is about 3.5 sessions a day.`,
           },
           { type: 'figure', name: 'capMath' },
           {
@@ -937,7 +937,7 @@ export const caseStudyCopy = {
           },
           {
             type: 'p',
-            html: `Böyle bakınca bu bir yapılandırma sorusuydu. Para açısından bakınca değildi. Oturum başına yaklaşık $0.034 ile ${estimatedTr}, günde 10 oturum ayda yaklaşık $10.20 ediyor. Yıllık plan ayda net yaklaşık $3.54 bırakıyor. Bu hesap, Apple'ın Small Business Program'ındaki 15% komisyonu varsayıyor; programa başvurdum ama henüz kabul almadım. Başa baş noktası günde yaklaşık 3.5 oturum.`,
+            html: `Böyle bakınca bu bir yapılandırma sorusuydu. Para açısından bakınca değildi. Oturum başına yaklaşık $0.034 ile ${estimatedTr}, günde 10 oturum ayda yaklaşık $10.20 ediyor. Yıllık plan, Apple'ın Small Business Program'ındaki 15% komisyonla ayda net yaklaşık $3.54 bırakıyor; GrammarLens Eylül 2026'da bu programa kabul edildi. Başa baş noktası günde yaklaşık 3.5 oturum.`,
           },
           { type: 'figure', name: 'capMath' },
           {

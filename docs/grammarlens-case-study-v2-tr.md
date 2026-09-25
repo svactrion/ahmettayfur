@@ -148,7 +148,7 @@ Bu yaklaşım bir hafta sonra karşılığını verdi. Apple'ın App Review kura
 Premium günde 10 pratik oturumuna izin veriyordu. Her oturum iki sunucu çağrısı kullanıyor; API anahtarını koruyan proxy ise cihaz başına günde 15 çağrıya izin veriyor. Yani yoğun kullanan bir abone, yaklaşık yedi oturumdan sonra genel bir "come back tomorrow" mesajına takılacaktı. Masadaki seçenekler, sunucu sınırını 25 civarına çıkarmak ya da oturum sınırını 7'ye indirmekti.
 
 **sections[1].blocks[19].html**
-Böyle bakınca bu bir yapılandırma sorusuydu. Para açısından bakınca değildi. Oturum başına yaklaşık $0.034 ile [estimated], günde 10 oturum ayda yaklaşık $10.20 ediyor. Yıllık plan ayda net yaklaşık $3.54 bırakıyor. Bu hesap, Apple'ın Small Business Program'ındaki 15% komisyonu varsayıyor; programa başvurdum ama henüz kabul almadım. Başa baş noktası günde yaklaşık 3.5 oturum.
+Böyle bakınca bu bir yapılandırma sorusuydu. Para açısından bakınca değildi. Oturum başına yaklaşık $0.034 ile [estimated], günde 10 oturum ayda yaklaşık $10.20 ediyor. Yıllık plan, Apple'ın Small Business Program'ındaki 15% komisyonla ayda net yaklaşık $3.54 bırakıyor; GrammarLens Eylül 2026'da bu programa kabul edildi. Başa baş noktası günde yaklaşık 3.5 oturum.
 
 **sections[1].blocks[21].html**
 İlk içgüdüm 3'tü. 5'te karar kıldım ve fiyatlara dokunmadım: ayda $5.99, yılda $49.99. Bir sınırı lansmandan sonra yükseltmek, düşürmekten daha kolay. Beş, her gün sonuna kadar kullanan yıllık bir abone için hâlâ başa baş noktasının üzerinde. Bahsim, neredeyse kimsenin bunu yapmayacağı ve kâr marjını en yüksek kullanımın değil ortalamanın belirleyeceği.
