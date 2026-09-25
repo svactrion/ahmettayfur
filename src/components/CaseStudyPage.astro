@@ -98,7 +98,7 @@ const rows =
                   const Figure = fig.component;
                   return (
                     <div class={fig.float ? 'fig fig-float' : 'fig'}>
-                      <Figure {...t.figures[b.name]} />
+                      <Figure {...t.figures[b.name]} ui={t.ui} />
                     </div>
                   );
                 }
@@ -107,7 +107,7 @@ const rows =
                 ) : b.type === 'h3' ? (
                   <h3>{b.text}</h3>
                 ) : b.type === 'reframe' ? (
-                  <Reframe first={b.first} actual={b.actual} />
+                  <Reframe first={b.first} actual={b.actual} ui={t.ui} />
                 ) : b.type === 'ol' ? (
                   <ol>
                     {b.items.map((item) => (

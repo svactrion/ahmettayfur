@@ -11,9 +11,9 @@
 //   rows: [{ label, limit, worst }]
 //   caption, label
 import ChartFigure from './ChartFigure.astro';
-import { VARIANTS } from './chart-utils.js';
+import { VARIANTS, fill } from './chart-utils.js';
 
-const { rows, caption, label } = Astro.props;
+const { rows, caption, label, ui } = Astro.props;
 
 const TRACK_H = 18;
 const PITCH = 90;
@@ -24,7 +24,7 @@ const n = (v) => v.toLocaleString('en-US');
 const headroom = (r) => Math.round((1 - r.worst / r.limit) * 100);
 ---
 
-<ChartFigure caption={caption} label={label}>
+<ChartFigure caption={caption} label={label} ui={ui}>
   {
     VARIANTS.map(({ name, width: W }) => {
       const x = (tokens) => (tokens / maxLimit) * W;
@@ -40,7 +40,7 @@ const headroom = (r) => Math.round((1 - r.worst / r.limit) * 100);
                 <rect class="track" x="0.75" y={y + 27} width={x(r.limit) - 1.5} height={TRACK_H} rx="4" />
                 <rect class="fill" x="0" y={y + 27} width={x(r.worst)} height={TRACK_H} rx="4" />
                 <text class="value" x="0" y={y + 68}>
-                  {`${n(r.worst)} of ${n(r.limit)} tokens, ${headroom(r)}% headroom`}
+                  {fill(ui.tokenBudget.value, { worst: n(r.worst), limit: n(r.limit), n: headroom(r) })}
                 </text>
               </g>
             );
@@ -53,10 +53,10 @@ const headroom = (r) => Math.round((1 - r.worst / r.limit) * 100);
   <Fragment slot="table">
     <thead>
       <tr>
-        <th scope="col">Version</th>
-        <th scope="col">Limit</th>
-        <th scope="col">Worst response</th>
-        <th scope="col">Headroom</th>
+        <th scope="col">{ui.tokenBudget.version}</th>
+        <th scope="col">{ui.tokenBudget.limit}</th>
+        <th scope="col">{ui.tokenBudget.worst}</th>
+        <th scope="col">{ui.tokenBudget.headroom}</th>
       </tr>
     </thead>
     <tbody>

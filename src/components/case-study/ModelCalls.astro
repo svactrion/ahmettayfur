@@ -13,14 +13,14 @@
 //   legend: { model, device }
 //   caption, label
 import ChartFigure from './ChartFigure.astro';
-import { VARIANTS, textWidth, charsFor, wrap } from './chart-utils.js';
+import { VARIANTS, textWidth, charsFor, wrap, fill } from './chart-utils.js';
 
-const { flows, legend, caption, label } = Astro.props;
+const { flows, legend, caption, label, ui } = Astro.props;
 
 const LINE = 19; // line height inside boxes and notes
 const PAD = 12; // text inset inside a box
 const ARROW = 24; // room between boxes for an arrow
-const callsText = (n) => (n === 1 ? '1 model call' : `${n} model calls`);
+const callsText = (n) => (n === 1 ? ui.modelCalls.callOne : fill(ui.modelCalls.callMany, { n }));
 
 function layout(W, stacked) {
   const maxSteps = Math.max(...flows.map((f) => f.steps.length));
@@ -86,17 +86,17 @@ const drawings = VARIANTS.map((v) => ({ ...v, ...layout(v.width, v.name === 's')
 
 // The data table's Steps cell as one sentence. The step labels are
 // capitalized for the diagram boxes; mid-sentence, every step after the
-// first starts lowercase.
+// first starts lowercase, by the page language's rules (Turkish I → ı).
 const stepsText = (flow) =>
   flow.steps
     .map((s, i) => {
-      const text = i === 0 ? s.text : s.text[0].toLowerCase() + s.text.slice(1);
-      return s.model ? `${text} (model)` : text;
+      const text = i === 0 ? s.text : s.text[0].toLocaleLowerCase(ui.locale) + s.text.slice(1);
+      return s.model ? `${text}${ui.modelCalls.model}` : text;
     })
-    .join(', then ') + (flow.note ? `. ${flow.note}` : '');
+    .join(ui.then) + (flow.note ? `. ${flow.note}` : '');
 ---
 
-<ChartFigure caption={caption} label={label}>
+<ChartFigure caption={caption} label={label} ui={ui}>
   {
     drawings.map((d) => (
       <svg class={`model-calls v v-${d.name}`} viewBox={`0 0 ${d.W} ${d.H}`} role="img" aria-label={label}>
@@ -163,9 +163,9 @@ const stepsText = (flow) =>
   <Fragment slot="table">
     <thead>
       <tr>
-        <th scope="col">Flow</th>
-        <th scope="col">Steps</th>
-        <th scope="col">Model calls</th>
+        <th scope="col">{ui.modelCalls.flow}</th>
+        <th scope="col">{ui.modelCalls.steps}</th>
+        <th scope="col">{ui.modelCalls.calls}</th>
       </tr>
     </thead>
     <tbody>

@@ -19,7 +19,7 @@
 import ChartFigure from './ChartFigure.astro';
 import { VARIANTS, textWidth, charsFor, wrap } from './chart-utils.js';
 
-const { bars, xMax, xStep, legend, caption, label } = Astro.props;
+const { bars, xMax, xStep, legend, caption, label, ui } = Astro.props;
 
 const LINE = 19;
 const BAR_H = 28;
@@ -61,7 +61,7 @@ function layout(W, name) {
 const drawings = VARIANTS.map((v) => layout(v.width, v.name));
 ---
 
-<ChartFigure caption={caption} label={label}>
+<ChartFigure caption={caption} label={label} ui={ui}>
   {
     drawings.map((d) => (
       <svg class={`free-cost v v-${d.name}`} viewBox={`0 0 ${d.W} ${d.H}`} role="img" aria-label={label}>
@@ -123,9 +123,9 @@ const drawings = VARIANTS.map((v) => layout(v.width, v.name));
   <Fragment slot="table">
     <thead>
       <tr>
-        <th scope="col">Free user, 30 days</th>
-        <th scope="col">Cost per month</th>
-        <th scope="col">Provenance</th>
+        <th scope="col">{ui.freeCost.user}</th>
+        <th scope="col">{ui.freeCost.cost}</th>
+        <th scope="col">{ui.freeCost.provenance}</th>
       </tr>
     </thead>
     <tbody>

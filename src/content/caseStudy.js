@@ -51,6 +51,40 @@ export const caseStudyCopy = {
     backLinkText: 'Back to the product',
     endLinkText: 'Product page',
 
+    // Labels the case study components draw themselves (Reframe, the chart
+    // frame and data tables). {n}, {worst} and {limit} are filled in by
+    // the component; `locale` lowercases the C3 table steps.
+    ui: {
+      locale: 'en',
+      then: ', then ',
+      showChartData: 'Show chart data',
+      firstFraming: 'First framing',
+      actualProblem: 'Actual problem',
+      timeline: { date: 'Date (2026)', event: 'Event' },
+      modelCalls: {
+        flow: 'Flow',
+        steps: 'Steps',
+        calls: 'Model calls',
+        callOne: '1 model call',
+        callMany: '{n} model calls',
+        model: ' (model)',
+      },
+      freeCost: { user: 'Free user, 30 days', cost: 'Cost per month', provenance: 'Provenance' },
+      capMath: {
+        sessions: 'Sessions per day',
+        cost: 'Model cost per month (estimated)',
+        note: 'Note',
+        about: 'about {n}',
+      },
+      tokenBudget: {
+        version: 'Version',
+        limit: 'Limit',
+        worst: 'Worst response',
+        headroom: 'Headroom',
+        value: '{worst} of {limit} tokens, {n}% headroom',
+      },
+    },
+
     summary: {
       label: 'Summary',
       blocks: [

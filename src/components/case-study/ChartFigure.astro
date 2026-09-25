@@ -18,9 +18,15 @@
 // display: none.
 //
 // Slots: default = the SVGs; "table" = <thead>/<tbody> for the data table.
+// Props: caption, label, ui (caseStudyCopy.<lang>.ui, for the disclosure label).
 import './figures.css';
 
-const { caption, label } = Astro.props;
+const { caption, label, ui } = Astro.props;
+
+// The summary label keeps the line breaks the plain text used to have
+// there, so the rendered HTML stayed byte-for-byte the same when it moved
+// into ui.
+const summaryLabel = `\n${ui.showChartData}\n`;
 ---
 
 <figure class="chart">
@@ -32,9 +38,7 @@ const { caption, label } = Astro.props;
     <summary>
       <svg class="cs-chevron" viewBox="0 0 16 16" aria-hidden="true">
         <path d="M6 3.5 10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
-      </svg>
-      Show chart data
-    </summary>
+      </svg>{summaryLabel}</summary>
     <div class="table-wrap">
       <table class="table">
         <slot name="table" />

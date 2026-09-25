@@ -18,9 +18,9 @@
 //   text: { xAxis, yAxis, line, estimated, breakEven: [..lines] }
 //   caption, label
 import ChartFigure from './ChartFigure.astro';
-import { VARIANTS, textWidth } from './chart-utils.js';
+import { VARIANTS, textWidth, fill } from './chart-utils.js';
 
-const { costPerSession, days, xMax, yMax, yStep, plans, caps, text, caption, label } = Astro.props;
+const { costPerSession, days, xMax, yMax, yStep, plans, caps, text, caption, label, ui } = Astro.props;
 
 const cost = (s) => s * costPerSession * days;
 const usd = (v) => `$${v.toFixed(2)}`;
@@ -70,7 +70,7 @@ const xTicks = Array.from({ length: xMax + 1 }, (_, i) => i);
 const tableSessions = [1, breakEven, ...caps.map((c) => c.value)].sort((a, b) => a - b);
 ---
 
-<ChartFigure caption={caption} label={label}>
+<ChartFigure caption={caption} label={label} ui={ui}>
   {
     drawings.map((d) => (
       <svg class={`cap-chart v v-${d.name}`} viewBox={`0 0 ${d.W} ${d.H}`} role="img" aria-label={label}>
@@ -195,9 +195,9 @@ const tableSessions = [1, breakEven, ...caps.map((c) => c.value)].sort((a, b) =>
   <Fragment slot="table">
     <thead>
       <tr>
-        <th scope="col">Sessions per day</th>
-        <th scope="col">Model cost per month (estimated)</th>
-        <th scope="col">Note</th>
+        <th scope="col">{ui.capMath.sessions}</th>
+        <th scope="col">{ui.capMath.cost}</th>
+        <th scope="col">{ui.capMath.note}</th>
       </tr>
     </thead>
     <tbody>
@@ -206,7 +206,7 @@ const tableSessions = [1, breakEven, ...caps.map((c) => c.value)].sort((a, b) =>
           const cap = caps.find((c) => c.value === s);
           return (
             <tr>
-              <td>{s === breakEven ? `about ${s.toFixed(1)}` : s}</td>
+              <td>{s === breakEven ? fill(ui.capMath.about, { n: s.toFixed(1) }) : s}</td>
               <td>{usd(cost(s))}</td>
               <td>{cap ? cap.label : s === breakEven ? text.breakEven.join(' ') : ''}</td>
             </tr>

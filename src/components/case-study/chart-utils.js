@@ -31,6 +31,9 @@ function greedy(text, maxChars) {
   return lines;
 }
 
+// Fills {name} placeholders in a ui string: fill('{n} model calls', { n: 2 }).
+export const fill = (text, values) => text.replace(/\{(\w+)\}/g, (_, k) => values[k]);
+
 // Word wrap by character count. Greedy wrapping at the limit sets the
 // line count; the text is then re-wrapped at the narrowest width that
 // keeps that count, so lines come out even instead of leaving one short

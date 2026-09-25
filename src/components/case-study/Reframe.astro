@@ -6,16 +6,16 @@
 // see it, only incomplete); the actual problem is the strongest text in
 // its section. A rail on the left runs from a hollow marker to a filled
 // accent one, so the reading direction is visible, not just implied.
-const { first, actual } = Astro.props;
+const { first, actual, ui } = Astro.props;
 ---
 
 <dl class="reframe">
   <div class="step first">
-    <dt>First framing</dt>
+    <dt>{ui.firstFraming}</dt>
     <dd>{first}</dd>
   </div>
   <div class="step actual">
-    <dt>Actual problem</dt>
+    <dt>{ui.actualProblem}</dt>
     <dd>{actual}</dd>
   </div>
 </dl>

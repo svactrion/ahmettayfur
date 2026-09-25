@@ -19,12 +19,12 @@
 //   caption, label
 import ChartFigure from './ChartFigure.astro';
 
-const { groups, caption, label } = Astro.props;
+const { groups, caption, label, ui } = Astro.props;
 const all = groups.flatMap((g) => g.events);
 const lastEvent = all.at(-1);
 ---
 
-<ChartFigure caption={caption} label={label}>
+<ChartFigure caption={caption} label={label} ui={ui}>
   <ol class="timeline" role="list">
     {
       groups.map((group, gi) => (
@@ -48,8 +48,8 @@ const lastEvent = all.at(-1);
   <Fragment slot="table">
     <thead>
       <tr>
-        <th scope="col">Date (2026)</th>
-        <th scope="col">Event</th>
+        <th scope="col">{ui.timeline.date}</th>
+        <th scope="col">{ui.timeline.event}</th>
       </tr>
     </thead>
     <tbody>
