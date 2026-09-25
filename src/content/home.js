@@ -42,7 +42,7 @@ export const copy = {
     heroTagline:
       'Building for myself is where it starts; shipping is where I learn what the market actually wants.',
     heroBody:
-      'I finished my statistics degree this June 2026 and I am building my own products to grow into product management: user research, PRD, MVP, testing and iteration, all of it hands-on. Looking for a role where I can keep learning at that pace.',
+      'I finished my statistics degree in June 2026 and I am building my own products to grow into product management: user research, PRD, MVP, testing and iteration, all of it hands-on. Looking for a role where I can keep learning at that pace.',
     heroAlt: 'Illustrated portrait of Ahmet Emin Tayfur',
     cta1: 'See the products',
     cta2: 'Read the articles',
@@ -60,7 +60,7 @@ export const copy = {
     whoTitle: 'Who am I',
     whoBody: [
       'I finished a statistics degree in June 2026. Four years of it left me with one habit that stuck: before believing a number, ask how it was collected. Most of what I bring to product work comes from that.',
-      'The rest I learned by building. GrammarLens started as my own problem: I kept correcting my English without ever understanding what I had done wrong. So I talked to people with the same problem, wrote the PRD, taught myself Flutter and built the app on my own. Four testers made me cut two features I was attached to.',
+      "The rest I learned by building. GrammarLens started as my own problem: I kept correcting my English without understanding what I was getting wrong. I wrote the PRD, built the app with AI coding agents that I directed through written decision reports, and tested it with seven people. They showed me that the feature I'd built the app around, naming the grammar rule, was the thing getting in their way.",
       'This site is the short version. It is here to show how I work rather than list everything I have done. Tools I use regularly: Flutter and Dart, SQL, Power BI, Excel, statistical modelling. I am looking for a product management role where the learning stays this fast.',
     ],
 
@@ -91,10 +91,10 @@ export const copy = {
     products: [
       {
         name: 'GrammarLens',
-        status: 'Not yet released',
+        status: 'In App Store review',
         kicker: 'AI-powered learning app',
-        desc: "GrammarLens explains why an English sentence is wrong instead of just marking it wrong. It's built in Flutter and calls a language model to generate the explanation in context. I did the user research, wrote the PRD, built the app, tested it with four people, and made two rounds of changes based on what they said. Gamified practice is next on the roadmap.",
-        facts: ['4 user interviews', '2 iteration rounds', 'Built solo'],
+        desc: "GrammarLens is an iOS app for English learners who speak fluently but can't reliably apply the grammar an exam like IELTS asks for. It builds practice around your own mistakes and explains them in plain language, not rule names. I did the research, wrote the PRD and made every product decision; AI coding agents wrote the code. Version 1.0 went to App Store review on 24 September 2026.",
+        facts: ['4 interviews', '3 usability tests', 'Solo project'],
         stack: ['Flutter / Dart', 'Claude API', 'Material 3'],
         caseHref: grammarlens.caseStudyUrl,
         sourceHref: grammarlens.sourceUrl,
@@ -106,19 +106,19 @@ export const copy = {
     principles: [
       {
         title: 'I start from the problem, not the feature',
-        body: 'GrammarLens began because I kept making the same English mistakes without learning anything from them. I talked to people with that habit before I opened an editor, so the PRD came out of those conversations rather than my own wish list.',
+        body: "GrammarLens started because I kept making the same English mistakes and learning nothing from them. My first version still carried an assumption I hadn't noticed: that naming the grammar rule was the feature. Seven people showed me it wasn't, and the product changed around what they said.",
       },
       {
         title: 'I state the real number',
-        body: 'I tested with four people, not forty. Four was what I could actually reach, and it was enough to cut two features I was attached to. I would rather give you the real sample size than round it into something that sounds better.',
+        body: "I tested with seven people, not seventy, and one of the interviews was with myself. Seven is not a sample, but it was enough to show me which way I was wrong. I'd rather state the real sample size than round up to one that sounds better.",
       },
       {
         title: 'I treat cost as a product decision',
-        body: 'Every grammar check calls a language model, and every call costs money. Batching the evaluations and letting the user choose question length was not a technical detail; it decided whether the product could exist at all.',
+        body: "Every generated practice set and every graded answer calls a language model, and every call has a price. Grading the free Daily Test on the device, writing the first test by hand and capping paid practice at five sessions a day weren't technical details; they decided whether the product could exist.",
       },
       {
         title: 'I finish things',
-        body: 'Learning Flutter was never the goal — shipping was. An idea that has not reached a real screen has not been tested, only described.',
+        body: "Writing the code myself was never the goal; shipping was. AI coding agents wrote it from my written decision reports, and my job was the decisions. An idea that hasn't reached a real screen hasn't been tested, only described.",
       },
     ],
 
@@ -129,7 +129,7 @@ export const copy = {
           {
             when: '2026 –',
             what: 'GrammarLens',
-            note: 'My own mobile product: user research, PRD, MVP, testing with four people, two rounds of changes. Not in the App Store yet.',
+            note: 'My own mobile product: user research, PRD, MVP, research and testing with seven people. Submitted for App Store review on 24 September 2026.',
           },
         ],
       },
@@ -220,7 +220,7 @@ export const copy = {
     whoTitle: 'Ben kimim',
     whoBody: [
       "Haziran 2026'da istatistik bölümünden mezun oldum. Dört yıllık eğitimden bana kalan en kalıcı alışkanlık şu: bir sayıya inanmadan önce nasıl toplandığını sormak. Ürün tarafında yaptığım işlerin çoğu bu alışkanlıktan besleniyor.",
-      "Gerisini ürün geliştirirken öğrendim. GrammarLens kendi problemim olarak başladı: İngilizcemi sürekli düzeltiyordum ama neyi yanlış yaptığımı bir türlü anlamıyordum. Aynı sorunu yaşayan insanlarla konuştum, PRD'yi yazdım, Flutter'ı kendi kendime öğrendim ve uygulamayı tek başıma geliştirdim. Dört test kullanıcısı sayesinde çok bağlandığım iki özelliği çıkardım.",
+      "Gerisini ürün geliştirirken öğrendim. GrammarLens kendi problemim olarak başladı: İngilizcemi sürekli düzeltiyordum ama neyi yanlış yaptığımı bir türlü anlamıyordum. PRD'yi yazdım, uygulamayı yazılı karar raporlarıyla yönlendirdiğim yapay zekâ kodlama ajanlarıyla geliştirdim ve yedi kişiyle test ettim. Uygulamayı etrafında kurduğum özelliğin, yani dilbilgisi kuralının adını vermenin, onların önündeki asıl engel olduğunu gösterdiler.",
       'Bu site işin kısa hâli. Amacı yaptığım her şeyi sıralamak değil, nasıl çalıştığımı göstermek. Düzenli kullandığım araçlar: Flutter ve Dart, SQL, Power BI, Excel, istatistiksel modelleme. Öğrenmeye bu hızla devam edebileceğim bir ürün yöneticiliği rolü arıyorum.',
     ],
 
@@ -251,10 +251,10 @@ export const copy = {
     products: [
       {
         name: 'GrammarLens',
-        status: 'Henüz yayında değil',
+        status: 'App Store incelemesinde',
         kicker: 'Yapay zekâ destekli öğrenme uygulaması',
-        desc: "GrammarLens, bir İngilizce cümleyi yalnızca yanlış diye işaretlemiyor; neden yanlış olduğunu açıklıyor. Flutter ile geliştirildi; açıklamaları cümlenin bağlamına göre bir dil modeli üretiyor. Kullanıcı araştırmasını yaptım, PRD'yi yazdım, uygulamayı geliştirdim, dört kişiyle test ettim ve geri bildirimlerine göre iki tur değişiklik yaptım. Yol haritasındaki sıradaki adım oyunlaştırılmış pratik.",
-        facts: ['4 kullanıcı görüşmesi', '2 iterasyon turu', 'Tek başıma geliştirdim'],
+        desc: "GrammarLens, İngilizceyi akıcı konuşan ama IELTS gibi bir sınavın istediği dilbilgisini güvenle uygulayamayanlar için bir iOS uygulaması. Kullanıcının kendi hatalarından yola çıkarak alıştırma üretiyor ve bu hataları kural adlarıyla değil, sade bir dille açıklıyor. Araştırmayı yaptım, PRD'yi yazdım ve bütün ürün kararlarını verdim; kodu yapay zekâ kodlama ajanları yazdı. 1.0 sürümü 24 Eylül 2026'da App Store incelemesine gönderildi.",
+        facts: ['4 görüşme', '3 kullanılabilirlik testi', 'Tek kişilik proje'],
         stack: ['Flutter / Dart', 'Claude API', 'Material 3'],
         caseHref: grammarlens.caseStudyUrl,
         sourceHref: grammarlens.sourceUrl,
@@ -266,19 +266,19 @@ export const copy = {
     principles: [
       {
         title: 'Özellikten değil, problemden başlarım',
-        body: 'GrammarLens, aynı İngilizce hataları tekrar tekrar yapıp bunlardan hiçbir şey öğrenmediğimi fark ettiğimde başladı. Kod yazmaya başlamadan önce aynı sorunu yaşayan insanlarla konuştum; PRD benim istek listemden değil, bu konuşmalardan çıktı.',
+        body: 'GrammarLens, aynı İngilizce hataları tekrar tekrar yapıp bunlardan hiçbir şey öğrenmediğimi fark ettiğimde başladı. İlk sürümüm yine de fark etmediğim bir varsayımı taşıyordu: dilbilgisi kuralının adını vermenin asıl özellik olduğu. Yedi kişi bunun böyle olmadığını gösterdi ve ürün onların söyledikleri etrafında değişti.',
       },
       {
         title: 'Gerçek sayıyı söylerim',
-        body: 'Kırk kişiyle değil, dört kişiyle test ettim. Dört, gerçekten ulaşabildiğim sayıydı ve çok bağlandığım iki özelliği çıkarmama yetti. Kulağa daha iyi gelen bir sayıya yuvarlamaktansa gerçek örneklem büyüklüğünü söylemeyi tercih ederim.',
+        body: 'Yetmiş kişiyle değil, yedi kişiyle test ettim; görüşmelerden biri de kendimleydi. Yedi kişi bir örneklem değil, ama hangi yönde yanıldığımı görmeme yetti. Kulağa daha iyi gelen bir sayıya yuvarlamaktansa gerçek örneklem büyüklüğünü söylemeyi tercih ederim.',
       },
       {
         title: 'Maliyeti bir ürün kararı olarak görürüm',
-        body: 'Her dilbilgisi kontrolü bir dil modeline çağrı yapıyor ve her çağrının bir maliyeti var. Değerlendirmeleri toplu yapmak ve soru uzunluğunu kullanıcının seçimine bırakmak teknik bir ayrıntı değildi; ürünün var olup olamayacağını bu kararlar belirledi.',
+        body: "Üretilen her pratik seti ve puanlanan her cevap bir dil modeline çağrı yapıyor ve her çağrının bir fiyatı var. Ücretsiz Daily Test'i cihazda puanlamak, ilk testi elle yazmak ve ücretli pratiği günde beş oturumla sınırlamak teknik ayrıntılar değildi; ürünün var olup olamayacağını bu kararlar belirledi.",
       },
       {
         title: 'İşi bitiririm',
-        body: 'Amacım Flutter öğrenmek değil, ürünü yayına çıkarmaktı. Gerçek bir ekrana ulaşmamış bir fikir test edilmiş sayılmaz, yalnızca anlatılmış olur.',
+        body: 'Kodu kendim yazmak hiçbir zaman amaç değildi; amaç ürünü yayına çıkarmaktı. Kodu, yazılı karar raporlarımdan yola çıkarak yapay zekâ kodlama ajanları yazdı; benim işim kararlardı. Gerçek bir ekrana ulaşmamış bir fikir test edilmiş sayılmaz, yalnızca anlatılmış olur.',
       },
     ],
 
@@ -289,7 +289,7 @@ export const copy = {
           {
             when: '2026 –',
             what: 'GrammarLens',
-            note: "Kendi mobil ürünüm: kullanıcı araştırması, PRD, MVP, dört kişiyle test ve iki tur değişiklik. Henüz App Store'da değil.",
+            note: "Kendi mobil ürünüm: kullanıcı araştırması, PRD, MVP, yedi kişiyle araştırma ve test. 24 Eylül 2026'da App Store incelemesine gönderildi.",
           },
         ],
       },

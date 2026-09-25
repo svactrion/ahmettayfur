@@ -21,11 +21,11 @@ export const productsCopy = {
       lede: "Things I've built far enough to put in front of someone who wasn't obliged to be nice about it.",
     },
     grammarlensEntry: {
-      note: { label: '01', line1: 'Flutter · iOS', line2: 'In review prep' },
+      note: { label: '01', line1: 'Flutter · iOS', line2: 'In App Store review' },
       cardTitle: 'GrammarLens',
       cardText:
         'An English grammar app that explains why a sentence is wrong, in context, instead of just flagging it.',
-      cardStatus: 'Preparing App Store submission',
+      cardStatus: 'Submitted for App Store review',
     },
   },
 
@@ -40,11 +40,11 @@ export const productsCopy = {
       lede: 'Bana nazik davranmak zorunda olmayan birinin önüne koyabilecek kadar ilerlettiğim işler.',
     },
     grammarlensEntry: {
-      note: { label: '01', line1: 'Flutter · iOS', line2: 'İnceleme hazırlığında' },
+      note: { label: '01', line1: 'Flutter · iOS', line2: 'App Store incelemesinde' },
       cardTitle: 'GrammarLens',
       cardText:
         'Bir cümlenin neden yanlış olduğunu, sadece işaretlemek yerine bağlamı içinde açıklayan bir İngilizce dilbilgisi uygulaması.',
-      cardStatus: 'App Store başvurusu hazırlanıyor',
+      cardStatus: 'App Store incelemesine gönderildi',
     },
   },
 };
@@ -59,9 +59,9 @@ export const grammarlensPageCopy = {
     note: { label: 'GrammarLens', line1: 'iOS', line2: 'Built in Flutter', line3: 'Solo project' },
     status: 'Not released yet',
     title: 'GrammarLens',
-    lede: 'Most grammar tools tell you a sentence is wrong and hand you a correction. GrammarLens tells you which rule you broke and why the correct version works — so the next sentence is easier.',
+    lede: "Most grammar tools tell you a sentence is wrong and hand you a correction. GrammarLens builds practice around the mistakes you actually make and explains every answer in plain language. The rule's name is there only if you want it.",
     downloadLink: 'Download on the App Store',
-    notReleasedNote: "The app is finished and being prepared for App Store review. There's nothing to download yet.",
+    notReleasedNote: "Version 1.0 was submitted for App Store review on 24 September 2026 and isn't approved yet. There's nothing to download yet.",
 
     whatItDoes: {
       label: 'What it does',
@@ -84,7 +84,7 @@ export const grammarlensPageCopy = {
 
     whoFor: {
       label: "Who it's for",
-      body: "People who already speak some English and keep making the same handful of mistakes — usually articles, tenses, and prepositions. If you're starting from zero, a course will serve you better than this app.",
+      body: "English learners who became fluent through games, series and friends, but can't reliably apply the grammar an exam like IELTS asks for: gerunds versus infinitives, modals, modal past forms. If you're starting from zero, a course will serve you better than this app.",
     },
 
     more: {
@@ -106,9 +106,9 @@ export const grammarlensPageCopy = {
     note: { label: 'GrammarLens', line1: 'iOS', line2: 'Flutter ile geliştirildi', line3: 'Tek kişilik proje' },
     status: 'Henüz yayında değil',
     title: 'GrammarLens',
-    lede: 'Çoğu dilbilgisi aracı bir cümlenin yanlış olduğunu söyler ve sana bir düzeltme sunar. GrammarLens ise hangi kuralı çiğnediğini ve doğru hâlinin neden doğru olduğunu anlatır; böylece bir sonraki cümleyi kurmak kolaylaşır.',
+    lede: 'Çoğu dilbilgisi aracı bir cümlenin yanlış olduğunu söyler ve sana bir düzeltme sunar. GrammarLens ise gerçekten yaptığın hatalardan alıştırma üretir ve her cevabı sade bir dille açıklar. Kuralın adı yalnızca istersen karşına çıkar.',
     downloadLink: "App Store'dan indir",
-    notReleasedNote: 'Uygulama tamamlandı ve App Store incelemesine hazırlanıyor. Şu an indirilecek bir şey yok.',
+    notReleasedNote: "1.0 sürümü 24 Eylül 2026'da App Store incelemesine gönderildi, henüz onaylanmadı. Şu an indirilebilecek bir şey yok.",
 
     whatItDoes: {
       label: 'Ne işe yarar',
@@ -131,7 +131,7 @@ export const grammarlensPageCopy = {
 
     whoFor: {
       label: 'Kimin için',
-      body: "Biraz İngilizce konuşabilen ama aynı birkaç hatayı tekrar tekrar yapanlar için; bu hatalar genellikle article'lar (a/an/the), zamanlar ve edatlarla ilgili. Sıfırdan başlıyorsan bir kurs bu uygulamadan daha işine yarar.",
+      body: "İngilizceyi oyunlar, diziler ve arkadaşları sayesinde akıcı konuşur hâle gelmiş ama IELTS gibi bir sınavın istediği dilbilgisini güvenle uygulayamayanlar için: gerund mu infinitive mi, modal'lar, modal'ların geçmiş biçimleri. Sıfırdan başlıyorsan bir kurs bu uygulamadan daha işine yarar.",
     },
 
     more: {
