@@ -627,8 +627,11 @@ const posts = await getPosts(me.mediumHandle, lang);
     min-height: 44px;
   }
 
+  /* A link that doesn't fit moves to the next line whole; a label such as
+     "Gizlilik (İngilizce)" never breaks inside itself. */
   .prod-docs {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 12px;
     font-size: 13px;
@@ -638,6 +641,7 @@ const posts = await getPosts(me.mediumHandle, lang);
     display: inline-flex;
     align-items: center;
     min-height: 44px;
+    white-space: nowrap;
     color: var(--color-neutral-400);
   }
 
