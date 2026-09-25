@@ -39,7 +39,7 @@ const posts = await getPosts(me.mediumHandle);
         src="/img/hero-arms.webp"
         width="266"
         height="840"
-        alt="Illustrated portrait of Ahmet Emin Tayfur"
+        alt={t.heroAlt}
       />
       <span class="shadow" aria-hidden="true"></span>
     </div>
@@ -172,10 +172,10 @@ const posts = await getPosts(me.mediumHandle);
         <p class="kicker">{t.backgroundLabel}</p>
         <div class="background-controls">
           <span class="hint">{t.scrollHint}</span>
-          <button type="button" class="btn btn-icon" data-track="prev" aria-label="Previous"
+          <button type="button" class="btn btn-icon" data-track="prev" aria-label={t.trackPrev}
             >&larr;</button
           >
-          <button type="button" class="btn btn-icon" data-track="next" aria-label="Next"
+          <button type="button" class="btn btn-icon" data-track="next" aria-label={t.trackNext}
             >&rarr;</button
           >
         </div>
@@ -251,7 +251,7 @@ const posts = await getPosts(me.mediumHandle);
       <a class="btn btn-secondary" href={me.linkedin} target="_blank" rel="noopener">LinkedIn</a>
       <a class="btn btn-secondary" href={me.medium} target="_blank" rel="noopener">Medium</a>
       <a class="btn btn-secondary" href={me.github} target="_blank" rel="noopener">GitHub</a>
-      <a class="btn btn-secondary" href={`mailto:${me.directEmail}`}>Direct contact</a>
+      <a class="btn btn-secondary" href={`mailto:${me.directEmail}`}>{t.directContact}</a>
     </div>
   </section>
 
@@ -261,12 +261,12 @@ const posts = await getPosts(me.mediumHandle);
       <h2>{t.byeTitle}</h2>
       <p>{t.byeNote}</p>
     </div>
-    <a class="bye-fig-link" href="#top" aria-label="Back to top">
+    <a class="bye-fig-link" href="#top" aria-label={t.backToTop}>
       <div class="fig bye-fig" aria-hidden="true">
         <span class="glow" aria-hidden="true"></span>
         <img src="/img/bye.webp" width="424" height="760" alt="" />
       </div>
-      <span class="bye-fig-hint" aria-hidden="true">Back to top</span>
+      <span class="bye-fig-hint" aria-hidden="true">{t.backToTop}</span>
       <span class="hint bye-fig-caption">{t.backToTopHint}</span>
     </a>
   </section>

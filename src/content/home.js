@@ -29,6 +29,8 @@ export const copy = {
     chrome: {
       skip: 'Skip to content',
       langSwitchAria: 'Switch to Turkish',
+      navAria: 'Primary',
+      grammarlensOgAlt: 'GrammarLens — AI-Powered Grammar Coach',
     },
 
     nav: { who: 'Who am I', products: 'Products', articles: 'Articles', contact: 'Contact' },
@@ -39,6 +41,7 @@ export const copy = {
       'Building for myself is where it starts; shipping is where I learn what the market actually wants.',
     heroBody:
       'I finished my statistics degree this June 2026 and I am building my own products to grow into product management: user research, PRD, MVP, testing and iteration, all of it hands-on. Looking for a role where I can keep learning at that pace.',
+    heroAlt: 'Illustrated portrait of Ahmet Emin Tayfur',
     cta1: 'See the products',
     cta2: 'Read the articles',
 
@@ -62,6 +65,8 @@ export const copy = {
     principlesLabel: 'How I work',
     backgroundLabel: 'Background',
     scrollHint: 'Swipe',
+    trackPrev: 'Previous',
+    trackNext: 'Next',
 
     articlesTitle: 'Articles',
     artFeed: 'From Medium',
@@ -74,10 +79,12 @@ export const copy = {
     contactTitle: 'Contact',
     contactNote:
       'Support requests for the apps, work conversations and everything else. I answer from here first.',
+    directContact: 'Direct contact',
 
     byeTitle: 'That is the whole site.',
     byeNote: 'If any of it was worth a conversation, the address above reaches me.',
     backToTopHint: 'Tap to go back to the top.',
+    backToTop: 'Back to top',
 
     products: [
       {
@@ -182,6 +189,8 @@ export const copy = {
     chrome: {
       skip: 'İçeriğe atla',
       langSwitchAria: 'İngilizceye geç',
+      navAria: 'Ana menü',
+      grammarlensOgAlt: 'GrammarLens — yapay zekâ destekli dilbilgisi koçu',
     },
 
     nav: { who: 'Ben kimim', products: 'Ürünler', articles: 'Yazılar', contact: 'İletişim' },
@@ -192,6 +201,7 @@ export const copy = {
       'Her şey kendim için üretmekle başlıyor; piyasanın gerçekte ne istediğini ise ürünü yayına aldığımda öğreniyorum.',
     heroBody:
       "Haziran 2026'da istatistik bölümünden mezun oldum. Ürün yöneticiliğine kendi ürünlerimi geliştirerek hazırlanıyorum; kullanıcı araştırmasından PRD'ye, MVP'den test ve iterasyona kadar her adımı kendim yürütüyorum. Bu hızla öğrenmeye devam edebileceğim bir ürün rolü arıyorum.",
+    heroAlt: "Ahmet Emin Tayfur'un illüstrasyon portresi",
     cta1: 'Ürünlere bak',
     cta2: 'Yazıları oku',
 
@@ -215,6 +225,8 @@ export const copy = {
     principlesLabel: 'Nasıl çalışırım',
     backgroundLabel: 'Özgeçmiş',
     scrollHint: 'Kaydır',
+    trackPrev: 'Önceki',
+    trackNext: 'Sonraki',
 
     articlesTitle: 'Yazılar',
     artFeed: "Medium'dan",
@@ -227,10 +239,12 @@ export const copy = {
     contactTitle: 'İletişim',
     contactNote:
       'Uygulamalarla ilgili destek talepleri, iş görüşmeleri ya da başka her şey için. En hızlı buradan dönüyorum.',
+    directContact: 'Doğrudan iletişim',
 
     byeTitle: 'Sitede anlatacaklarım bu kadar.',
     byeNote: 'Konuşmaya değer bir şey bulduysan yukarıdaki adresten bana ulaşabilirsin.',
     backToTopHint: 'Başa dönmek için dokun.',
+    backToTop: 'Başa dön',
 
     products: [
       {

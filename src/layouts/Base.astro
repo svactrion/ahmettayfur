@@ -46,7 +46,7 @@ const isGrammarLens = enPath.startsWith('/products/grammarlens');
 const ogImagePath = isGrammarLens ? '/grammarlens-og.png' : '/og.jpg';
 const ogImageWidth = isGrammarLens ? 1672 : 1200;
 const ogImageHeight = isGrammarLens ? 941 : 630;
-const ogImageAlt = isGrammarLens ? 'GrammarLens — AI-Powered Grammar Coach' : null;
+const ogImageAlt = isGrammarLens ? t.chrome.grammarlensOgAlt : null;
 
 // Language switch: only a real link when this exact page also exists in
 // the other language. Otherwise it renders disabled rather than risking a
@@ -102,7 +102,7 @@ const switchHref = otherLocalePath(path, lang);
 
     <div class="shell">
       <header class="masthead">
-        <nav class="nav" aria-label="Primary">
+        <nav class="nav" aria-label={t.chrome.navAria}>
           <a class="nav-brand" href={homePath}>
             <img src="/img/hero-face.webp" alt="" aria-hidden="true" width="32" height="32" />
             {me.shortName}
