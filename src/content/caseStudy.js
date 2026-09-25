@@ -1,18 +1,17 @@
 // Copy for /products/grammarlens/case-study, in both languages.
 //
 // src/components/CaseStudyPage.astro renders whichever of these matches
-// Astro.currentLocale. The two languages have different shapes on purpose:
-// the English page is the v2 case study (docs/grammarlens-case-study-v2.md),
-// written as a list of typed blocks per section; the Turkish page still
-// carries the earlier MVP-only text in its original shape, plus a notice
-// pointing to the English version.
+// Astro.currentLocale. Both languages are the v2 case study
+// (docs/grammarlens-case-study-v2.md), written as a list of typed blocks per
+// section, in the same shape and block order; the Turkish text is the
+// approved translation in docs/grammarlens-case-study-v2-tr.md.
 //
 // Paragraph entries are trusted HTML strings (bold, italic and the
 // provenance tags come straight from the source copy) rendered with
 // set:html, since the prose has inline formatting mid-sentence that a
 // plain string can't carry.
 //
-// English block types:
+// Block types:
 //   { type: 'p', html, clear? }    a paragraph; clear: true starts it below
 //                                  a floated screenshot
 //   { type: 'h3', text }           a subsection heading
@@ -32,6 +31,8 @@
 // figure in the copy carries one of these right after it.
 const measured = '<span class="tag tag-neutral prov">measured</span>';
 const estimated = '<span class="tag tag-neutral prov">estimated</span>';
+const measuredTr = '<span class="tag tag-neutral prov">ölçüldü</span>';
+const estimatedTr = '<span class="tag tag-neutral prov">tahmin</span>';
 
 export const caseStudyCopy = {
   en: {
@@ -567,80 +568,528 @@ export const caseStudyCopy = {
     ],
   },
 
+  // Turkish: the same shape and block order as en. Every string is the
+  // owner-approved translation in docs/grammarlens-case-study-v2-tr.md,
+  // applied verbatim.
   tr: {
     meta: {
-      title: 'GrammarLens vaka analizi — Ahmet Emin Tayfur',
+      title: 'GrammarLens case study — Ahmet Emin Tayfur',
       description:
-        'GrammarLens bir araştırma sorusundan bitmiş bir iOS uygulamasına nasıl geldi: görüşmeler, PRD, kapsam kesintileri, iki iterasyon turu ve ürünü şekillendiren kısıtlar.',
+        "GrammarLens'i geliştirmek: bir haftalık MVP'den App Store'a, her yapay zekâ çağrısının bir fiyatı varken problemi doğru tanımlamak.",
     },
     aside: {
-      label: 'Vaka analizi',
-      lines: ['Tek kişilik proje', 'Araştırma → PRD → geliştirme', '→ test → 2 iterasyon'],
+      label: 'Case study',
+      lines: [
+        'Tek kişilik proje.',
+        'Temmuz–Eylül 2026.',
+        'Araştırma, PRD, geliştirme, test, iterasyon, App Store başvurusu.',
+      ],
+      status: "24 Eylül 2026'da App Store incelemesine gönderildi. Henüz onaylanmadı.",
+      updated: "Eylül 2026'da güncellendi. Bu sayfanın önceki sürümü yalnızca MVP'yi anlatıyordu.",
     },
-    title: "GrammarLens'i Geliştirmek",
-    lede: [
-      'GrammarLens, iOS için bir İngilizce dilbilgisi pratik uygulaması. Alıştırmaları anlık üretiyor, yazdığını puanlıyor ve hatayı bir kural adı söyleyerek değil, sade bir dille açıklıyor.',
-      'Tek başıma, yedi haftada geliştirdim. Bir hafta planlamıştım. Aşağıdakiler bir özellik turu değil — ürünü değiştiren üç karar ve her birini öğrenmenin bana neye mal olduğu.',
-    ],
+    title: "GrammarLens'i geliştirmek",
+    subtitle:
+      "Bir haftalık MVP'den App Store'a: her yapay zekâ çağrısının bir fiyatı varken problemi doğru tanımlamak.",
     backLinkText: 'Ürüne dön',
-    // The v2 rewrite is English only for now. The link goes straight to
-    // the English page (the component does not pass it through
-    // localizeHref, which would send it back to /tr).
-    notice: {
-      before: 'Bu yazının ',
-      linkText: 'güncel sürümü',
-      after: ' şimdilik yalnızca İngilizce.',
-      href: '/products/grammarlens/case-study',
+    endLinkText: 'Ürün sayfası',
+    ui: {
+      locale: 'tr',
+      then: ', ardından ',
+      showChartData: 'Grafik verisini göster',
+      firstFraming: 'İlk bakış',
+      actualProblem: 'Asıl problem',
+      timeline: { date: 'Tarih (2026)', event: 'Olay' },
+      modelCalls: {
+        flow: 'Akış',
+        steps: 'Adımlar',
+        calls: 'Model çağrısı',
+        callOne: '1 model çağrısı',
+        callMany: '{n} model çağrısı',
+        model: ' (model)',
+      },
+      freeCost: {
+        user: 'Ücretsiz kullanıcı, 30 gün',
+        cost: 'Aylık maliyet',
+        provenance: 'Veri kaynağı',
+      },
+      capMath: {
+        sessions: 'Günlük oturum',
+        cost: 'Aylık model maliyeti (tahmin)',
+        note: 'Not',
+        about: 'yaklaşık {n}',
+      },
+      tokenBudget: {
+        version: 'Sürüm',
+        limit: 'Sınır',
+        worst: 'En uzun yanıt',
+        headroom: 'Boş pay',
+        value: '{worst} / {limit} token, {n}% boş pay',
+      },
     },
-
-    section1: {
-      asideLabel: '01 — Araştırma',
-      asideLines: ['Araştırmanın', 'çürüttüğü varsayım'],
-      heading: '1. Araştırmanın çürüttüğü varsayım',
-      paragraphs: [
-        "Kullanıcı olarak başladım. IELTS hazırlığı sırasında aynı birkaç hatayı sürekli tekrarlıyordum — gerund ile infinitive ayrımı, modal'lar, modal'ların geçmiş biçimleri — ve doğru cümleyi hissederek kurabiliyor ama neden doğru olduğunu açıklayamıyordum. Daldırma yoluyla gelen akıcılık, örtük kalmış dilbilgisi bilgisi. IELTS ise açık olanını istiyor.",
-        'Bu bana bir problem tanımı verdi. Bir ürün vermedi. İlk sürümüm, farkında olmadan kurduğum bir varsayımı içine almıştı: dilbilgisi kuralının adını söylemek bir özelliktir. Uygulama kural adlarını birincil etiket olarak gösteriyordu.',
-        'Yedi kişi buna katılmadı. Dört görüşme ve üç kullanılabilirlik testi boyunca desen tutarlıydı. Bir katılımcı, kendisine "Past Perfect Continuous kullan" demenin hiçbir şey ifade etmediğini söyledi — o yapıyı her gün kullanmasına rağmen. Bir diğeri "noun clause" gibi terimlerin, tarif ettikleri hatanın kendisinden daha zor olduğunu belirtti.',
-        'Ben de tersine çevirdim. Önce sade dille açıklama, kural adı isteyene ikincil bir alt bilgi olarak geride. Sonrasındaki üç kullanılabilirlik testinin üçünde de katılımcılar sade dildeki geri bildirimi, hiç sorulmadan övdü. Projenin en güçlü ve en çok tekrarlanan bulgusu bu oldu.',
-        'Aynı turlar ikinci bir varsayımı da öldürdü. Soru karışımım ağırlıklı olarak boşluk doldurma ve çoktan seçmeliydi — yapması ve puanlaması en kolay formatlar. Yedi kişiden beşi bunları reddetti. Neden olduğunu benim kendi gerekçemden daha iyi anlatan tek bir cümle var: seçenek olsaydı tahmin edeceğini, olmayınca gerçekten bildiğini kanıtlamak zorunda kaldığını söyledi.',
-        'Serbest metin cevapları puanlamak daha pahalı ve doğru yapması daha zor. Yine de onlarda kaldım, çünkü kanıt ucuz formatın yanlış şeyi ölçtüğünü söylüyordu.',
+    summary: {
+      label: 'Özet',
+      blocks: [
+        {
+          type: 'p',
+          html: 'GrammarLens; İngilizceyi oyunlar, diziler ve arkadaşları sayesinde akıcı konuşur hâle gelmiş ama IELTS gibi bir sınavın istediği dilbilgisini güvenle uygulayamayanlar için bir iOS uygulaması. Kullanıcının kendi hatalarından yola çıkarak alıştırma üretiyor ve bu hataları kural adlarıyla değil, sade bir dille açıklıyor.',
+        },
+        {
+          type: 'p',
+          html: "Her şeyi tek başıma yaptım: araştırmayı, PRD'yi, bütün ürün kararlarını ve kodu. Kodu, yazılı karar raporlarıyla yönlendirdiğim yapay zekâ kodlama ajanları yazdı. Proje Temmuz 2026'da, yedi kişiyle test edilen bir haftalık bir MVP olarak başladı. Sonraki iki ayda bir abonelik ürününe dönüştü: cihazda puanlanan ücretsiz bir Daily Test, bir yapay zekâ modelinin üretip puanladığı ücretli Topic Practice ve bunların üzerinde aylık bir alışkanlık katmanı.",
+        },
+        {
+          type: 'p',
+          html: "1.0 sürümü 24 Eylül 2026'da App Store incelemesine gönderildi. Henüz onaylanmadı ve elimde kullanıcı verisi yok. Bu yüzden bu sayfa sonuçların değil, kararların kaydı.",
+        },
+        {
+          type: 'p',
+          html: 'Geriye dönüp baktığımda, değerli olan nadiren bir problemi daha hızlı çözmekti; çoğu zaman önümdeki problemin asıl problem olmadığını fark etmekti. Aşağıdaki her karar aynı yapıyı izliyor: problem ilk bakışta neye benziyordu, aslında ne çıktı, neyi seçtim, bunun bedeli ne oldu ve yanıldıysam bunu nasıl anlayacağım. Her rakam "ölçüldü" ya da "tahmin" olarak işaretli.',
+        },
+        { type: 'figure', name: 'timeline' },
       ],
     },
-
-    section2: {
-      asideLabel: '02 — Maliyet',
-      asideLines: ['Maliyetin verdiği', 'kararlar'],
-      heading: '2. Maliyetin verdiği kararlar',
-      intro: [
-        'GrammarLens ürettiği her alıştırma ve puanladığı her cevap için bir dil modeline istek atıyor. Bu, maliyeti bir mühendislik ayrıntısı değil, bir ürün kısıtı haline getiriyor ve birkaç kararı doğrudan değiştirdi.',
-        'Birim ekonomi — tahminden değil, yayındaki servisten türetildi:',
-      ],
-      list: [
-        'Bir konu pratiği seansı (üretim ve puanlama birlikte) yaklaşık $0,034',
-        'Bir günlük test üretimi yaklaşık $0,021',
-        'Tipik bir premium kullanıcı ayda yaklaşık $1,43 maliyet, buna karşılık $5,09 net gelir — kabaca %72 marj',
-        'Uygulamayı her gün açan ücretsiz bir kullanıcı ayda yaklaşık $0,63 maliyet ve sıfır gelir',
-      ],
-      after: [
-        'Asıl önemli satır sonuncusu. Maliyeti kullanıcı sayısıyla büyüyen, geliri kimseyle büyümeyen bir ücretsiz katman bir büyüme stratejisi değil, bir kaçaktır. Bu yüzden ücretsiz katmanı, ücretli olanın kısıtlanmış hali olarak değil, yapısal olarak farklı bir mekanik olarak tasarladım: günlük test tek bir üretim çağrısı kullanıyor ve model tabanlı puanlama hiç yok; her yanlış cevabın açıklaması da ikinci bir çağrıda değil, aynı çağrının içinde üretiliyor.',
-        "Maliyet aynı zamanda tavanı belirledi. Proxy hem cihaz başına hem global günlük bir sınır uyguluyor ve sınır, asıl çağrıdan <strong>önce</strong> rezerve ediliyor — yani denemeyi sayıyor, başarıyı değil. Harcamayı gerçekten sınırlayan tek sürüm bu. Cihaz başına sınır 30 iken tek bir kurulum günde yaklaşık 14 seans çalıştırıp ayda yaklaşık $30 maliyet üretebiliyordu; karşılığında $5,09 gelir. Sınırı 15'e indirdim; bu hâlâ gerçek hiçbir kullanım deseninin iki katı ve en kötü durumu $8 ile $15 arasında tutuyor. Global sınır olan 300 ise, yükseltmeye karar edene kadar toplam harcamayı ayda yaklaşık $300 ile bağlıyor.",
-        "Dürüst uyarı dipnota değil, tam buraya ait: bu rakamlar modellendi, ölçülmedi. Sistem promptlarının boyutları gerçek, yayındaki koddan okundu. Gerisi tahmin. Anthropic her yanıtta tam token sayılarını döndürüyor ve proxy'm bunları şu an atıyor. O iki sayıyı kaydetmek bu bölümün tamamını veriyle değiştirir ve bunu henüz yapmadım.",
-      ],
+    figures: {
+      timeline: {
+        label: 'Proje zaman çizelgesi, 19 Temmuz – 24 Eylül 2026',
+        caption: "İlk commit'ten başvuruya yaklaşık on hafta.",
+        groups: [
+          {
+            title: 'Temmuz: MVP haftası',
+            events: [
+              { date: '19 Tem', label: 'İlk commit' },
+              {
+                date: '20–25 Tem',
+                label: 'MVP haftası: ilk build, görüşmeler, 2. iterasyon',
+              },
+            ],
+          },
+          {
+            title: "Ağustos–Eylül: App Store'a doğru",
+            events: [
+              { date: '24 Ağu', label: 'Onboarding, Home ve Premium ekranı' },
+              { date: '2 Eyl', label: 'Ücretsiz ve ücretli ayrımı' },
+              {
+                date: '6 Eyl',
+                label: "API anahtarı bir sunucu proxy'sinin arkasına taşındı",
+              },
+              { date: '14 Eyl', label: "Gerçek bir iPhone'da ilk çalıştırma" },
+              {
+                date: '15 Eyl',
+                label: 'Paywall açığı kapatıldı; ücretsiz katman tanımlandı',
+              },
+              { date: '19 Eyl', label: 'Monthly Climb ilk sürüme alındı' },
+              {
+                date: '21–22 Eyl',
+                label: 'Sınır 10 → 5, yapay zekâ izni, sabit ilk test, tırmanıştan sonra paywall',
+              },
+              { date: '23 Eyl', label: "Birleştirildi; ilk TestFlight build'i" },
+              { date: '24 Eyl', label: 'App Store incelemesine gönderildi' },
+            ],
+          },
+        ],
+      },
+      modelCalls: {
+        label: 'Her akış dil modelini nerede çağırıyor',
+        caption:
+          'Her model çağrısı, kullanıcı sayısıyla büyüyen bir maliyet. Ücretsiz modlar en fazla bir çağrı yapıyor, ücretli mod iki.',
+        legend: { model: 'Model çağrısı', device: 'Cihazda' },
+        flows: [
+          {
+            name: 'İlk Daily Test',
+            calls: 0,
+            steps: [
+              { text: 'Elle yazılmış sorular', model: false },
+              { text: 'Cevaplar cihazda puanlanır', model: false },
+            ],
+          },
+          {
+            name: 'Daily Test',
+            calls: 1,
+            steps: [
+              { text: 'Model soruları ve açıklamaları üretir', model: true },
+              { text: 'Cevaplar cihazda puanlanır', model: false },
+            ],
+            note: 'Bir testi bitirmek, ertesi günün setini arka planda hazırlar.',
+          },
+          {
+            name: 'Topic Practice',
+            calls: 2,
+            steps: [
+              { text: 'Model soruları üretir', model: true },
+              { text: 'Kullanıcı cevaplar', model: false },
+              { text: 'Model puanlar ve açıklar', model: true },
+            ],
+          },
+        ],
+      },
+      freeCost: {
+        label: 'Uygulamayı her gün açan ücretsiz bir kullanıcının aylık maliyeti',
+        caption:
+          'Günlük ücretsiz pratik oturumu, aktif bir ücretsiz kullanıcının maliyetini iki katından fazlasına çıkarıyor.',
+        legend: { measured: 'ölçüldü', estimated: 'tahmin' },
+        xMax: 2,
+        xStep: 0.5,
+        bars: [
+          {
+            label: 'Yalnızca Daily Test',
+            measured: [0.7, 0.84],
+            provenance: 'Ölçülen token sayıları × liste fiyatı',
+          },
+          {
+            label: 'Daily Test + günde bir ücretsiz pratik oturumu',
+            measured: [0.7, 0.84],
+            estimatedAdd: 1.02,
+            provenance: 'Daily Test kısmı ölçüldü, pratik kısmı tahmin',
+          },
+        ],
+      },
+      capMath: {
+        label: 'Günlük pratik oturumu sayısına göre aylık model maliyeti',
+        caption:
+          'Oturum başına yaklaşık $0.034 ile (tahmin), eski sınırda yoğun kullanan bir abone, yıllık planın getirdiğinin kabaca üç katına mal olabiliyordu.',
+        costPerSession: 0.034,
+        days: 30,
+        xMax: 10,
+        yMax: 11,
+        yStep: 2,
+        plans: [
+          { label: ['Yıllık plan, net', 'aylık: $3.54'], value: 3.54, style: 'solid' },
+          { label: ['Aylık plan, net: $5.09'], value: 5.09, style: 'dashed' },
+        ],
+        caps: [
+          { label: 'Yeni sınır: 5', value: 5, current: true },
+          { label: 'Eski sınır: 10', value: 10 },
+        ],
+        text: {
+          yAxis: 'Aylık model maliyeti (USD)',
+          xAxis: 'Günlük pratik oturumu',
+          line: 'Oturum başına $0.034 ile maliyet',
+          estimated: 'tahmin',
+          breakEven: ['Başa baş: yaklaşık', 'günde 3.5 oturum'],
+        },
+      },
+      storyboard: {
+        label: 'İlk gün, sırasıyla',
+        frames: [
+          {
+            src: '/img/case-study/grammarlens/day0-1-test.webp',
+            width: 600,
+            height: 1298,
+            alt: 'Boşluk doldurma sorusu gösteren ilk Daily Test.',
+            caption: 'Elle yazılmış ilk test, yükleme yok.',
+          },
+          {
+            src: '/img/case-study/grammarlens/day0-2-result.webp',
+            width: 600,
+            height: 1298,
+            alt: 'Altında Start my climb butonu olan ilk test sonuçları.',
+            caption: 'Tek buton: Start my climb.',
+          },
+          {
+            src: '/img/case-study/grammarlens/day0-3-climb.webp',
+            width: 600,
+            height: 1298,
+            alt: 'Avatarın dağ patikasının ilk basamağında durduğu Home ekranı.',
+            caption: 'Avatar ilk adımını atıyor.',
+          },
+          {
+            src: '/img/case-study/grammarlens/day0-4-paywall.webp',
+            width: 600,
+            height: 1298,
+            alt: 'Aylık ve yıllık planları gösteren Premium ekranı.',
+            caption: 'Premium ekranı. İlk gün, tırmanışın hemen ardından bir kez açılıyor.',
+          },
+        ],
+      },
+      offerCard: {
+        src: '/img/case-study/grammarlens/practice-offer-card.webp',
+        width: 600,
+        height: 1298,
+        alt: 'Premium teklif kartı ve altında Back to topics butonu olan pratik sonuç ekranı.',
+        caption:
+          "Teklif kartı Premium'un neler kattığını gösteriyor. Back to topics yerinde duruyor.",
+      },
+      explanation: {
+        src: '/img/case-study/grammarlens/daily-test-explanation.webp',
+        width: 600,
+        height: 1298,
+        alt:
+          'Yanlış bir cevabı, doğru cevabı ve tek cümlelik bir açıklamayı gösteren Daily Test sonuç kartı.',
+        caption: 'Artık her cevabın bir gerekçesi var.',
+      },
+      tokenBudget: {
+        label: 'Daily Test çıktı token sınırı ve ölçülen en uzun yanıt',
+        caption: 'Her biri için beş test çalıştırması, yerel sunucuda ölçüldü.',
+        rows: [
+          { label: 'Açıklamalardan önce', limit: 2048, worst: 1632 },
+          { label: 'Açıklamalarla, kendi sınırıyla', limit: 3072, worst: 1496 },
+        ],
+      },
     },
-
-    section3: {
-      asideLabel: '03 — Geri dönüş',
-      asideLines: ['Baştan yapsam', 'farklı yapacaklarım'],
-      heading: '3. Baştan yapsam farklı yapacaklarım',
-      retroPoints: [
-        '<strong>Ölçüm en başta kurulmalıydı.</strong> Bu projedeki ölçülmemiş her bahis aynı eksik katmana çıkıyor. Enstrümantasyonu erteledim çünkü launch öncesinde gereksiz bir yük gibi göründü; sonucu, bu case study\'nin bir bölümünün "tahmin" diyerek açılmak zorunda kalması oldu.',
-        '<strong>Maliyet tahminleri yayındaki gerçeğe karşı daha erken kontrol edilmeliydi.</strong> Fiyatlandırma hesaplarımdan biri haftalarca yanlış bir model fiyatı üzerinden çalıştı; "ücretsiz katmanın maliyeti neredeyse sıfır" satırı ise, arkasındaki mantık aynı dokümanın başka bir yerinde çürütüldükten sonra bile yerinde kaldı.',
-        "<strong>Geri alınamaz kimlik kararları ilk gün verilmeliydi.</strong> Paket tanımlayıcısı aylarca Flutter'ın com.example yer tutucusu olarak durdu ve bir launch engelleyicisi olarak ortaya çıktı. Ürün tanımlayıcılarının ve yetki adlarının App Store Connect ile birebir eşleşmesi gerekiyor ve bir kez oluşturulduktan sonra yeniden adlandırılamıyor — hiçbiri zor değil, hepsini geç fark etmek can sıkıcı.",
-        '<strong>Bir kararı geri almak, onu savunmaktan ucuz.</strong> Planladığım özel test turunu iptal ettim, çünkü yedi kişi çekirdek döngüyü zaten kullanmıştı ve ikinci küçük bir tur yalnızca bildiğimi tekrarlayacaktı. Launch sıralamasını tersine çevirdim ki doğrulanmış olan tek şey, doğrulanmamış bahislerden önce yayına çıksın. Satın alma ekranından, reklamı yapılan ama yapılmamış iki özelliği kaldırdım; çünkü var olmayan şeyleri listeleyen bir ödeme ekranı hem App Store ret riski hem de yalan.',
-      ],
-      closing:
-        "Bunların her biri proje kaydında bilinçli bir geri dönüş olarak, tarihiyle ve eskisinin yerine geçen gerekçesiyle yazılı. O kaydı tutmak, hiçbir şeyini değiştirmeden tekrar edeceğim kısım.",
-      endLinkText: 'Ürün sayfası',
-    },
+    sections: [
+      {
+        label: 'Araştırma',
+        heading: '1. Araştırmanın çürüttüğü varsayım',
+        blocks: [
+          {
+            type: 'p',
+            html: "İşe kullanıcı olarak başladım. IELTS'e hazırlanırken hep aynı birkaç hatayı yapıyordum: gerund mu infinitive mi, modal'lar, modal'ların geçmiş biçimleri. Doğru bir cümleyi sezgiyle kurabiliyor ama neden doğru olduğunu açıklayamıyordum. Akıcılık dilin içinde yaşayarak gelmişti; dilbilgisi bilgisi ise örtük kalmıştı. IELTS ise açık olanını istiyor.",
+          },
+          {
+            type: 'p',
+            html: 'Bu bana bir problem tanımı verdi, ama bir ürün vermedi. İlk sürümüm, yaptığımı fark etmediğim bir varsayımı içinde taşıyordu: dilbilgisi kuralının adını vermek bir özelliktir. Uygulama kural adlarını ana etiket olarak öne çıkarıyordu.',
+          },
+          {
+            type: 'p',
+            html: `Yedi kişi buna katılmadı: dört görüşme ve üç kullanılabilirlik testi. Görüşmelerden biri kendimleydi; bunu PRD'de belirttim, burada da belirtiyorum. Bir katılımcı, kendisine "Past Perfect Continuous kullan" denmesinin hiçbir şey ifade etmediğini söyledi, oysa bu yapıyı her gün kullanıyor. Bir başkası, "noun clause" gibi terimlerin anlattıkları hatadan daha zor anlaşıldığını söyledi.`,
+          },
+          {
+            type: 'reframe',
+            first: 'Öğrenenler dilbilgisi kurallarını bilmiyor.',
+            actual: 'Kuralları zaten kullanıyorlar. Engel olan, kuralların adları.',
+          },
+          {
+            type: 'p',
+            html: 'Ben de bunu tersine çevirdim. Önce sade dilde açıklama geliyor; kural adı, isteyenler için ikincil bir alt yazıya indi. Ardından yapılan üç kullanılabilirlik testinde üç katılımcının üçü de, sorulmadan, sade dildeki geri bildirimi övdü. Projenin en güçlü ve en çok tekrarlanan bulgusu bu.',
+          },
+          {
+            type: 'p',
+            html: 'Aynı turlar ikinci bir varsayımı da çürüttü. Soru karışımım çoğunlukla boşluk doldurma ve çoktan seçmeliydi, yani geliştirmesi ve puanlaması en kolay biçimler. Yedi kişiden beşi bunları istemedi. Bir katılımcı bunu benim gerekçemden daha iyi açıkladı: seçenekler olsa tahmin edeceğini, seçenekler olmadığında ise gerçekten bildiğini kanıtlamak zorunda kaldığını söyledi.',
+          },
+          {
+            type: 'p',
+            html: 'Serbest metin cevaplarını puanlamak hem daha pahalı hem de doğru yapması daha zor. Yine de onları tuttum, çünkü kanıtlar ucuz biçimin yanlış şeyi ölçtüğünü söylüyordu.',
+          },
+          {
+            type: 'p',
+            html: 'Yedi kişi bir örneklem değil. Ama hangi yönde yanıldığımı görmeme yetti ve o aşamada ihtiyacım olan da buydu.',
+          },
+        ],
+      },
+      {
+        label: 'Maliyet',
+        heading: '2. Her çağrının bir fiyatı varken alınan kararlar',
+        blocks: [
+          {
+            type: 'p',
+            html: 'GrammarLens, ürettiği her alıştırma ve puanladığı her cevap için bir dil modeline çağrı yapıyor. Bu da maliyeti bir mühendislik ayrıntısı olmaktan çıkarıp bir ürün kısıtına dönüştürüyor. Problemi doğru tanımlamanın bu kadar önemli olmasının sebebi de bu: bu üründe yanlış bir çerçeve sadece daha kötü bir özellik değil, her ay gelen bir fatura demek.',
+          },
+          { type: 'figure', name: 'modelCalls' },
+          { type: 'h3', text: 'Neyi ücretsiz vermeli' },
+          {
+            type: 'reframe',
+            first: "Paywall'dan önce kaç ücretsiz oturum olmalı?",
+            actual: 'Ürünün hangi parçaları, her kullanıldığında para harcatıyor?',
+          },
+          {
+            type: 'p',
+            html: `İlk soruya genelde verilen cevap, ücretli ürünün sınırlı bir sürümüdür. Ama Topic Practice her oturumda dil modeline iki kez çağrı yapıyor: bir kez üretmek, bir kez puanlamak için. Ücretsiz ve sınırsız bir sürümde maliyet kullanıcı sayısıyla büyür, gelir ise hiç gelmez. Günde 100 kullanıcıda bu, ayda kabaca $90–270 ediyor ${estimatedTr}; o dönem çıkardığım kaba bir rakam. Her şeyin önüne konan katı bir paywall'ın sorunu ise tam tersiydi: hiç kimse, bütün test kullanıcılarının övdüğü sade dildeki geri bildirimle karşılaşmazdı.`,
+          },
+          {
+            type: 'p',
+            html: 'Bu yüzden sınırı olan tek bir mod yerine yapısal olarak farklı iki mod kurdum. Ücretsiz Daily Test tek bir üretim çağrısı yapıyor ve cevapları model kullanmadan cihazda puanlıyor. Ücretli ürün ise modelin ürettiği ve puanladığı Topic Practice.',
+          },
+          {
+            type: 'p',
+            html: 'İki hafta sonra, Review ekranındaki bir hatadan ulaşılabilen, günde bir ücretsiz Topic Practice oturumu ekledim. Ürünü satan şey geri bildirim; o oturum olmasa ücretsiz kullanıcı bunu hiç görmezdi.',
+          },
+          {
+            type: 'p',
+            html: `Bu tek oturum, aktif bir ücretsiz kullanıcının maliyetini iki katından fazlasına çıkarıyor: ayda yaklaşık $0.70–0.84 iken yaklaşık $1.72–1.86 oluyor. Daily Test kısmı ölçülmüş token sayılarına dayanıyor ${measuredTr}; pratik oturumu ise hâlâ bir tahmin ${estimatedTr}.`,
+          },
+          { type: 'figure', name: 'freeCost' },
+          {
+            type: 'p',
+            html: '<strong>Nasıl anlayacağım.</strong> İki analitik olayı, ücretsiz bir kullanıcının bu oturumu ne zaman kullandığını ve sınıra ne zaman ulaştığını kaydediyor. Dört haftanın sonunda soru basit: bu oturumu kullanan ücretsiz kullanıcılar, kullanmayanlardan daha sık aboneye dönüşüyor mu? Dönüşmüyorsa bu hak azaltılır. Kodda bu tek bir sabit.',
+          },
+          { type: 'h3', text: 'Orada olmayan paywall' },
+          {
+            type: 'reframe',
+            first: 'Review ekranı, kullanıcının Premium olup olmadığını kontrol etmeyi unutmuş.',
+            actual: 'Kontrol paranın harcandığı yerde değil, navigasyonda duruyordu.',
+          },
+          {
+            type: 'p',
+            html: `15 Eylül'de bir cihaz testi, ücretsiz bir kullanıcının ücretli pratiğe ulaşabildiğini gösterdi. Review ekranında zayıf bir noktaya, ardından "Practice this"e dokunmak, hiçbir abonelik kontrolü yapmadan gerçek ve faturalanan bir üretim başlatıyordu. Bu riski on gün önce fark etmiş, not almış ve ertelemiştim.`,
+          },
+          {
+            type: 'p',
+            html: 'Hızlı çözüm, kontrolün bir kopyasını da Review ekranına koymaktı. Ama Home ekranındaki kilitli kartlar yalnızca bir navigasyon korumasıydı: dokunuşu durduruyor, para harcatan şeyi korumuyordu. Uygulamada pratik seti üreten tek bir fonksiyon var. Kontrol bu fonksiyonun içine taşındı. Fonksiyon artık abonelik servisini, çağıranın unutabileceği isteğe bağlı bir bayrak olarak değil, zorunlu bir bağımlılık olarak istiyor. Henüz var olmayanlar da dahil, her yol aynı kapıdan geçiyor.',
+          },
+          {
+            type: 'p',
+            html: "Bu yaklaşım bir hafta sonra karşılığını verdi. Apple'ın App Review kuralları, kişisel veriler üçüncü taraf bir yapay zekâya gitmeden önce açık izin alınmasını istiyor. İzin ekranı aynı fonksiyona, aynı kapının önüne yerleşti; bütün giriş noktalarını yeniden aramam gerekmedi.",
+          },
+          {
+            type: 'p',
+            html: '<strong>Maliyeti.</strong> Bilinen bir açıkla geçen on gün; üstelik iki ekranı da kapsayan bir test yoktu. <strong>Nasıl anlayacağım.</strong> Bu konu ölçümle değil, yapıyla ilgili: iki giriş noktasının da artık kapıyı sınayan testleri var.',
+          },
+          { type: 'h3', text: 'Aslında bir kâr marjı olan sınır' },
+          {
+            type: 'reframe',
+            first:
+              'İki sınır çakışıyor. Sunucu sınırını mı yükseltmeli, oturum sınırını mı düşürmeli?',
+            actual: 'Planlanan sınırda, yoğun kullanan bir abone ödediğinden fazlasına mal oluyor.',
+          },
+          {
+            type: 'p',
+            html: `Premium günde 10 pratik oturumuna izin veriyordu. Her oturum iki sunucu çağrısı kullanıyor; API anahtarını koruyan proxy ise cihaz başına günde 15 çağrıya izin veriyor. Yani yoğun kullanan bir abone, yaklaşık yedi oturumdan sonra genel bir "come back tomorrow" mesajına takılacaktı. Masadaki seçenekler, sunucu sınırını 25 civarına çıkarmak ya da oturum sınırını 7'ye indirmekti.`,
+          },
+          {
+            type: 'p',
+            html: `Böyle bakınca bu bir yapılandırma sorusuydu. Para açısından bakınca değildi. Oturum başına yaklaşık $0.034 ile ${estimatedTr}, günde 10 oturum ayda yaklaşık $10.20 ediyor. Yıllık plan ayda net yaklaşık $3.54 bırakıyor. Bu hesap, Apple'ın Small Business Program'ındaki 15% komisyonu varsayıyor; programa başvurdum ama henüz kabul almadım. Başa baş noktası günde yaklaşık 3.5 oturum.`,
+          },
+          { type: 'figure', name: 'capMath' },
+          {
+            type: 'p',
+            html: "İlk içgüdüm 3'tü. 5'te karar kıldım ve fiyatlara dokunmadım: ayda $5.99, yılda $49.99. Bir sınırı lansmandan sonra yükseltmek, düşürmekten daha kolay. Beş, her gün sonuna kadar kullanan yıllık bir abone için hâlâ başa baş noktasının üzerinde. Bahsim, neredeyse kimsenin bunu yapmayacağı ve kâr marjını en yüksek kullanımın değil ortalamanın belirleyeceği.",
+          },
+          {
+            type: 'p',
+            html: 'Buradan bir kural çıktı: "unlimited" kelimesi Premium metinlerinde hiç geçmiyor. Sınır gerçek; öyle bir iddia yalan olurdu.',
+          },
+          {
+            type: 'p',
+            html: '<strong>Nasıl anlayacağım.</strong> Proxy artık her çağrının token sayısını kaydediyor. Gerçek bir oturum tahminden ucuza geliyorsa sınır yükselir.',
+          },
+          { type: 'h3', text: 'İlk Daily Test' },
+          {
+            type: 'reframe',
+            first: 'İlk testin yüklenmesi 20 saniyeden uzun sürüyor.',
+            actual: 'İlk test neden üretiliyor ki?',
+          },
+          {
+            type: 'p',
+            html: 'Her yeni kullanıcı aynı ilk ekranla karşılaşıyor ve bu ekranın yüklenmesi 20 saniyeden uzun sürüyordu. Bu bir gecikme sorunu gibi görünüyor ve ilk çözümüm de onu öyle ele aldı: kullanıcı "Get started"a dokunduğu anda seti arka planda üretmeye başlamak. Yine de yeterince hızlı olmadı.',
+          },
+          {
+            type: 'p',
+            html: 'Daha iyi soru, bu setin neden üretildiğiydi. Burası her kullanıcının gördüğü tek ekran; tuhaf bir sorunun ya da yanlış bir cevap anahtarının en pahalıya patladığı yer de burası. Onu üretmek, bir bekleme, bir API çağrısı ve kimsenin okumadığı bir cevap anahtarı demekti.',
+          },
+          {
+            type: 'p',
+            html: 'Bunun yerine ilk testi elle yazdım: beş soru, anında açılıyor, API çağrısı yok. O sabah kurduğum arka plan ön yüklemesi de aynı gün kaldırıldı.',
+          },
+          {
+            type: 'p',
+            html: `Tasarruf göründüğünden küçük çıktı. Bir testi bitirmek, ertesi günün setini arka planda hazırlamayı başlatıyor; böylece ertesi gün test anında açılıyor. Bu da bir daha hiç geri dönmeyen her kurulumun yine de bir üretimin bedelini ödediği anlamına geliyor. Ölçülen token sayılarıyla bu yaklaşık $0.025 ${measuredTr}.`,
+          },
+          {
+            type: 'p',
+            html: '<strong>Nasıl anlayacağım.</strong> Sabit setteki tamamlanma oranı ve puanlar, üretilen setlerle karşılaştırılacak. Uygulama her testin hangi tür set olduğunu kaydediyor.',
+          },
+          { type: 'h3', text: 'Ürünün tutmadığı bir söz' },
+          {
+            type: 'reframe',
+            first: 'Yanlış bir cevapta açıklama görünmüyor. Eksik metin.',
+            actual: 'Mağaza sayfası, ürünün yapmadığı bir şeyi vaat ediyor.',
+          },
+          { type: 'figure', name: 'explanation' },
+          {
+            type: 'p',
+            html: "Başvuru günü, Daily Test'te yanlış bir cevabın yalnızca doğru cevabı gösterdiğini, başka hiçbir şey göstermediğini fark ettim. İlk yorumum bir metin parçasının eksik olduğuydu. Değildi. Daily Test cihazda puanlanıyor ve üretilen set yalnızca modelin önceden tahmin ettiği yanlış cevaplar için yorum taşıyordu. Doğru cevaplar, atlananlar ve beklenmedik her hata hiçbir açıklama almıyordu.",
+          },
+          {
+            type: 'p',
+            html: 'Oysa App Store açıklaması, kullanıcının her cevabın neden doğru ya da yanlış olduğunu gördüğünü söylüyordu. Bu sayfanın ilk sürümü de öyle. Bu sözü, ürünle karşılaştırmadan iki kez yazmıştım.',
+          },
+          {
+            type: 'p',
+            html: `Çözüm, soru başına bir açıklamaydı: sorularla aynı çağrıda üretilen, 25 kelimenin altında bir açıklama. Bunun için daha fazla alan gerekiyordu, bu yüzden Daily Test'e kendi çıktı bütçesi verildi. En uzun yanıtın kullandığı pay, 2,048 token'lık sınırda 80% iken 3,072 token'lık sınırda 49% oldu ${measuredTr}. Ortalama açıklama yaklaşık 29 kelimeden 20'ye indi. 25 açıklamanın beşi hâlâ sınırı biraz aşıyordu; bunu kabul ettim, çünkü hiçbir şey tam uzunluğa bağlı değil.`,
+          },
+          { type: 'figure', name: 'tokenBudget' },
+          {
+            type: 'p',
+            html: `<strong>Maliyeti.</strong> Bir Daily Test seti artık yaklaşık $0.023–0.028 tutuyor ${measuredTr}; bu, daha önceki $0.021 tahminimin üzerinde. <strong>Nasıl anlayacağım.</strong> Yeni açıklamaları cihazda şimdiye kadar yalnızca elle yazılmış ilk testte gördüm. Bir sonraki kontrol, gerçek bir cihazda üretilen ilk set.`,
+          },
+        ],
+      },
+      {
+        label: 'Paywall',
+        heading: '3. Parayı nerede istemeli',
+        blocks: [
+          {
+            type: 'p',
+            html: "Paywall'ın yerini belirlemek üç karar ve bir hata doğurdu.",
+          },
+          {
+            type: 'p',
+            html: '<strong>Sonuç listesinden sonra değil, başarı anından sonra.</strong> İlk test eskiden sonuç ekranındaki bir paywall kartıyla bitiyordu: ilk puanın hemen ardından, henüz gözle görülür hiçbir şey değişmeden önce. Onu taşıdım. Artık sonuç ekranı tek bir butonla bitiyor: "Start my climb". Kullanıcının avatarı Home ekranında ilk basamağını çıkıyor ve Premium ekranı yaklaşık 600 ms sonra, bir kez açılıyor. Hipotez şu: görünür bir başarının hemen sonrası, bir sonuç listesinin sonrasından daha iyi dönüşüm getirir. Bu bir hipotez, bulgu değil.',
+          },
+          { type: 'figure', name: 'storyboard' },
+          { type: 'figure', name: 'offerCard' },
+          {
+            type: 'p',
+            html: `<strong>Çıkış, çıkış olarak kalır.</strong> Günün pratik oturumunu kullanmış ücretsiz bir kullanıcı, tek çıkışı "Back to topics" olan bir sonuç ekranına düşüyordu. Akla gelen ilk hamle, bu butonun paywall'ı açmasını sağlamaktı. Bunu yapmadım: bir şey söyleyip başka bir şey yapan bir buton dark pattern'dir ve çıkmak isteyen biri bunun için bir satış konuşmasını aşmak zorunda kalmamalı. Bunun yerine ekrana, Premium'un neler kattığını gösteren ve kendi "See Premium" butonu olan bir teklif kartı eklendi. "Back to topics" ise altında, olduğu gibi duruyor.`,
+          },
+          {
+            type: 'p',
+            html: `Daha küçük bir geri alma kararı da buraya ait. Premium karşılaştırma tablosuna, ücretsiz ile Premium arasındaki günlük oturum farkını gösteren bir satır ekledim. 375 pt genişliğindeki bir telefonda bu satır, plan kartlarını neredeyse ekranın dışına itti. Kartların görünen kısmı varsayılan yazı boyutunda 78 pt iken yaklaşık 30 pt kaldı, büyük yazı boyutunda ise tamamen kayboldu ${measuredTr}. Aynı gün geri aldım. İnsanların satın aldığı şeyi, alacakları şeyi anlatmak için gizlemek yanlış bir takas. Bunun bedeli gerçek bir boşluk: teklif kartı daha fazla günlük oturum vaat ediyor, ama Premium ekranı bunu henüz gösteremiyor.`,
+          },
+          {
+            type: 'p',
+            clear: true,
+            html: "<strong>Hata: tek sürümde iki değişken.</strong> Yeni ilk gün paywall'ı, alışkanlık katmanı olan Monthly Climb ile aynı sürümde yayına çıktı. Kendi oyunlaştırma spesifikasyonum tam olarak buna karşı uyarmıştı: birlikte yayına çıkarlarsa etkileri birbirinden ayrılamaz. Karşılaştırma yapabileceğim önceki bir referans değer de yok. Bu yüzden lansmandan sonra ilk gün dönüşümünü okuduğumda onu raporlayabileceğim, ama ne kadarının zamanlamadan geldiğini söyleyemeyeceğim. Neyi öğrenmem gerektiğini tanımlamadan önce neyi geliştireceğimi tanımlamıştım.",
+          },
+        ],
+      },
+      {
+        label: 'Geriye bakış',
+        heading: '4. Baştan yapsam neyi farklı yapardım',
+        blocks: [
+          {
+            type: 'p',
+            html: '<strong>Ölçümü düzelttim, başka bir yerde bozdum.</strong> Bu sayfanın ilk sürümü, ölçümün en başta gelmesi gerektiğini söylüyordu. Bu sefer öyle oldu: yazılı bir plana dayanan analitik ve her API çağrısında token kaydı, hepsi başvurudan önce çalışıyordu. Sonra etkisini ölçmek istediğim iki değişikliği aynı sürümde yayına çıkardım. Ölçüm altyapısı şart, ama ölçülebilir bir planla aynı şey değil.',
+          },
+          {
+            type: 'p',
+            html: '<strong>Eskimiş belgeler tek bir yerde kalmıyor.</strong> Bu sayfanın ilk sürümü, kendi belgelerimdeki bir satırı anlatıyordu: ücretsiz katmanın neredeyse hiçbir maliyeti olmadığını iddia eden ve arkasındaki gerekçe çürütüldükten sonra da yerinde kalan bir satır. Aynı iddia, başvuru gününe kadar projenin README dosyasında da duruyordu. Başvurudan sonra yaptığım bir belge denetimi, belgelerin genelinde artık gerçeği yansıtmayan 21 durum satırı buldu. Benimsediğim çözüm yapısal: güncel durum tek bir belgede tutuluyor; eski planlar ise kimsenin sürdürmediği satır satır düzeltmeler yerine tarihli bir "historical" notu alıyor.',
+          },
+          {
+            type: 'p',
+            html: "<strong>Geri dönüşü olmayan kararları erken ver.</strong> Bundle identifier aylarca yer tutucu olarak kaldı ve lansmanı engelleyen bir sorun olarak karşıma çıktı. Ürün kimlikleri bir kez oluşturulduktan sonra yeniden adlandırılamıyor. Aynısı sonda da geçerliydi. Apple, bir sürüm yayınlandıktan sonra uygulamanın iPad desteğini kaldırmasına izin vermiyor. Bu yüzden iPad desteğini bilerek tuttum, çünkü eğitim uygulamaları okul tabletlerinde kullanılıyor; uygulamayı da dikey moda kilitledim. Bunun bedeli iPad'de Split View. Bunların hiçbiri zor değil. Hepsi geç fark edildiğinde can sıkıcı.",
+          },
+          {
+            type: 'p',
+            html: "<strong>Bir kararı geri almak, onu savunmaktan daha ucuz.</strong> Planladığım kapalı bir test turunu iptal ettim, çünkü yedi kişi temel döngüyü zaten kullanmıştı. Satın alma ekranından, duyurulmuş ama geliştirilmemiş iki özelliği çıkardım. Var olmayan şeyleri listeleyen ücretli bir ekran hem App Store'dan ret riski hem de bir yalan. Karşılaştırma tablosuna eklediğim satırı bir gün içinde geri aldım. Her geri dönüş, tarihiyle ve eski gerekçenin yerini alan yeni gerekçeyle birlikte proje günlüğünde yazılı.",
+          },
+          {
+            type: 'p',
+            html: '<strong>Nasıl çalıştım.</strong> Kodu yapay zekâ kodlama ajanları yazdı; benim işim kararlardı. Muhakeme gerektiren her değişiklik, ajanın hazırladığı salt okunur bir raporla başladı (seçenekler, ölçümler, riskler) ve ben karar verene kadar kod yazılmadı. Başvuru anında projede 883 uygulama testi ve 70 sunucu testi vardı. Karar kaydını tutmak, hiçbir şeyini değiştirmeden tekrar edeceğim kısım.',
+          },
+        ],
+      },
+      {
+        label: 'Durum',
+        heading: '5. Mevcut durum ve nasıl anlayacağım',
+        blocks: [
+          {
+            type: 'p',
+            html: "GrammarLens 1.0, iki aboneliğiyle birlikte 24 Eylül 2026'da App Store incelemesine gönderildi. Henüz onaylanmadı. Yayın manuel olduğu için onay, uygulamayı kendiliğinden yayına çıkarmayacak.",
+          },
+          {
+            type: 'p',
+            html: 'Yayından sonraki ilk dört hafta geliştirmeye değil, veriyi okumaya ayrıldı. Sorular:',
+          },
+          {
+            type: 'ol',
+            items: [
+              'Bir Daily Test ve bir pratik oturumu gerçekte ne kadara mal oluyor? Token kaydı, bu sayfadaki bütün tahminlerin yerini alacak.',
+              'Günlük pratik oturumunu kullanan ücretsiz kullanıcılar, kullanmayanlardan daha sık aboneye dönüşüyor mu?',
+              'Elle yazılmış ilk test, üretilen testlerden farklı bir performans gösteriyor mu?',
+              "Dönüşüm, paywall'ın göründüğü yere göre nasıl değişiyor? Bu soru, 3. bölümdeki çekinceyle birlikte okunmalı.",
+            ],
+          },
+          {
+            type: 'p',
+            html: "Bir sonraki ürün kararı şimdiden çerçevelendi: her cihazın kendi Daily Test'ini üretmesi yerine, herkes için günde tek bir set üretmek. Bu, Daily Test maliyetinin büyük kısmını ortadan kaldırır. Hâlâ açık olan konular şunlar: cevapların nasıl açıklanacağı, farklı saat dilimlerinde günün hangi saatte başlayacağı ve günlük üretim başarısız olursa ne olacağı. Bu karar token verisini bekliyor.",
+          },
+          {
+            type: 'p',
+            html: 'Sonuçlar geldiğinde bu sayfaya bir sonuçlar bölümü eklenecek.',
+          },
+        ],
+      },
+    ],
   },
 };

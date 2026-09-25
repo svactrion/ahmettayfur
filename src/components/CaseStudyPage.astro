@@ -2,10 +2,9 @@
 // The GrammarLens case study, shared by the English and Turkish routes.
 // Astro.currentLocale picks the language — see src/content/caseStudy.js.
 //
-// The two languages render differently: English is the v2 case study,
-// built from typed blocks (brief: docs/grammarlens-case-study-v2.md);
-// Turkish keeps the earlier MVP-only text in its original markup, with a
-// notice at the top pointing to the English page.
+// Both languages render the v2 case study, built from typed blocks (brief:
+// docs/grammarlens-case-study-v2.md; Turkish text:
+// docs/grammarlens-case-study-v2-tr.md).
 //
 // The legal pages this links out to (privacy/terms/support) stay
 // English-only, so this page never links to them; it only links back to
@@ -48,167 +47,76 @@ const figures = {
 
 // One .row per entry: the summary (no heading of its own, so its aside
 // label names it) and then the numbered sections.
-const rows =
-  lang === 'en'
-    ? [
-        { label: t.summary.label, id: 'summary', blocks: t.summary.blocks },
-        ...t.sections.map((section, i) => ({
-          label: section.label,
-          heading: section.heading,
-          id: `section-${i + 1}`,
-          blocks: section.blocks,
-        })),
-      ]
-    : [];
+const rows = [
+  { label: t.summary.label, id: 'summary', blocks: t.summary.blocks },
+  ...t.sections.map((section, i) => ({
+    label: section.label,
+    heading: section.heading,
+    id: `section-${i + 1}`,
+    blocks: section.blocks,
+  })),
+];
 ---
 
 <Base title={t.meta.title} description={t.meta.description}>
-  {
-    lang === 'en' ? (
-      <>
-        <section class="row v2">
-          <aside class="note">
-            <strong>{t.aside.label}</strong>
-            {t.aside.lines.map((line) => (
-              <span class="note-line">{line}</span>
-            ))}
-            <span class="note-status">{t.aside.status}</span>
-            <span class="note-updated">{t.aside.updated}</span>
-          </aside>
-          <div class="body">
-            <h1 class="display">{t.title}</h1>
-            <p class="lede">{t.subtitle}</p>
-            <p>
-              <a class="tap-link" href={productHref}>{t.backLinkText}</a>
-            </p>
-          </div>
-        </section>
+  <section class="row v2">
+    <aside class="note">
+      <strong>{t.aside.label}</strong>
+      {t.aside.lines.map((line) => (
+        <span class="note-line">{line}</span>
+      ))}
+      <span class="note-status">{t.aside.status}</span>
+      <span class="note-updated">{t.aside.updated}</span>
+    </aside>
+    <div class="body">
+      <h1 class="display">{t.title}</h1>
+      <p class="lede">{t.subtitle}</p>
+      <p>
+        <a class="tap-link" href={productHref}>{t.backLinkText}</a>
+      </p>
+    </div>
+  </section>
 
-        {rows.map((row, ri) => (
-          <section class="row v2" aria-labelledby={row.heading ? row.id : `${row.id}-label`}>
-            <aside class="note">
-              <strong id={row.heading ? undefined : `${row.id}-label`}>{row.label}</strong>
-            </aside>
-            <div class="body">
-              {row.heading && <h2 id={row.id}>{row.heading}</h2>}
-              {row.blocks.map((b) => {
-                if (b.type === 'figure') {
-                  const fig = figures[b.name];
-                  if (!fig) return null;
-                  const Figure = fig.component;
-                  return (
-                    <div class={fig.float ? 'fig fig-float' : 'fig'}>
-                      <Figure {...t.figures[b.name]} ui={t.ui} />
-                    </div>
-                  );
-                }
-                return b.type === 'p' ? (
-                  <p class={b.clear ? 'clear' : undefined} set:html={b.html} />
-                ) : b.type === 'h3' ? (
-                  <h3>{b.text}</h3>
-                ) : b.type === 'reframe' ? (
-                  <Reframe first={b.first} actual={b.actual} ui={t.ui} />
-                ) : b.type === 'ol' ? (
-                  <ol>
-                    {b.items.map((item) => (
-                      <li set:html={item} />
-                    ))}
-                  </ol>
-                ) : null;
-              })}
-              {ri === rows.length - 1 && (
-                <p>
-                  <a class="tap-link" href={productHref}>{t.endLinkText}</a>
-                </p>
-              )}
-            </div>
-          </section>
-        ))}
-      </>
-    ) : (
-      <>
-        <section class="row">
-          <aside class="note">
-            <strong>{t.aside.label}</strong>
-            {t.aside.lines[0]}
-            <br />
-            {t.aside.lines[1]}
-            <br />
-            {t.aside.lines[2]}
-          </aside>
-          <div class="body">
-            <p class="notice">
-              {t.notice.before}<a href={t.notice.href} hreflang="en">{t.notice.linkText}</a>{t.notice.after}
-            </p>
-            <h1 class="display">{t.title}</h1>
-            {t.lede.map((p) => (
-              <p class="lede" set:html={p} />
-            ))}
-            <p>
-              <a class="tap-link" href={productHref}>{t.backLinkText}</a>
-            </p>
-          </div>
-        </section>
-
-        <section class="row">
-          <aside class="note">
-            <strong>{t.section1.asideLabel}</strong>
-            {t.section1.asideLines[0]}
-            <br />
-            {t.section1.asideLines[1]}
-          </aside>
-          <div class="body">
-            <h2>{t.section1.heading}</h2>
-            {t.section1.paragraphs.map((p) => (
-              <p set:html={p} />
-            ))}
-          </div>
-        </section>
-
-        <section class="row">
-          <aside class="note">
-            <strong>{t.section2.asideLabel}</strong>
-            {t.section2.asideLines[0]}
-            <br />
-            {t.section2.asideLines[1]}
-          </aside>
-          <div class="body">
-            <h2>{t.section2.heading}</h2>
-            {t.section2.intro.map((p) => (
-              <p set:html={p} />
-            ))}
-            <ul>
-              {t.section2.list.map((item) => (
+  {rows.map((row, ri) => (
+    <section class="row v2" aria-labelledby={row.heading ? row.id : `${row.id}-label`}>
+      <aside class="note">
+        <strong id={row.heading ? undefined : `${row.id}-label`}>{row.label}</strong>
+      </aside>
+      <div class="body">
+        {row.heading && <h2 id={row.id}>{row.heading}</h2>}
+        {row.blocks.map((b) => {
+          if (b.type === 'figure') {
+            const fig = figures[b.name];
+            if (!fig) return null;
+            const Figure = fig.component;
+            return (
+              <div class={fig.float ? 'fig fig-float' : 'fig'}>
+                <Figure {...t.figures[b.name]} ui={t.ui} />
+              </div>
+            );
+          }
+          return b.type === 'p' ? (
+            <p class={b.clear ? 'clear' : undefined} set:html={b.html} />
+          ) : b.type === 'h3' ? (
+            <h3>{b.text}</h3>
+          ) : b.type === 'reframe' ? (
+            <Reframe first={b.first} actual={b.actual} ui={t.ui} />
+          ) : b.type === 'ol' ? (
+            <ol>
+              {b.items.map((item) => (
                 <li set:html={item} />
               ))}
-            </ul>
-            {t.section2.after.map((p) => (
-              <p set:html={p} />
-            ))}
-          </div>
-        </section>
-
-        <section class="row">
-          <aside class="note">
-            <strong>{t.section3.asideLabel}</strong>
-            {t.section3.asideLines[0]}
-            <br />
-            {t.section3.asideLines[1]}
-          </aside>
-          <div class="body">
-            <h2>{t.section3.heading}</h2>
-            {t.section3.retroPoints.map((p) => (
-              <p class="retro-point" set:html={p} />
-            ))}
-            <p set:html={t.section3.closing} />
-            <p>
-              <a class="tap-link" href={productHref}>{t.section3.endLinkText}</a>
-            </p>
-          </div>
-        </section>
-      </>
-    )
-  }
+            </ol>
+          ) : null;
+        })}
+        {ri === rows.length - 1 && (
+          <p>
+            <a class="tap-link" href={productHref}>{t.endLinkText}</a>
+          </p>
+        )}
+      </div>
+    </section>
+  ))}
 </Base>
 
 <style>
