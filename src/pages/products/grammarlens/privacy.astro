@@ -18,9 +18,10 @@ const updated = '22 September 2026';
       <h1 class="display">Privacy Policy</h1>
       <p class="lede">
         GrammarLens has no accounts, never asks for your email, and shows no ads. Your
-        name, your learning goal, your avatar and your entire practice history —
-        including the Daily Test — stay on your phone; the Daily Test is scored on the
-        device and never leaves it. If you turn on AI feedback for Topic Practice, the
+        name, your avatar and your entire practice history — including the Daily
+        Test — stay on your phone; the Daily Test is scored on the
+        device and never leaves it. If you turn on AI feedback for Topic Practice
+        (including practice you start from a weak spot), the
         answer you type and the question it responds to are sent through our server to
         Anthropic (Claude) so it can check your work — only after you've agreed to it
         in the app, and you can withdraw that agreement at any time.
@@ -71,10 +72,12 @@ const updated = '22 September 2026';
       <h2 id="what-stays-on-your-device">What stays on your device</h2>
       <p>
         Everything below is stored in the app's local database and is removed when you
-        delete the app. None of it is ever sent anywhere:
+        delete the app. Apart from your text-size setting and the aggregate counts
+        described under <a href="#analytics-and-crash-reporting">Analytics and crash reporting</a>,
+        none of it is sent anywhere:
       </p>
       <ul>
-        <li>Your first name and your stated learning goal, from onboarding</li>
+        <li>Your first name, from onboarding</li>
         <li>Your chosen avatar and your app settings, including text size and theme</li>
         <li>
           Your weak-spot profile — which grammar topics you get wrong and how often,
@@ -136,8 +139,8 @@ const updated = '22 September 2026';
         Before you use it for the first time, the app shows a permission screen that
         states what is sent (the answer you type, together with the question it
         responds to), who receives it (Anthropic, the company that makes Claude,
-        reached through our own server), and what is never sent (your name, your
-        learning goal or your avatar — Daily Test answers stay on your device
+        reached through our own server), and what is never sent (your name
+        or your avatar — Daily Test answers stay on your device
         regardless). You can decline and still use the Daily Test.
       </p>
       <p>
@@ -242,9 +245,15 @@ const updated = '22 September 2026';
         <li>Your AI-feedback permission decision (see <a href="#permission-for-ai-feedback">Permission for AI feedback</a>)</li>
       </ul>
       <p>
+        The learning goal you choose during onboarding (exam prep, work, everyday
+        confidence, or skipped) is sent with the app's usage analytics, never with
+        your name. It helps us decide what to improve; it does not change your
+        lessons.
+      </p>
+      <p>
         The exact events inside these categories may change as the app evolves; what
-        doesn't change is the boundary — none of them ever carry your name, your
-        learning goal, or the text of any question or answer.
+        doesn't change is the boundary — none of them ever carry your name
+        or the text of any question or answer.
       </p>
       <p>
         <strong>What Firebase collects automatically.</strong> Independently of the events above,
@@ -295,7 +304,7 @@ const updated = '22 September 2026';
       <h2 id="what-we-never-send">What we never send</h2>
       <p>Regardless of feature or permission state, GrammarLens never sends:</p>
       <ul>
-        <li>Your name, your learning goal or your avatar</li>
+        <li>Your name or your avatar</li>
         <li>
           Your stored practice history (other than the Topic Practice answers you
           choose to submit for feedback — see <a href="#permission-for-ai-feedback">Permission for AI feedback</a>)
