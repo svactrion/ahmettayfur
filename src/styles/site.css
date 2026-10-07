@@ -503,8 +503,12 @@ a.card:hover {
      it, instead of the first link getting stranded next to the brand
      while the rest wrap (flex-wrap splits wherever items stop fitting,
      which used to land mid-group). */
+  /* The brand still takes the first line, but leaves room on its right
+     for the language switch (moved up with `order`, see below), so the
+     links get the whole second line to themselves. 100px covers the
+     switch's 73px plus the column gap. */
   .nav-brand {
-    flex: 1 0 100%;
+    flex: 1 0 calc(100% - 100px);
     margin-right: 0;
   }
 
@@ -520,18 +524,35 @@ a.card:hover {
     padding-block: 11px;
   }
 
-  /* On the wrapped second line, keep the four links packed to the left and
-     push the language switch to the right edge instead of it trailing
-     right after "Contact" — the same left/right split the brand row above
-     already has, just one line down. */
+  /* The language switch sits at the right edge of the brand line, so the
+     five links fit on one line underneath instead of wrapping to a third.
+     Only the visual order changes; the DOM (and tab) order stays as on
+     desktop. */
+  .masthead .nav > * {
+    order: 2;
+  }
+
+  .masthead .nav .nav-brand {
+    order: 0;
+  }
+
   .masthead .nav .lang-switch {
+    order: 1;
     margin-left: auto;
   }
 }
 
 @media (max-width: 560px) {
   .masthead .nav {
-    gap: 10px 14px;
+    gap: 10px 12px;
     font-size: 14px;
+  }
+}
+
+/* Narrow phones (360px wide): a tighter gap keeps the five links on one
+   line. */
+@media (max-width: 374.98px) {
+  .masthead .nav {
+    column-gap: 8px;
   }
 }
