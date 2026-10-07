@@ -116,6 +116,7 @@ const switchHref = otherLocalePath(path, lang);
           <a href={`${home}#who`}>{t.nav.who}</a>
           <a href={`${home}#articles`}>{t.nav.articles}</a>
           <a href={`${home}#contact`}>{t.nav.contact}</a>
+          <a href="/studio">Svactrion</a>
           {
             switchHref ? (
               <a class="lang-switch" href={switchHref} hreflang={lang === 'en' ? 'tr' : 'en'} aria-label={t.chrome.langSwitchAria}>
@@ -142,7 +143,10 @@ const switchHref = otherLocalePath(path, lang);
 
       <footer class="footer">
         <span>&copy; {year} {me.name}</span>
-        <span>ahmettayfur.com</span>
+        <span class="footer-links">
+          <a href="/studio">Svactrion</a>
+          <span>ahmettayfur.com</span>
+        </span>
       </footer>
     </div>
 

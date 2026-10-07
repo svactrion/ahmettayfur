@@ -1,0 +1,161 @@
+---
+// src/pages/studio.astro  ->  https://ahmettayfur.com/studio
+// Self-contained page: no layout import needed. If you want your site's
+// header/footer, wrap the <main> block in your own layout component instead.
+
+const studio = {
+  name: "Svactrion",
+  tagline: "An independent app studio building practical tools people actually need.",
+  founded: "2026",
+  location: "Istanbul, Türkiye",
+  founder: "Ahmet Tayfur",
+  email: "ahmet@ahmettayfur.com",
+  url: "https://ahmettayfur.com/studio",
+  linkedin: "https://www.linkedin.com/in/ahmettayfur",
+  github: "https://github.com/svactrion",
+};
+
+const links = {
+  grammarlens: "/products/grammarlens/case-study",
+  privacy: "/products/grammarlens/privacy/",
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: studio.name,
+  url: studio.url,
+  email: studio.email,
+  foundingDate: studio.founded,
+  description: studio.tagline,
+  address: { "@type": "PostalAddress", addressLocality: "Istanbul", addressCountry: "TR" },
+  founder: { "@type": "Person", name: studio.founder, url: studio.linkedin },
+  sameAs: [studio.github, studio.linkedin],
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{studio.name} — App studio</title>
+    <meta name="description" content={studio.tagline} />
+    <link rel="canonical" href={studio.url} />
+    <meta property="og:title" content={`${studio.name} — App studio`} />
+    <meta property="og:description" content={studio.tagline} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={studio.url} />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body>
+    <main>
+      <header class="hero">
+        <p class="eyebrow">App studio · Founded {studio.founded} · {studio.location}</p>
+        <h1>{studio.name}</h1>
+        <p class="lede">{studio.tagline}</p>
+      </header>
+
+      <section>
+        <h2>What we do</h2>
+        <p>
+          {studio.name} designs, builds and ships small, focused mobile apps. Each product
+          starts from user research and a written product spec, goes out as a lean first
+          version, and is improved in short iteration cycles. We build with Claude: Claude Code
+          in development, and the Claude API inside products where AI does real work for the user.
+        </p>
+      </section>
+
+      <section>
+        <h2>Products</h2>
+        <article class="card">
+          <p class="status">Launching on the App Store</p>
+          <h3>GrammarLens</h3>
+          <p>
+            An iOS app for IELTS and fluency-focused English learners. Instead of
+            multiple-choice drills, learners write their own sentences and get AI feedback
+            on grammar and natural phrasing, powered by Claude Sonnet.
+          </p>
+          <p class="meta">iOS · Flutter · Claude API · Subscription</p>
+          <a href={links.grammarlens}>Read the case study →</a>
+        </article>
+        <article class="card muted">
+          <p class="status">In development</p>
+          <h3>Next: utility apps</h3>
+          <p>More everyday tool apps are in research and planning.</p>
+        </article>
+      </section>
+
+      <section>
+        <h2>Company</h2>
+        <dl>
+          <div><dt>Name</dt><dd>{studio.name}</dd></div>
+          <div><dt>Founder</dt><dd><a href={studio.linkedin}>{studio.founder}</a></dd></div>
+          <div><dt>Founded</dt><dd>{studio.founded}</dd></div>
+          <div><dt>Legal form</dt><dd>Sole proprietorship registered in Türkiye</dd></div>
+          <div><dt>Location</dt><dd>{studio.location}</dd></div>
+          <div><dt>Contact</dt><dd><a href={`mailto:${studio.email}`}>{studio.email}</a></dd></div>
+        </dl>
+      </section>
+
+      <footer>
+        <a href={links.privacy}>GrammarLens privacy policy</a>
+        <a href={studio.github}>GitHub</a>
+        <a href={studio.linkedin}>LinkedIn</a>
+        <span>© {studio.founded} {studio.name}</span>
+      </footer>
+    </main>
+
+    <style>
+      :root {
+        --bg: #fbfaf7;
+        --fg: #1a1a18;
+        --muted: #6b6a65;
+        --line: #e4e2db;
+        --card: #ffffff;
+        --accent: #2f5d50;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #141413;
+          --fg: #f1efe9;
+          --muted: #a09e97;
+          --line: #2c2b28;
+          --card: #1c1c1a;
+          --accent: #8fc7b3;
+        }
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--fg);
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        line-height: 1.6;
+      }
+      main { max-width: 720px; margin: 0 auto; padding: 72px 20px 48px; }
+      .eyebrow, .status, .meta {
+        font-size: 0.8rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin: 0;
+      }
+      h1 { font-size: clamp(2.6rem, 9vw, 4.2rem); line-height: 1.05; margin: 12px 0 16px; letter-spacing: -0.03em; }
+      .lede { font-size: 1.25rem; max-width: 34ch; margin: 0; }
+      section { margin-top: 56px; }
+      h2 { font-size: 1rem; color: var(--muted); font-weight: 600; margin: 0 0 16px; border-top: 1px solid var(--line); padding-top: 16px; }
+      h3 { font-size: 1.4rem; margin: 6px 0 8px; }
+      p { margin: 0 0 12px; }
+      a { color: var(--accent); text-underline-offset: 3px; }
+      .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 24px; margin-bottom: 16px; }
+      .card.muted { background: transparent; }
+      .status { color: var(--accent); }
+      dl { margin: 0; }
+      dl div { display: flex; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+      dt { width: 110px; flex-shrink: 0; color: var(--muted); }
+      dd { margin: 0; }
+      footer { margin-top: 64px; display: flex; flex-wrap: wrap; gap: 20px; font-size: 0.9rem; color: var(--muted); }
+    </style>
+  </body>
+</html>
