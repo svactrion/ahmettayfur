@@ -1,14 +1,16 @@
 // Which pages exist in both languages, given as their English path.
 //
 // Add a path here once its Turkish counterpart exists at the matching
-// location under src/pages/tr/. Everything not listed here — the legal
-// pages — stays English-only, and the language switch shows as disabled on
+// location under src/pages/tr/. Everything not listed here — the GrammarLens
+// legal pages — stays English-only, and the language switch shows as disabled on
 // those pages instead of linking to a Turkish page that doesn't exist.
 export const translatedPaths = [
   '/',
   '/products/',
   '/products/grammarlens/',
   '/products/grammarlens/case-study/',
+  '/products/scanstash/privacy/',
+  '/products/scanstash/terms/',
 ];
 
 // Strips a leading /tr (or /tr/) prefix, returning the English form of a

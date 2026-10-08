@@ -3,6 +3,7 @@
 // Astro.currentLocale picks the language — see src/content/products.js.
 import Base from '../layouts/Base.astro';
 import { productsCopy } from '../content/products.js';
+import { scanstash } from '../data.js';
 import { localizeHref } from '../i18n.js';
 
 const lang = Astro.currentLocale ?? 'en';
@@ -36,4 +37,82 @@ const t = productsCopy[lang];
       </a>
     </div>
   </section>
+
+  <section class="row">
+    <aside class="note">
+      <strong>{t.scanstashEntry.note.label}</strong>
+      {t.scanstashEntry.note.line1}<br />
+      {t.scanstashEntry.note.line2}
+    </aside>
+    <div class="body">
+      <!-- No product page yet: same card, but not a link. -->
+      <div class="card card-static">
+        <span class="card-title card-title-icon">
+          <picture>
+            <source srcset={scanstash.icon.webp} type="image/webp" />
+            <img src={scanstash.icon.png} alt="" width="40" height="40" loading="lazy" />
+          </picture>
+          {t.scanstashEntry.cardTitle}
+        </span>
+        <span class="card-text">{t.scanstashEntry.cardText}</span>
+        <span class="card-status">{t.scanstashEntry.cardStatus}</span>
+      </div>
+      <p class="card-docs">
+        {t.scanstashEntry.docs.map((l, i) => (
+          <>
+            {i > 0 && <span aria-hidden="true">·</span>}
+            <a href={localizeHref(l.href, lang)}>{l.label}</a>
+          </>
+        ))}
+      </p>
+    </div>
+  </section>
 </Base>
+
+<style>
+  /* Same look as a.card in site.css, for a product with no page yet: not a
+     link, so no hover state. Kept here rather than in site.css so the
+     shared stylesheet the legal pages load doesn't change. */
+  .card-static {
+    padding: clamp(18px, 2.2vw, 26px);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    color: var(--color-text);
+  }
+
+  .card-title-icon {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .card-title-icon img {
+    display: block;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+  }
+
+  /* Legal links under a card that has no page of its own. 13px text, but
+     each link is 44px tall to tap. */
+  .card-docs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin: 6px 0 0;
+    font-size: 13px;
+    color: var(--color-neutral-500);
+  }
+
+  .card-docs a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--color-neutral-400);
+  }
+
+  .card-docs a:hover {
+    color: var(--color-accent-300);
+  }
+</style>

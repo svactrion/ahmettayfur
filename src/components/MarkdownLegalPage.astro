@@ -1,0 +1,134 @@
+---
+// Renders one legal document kept as Markdown (src/legal/) inside the
+// Legal layout, using the same row/note structure as the hand-written
+// GrammarLens legal pages.
+//
+// The Markdown is the source of truth and is rendered as-is: "# " is the
+// title, the "Last updated" line goes in the side note, the paragraphs
+// before the first "## " are the lede, and every "## N. Heading" becomes a
+// numbered row. Inline, **bold** and bare https:// URLs are the only
+// markup the files use; a bold email address is rendered as a mailto link
+// to me.email, and the build fails if the file names a different address.
+import Legal from '../layouts/Legal.astro';
+import { me } from '../data.js';
+
+const {
+  source,
+  lang,
+  description,
+  docLabel, // side-note label, e.g. "Privacy"
+  productLine, // side-note second line, e.g. "QR: ScanStash for iPhone"
+  contentsLabel,
+  related, // { label, links: [{ text, href, hreflang? }] }
+  alternate,
+  switchAria,
+  homeHref,
+  navLink,
+  footerLinks,
+} = Astro.props;
+
+const escape = (s) =>
+  s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+function inline(text) {
+  return escape(text)
+    .replace(/\*\*(.+?)\*\*/g, (_, inner) => {
+      if (/^[^\s@]+@[^\s@]+$/.test(inner)) {
+        if (inner !== me.email) {
+          throw new Error(`Legal text names ${inner}, but me.email is ${me.email}`);
+        }
+        return `<a href="mailto:${me.email}">${me.email}</a>`;
+      }
+      return `<strong>${inner}</strong>`;
+    })
+    .replace(/https:\/\/[^\s<]+[^\s<.,;:)]/g, (url) => `<a href="${url}">${url}</a>`);
+}
+
+const turkish = { ç: 'c', ğ: 'g', ı: 'i', İ: 'i', ö: 'o', ş: 's', ü: 'u', â: 'a' };
+const slug = (s) =>
+  s
+    .toLocaleLowerCase(lang)
+    .replace(/[çğıİöşüâ]/g, (c) => turkish[c] ?? c)
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+
+// Split into blocks on blank lines.
+const blocks = source.trim().split(/\n\s*\n/).map((b) => b.trim());
+const titleBlock = blocks.shift();
+if (!titleBlock.startsWith('# ')) throw new Error('Legal Markdown must start with "# Title"');
+const title = titleBlock.slice(2).trim();
+const updatedLine = blocks.shift();
+
+const lede = [];
+const sections = [];
+for (const block of blocks) {
+  const h = block.match(/^## (\d+)\.\s+(.+)$/);
+  if (h) {
+    sections.push({ num: h[1].padStart(2, '0'), heading: block.slice(3), short: h[2], id: slug(h[2]), paras: [] });
+  } else if (sections.length) {
+    sections[sections.length - 1].paras.push(inline(block));
+  } else {
+    lede.push(inline(block));
+  }
+}
+---
+
+<Legal
+  title={title}
+  description={description}
+  noindex
+  lang={lang}
+  alternate={alternate}
+  switchAria={switchAria}
+  homeHref={homeHref}
+  navLink={navLink}
+  footerLinks={footerLinks}
+  ogImage={{ path: '/og.jpg', width: 1200, height: 630, alt: null }}
+>
+  <section class="row">
+    <aside class="note">
+      <strong>{docLabel}</strong>
+      {productLine}<br />
+      {updatedLine}
+    </aside>
+    <div class="body">
+      <h1 class="display">{title}</h1>
+      {lede.map((p) => <p class="lede" set:html={p} />)}
+
+      <p class="links-label">{contentsLabel}</p>
+      <ul class="links toc-list">
+        {sections.map((s) => (
+          <li><a href={`#${s.id}`}>{s.short}</a></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  {
+    sections.map((s) => (
+      <section class="row">
+        <aside class="note">
+          <strong>{s.num}</strong>
+          {s.short}
+        </aside>
+        <div class="body">
+          <h2 id={s.id}>{s.heading}</h2>
+          {s.paras.map((p) => <p set:html={p} />)}
+        </div>
+      </section>
+    ))
+  }
+
+  <section class="row">
+    <aside class="note">
+      <strong>{related.label}</strong>
+    </aside>
+    <div class="body">
+      <ul class="links">
+        {related.links.map((l) => (
+          <li><a href={l.href} hreflang={l.hreflang}>{l.text}</a></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</Legal>

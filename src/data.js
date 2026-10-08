@@ -47,3 +47,23 @@ export const grammarlens = {
     png: '/img/grammarlens-icon-112.png',
   },
 };
+
+export const scanstash = {
+  name: 'QR: ScanStash',
+  // In development, not submitted for review. There is no product page and
+  // no App Store link yet; set these once the app is approved.
+  released: false,
+  appStoreUrl: '',
+
+  // English is the default; each legal page links to its Turkish version
+  // under /tr. Meant as the stable addresses for a future App Store listing.
+  privacyUrl: '/products/scanstash/privacy/',
+  termsUrl: '/products/scanstash/terms/',
+
+  // Source: public/img/scanstash-icon.png (1254×1254). Same 112×112 WebP +
+  // PNG pair as the GrammarLens icon above.
+  icon: {
+    webp: '/img/scanstash-icon-112.webp',
+    png: '/img/scanstash-icon-112.png',
+  },
+};

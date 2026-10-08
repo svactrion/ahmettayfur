@@ -4,7 +4,7 @@
 // Astro.currentLocale — copy.en at "/", copy.tr at "/tr/". Edit text here,
 // never in HomePage.astro.
 
-import { grammarlens } from '../data.js';
+import { grammarlens, scanstash } from '../data.js';
 
 const productDocsEn = [
   { label: 'Privacy', href: grammarlens.privacyUrl },
@@ -48,12 +48,12 @@ export const copy = {
     cta2: 'Read the articles',
 
     prodTitle: 'Products',
-    prodCount: 'One in the works · more to come',
+    prodCount: 'Two in the works · more to come',
     caseStudy: 'Read the case study',
     source: 'GitHub',
     sourceLabel: 'GrammarLens source code on GitHub (opens in a new tab)',
     nextKicker: 'Next',
-    nextTitle: 'Product 02 is in discovery',
+    nextTitle: 'Product 03 is in discovery',
     nextBody:
       'The next one starts the same way: a problem I keep running into myself, then research before a line of code.',
 
@@ -100,6 +100,19 @@ export const copy = {
         sourceHref: grammarlens.sourceUrl,
         docs: productDocsEn,
         icon: { ...grammarlens.icon, alt: 'GrammarLens app icon' },
+      },
+      // No product page, case study or source link yet; only the legal
+      // pages.
+      {
+        name: scanstash.name,
+        status: 'In development · device testing',
+        kicker: 'iPhone app',
+        desc: 'An iPhone app that scans QR codes with the camera or from a photo and saves the web links in a personal visual library. You can name your links, search them and reopen them with one tap from a Home Screen widget.',
+        docs: [
+          { label: 'Privacy', href: scanstash.privacyUrl },
+          { label: 'Terms', href: scanstash.termsUrl },
+        ],
+        icon: { ...scanstash.icon, alt: 'QR: ScanStash app icon' },
       },
     ],
 
@@ -208,12 +221,12 @@ export const copy = {
     cta2: 'Yazıları oku',
 
     prodTitle: 'Ürünler',
-    prodCount: 'Biri geliştirmede · yenileri yolda',
+    prodCount: 'İkisi geliştirmede · yenileri yolda',
     caseStudy: "Case study'yi oku",
     source: 'GitHub',
     sourceLabel: "GrammarLens kaynak kodu GitHub'da (yeni sekmede açılır)",
     nextKicker: 'Sıradaki',
-    nextTitle: 'İkinci ürün keşif aşamasında',
+    nextTitle: 'Üçüncü ürün keşif aşamasında',
     nextBody:
       'O da aynı yoldan başlıyor: önce benim de sürekli karşılaştığım bir problem, sonra tek satır kod yazmadan önce araştırma.',
 
@@ -260,6 +273,17 @@ export const copy = {
         sourceHref: grammarlens.sourceUrl,
         docs: productDocsTr,
         icon: { ...grammarlens.icon, alt: 'GrammarLens uygulama simgesi' },
+      },
+      {
+        name: scanstash.name,
+        status: 'Geliştirme aşamasında · cihaz testleri sürüyor',
+        kicker: 'iPhone uygulaması',
+        desc: "QR kodlarını kameradan veya fotoğraftan tarayarak web bağlantılarını kişisel bir görsel kütüphanede saklamanı sağlayan iPhone uygulaması. Bağlantılarını adlandırabilir, arayabilir ve ana ekran widget'ından tek dokunuşla yeniden açabilirsin.",
+        docs: [
+          { label: 'Gizlilik', href: scanstash.privacyUrl },
+          { label: 'Kullanım koşulları', href: scanstash.termsUrl },
+        ],
+        icon: { ...scanstash.icon, alt: 'QR: ScanStash uygulama simgesi' },
       },
     ],
 

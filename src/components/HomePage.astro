@@ -86,36 +86,42 @@ const posts = await getPosts(me.mediumHandle, lang);
 
               <p class="prod-desc">{p.desc}</p>
 
-              <p class="prod-facts">
-                {p.facts.map((f, i) => (
-                  <>
-                    {i > 0 && <span aria-hidden="true">·</span>}
-                    <span>{f}</span>
-                  </>
-                ))}
-              </p>
+              {p.facts && (
+                <p class="prod-facts">
+                  {p.facts.map((f, i) => (
+                    <>
+                      {i > 0 && <span aria-hidden="true">·</span>}
+                      <span>{f}</span>
+                    </>
+                  ))}
+                </p>
+              )}
 
-              <div class="prod-stack">
-                {p.stack.map((s) => (
-                  <span class="tag tag-neutral">{s}</span>
-                ))}
-              </div>
+              {p.stack && (
+                <div class="prod-stack">
+                  {p.stack.map((s) => (
+                    <span class="tag tag-neutral">{s}</span>
+                  ))}
+                </div>
+              )}
 
               <div class="prod-foot">
-                <div class="prod-actions">
-                  <a class="btn btn-primary" href={localizeHref(p.caseHref, lang)}>
-                    {t.caseStudy} <span aria-hidden="true">&rarr;</span>
-                  </a>
-                  <a
-                    class="btn btn-secondary"
-                    href={p.sourceHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={t.sourceLabel}
-                  >
-                    {t.source} <span aria-hidden="true">&nearr;</span>
-                  </a>
-                </div>
+                {p.caseHref && (
+                  <div class="prod-actions">
+                    <a class="btn btn-primary" href={localizeHref(p.caseHref, lang)}>
+                      {t.caseStudy} <span aria-hidden="true">&rarr;</span>
+                    </a>
+                    <a
+                      class="btn btn-secondary"
+                      href={p.sourceHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={t.sourceLabel}
+                    >
+                      {t.source} <span aria-hidden="true">&nearr;</span>
+                    </a>
+                  </div>
+                )}
                 <span class="prod-docs">
                   {p.docs.map((l) => (
                     <a href={localizeHref(l.href, lang)} hreflang={hreflangFor(l.href, lang)} aria-label={l.aria}>{l.label}</a>

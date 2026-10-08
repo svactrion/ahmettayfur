@@ -1,5 +1,5 @@
 ---
-// Layout for the GrammarLens legal and support pages only.
+// Layout for the product legal and support pages (GrammarLens, ScanStash).
 //
 // These three addresses are given to Apple in the App Store submission and
 // are opened directly by the review team and by links inside the app. So:
@@ -15,7 +15,30 @@ import { me } from '../data.js';
 import '../styles/nocturne.css';
 import '../styles/site.css';
 
-const { title, description, noindex = false } = Astro.props;
+// Every prop below title/description is optional, and the defaults are the
+// GrammarLens pages exactly as they were. Other products' legal pages
+// (ScanStash) pass their own language, alternate-language address, share
+// image, nav link and footer links.
+const {
+  title,
+  description,
+  noindex = false,
+  lang = 'en',
+  // The same page's address in the other language, e.g.
+  // { lang: 'tr', href: '/tr/products/scanstash/privacy/' }. Without it the
+  // page is English-only and the language switch shows as disabled.
+  alternate = null,
+  // The language switch's accessible name, only used with `alternate`.
+  switchAria = 'Switch to Turkish',
+  homeHref = '/',
+  navLink = { label: 'GrammarLens', href: '/products/grammarlens' },
+  footerLinks = [
+    { label: 'Privacy', href: '/products/grammarlens/privacy' },
+    { label: 'Terms', href: '/products/grammarlens/terms' },
+    { label: 'Support', href: '/products/grammarlens/support' },
+  ],
+  ogImage = { path: '/grammarlens-og.png', width: 1672, height: 941, alt: 'GrammarLens — AI-Powered Grammar Coach' },
+} = Astro.props;
 const path = Astro.url.pathname;
 // These three addresses are compiled into the shipped app in
 // lib/utils/app_links.dart WITH a trailing slash
@@ -25,31 +48,37 @@ const path = Astro.url.pathname;
 // published at. It is pinned to the released app binary — changing it
 // does not reach installs already in the wild, only a new app version does.
 const canonical = new URL(path.endsWith('/') ? path : `${path}/`, Astro.site).href;
+// hreflang: with an alternate, the English address is both "en" and
+// x-default; the canonical stays this page's own address.
+const altUrl = alternate ? new URL(alternate.href, Astro.site).href : null;
+const enUrl = alternate && alternate.lang === 'en' ? altUrl : canonical;
+const ogImageUrl = new URL(ogImage.path, Astro.site).href;
 const year = new Date().getFullYear();
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <link rel="alternate" hreflang="en" href={canonical} />
-    <link rel="alternate" hreflang="x-default" href={canonical} />
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    {alternate && <link rel="alternate" hreflang="tr" href={alternate.lang === 'tr' ? altUrl : canonical} />}
+    <link rel="alternate" hreflang="x-default" href={enUrl} />
     {noindex && <meta name="robots" content="noindex, follow" />}
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={new URL('/grammarlens-og.png', Astro.site).href} />
-    <meta property="og:image:width" content="1672" />
-    <meta property="og:image:height" content="941" />
-    <meta property="og:image:alt" content="GrammarLens — AI-Powered Grammar Coach" />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content={ogImage.width} />
+    <meta property="og:image:height" content={ogImage.height} />
+    {ogImage.alt && <meta property="og:image:alt" content={ogImage.alt} />}
     <meta property="og:site_name" content="ahmettayfur.com" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content={new URL('/grammarlens-og.png', Astro.site).href} />
+    <meta name="twitter:image" content={ogImageUrl} />
     <meta name="theme-color" content="#161826" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
@@ -64,12 +93,25 @@ const year = new Date().getFullYear();
     <div class="shell shell-narrow">
       <header class="masthead">
         <nav class="nav" aria-label="Primary">
-          <a class="nav-brand" href="/">{me.shortName}</a>
-          <a href="/products/grammarlens">GrammarLens</a>
-          <span class="lang-switch lang-switch-off" aria-hidden="true">
-            <span class="lang-switch-item is-active">EN</span>
-            <span class="lang-switch-item">TR</span>
-          </span>
+          <a class="nav-brand" href={homeHref}>{me.shortName}</a>
+          <a href={navLink.href}>{navLink.label}</a>
+          {
+            alternate ? (
+              <a class="lang-switch" href={alternate.href} hreflang={alternate.lang} aria-label={switchAria}>
+                <span class={`lang-switch-item${lang === 'en' ? ' is-active' : ''}`} aria-hidden="true">
+                  EN
+                </span>
+                <span class={`lang-switch-item${lang === 'tr' ? ' is-active' : ''}`} aria-hidden="true">
+                  TR
+                </span>
+              </a>
+            ) : (
+              <span class="lang-switch lang-switch-off" aria-hidden="true">
+                <span class="lang-switch-item is-active">EN</span>
+                <span class="lang-switch-item">TR</span>
+              </span>
+            )
+          }
         </nav>
       </header>
 
@@ -80,9 +122,9 @@ const year = new Date().getFullYear();
       <footer class="footer">
         <span>&copy; {year} {me.name}</span>
         <span class="footer-links">
-          <a class="tap-link" href="/products/grammarlens/privacy">Privacy</a>
-          <a class="tap-link" href="/products/grammarlens/terms">Terms</a>
-          <a class="tap-link" href="/products/grammarlens/support">Support</a>
+          {footerLinks.map((l, i) => (
+            <>{i > 0 && ' '}<a class="tap-link" href={l.href}>{l.label}</a></>
+          ))}
         </span>
       </footer>
     </div>
