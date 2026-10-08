@@ -43,9 +43,9 @@ const hreflangTr = isTranslated(path)
 // twitter:image only exist on those pages — everywhere else keeps exactly
 // the tags it had before.
 const isGrammarLens = enPath.startsWith('/products/grammarlens');
-const ogImagePath = isGrammarLens ? '/grammarlens-og.png' : '/og.jpg';
-const ogImageWidth = isGrammarLens ? 1672 : 1200;
-const ogImageHeight = isGrammarLens ? 941 : 630;
+const ogImagePath = isGrammarLens ? '/grammarlens-og-v2.jpg' : '/og.jpg';
+const ogImageWidth = isGrammarLens ? 1200 : 1200;
+const ogImageHeight = isGrammarLens ? 630 : 630;
 const ogImageAlt = isGrammarLens ? t.chrome.grammarlensOgAlt : null;
 
 // Language switch: only a real link when this exact page also exists in
