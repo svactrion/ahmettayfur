@@ -31,7 +31,7 @@ export const productsCopy = {
     // No product page yet, so this card links nowhere; only its legal
     // pages do.
     scanstashEntry: {
-      note: { label: '02', line1: 'iOS', line2: 'In development' },
+      note: { label: '02', line1: 'Flutter · Swift · iOS', line2: 'In development' },
       cardTitle: scanstash.name,
       cardText:
         'An iPhone app that scans QR codes with the camera or from a photo and saves the web links in a personal visual library. You can name your links, search them and reopen them with one tap from a Home Screen widget.',
@@ -61,7 +61,7 @@ export const productsCopy = {
       cardStatus: 'App Store incelemesine gönderildi',
     },
     scanstashEntry: {
-      note: { label: '02', line1: 'iOS', line2: 'Geliştirme aşamasında' },
+      note: { label: '02', line1: 'Flutter · Swift · iOS', line2: 'Geliştirme aşamasında' },
       cardTitle: scanstash.name,
       cardText:
         "QR kodlarını kameradan veya fotoğraftan tarayarak web bağlantılarını kişisel bir görsel kütüphanede saklamanı sağlayan iPhone uygulaması. Bağlantılarını adlandırabilir, arayabilir ve ana ekran widget'ından tek dokunuşla yeniden açabilirsin.",
