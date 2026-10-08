@@ -6,9 +6,12 @@
 // The Markdown is the source of truth and is rendered as-is: "# " is the
 // title, the "Last updated" line goes in the side note, the paragraphs
 // before the first "## " are the lede, and every "## N. Heading" becomes a
-// numbered row. Inline, **bold** and bare https:// URLs are the only
-// markup the files use; a bold email address is rendered as a mailto link
-// to me.email, and the build fails if the file names a different address.
+// numbered row. A "## Heading" without a number (the support page) becomes
+// a row numbered by its position. Inside a row, "### " is a subheading and
+// a block of "- " lines is a list. Inline markup: **bold**, `code`,
+// [text](url) and bare https:// URLs. A bold email address is rendered as
+// a mailto link to me.email, and the build fails if the file names a
+// different address.
 import Legal from '../layouts/Legal.astro';
 import { me } from '../data.js';
 
@@ -31,7 +34,13 @@ const escape = (s) =>
   s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 function inline(text) {
+  // [text](url) and `code` are swapped out for placeholders first, so the
+  // bare-URL pass below can't turn the URL inside a link into a second link.
+  const held = [];
+  const hold = (html) => `\u0000${held.push(html) - 1}\u0000`;
   return escape(text)
+    .replace(/`([^`]+)`/g, (_, code) => hold(`<code>${code}</code>`))
+    .replace(/\[([^\]]+)\]\((https:\/\/[^\s)]+)\)/g, (_, label, url) => hold(`<a href="${url}">${label}</a>`))
     .replace(/\*\*(.+?)\*\*/g, (_, inner) => {
       if (/^[^\s@]+@[^\s@]+$/.test(inner)) {
         if (inner !== me.email) {
@@ -41,7 +50,8 @@ function inline(text) {
       }
       return `<strong>${inner}</strong>`;
     })
-    .replace(/https:\/\/[^\s<]+[^\s<.,;:)]/g, (url) => `<a href="${url}">${url}</a>`);
+    .replace(/https:\/\/[^\s<\u0000]+[^\s<.,;:)\u0000]/g, (url) => `<a href="${url}">${url}</a>`)
+    .replace(/\u0000(\d+)\u0000/g, (_, i) => held[Number(i)]);
 }
 
 const turkish = { ç: 'c', ğ: 'g', ı: 'i', İ: 'i', ö: 'o', ş: 's', ü: 'u', â: 'a' };
@@ -62,11 +72,20 @@ const updatedLine = blocks.shift();
 const lede = [];
 const sections = [];
 for (const block of blocks) {
-  const h = block.match(/^## (\d+)\.\s+(.+)$/);
+  const h = block.match(/^## (?:(\d+)\.\s+)?(.+)$/);
   if (h) {
-    sections.push({ num: h[1].padStart(2, '0'), heading: block.slice(3), short: h[2], id: slug(h[2]), paras: [] });
+    const num = h[1] ?? String(sections.length + 1);
+    sections.push({ num: num.padStart(2, '0'), heading: block.slice(3), short: h[2], id: slug(h[2]), paras: [] });
   } else if (sections.length) {
-    sections[sections.length - 1].paras.push(inline(block));
+    const lines = block.split('\n');
+    const items = sections[sections.length - 1].paras;
+    if (block.startsWith('### ')) {
+      items.push({ type: 'h3', html: inline(block.slice(4)) });
+    } else if (lines.every((l) => l.startsWith('- '))) {
+      items.push({ type: 'list', items: lines.map((l) => inline(l.slice(2))) });
+    } else {
+      items.push({ type: 'p', html: inline(block) });
+    }
   } else {
     lede.push(inline(block));
   }
@@ -113,7 +132,19 @@ for (const block of blocks) {
         </aside>
         <div class="body">
           <h2 id={s.id}>{s.heading}</h2>
-          {s.paras.map((p) => <p set:html={p} />)}
+          {s.paras.map((p) =>
+            p.type === 'h3' ? (
+              <h3 set:html={p.html} />
+            ) : p.type === 'list' ? (
+              <ul class="links">
+                {p.items.map((i) => (
+                  <li set:html={i} />
+                ))}
+              </ul>
+            ) : (
+              <p set:html={p.html} />
+            ),
+          )}
         </div>
       </section>
     ))

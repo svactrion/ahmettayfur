@@ -1,15 +1,21 @@
-// UI labels and links around the ScanStash privacy policy and terms. The
-// policy text itself is src/legal/scanstash/*.md, rendered as-is.
+// UI labels and links around the ScanStash privacy policy, terms and
+// support page. The text itself is src/legal/scanstash/*.md, rendered as-is.
 
 import privacyEn from '../legal/scanstash/privacy.en.md?raw';
 import privacyTr from '../legal/scanstash/privacy.tr.md?raw';
 import termsEn from '../legal/scanstash/terms.en.md?raw';
 import termsTr from '../legal/scanstash/terms.tr.md?raw';
+import supportEn from '../legal/scanstash/support.en.md?raw';
+import supportTr from '../legal/scanstash/support.tr.md?raw';
 import { scanstash } from '../data.js';
 
 const url = {
-  en: { privacy: scanstash.privacyUrl, terms: scanstash.termsUrl },
-  tr: { privacy: `/tr${scanstash.privacyUrl}`, terms: `/tr${scanstash.termsUrl}` },
+  en: { privacy: scanstash.privacyUrl, terms: scanstash.termsUrl, support: scanstash.supportUrl },
+  tr: {
+    privacy: `/tr${scanstash.privacyUrl}`,
+    terms: `/tr${scanstash.termsUrl}`,
+    support: `/tr${scanstash.supportUrl}`,
+  },
 };
 
 const ui = {
@@ -21,14 +27,21 @@ const ui = {
     contentsLabel: 'Contents',
     privacy: 'Privacy Policy',
     terms: 'Terms of Use',
+    support: 'Support',
     footerPrivacy: 'Privacy',
     footerTerms: 'Terms',
-    docLabel: { privacy: 'Privacy', terms: 'Terms' },
+    footerSupport: 'Support',
+    docLabel: { privacy: 'Privacy', terms: 'Terms', support: 'Support' },
     related: 'Related',
-    otherLanguage: { privacy: 'Gizlilik Politikası (Türkçe)', terms: 'Kullanım Koşulları (Türkçe)' },
+    otherLanguage: {
+      privacy: 'Gizlilik Politikası (Türkçe)',
+      terms: 'Kullanım Koşulları (Türkçe)',
+      support: 'Destek (Türkçe)',
+    },
     description: {
       privacy: 'Privacy policy for QR: ScanStash, the iPhone app.',
       terms: 'Terms of use for QR: ScanStash, the iPhone app.',
+      support: 'Help and contact for QR: ScanStash, the iPhone app.',
     },
   },
   tr: {
@@ -39,14 +52,21 @@ const ui = {
     contentsLabel: 'İçindekiler',
     privacy: 'Gizlilik Politikası',
     terms: 'Kullanım Koşulları',
+    support: 'Destek',
     footerPrivacy: 'Gizlilik',
     footerTerms: 'Koşullar',
-    docLabel: { privacy: 'Gizlilik', terms: 'Koşullar' },
+    footerSupport: 'Destek',
+    docLabel: { privacy: 'Gizlilik', terms: 'Koşullar', support: 'Destek' },
     related: 'İlgili',
-    otherLanguage: { privacy: 'Privacy Policy (English)', terms: 'Terms of Use (English)' },
+    otherLanguage: {
+      privacy: 'Privacy Policy (English)',
+      terms: 'Terms of Use (English)',
+      support: 'Support (English)',
+    },
     description: {
       privacy: 'QR: ScanStash iPhone uygulamasının gizlilik politikası.',
       terms: 'QR: ScanStash iPhone uygulamasının kullanım koşulları.',
+      support: 'QR: ScanStash iPhone uygulaması için yardım ve iletişim.',
     },
   },
 };
@@ -54,13 +74,15 @@ const ui = {
 const sources = {
   privacy: { en: privacyEn, tr: privacyTr },
   terms: { en: termsEn, tr: termsTr },
+  support: { en: supportEn, tr: supportTr },
 };
+
+const docs = ['privacy', 'terms', 'support'];
 
 // Everything MarkdownLegalPage needs for one document in one language.
 export function scanstashLegalProps(doc, lang) {
   const t = ui[lang];
   const other = lang === 'en' ? 'tr' : 'en';
-  const otherDoc = doc === 'privacy' ? 'terms' : 'privacy';
   return {
     source: sources[doc][lang],
     lang,
@@ -75,11 +97,12 @@ export function scanstashLegalProps(doc, lang) {
     footerLinks: [
       { label: t.footerPrivacy, href: url[lang].privacy },
       { label: t.footerTerms, href: url[lang].terms },
+      { label: t.footerSupport, href: url[lang].support },
     ],
     related: {
       label: t.related,
       links: [
-        { text: t[otherDoc], href: url[lang][otherDoc] },
+        ...docs.filter((d) => d !== doc).map((d) => ({ text: t[d], href: url[lang][d] })),
         { text: t.otherLanguage[doc], href: url[other][doc], hreflang: other },
       ],
     },

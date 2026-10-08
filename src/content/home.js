@@ -111,6 +111,7 @@ export const copy = {
         docs: [
           { label: 'Privacy', href: scanstash.privacyUrl },
           { label: 'Terms', href: scanstash.termsUrl },
+        { label: 'Support', href: scanstash.supportUrl },
         ],
         facts: ['Solo project', '15 languages', 'No account · on-device'],
         stack: ['Flutter / Dart', 'Swift', 'WidgetKit', 'WebKit'],
@@ -289,6 +290,7 @@ export const copy = {
         docs: [
           { label: 'Gizlilik', href: scanstash.privacyUrl },
           { label: 'Kullanım koşulları', href: scanstash.termsUrl },
+        { label: 'Destek', href: scanstash.supportUrl },
         ],
         facts: ['Tek kişilik proje', '15 dil', 'Hesapsız · cihazda'],
         stack: ['Flutter / Dart', 'Swift', 'WidgetKit', 'WebKit'],

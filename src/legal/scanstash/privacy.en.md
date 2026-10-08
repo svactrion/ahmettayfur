@@ -1,6 +1,6 @@
 # QR: ScanStash — Privacy Policy
 
-Last updated: 8 October 2026
+Last updated: 9 October 2026
 
 QR: ScanStash is an iPhone app for scanning QR codes and keeping a local visual library of web links. This policy describes the current free version of the app and support communications relating to it. It does not describe the independent privacy practices of websites you open, apps you share with, or the portfolio website hosting this page.
 
@@ -26,7 +26,7 @@ Photo scanning uses Apple's system photo picker to access the image you choose. 
 
 Scanning or saving a link does not automatically visit it. Opening a card, choosing to go to a scanned link, or requesting a page preview contacts the destination website. The website may receive the requested address, including its parameters, your IP address and normal browser information. It may use cookies or other website storage under its own policy.
 
-Page previews use an in-app WebKit browser. Cookies, cache and website data may remain in iOS-managed web storage. A preview is created only when you choose to capture the visible page; it is saved locally and may contain personal information visible on that page. It is a stored image, not a live or offline copy of the website. Merely browsing your card library does not load the linked sites or fetch remote preview images.
+Page previews use an in-app WebKit browser with a temporary, non-persistent website-data store. Cookies, cache and website data belong to that browsing session; this WebKit store does not write them to the app's file storage. A preview is created only when you choose to capture the visible page; it is saved locally and may contain personal information visible on that page. It is a stored image, not a live or offline copy of the website. Merely browsing your card library does not load the linked sites or fetch remote preview images.
 
 ## 5. Safari sharing and widgets
 

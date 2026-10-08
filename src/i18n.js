@@ -11,6 +11,7 @@ export const translatedPaths = [
   '/products/grammarlens/case-study/',
   '/products/scanstash/privacy/',
   '/products/scanstash/terms/',
+  '/products/scanstash/support/',
 ];
 
 // Strips a leading /tr (or /tr/) prefix, returning the English form of a

@@ -59,6 +59,7 @@ export const scanstash = {
   // under /tr. Meant as the stable addresses for a future App Store listing.
   privacyUrl: '/products/scanstash/privacy/',
   termsUrl: '/products/scanstash/terms/',
+  supportUrl: '/products/scanstash/support/',
 
   // Source: public/img/scanstash-icon.png (1254×1254). Same 112×112 WebP +
   // PNG pair as the GrammarLens icon above.

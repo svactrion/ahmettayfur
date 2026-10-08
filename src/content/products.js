@@ -39,6 +39,7 @@ export const productsCopy = {
       docs: [
         { label: 'Privacy', href: scanstash.privacyUrl },
         { label: 'Terms', href: scanstash.termsUrl },
+        { label: 'Support', href: scanstash.supportUrl },
       ],
     },
   },
@@ -69,6 +70,7 @@ export const productsCopy = {
       docs: [
         { label: 'Gizlilik', href: scanstash.privacyUrl },
         { label: 'Kullanım koşulları', href: scanstash.termsUrl },
+        { label: 'Destek', href: scanstash.supportUrl },
       ],
     },
   },

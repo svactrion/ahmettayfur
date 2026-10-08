@@ -1,6 +1,6 @@
 # QR: ScanStash — Gizlilik Politikası
 
-Son güncelleme: 8 Ekim 2026
+Son güncelleme: 9 Ekim 2026
 
 QR: ScanStash, QR kodlarını taramak ve web bağlantılarını yerel bir görsel kütüphanede saklamak için geliştirilmiş bir iPhone uygulamasıdır. Bu politika uygulamanın mevcut ücretsiz sürümünü ve onunla ilgili destek yazışmalarını açıklar. Açtığınız web sitelerinin, paylaşım yaptığınız uygulamaların veya bu sayfayı barındıran portföy sitesinin bağımsız gizlilik uygulamalarını kapsamaz.
 
@@ -26,7 +26,7 @@ Fotoğraftan tarama, yalnız seçtiğiniz görsele erişmek için Apple'ın sist
 
 Bir bağlantıyı taramak veya kaydetmek siteyi otomatik açmaz. Karta dokunmak, taranan bağlantıya gitmeyi seçmek veya sayfa önizlemesi istemek hedef siteye bağlantı kurar. Site; istenen adresi ve parametrelerini, IP adresinizi ve olağan tarayıcı bilgilerini alabilir. Kendi politikası kapsamında çerez veya başka web depolaması kullanabilir.
 
-Önizleme için uygulama içi WebKit tarayıcısı kullanılır. Çerezler, önbellek ve site verileri iOS'un yönettiği web depolamasında kalabilir. Görsel yalnız görünür sayfayı yakalamayı seçtiğinizde oluşturulur ve yerel saklanır; sayfada görünen kişisel bilgileri içerebilir. Önizleme kayıtlı bir görseldir; sitenin canlı veya çevrimdışı kopyası değildir. Kart kütüphanesinde gezinmek bağlantılı siteleri açmaz veya uzak önizleme görsellerini indirmez.
+Önizleme için geçici, kalıcı olmayan bir web veri deposu kullanan uygulama içi WebKit tarayıcısı açılır. Çerezler, önbellek ve site verileri bu gezinme oturumuna aittir; bu WebKit deposu bunları uygulamanın dosya depolamasına yazmaz. Görsel yalnız görünür sayfayı yakalamayı seçtiğinizde oluşturulur ve yerel saklanır; sayfada görünen kişisel bilgileri içerebilir. Önizleme kayıtlı bir görseldir; sitenin canlı veya çevrimdışı kopyası değildir. Kart kütüphanesinde gezinmek bağlantılı siteleri açmaz veya uzak önizleme görsellerini indirmez.
 
 ## 5. Safari paylaşımı ve widget
 
