@@ -1,12 +1,12 @@
 # QR: ScanStash — Kullanım Koşulları
 
-Son güncelleme: 8 Ekim 2026
+Son güncelleme: 9 Ekim 2026
 
 Bu koşullar Ahmet Emin Tayfur'un geliştirdiği QR: ScanStash'in kullanımını açıklar. İletişim: **support@ahmettayfur.com**. App Store'dan indirdiğiniz uygulamaya geçerli lisansı tamamlar; onun veya uygulanabilir mevzuatın zorunlu haklarının yerine geçmez. Apple'ın standart son kullanıcı lisansı uygulanıyorsa metni https://www.apple.com/legal/internet-services/itunes/dev/stdeula/ adresindedir.
 
 ## 1. Uygulamanın sundukları
 
-QR: ScanStash; QR okumak, web bağlantılarını kendi verdiğiniz adlarla saklamak, isteğe bağlı yerel önizlemeler eklemek ve bağlantılara yeniden ulaşmak için bir iPhone aracıdır. Elle veya iOS paylaşım uzantısıyla bağlantı ekleyebilir, yapılandırılabilir ana ekran widget'ı kullanabilirsiniz. Mevcut sürüm iOS 17 veya üstünü gerektirir; ücretsizdir, abonelik, reklam veya uygulama içi satın alma içermez.
+QR: ScanStash; QR okumak, web bağlantılarını kendi verdiğiniz adlarla saklamak, isteğe bağlı yerel önizlemeler eklemek ve bağlantılara yeniden ulaşmak için bir iPhone aracıdır. Elle veya iOS paylaşım uzantısıyla bağlantı ekleyebilir, yapılandırılabilir ana ekran widget'ı kullanabilirsiniz. Uygulama iOS 17 veya üstünü gerektirir. Ücretsiz plan en fazla 10 kayıtlı kart sunar. QR ve fotoğraf tarama, son tarananlar, arama, önizleme, kopyalama, paylaşma ve mevcut widget abonelik olmadan kullanılabilir. İsteğe bağlı tek seferlik ScanStash Pro satın alma sınırsız kart kaydını açar. Reklam yoktur.
 
 ## 2. Kullanımınız ve kaydettiğiniz içerik
 
@@ -24,20 +24,30 @@ Hedef web siteleri bağımsız hizmetlerdir. İçerikleri, güvenlikleri, çerez
 
 ## 5. Yerel saklama ve geri yükleme
 
-Kütüphaneniz yerel saklanır. QR tarama geçmişi kaydedilen kartlardan ayrıdır; açıkken son 20 farklı taranan içerikle sınırlıdır. Bir kopyasını tutmadığımız için yerel kütüphanenizi kendi sunucumuzdan geri getiremeyiz. Uygulamayı kaldırma, cihaz kaybı, depolama sorunları veya diğer hatalar veri kaybına yol açabilir. Kaybetmemeniz gereken adreslerin bağımsız bir kopyasını tutun. Uygulamanın şu anda yedekleme veya geri yükleme hizmeti yoktur; Apple cihaz yedeklerinin davranışı ayarlarınıza bağlıdır.
+Kütüphaneniz yerel saklanır. QR tarama geçmişi kaydedilen kartlardan ayrıdır; açıkken son 20 farklı taranan içerikle sınırlıdır. Bir kopyasını tutmadığımız için yerel kütüphanenizi kendi sunucumuzdan geri getiremeyiz. Uygulamayı kaldırma, cihaz kaybı, depolama sorunları veya diğer hatalar veri kaybına yol açabilir. Kaybetmemeniz gereken adreslerin bağımsız bir kopyasını tutun. Uygulamanın şu anda kütüphane yedekleme veya kütüphane geri yükleme hizmeti yoktur; Apple cihaz yedeklerinin davranışı ayarlarınıza bağlıdır.
 
 ## 6. İzinler, kopyalama ve paylaşma
 
 Kamera erişimi isteğe bağlıdır ve iOS Ayarları'ndan yönetilir. Fotoğraf tarama, seçtiğiniz görsel için sistem seçicisini kullanır. Kopyalama tam adresi panoya koyar; paylaşma Apple'ın paylaşım ekranı üzerinden seçtiğiniz hedefe verir. Doğru alıcıyı seçmek sizin sorumluluğunuzdadır. İlgili veri işleme Gizlilik Politikası'nda açıklanır.
 
-## 7. Kullanılabilirlik ve değişiklikler
+## 7. ScanStash Pro satın alma
 
-Yararlı ve güvenilir bir uygulama sunmayı amaçlarız; kesintisiz veya hatasız çalışmayı ya da her üçüncü taraf siteyle uyumluluğu garanti edemeyiz. Özellikler değişebilir veya sona erebilir. İleride ücretli özellikler eklenirse fiyatı ve satın alma koşulları satın alma öncesinde ayrıca açıklanır; bu koşullar ödeme yükümlülüğü oluşturmaz.
+ScanStash Pro, Apple üzerinden işlenen isteğe bağlı ve tüketilmeyen bir uygulama içi satın almadır. Onaylamadan önce App Store’un gösterdiği yerel fiyatı kontrol edin. Tek seferlik satın almadır; abonelik veya tekrar eden ödeme değildir. Sınırsız kayıtlı kart hakkının belirlenmiş bir sona erme tarihi yoktur; bu hak gelecekteki her özelliği, uygulamanın sonsuza kadar kullanılabilirliğini veya bulut depolamasını vaat etmez.
 
-## 8. Sorumluluk ve haklarınız
+Hak, satın almada kullanılan Apple Hesabı ile ilişkilidir. Gerektiğinde Pro ekranındaki **Satın alımları geri yükle** seçeneğiyle Apple üzerinden hakkı geri yüklemeyi isteyebilirsiniz. Pro’yu geri yüklemek satın alma hakkını geri getirir; kaybolan yerel kütüphaneyi geri getirmez. Ayrı bir ScanStash hesabı veya satın alma devretme hizmeti yoktur.
+
+Apple satın alımı iade eder veya hakkı kaldırırsa Pro kullanılamayabilir; yeni kartlara ücretsiz sınır uygulanır. Mevcut kartlar korunur; açılabilir, düzenlenebilir, kopyalanabilir, paylaşılabilir veya silinebilir. Aynı bağlantı için yeni kart hakkı gerekmez. Ücretsiz sınır doluyken paylaşım uzantısıyla alınan bağlantı cihazda bekleyebilir; kaydı tamamlamak için uygulamayı açıp yer açın veya Pro’yu etkinleştirin.
+
+İade taleplerini Apple, kendi politikaları ve uygulanabilir hukuk kapsamında işler; [Apple’ın iade yönergesine](https://support.apple.com/118223) bakabilirsiniz. Bu koşullar zorunlu tüketici haklarını sınırlamaz.
+
+## 8. Kullanılabilirlik ve değişiklikler
+
+Yararlı ve güvenilir bir uygulama sunmayı amaçlarız; kesintisiz veya hatasız çalışmayı ya da her üçüncü taraf siteyle uyumluluğu garanti edemeyiz. Özellikler değişebilir veya sona erebilir. Ek ücretli bir seçenek sunulursa fiyatı ve koşulları satın alma öncesinde açıklanır; ücretsiz planı kullanmak ödeme yükümlülüğü oluşturmaz.
+
+## 9. Sorumluluk ve haklarınız
 
 Uygulanabilir mevzuatın izin verdiği ölçüde üçüncü taraf sitelerin içeriği veya işlemlerinden ve eski bir önizlemeye güvenilmesinden doğan kayıplardan sorumlu değiliz. Bu koşullar hukuken kaldırılamayan garanti, başvuru yolu veya sorumluluğu kaldırmaz; zorunlu tüketici haklarını sınırlamaz. Uygulama veya koşullar hakkında **support@ahmettayfur.com** adresine yazabilirsiniz.
 
-## 9. Koşulların güncellenmesi
+## 10. Koşulların güncellenmesi
 
 Yukarıdaki tarih güncel metni belirtir. Önemli değişiklikler uygun bir uygulama veya web sitesi bildirimiyle açıklanır. App Store indirmesine geçerli lisans ve zorunlu yerel haklar uygulanmaya devam eder.

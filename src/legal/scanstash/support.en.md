@@ -38,10 +38,25 @@ Open a saved card's options and choose the widget help action. Add the QR: ScanS
 
 ### Can support recover a lost library?
 
-We do not have a remote copy of your library. The app has no built-in backup or restore feature. Apple's device backups follow your device settings; deleting the app can remove its local data.
+We do not have a remote copy of your library. The app has no built-in library backup or library restore feature. Restoring Pro does not recover lost cards. Apple's device backups follow your device settings; deleting the app can remove its local data.
+
+### What is free, and what does Pro unlock?
+
+You can keep up to 10 saved cards for free. QR and photo scanning are unlimited; Recent scans still keeps the last 20 distinct contents. Search, previews, copy/share and the existing widget remain free. ScanStash Pro is an optional one-time purchase that unlocks unlimited saved cards, with no subscription. The Pro screen shows Apple’s localized price before purchase.
+
+### What happens at the free limit?
+
+You can still open, edit, copy, share or delete existing cards, and saving an already saved link does not use a new slot. To add a new card, delete a card to free space or unlock Pro. A new link received from Safari waits locally until the app can finish saving it; open the app to see the notice.
+
+### How do I restore Pro?
+
+Use the Apple Account that made the purchase, then open the **Free / Pro** button at the top of the home screen → **Restore purchases**. Apple may ask you to sign in. Restoring the purchase restores unlimited saved cards, not the contents of a lost local library. A pending purchase does not unlock Pro until Apple confirms it.
+
+### Where do I request a refund?
+
+Apple handles App Store purchase refunds. Follow [Apple’s refund instructions](https://support.apple.com/118223). If Apple refunds or revokes Pro, existing cards stay available; the free limit applies to new cards.
 
 ## Privacy and terms
 
 - [Privacy Policy](https://ahmettayfur.com/products/scanstash/privacy/)
 - [Terms of Use](https://ahmettayfur.com/products/scanstash/terms/)
-

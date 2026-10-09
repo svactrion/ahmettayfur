@@ -2,7 +2,7 @@
 
 Son güncelleme: 9 Ekim 2026
 
-QR: ScanStash, QR kodlarını taramak ve web bağlantılarını yerel bir görsel kütüphanede saklamak için geliştirilmiş bir iPhone uygulamasıdır. Bu politika uygulamanın mevcut ücretsiz sürümünü ve onunla ilgili destek yazışmalarını açıklar. Açtığınız web sitelerinin, paylaşım yaptığınız uygulamaların veya bu sayfayı barındıran portföy sitesinin bağımsız gizlilik uygulamalarını kapsamaz.
+QR: ScanStash, QR kodlarını taramak ve web bağlantılarını yerel bir görsel kütüphanede saklamak için geliştirilmiş bir iPhone uygulamasıdır. Bu politika uygulamanın ücretsiz planını, isteğe bağlı tek seferlik Pro satın alımını ve onunla ilgili destek yazışmalarını açıklar. Açtığınız web sitelerinin, paylaşım yaptığınız uygulamaların veya bu sayfayı barındıran portföy sitesinin bağımsız gizlilik uygulamalarını kapsamaz.
 
 ## 1. Sorumlu kişi
 
@@ -12,9 +12,15 @@ QR: ScanStash'in geliştiricisi Ahmet Emin Tayfur'dur. Gizlilik soruları ve tal
 
 Kaydettiğiniz web adresleri, verdiğiniz kart adları, sabitleme tercihleri ve isteğe bağlı sayfa önizlemeleri uygulamanın yerel depolamasında tutulur. Tarama geçmişi açıksa son 20 farklı QR içeriği ve tarama zamanları da saklanır. Aynı içerik yeniden taranınca sırası güncellenir. Arama metni cihazda kartları filtrelemek için kullanılır; ayrı bir arama geçmişine kaydedilmez.
 
-Uygulamada kullanıcı hesabı, geliştiricinin işlettiği içerik sunucusu, bulut eşitleme hizmeti, yapay zekâ hizmeti, reklam, ödeme özelliği veya üçüncü taraf analitik/hata raporlama SDK'sı yoktur. Kartlarınızın, QR içeriklerinizin, arama metinlerinizin ve önizlemelerinizin bir kopyası bize otomatik olarak gönderilmez.
+Uygulamada kullanıcı hesabı, geliştiricinin işlettiği içerik sunucusu, bulut eşitleme hizmeti, yapay zekâ hizmeti, reklam veya üçüncü taraf analitik/hata raporlama SDK'sı yoktur. Kartlarınızın, QR içeriklerinizin, arama metinlerinizin ve önizlemelerinizin bir kopyası bize otomatik olarak gönderilmez.
 
 Bu açıklama uygulamanın kendi davranışı içindir. Apple, App Store, işletim sistemi veya tanılama bilgilerini kendi ayarları ve gizlilik politikaları kapsamında işleyebilir.
+
+### İsteğe bağlı Pro satın alma
+
+Apple, isteğe bağlı ScanStash Pro ödemesini StoreKit üzerinden işler. Uygulama sınırsız kart kaydını etkinleştirmek için ürün ve satın alma hakkının geçerli veya kaldırılmış olması gibi Apple’ın doğruladığı satın alma bilgilerini okur. Satın alma ve geri yükleme istekleri Apple’a bağlanabilir; hesap, işlem ve ödeme kayıtlarını Apple kendi politikaları kapsamında işler. Kart numaranızı veya Apple Hesabı parolanızı almayız; uygulama satın alma makbuzlarını geliştiricinin işlettiği bir sunucuya göndermez. Apple, App Store Connect üzerinden geliştiriciye satış, iade ve mali raporlar sağlayabilir.
+
+Kaydedilen URL’ler, kart adları, QR içerikleri, aramalar ve önizlemeler uygulamanın satın alma veya geri yükleme isteklerine eklenmez. Satın alma geri yüklemesi Pro hakkını geri getirir; yerel kart kütüphanesini geri getirmez.
 
 ## 3. Kamera ve seçilen fotoğraflar
 
@@ -44,7 +50,7 @@ Kaydedilen kartlar siz silene kadar kalır. Bir kartın önizlemesini kaldırabi
 
 Geliştirici yerel kütüphanenize erişip onu uzaktan geri getiremez veya silemez. Uygulamayı iOS'un **Uygulamayı Sil** seçeneğiyle kaldırmak, iOS'un davranışı kapsamında yerel uygulama verilerini kaldırır. Uygulamayı boşaltmak belge ve verileri koruyabilir. İşletim sisteminin web depolaması, sistem yedekleri ve başka yerlere paylaştığınız kopyalar tekil kart veya geçmiş silmeden ayrıdır.
 
-QR: ScanStash'in kendi yedekleme, geri yükleme veya cihazlar arası eşitleme hizmeti yoktur. Apple'ın cihaz yedekleri ayarlarınıza göre uygulama verilerini içerebilir. Uygulama kaldırma, cihaz kaybı veya değişimi sonrasında geri yükleme garantisi vermeyiz. Apple yedeklerinin işlenmesi Apple'a ve ayarlarınıza bağlıdır.
+QR: ScanStash'in kendi kütüphane yedekleme, kütüphane geri yükleme veya cihazlar arası eşitleme hizmeti yoktur. Apple'ın cihaz yedekleri ayarlarınıza göre uygulama verilerini içerebilir. Uygulama kaldırma, cihaz kaybı veya değişimi sonrasında geri yükleme garantisi vermeyiz. Apple yedeklerinin işlenmesi Apple'a ve ayarlarınıza bağlıdır.
 
 ## 8. Destek yazışmaları ve talepleriniz
 
@@ -54,4 +60,4 @@ Elimizde bulunan destek bilgileri hakkında soru sormak, düzeltme veya silme is
 
 ## 9. Değişiklikler
 
-Veri uygulamaları değişirse bu politikayı güncelleriz. Yukarıdaki tarih bu sürümü gösterir. Yeni veri toplama, ödeme veya eşitleme özellikleri eklenmeden önce ilgili açıklamalar güncellenecektir. Gizlilik soruları: **support@ahmettayfur.com**.
+Veri uygulamaları değişirse bu politikayı güncelleriz. Yukarıdaki tarih bu sürümü gösterir. Veri toplama, satın alma işleme veya eşitleme davranışı değişmeden önce ilgili açıklamalar güncellenecektir. Gizlilik soruları: **support@ahmettayfur.com**.

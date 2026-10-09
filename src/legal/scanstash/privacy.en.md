@@ -2,7 +2,7 @@
 
 Last updated: 9 October 2026
 
-QR: ScanStash is an iPhone app for scanning QR codes and keeping a local visual library of web links. This policy describes the current free version of the app and support communications relating to it. It does not describe the independent privacy practices of websites you open, apps you share with, or the portfolio website hosting this page.
+QR: ScanStash is an iPhone app for scanning QR codes and keeping a local visual library of web links. This policy describes the app’s free plan and optional one-time Pro purchase and support communications relating to it. It does not describe the independent privacy practices of websites you open, apps you share with, or the portfolio website hosting this page.
 
 ## 1. Who is responsible
 
@@ -12,9 +12,15 @@ QR: ScanStash is developed by Ahmet Emin Tayfur. For privacy questions or reques
 
 The app stores your saved web addresses, titles you give them, pinned-card choices and optional page-preview images in its local storage. If scan history is enabled, it also keeps the content of your 20 most recent distinct QR scans and their scan times. Scanning the same content again updates its position. Search text is used on the device to filter your cards and is not saved as a search history.
 
-The app has no user accounts, developer-operated content server, cloud-sync service, AI service, advertisements, payment feature, or third-party analytics or crash-reporting SDK. We do not receive an automatic copy of your cards, QR contents, search text or preview images.
+The app has no user accounts, developer-operated content server, cloud-sync service, AI service, advertisements, or third-party analytics or crash-reporting SDK. We do not receive an automatic copy of your cards, QR contents, search text or preview images.
 
 This describes the app's own behavior. Apple may process App Store, operating-system or diagnostic information under its own settings and privacy policies.
+
+### Optional Pro purchase
+
+Apple processes the optional ScanStash Pro payment through StoreKit. The app reads Apple-verified purchase information, including the product and whether the purchase right is valid or revoked, to enable unlimited saved cards. Purchase and restore requests may contact Apple; Apple handles its account, transaction and payment records under its own policies. We do not receive your payment-card number or Apple Account password, and the app does not send purchase receipts to a developer-operated server. Apple may provide the developer with sales, refund and financial reports through App Store Connect.
+
+Your saved URLs, titles, QR contents, searches and preview images are not included in the app’s purchase or restore requests. Restoring a purchase restores the Pro right and does not restore a local card library.
 
 ## 3. Camera and selected photos
 
@@ -44,7 +50,7 @@ Saved cards remain until you delete them. You can remove or replace a card's pre
 
 The developer cannot access your local library to retrieve or delete it remotely. Removing the app using iOS's **Delete App** option removes its local app data under iOS's behavior. Offloading the app can retain documents and data. OS-managed website storage, system backups and copies you shared elsewhere are separate from individual card or history deletion.
 
-QR: ScanStash does not offer its own backup, restore or cross-device sync service. Apple's device backups may include app data depending on your settings. We do not guarantee recovery after app removal, device loss or replacement. Apple backup handling is governed by Apple and your settings.
+QR: ScanStash does not offer its own library backup, library restore or cross-device sync service. Apple's device backups may include app data depending on your settings. We do not guarantee recovery after app removal, device loss or replacement. Apple backup handling is governed by Apple and your settings.
 
 ## 8. Support messages and your requests
 
@@ -54,4 +60,4 @@ You can contact us to ask about, correct or request deletion of support informat
 
 ## 9. Changes
 
-We will update this policy if the app's data practices change. The date above identifies this version. New data collection, payment or sync features will require updated explanations before they are introduced. Privacy questions: **support@ahmettayfur.com**.
+We will update this policy if the app's data practices change. The date above identifies this version. Changes to data collection, purchase handling or sync features will require updated explanations before they are introduced. Privacy questions: **support@ahmettayfur.com**.

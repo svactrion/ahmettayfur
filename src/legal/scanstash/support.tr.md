@@ -38,10 +38,25 @@ Kaydedilen kartın seçeneklerinden widget rehberini aç. iOS'un widget galerisi
 
 ### Destek ekibi kaybolan kütüphanemi geri getirebilir mi?
 
-Kütüphanenin uzaktan erişebildiğimiz bir kopyası yoktur. Uygulamada yerleşik yedekleme veya geri yükleme özelliği bulunmaz. Apple'ın cihaz yedekleri cihaz ayarlarına bağlıdır; uygulamayı silmek yerel verileri kaldırabilir.
+Kütüphanenin uzaktan erişebildiğimiz bir kopyası yoktur. Uygulamada yerleşik kütüphane yedekleme veya kütüphane geri yükleme özelliği bulunmaz. Pro’yu geri yüklemek kaybolan kartları geri getirmez. Apple'ın cihaz yedekleri cihaz ayarlarına bağlıdır; uygulamayı silmek yerel verileri kaldırabilir.
+
+### Ücretsiz plan ve Pro neler sunar?
+
+Ücretsiz olarak en fazla 10 kayıtlı kart tutabilirsin. QR ve fotoğraf tarama sınırsızdır; Son tarananlar yine son 20 farklı içeriği tutar. Arama, önizleme, kopyala/paylaş ve mevcut widget ücretsiz kalır. ScanStash Pro, abonelik olmadan sınırsız kart kaydını açan isteğe bağlı tek seferlik satın almadır. Pro ekranı satın alma öncesinde Apple’ın yerel fiyatını gösterir.
+
+### Ücretsiz sınıra ulaşınca ne olur?
+
+Mevcut kartları açabilir, düzenleyebilir, kopyalayabilir, paylaşabilir veya silebilirsin. Aynı bağlantıyı tekrar kaydetmek yeni hak tüketmez. Yeni kart eklemek için bir kart silerek yer açabilir veya Pro’yu etkinleştirebilirsin. Safari’den alınan yeni bağlantı, uygulama kaydı tamamlayana kadar cihazda bekler; bildirimi görmek için uygulamayı aç.
+
+### Pro’yu nasıl geri yüklerim?
+
+Satın aldığın Apple Hesabı’nı kullan; ana ekranın sol üstündeki **Free / Pro** düğmesi → **Satın alımları geri yükle** yolunu izle. Apple giriş yapmanı isteyebilir. Satın alma geri yüklemesi sınırsız kart hakkını geri getirir; kaybolan yerel kütüphaneyi geri getirmez. Bekleyen satın alma Apple onaylayana kadar Pro açılmaz.
+
+### İade için nereye başvururum?
+
+App Store satın alma iadelerini Apple işler. [Apple’ın iade yönergesini](https://support.apple.com/118223) izleyebilirsin. Apple Pro’yu iade eder veya hakkı kaldırırsa mevcut kartlar kullanılabilir kalır; yeni kartlara ücretsiz sınır uygulanır.
 
 ## Gizlilik ve koşullar
 
 - [Gizlilik Politikası](https://ahmettayfur.com/tr/products/scanstash/privacy/)
 - [Kullanım Koşulları](https://ahmettayfur.com/tr/products/scanstash/terms/)
-
