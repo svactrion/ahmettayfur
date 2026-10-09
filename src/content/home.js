@@ -92,6 +92,7 @@ export const copy = {
       {
         name: 'GrammarLens',
         status: 'In App Store review',
+        pricing: 'Subscription',
         kicker: 'AI-powered learning app',
         desc: "GrammarLens is an iOS app for English learners who speak fluently but can't reliably apply the grammar an exam like IELTS asks for. It builds practice around your own mistakes and explains them in plain language, not rule names. I did the research, wrote the PRD and made every product decision; AI coding agents wrote the code. Version 1.0 went to App Store review on 24 September 2026.",
         facts: ['4 interviews', '3 usability tests', 'Solo project'],
@@ -106,6 +107,7 @@ export const copy = {
       {
         name: scanstash.name,
         status: 'In development · device testing',
+        pricing: 'One-time purchase',
         kicker: 'QR-powered link library',
         desc: 'An iPhone app that scans QR codes with the camera or from a photo and saves the web links in a personal visual library. You can name your links, search them and reopen them with one tap from a Home Screen widget.',
         docs: [
@@ -273,6 +275,7 @@ export const copy = {
       {
         name: 'GrammarLens',
         status: 'App Store incelemesinde',
+        pricing: 'Abonelik',
         kicker: 'Yapay zekâ destekli öğrenme uygulaması',
         desc: "GrammarLens, İngilizceyi akıcı konuşan ama IELTS gibi bir sınavın istediği dilbilgisini güvenle uygulayamayanlar için bir iOS uygulaması. Kullanıcının kendi hatalarından yola çıkarak alıştırma üretiyor ve bu hataları kural adlarıyla değil, sade bir dille açıklıyor. Araştırmayı yaptım, PRD'yi yazdım ve bütün ürün kararlarını verdim; kodu yapay zekâ kodlama ajanları yazdı. 1.0 sürümü 24 Eylül 2026'da App Store incelemesine gönderildi.",
         facts: ['4 görüşme', '3 kullanılabilirlik testi', 'Tek kişilik proje'],
@@ -285,6 +288,7 @@ export const copy = {
       {
         name: scanstash.name,
         status: 'Geliştirme aşamasında · cihaz testleri sürüyor',
+        pricing: 'Tek seferlik satın alma',
         kicker: 'QR tabanlı bağlantı kütüphanesi',
         desc: "QR kodlarını kameradan veya fotoğraftan tarayarak web bağlantılarını kişisel bir görsel kütüphanede saklamanı sağlayan iPhone uygulaması. Bağlantılarını adlandırabilir, arayabilir ve ana ekran widget'ından tek dokunuşla yeniden açabilirsin.",
         docs: [

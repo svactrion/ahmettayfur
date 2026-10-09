@@ -78,7 +78,10 @@ const posts = await getPosts(me.mediumHandle, lang);
                 <div class="prod-headings">
                   <div class="prod-name-row">
                     <h3>{p.name}</h3>
-                    <span class="tag tag-outline">{p.status}</span>
+                    <div class="prod-tags">
+                      <span class="tag tag-outline">{p.status}</span>
+                      {p.pricing && <span class="tag tag-accent-2">{p.pricing}</span>}
+                    </div>
                   </div>
                   <p class="kicker kicker-accent">{p.kicker}</p>
                 </div>
@@ -578,6 +581,13 @@ const posts = await getPosts(me.mediumHandle, lang);
     line-height: 1.2;
     letter-spacing: -0.02em;
     margin: 0;
+  }
+
+  /* Status, then the pricing model. */
+  .prod-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
   }
 
   .prod-headings .kicker {
