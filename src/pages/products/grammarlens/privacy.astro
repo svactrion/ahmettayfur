@@ -4,7 +4,7 @@ import { me } from '../../../data.js';
 
 const title = 'GrammarLens privacy policy';
 const description = 'What data GrammarLens collects, where it goes, and how long it is kept.';
-const updated = '22 September 2026';
+const updated = '16 October 2026';
 ---
 
 <Legal title={title} description={description} noindex>
@@ -18,7 +18,7 @@ const updated = '22 September 2026';
       <h1 class="display">Privacy Policy</h1>
       <p class="lede">
         GrammarLens has no accounts, never asks for your email, and shows no ads. Your
-        name, your learning goal, your avatar and your entire practice history —
+        name, your avatar and your entire practice history —
         including the Daily Test — stay on your phone; the Daily Test is scored on the
         device and never leaves it. If you turn on AI feedback for Topic Practice, the
         answer you type and the question it responds to are sent through our server to
@@ -74,7 +74,7 @@ const updated = '22 September 2026';
         delete the app. None of it is ever sent anywhere:
       </p>
       <ul>
-        <li>Your first name and your stated learning goal, from onboarding</li>
+        <li>Your first name, from onboarding</li>
         <li>Your chosen avatar and your app settings, including text size and theme</li>
         <li>
           Your weak-spot profile — which grammar topics you get wrong and how often,
@@ -92,9 +92,10 @@ const updated = '22 September 2026';
         submit are sent off-device for scoring; see <a href="#permission-for-ai-feedback">Permission for AI feedback</a> for exactly what that involves and how to control it.
       </p>
       <p>
-        Separately, your text-size preference and totals about your sessions — like how
-        many questions you answered or skipped — are sent to our analytics provider as
-        numbers and category labels, never as text; see
+        Separately, the learning goal you choose during onboarding, your text-size
+        preference and totals about your sessions — like how many questions you
+        answered or skipped — are sent to our analytics provider as numbers and
+        category labels, never as text; see
         <a href="#analytics-and-crash-reporting">Analytics and crash reporting</a>.
       </p>
     </div>
@@ -238,13 +239,19 @@ const updated = '22 September 2026';
         </li>
         <li>Progress milestones, such as medals</li>
         <li>Steps through the paywall and purchase flow</li>
+        <li>Your learning goal from onboarding — exam prep, work, everyday confidence, or skipped</li>
         <li>Your text-size preference</li>
         <li>Your AI-feedback permission decision (see <a href="#permission-for-ai-feedback">Permission for AI feedback</a>)</li>
       </ul>
       <p>
+        The learning goal you choose during onboarding is sent with the app's usage
+        analytics, never with your name. It helps us decide what to improve; it does
+        not change your lessons.
+      </p>
+      <p>
         The exact events inside these categories may change as the app evolves; what
-        doesn't change is the boundary — none of them ever carry your name, your
-        learning goal, or the text of any question or answer.
+        doesn't change is the boundary — none of them ever carry your name or the
+        text of any question or answer.
       </p>
       <p>
         <strong>What Firebase collects automatically.</strong> Independently of the events above,
@@ -295,7 +302,7 @@ const updated = '22 September 2026';
       <h2 id="what-we-never-send">What we never send</h2>
       <p>Regardless of feature or permission state, GrammarLens never sends:</p>
       <ul>
-        <li>Your name, your learning goal or your avatar</li>
+        <li>Your name or your avatar</li>
         <li>
           Your stored practice history (other than the Topic Practice answers you
           choose to submit for feedback — see <a href="#permission-for-ai-feedback">Permission for AI feedback</a>)
