@@ -113,20 +113,24 @@ const postLang = (p) => (lang === 'en' && /[çğıöşüÇĞİÖŞÜ]/.test(`${p
               )}
 
               <div class="prod-foot">
-                {p.caseHref && (
+                {(p.caseHref || p.sourceHref) && (
                   <div class="prod-actions">
-                    <a class="btn btn-primary" href={localizeHref(p.caseHref, lang)}>
-                      {t.caseStudy} <span aria-hidden="true">&rarr;</span>
-                    </a>
-                    <a
-                      class="btn btn-secondary"
-                      href={p.sourceHref}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={t.sourceLabel}
-                    >
-                      {t.source} <span aria-hidden="true">&nearr;</span>
-                    </a>
+                    {p.caseHref && (
+                      <a class="btn btn-primary" href={localizeHref(p.caseHref, lang)}>
+                        {t.caseStudy} <span aria-hidden="true">&rarr;</span>
+                      </a>
+                    )}
+                    {p.sourceHref && (
+                      <a
+                        class="btn btn-secondary"
+                        href={p.sourceHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={p.sourceLabel}
+                      >
+                        {t.source} <span aria-hidden="true">&nearr;</span>
+                      </a>
+                    )}
                   </div>
                 )}
                 <span class="prod-docs">
@@ -261,7 +265,6 @@ const postLang = (p) => (lang === 'en' && /[çğıöşüÇĞİÖŞÜ]/.test(`${p
     <a class="contact-mail" href={`mailto:${me.email}`}>{me.email}</a>
     <p class="contact-note">{t.contactNote}</p>
     <div class="btn-row">
-      <a class="btn btn-secondary" href="/studio/">Svactrion</a>
       <a class="btn btn-secondary" href={me.linkedin} target="_blank" rel="noopener">LinkedIn</a>
       <a class="btn btn-secondary" href={me.medium} target="_blank" rel="noopener">Medium</a>
       <a class="btn btn-secondary" href={me.github} target="_blank" rel="noopener">GitHub</a>

@@ -51,7 +51,6 @@ export const copy = {
     prodCount: 'Two in App Store review · one in development',
     caseStudy: 'Read the case study',
     source: 'GitHub',
-    sourceLabel: 'GrammarLens source code on GitHub (opens in a new tab)',
     nextKicker: 'Next',
     nextTitle: 'Product 04 is in discovery',
     nextBody:
@@ -96,14 +95,15 @@ export const copy = {
         kicker: 'AI-powered learning app',
         desc: "GrammarLens is an iOS app for English learners who speak fluently but can't reliably apply the grammar an exam like IELTS asks for. It builds practice around your own mistakes and explains them in plain language, not rule names. I did the research, wrote the PRD and made every product decision; AI coding agents wrote the code. Version 1.0 went to App Store review on 24 September 2026.",
         facts: ['4 interviews', '3 usability tests', 'Solo project'],
-        stack: ['Flutter / Dart', 'Claude API', 'Material 3'],
+        stack: ['Flutter / Dart', 'Claude API', 'RevenueCat', 'Cloudflare Workers', 'Material 3'],
         caseHref: grammarlens.caseStudyUrl,
         sourceHref: grammarlens.sourceUrl,
+        sourceLabel: 'GrammarLens source code on GitHub (opens in a new tab)',
         docs: productDocsEn,
         icon: { ...grammarlens.icon, alt: 'GrammarLens app icon' },
       },
-      // No product page, case study or source link yet; only the legal
-      // pages.
+      // No product page or case study yet; the legal pages and the
+      // source code.
       {
         name: scanstash.name,
         status: 'In App Store review',
@@ -117,6 +117,8 @@ export const copy = {
         ],
         facts: ['Solo project', '15 languages', 'No account · on-device'],
         stack: ['Flutter / Dart', 'Swift', 'WidgetKit', 'WebKit'],
+        sourceHref: scanstash.sourceUrl,
+        sourceLabel: 'QR: ScanStash source code on GitHub (opens in a new tab)',
         icon: { ...scanstash.icon, alt: 'QR: ScanStash app icon' },
       },
       // Same as ScanStash: only the legal pages.
@@ -161,17 +163,17 @@ export const copy = {
         title: 'Projects',
         items: [
           {
-            when: '2026 –',
+            when: 'July 2026 –',
             what: 'GrammarLens',
             note: 'My own mobile product: user research, PRD, MVP, testing with seven people. Submitted for App Store review on 24 September 2026.',
           },
           {
-            when: '2026 –',
+            when: 'September 2026 –',
             what: 'QR: ScanStash',
             note: 'My second app: a visual library for links reached through QR codes. Flutter with native Swift for the widget and share extension, in 15 languages. Submitted for App Store review.',
           },
           {
-            when: '2026 –',
+            when: 'October 2026 –',
             what: 'BirdPerch',
             note: 'My third app: you create your own bird in 3D, track its care and get AI-assisted suggestions. Swift, with the Claude API behind my own Cloudflare server. In development.',
           },
@@ -255,7 +257,6 @@ export const copy = {
     prodCount: 'İkisi App Store incelemesinde · biri geliştirmede',
     caseStudy: "Case study'yi oku",
     source: 'GitHub',
-    sourceLabel: "GrammarLens kaynak kodu GitHub'da (yeni sekmede açılır)",
     nextKicker: 'Sıradaki',
     nextTitle: 'Dördüncü ürün keşif aşamasında',
     nextBody:
@@ -300,9 +301,10 @@ export const copy = {
         kicker: 'Yapay zekâ destekli öğrenme uygulaması',
         desc: "GrammarLens, İngilizceyi akıcı konuşan ama IELTS gibi bir sınavın istediği dilbilgisini güvenle uygulayamayanlar için bir iOS uygulaması. Kullanıcının kendi hatalarından yola çıkarak alıştırma üretiyor ve bu hataları kural adlarıyla değil, sade bir dille açıklıyor. Araştırmayı yaptım, PRD'yi yazdım ve bütün ürün kararlarını verdim; kodu yapay zekâ kodlama ajanları yazdı. 1.0 sürümü 24 Eylül 2026'da App Store incelemesine gönderildi.",
         facts: ['4 görüşme', '3 kullanılabilirlik testi', 'Tek kişilik proje'],
-        stack: ['Flutter / Dart', 'Claude API', 'Material 3'],
+        stack: ['Flutter / Dart', 'Claude API', 'RevenueCat', 'Cloudflare Workers', 'Material 3'],
         caseHref: grammarlens.caseStudyUrl,
         sourceHref: grammarlens.sourceUrl,
+        sourceLabel: "GrammarLens kaynak kodu GitHub'da (yeni sekmede açılır)",
         docs: productDocsTr,
         icon: { ...grammarlens.icon, alt: 'GrammarLens uygulama simgesi' },
       },
@@ -319,6 +321,8 @@ export const copy = {
         ],
         facts: ['Tek kişilik proje', '15 dil', 'Hesapsız · cihazda'],
         stack: ['Flutter / Dart', 'Swift', 'WidgetKit', 'WebKit'],
+        sourceHref: scanstash.sourceUrl,
+        sourceLabel: "QR: ScanStash kaynak kodu GitHub'da (yeni sekmede açılır)",
         icon: { ...scanstash.icon, alt: 'QR: ScanStash uygulama simgesi' },
       },
       {
@@ -362,17 +366,17 @@ export const copy = {
         title: 'Projeler',
         items: [
           {
-            when: '2026 –',
+            when: 'Temmuz 2026 –',
             what: 'GrammarLens',
             note: "Kendi mobil ürünüm: kullanıcı araştırması, PRD, MVP, yedi kişiyle test. 24 Eylül 2026'da App Store incelemesine gönderildi.",
           },
           {
-            when: '2026 –',
+            when: 'Eylül 2026 –',
             what: 'QR: ScanStash',
             note: "İkinci uygulamam: QR kodlarıyla ulaşılan bağlantılar için görsel bir kütüphane. Flutter ile geliştirildi; widget ve paylaşım uzantısı Swift ile yazıldı, 15 dili destekliyor. App Store incelemesine gönderildi.",
           },
           {
-            when: '2026 –',
+            when: 'Ekim 2026 –',
             what: 'BirdPerch',
             note: "Üçüncü uygulamam: kendi kuşunu 3D olarak oluşturuyor, bakımını takip ediyor ve yapay zekâ destekli öneriler alıyorsun. Swift ile geliştirildi; Claude API'ye kendi Cloudflare sunucum üzerinden bağlanıyor. Geliştirme aşamasında.",
           },

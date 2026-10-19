@@ -60,6 +60,7 @@ export const scanstash = {
   privacyUrl: '/products/scanstash/privacy/',
   termsUrl: '/products/scanstash/terms/',
   supportUrl: '/products/scanstash/support/',
+  sourceUrl: 'https://github.com/svactrion/ScanStash',
 
   // Source: design/icons/scanstash-icon.png (1254×1254). Same 112×112 WebP +
   // PNG pair as the GrammarLens icon above.
