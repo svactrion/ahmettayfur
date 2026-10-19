@@ -42,3 +42,4 @@ Cloudflare Pages build settings:
 
 `/products/grammarlens/privacy` and `/products/grammarlens/support` must be live and loading before
 you submit. Apple's reviewers open both.
+
