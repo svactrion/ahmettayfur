@@ -23,7 +23,7 @@ import { localizeHref } from '../i18n.js';
 
 const lang = Astro.currentLocale ?? 'en';
 const t = caseStudyCopy[lang];
-const productHref = localizeHref('/products/grammarlens', lang);
+const productHref = localizeHref('/products/grammarlens/', lang);
 
 // Charts, diagrams and screenshots, by the name a { type: 'figure' } block
 // uses; their props come from t.figures under the same name. A name

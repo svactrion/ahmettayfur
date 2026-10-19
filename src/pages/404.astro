@@ -5,7 +5,7 @@ const title = 'Page not found — Ahmet Emin Tayfur';
 const description = 'That page does not exist.';
 ---
 
-<Base title={title} description={description}>
+<Base title={title} description={description} noindex canonical={false}>
   <section class="row">
     <aside class="note">
       <strong>404</strong>
@@ -23,7 +23,7 @@ const description = 'That page does not exist.';
         </li>
         <li>
           <span class="links-label">Products</span>
-          <a href="/products">GrammarLens</a>
+          <a href="/products/">GrammarLens</a>
         </li>
       </ul>
       <div lang="tr">

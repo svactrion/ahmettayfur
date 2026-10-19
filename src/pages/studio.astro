@@ -8,7 +8,7 @@ const studio = {
   tagline: "An independent app studio building practical tools people actually need.",
   founded: "2026",
   location: "Istanbul, Türkiye",
-  founder: "Ahmet Tayfur",
+  founder: "Ahmet Emin Tayfur",
   email: "ahmet@ahmettayfur.com",
   url: "https://ahmettayfur.com/studio/",
   linkedin: "https://www.linkedin.com/in/ahmettayfur",
@@ -16,7 +16,7 @@ const studio = {
 };
 
 const links = {
-  grammarlens: "/products/grammarlens/case-study",
+  grammarlens: "/products/grammarlens/case-study/",
   privacy: "/products/grammarlens/privacy/",
 };
 
@@ -46,6 +46,9 @@ const jsonLd = {
     <meta property="og:description" content={studio.tagline} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={studio.url} />
+    <meta property="og:image" content="https://ahmettayfur.com/og.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body>
@@ -69,7 +72,7 @@ const jsonLd = {
       <section>
         <h2>Products</h2>
         <article class="card">
-          <p class="status">Launching on the App Store</p>
+          <p class="status">In App Store review</p>
           <h3>GrammarLens</h3>
           <p>
             An iOS app for IELTS and fluency-focused English learners. Instead of
@@ -79,10 +82,24 @@ const jsonLd = {
           <p class="meta">iOS · Flutter · Claude API · Subscription</p>
           <a href={links.grammarlens}>Read the case study →</a>
         </article>
-        <article class="card muted">
+        <article class="card">
+          <p class="status">In App Store review</p>
+          <h3>QR: ScanStash</h3>
+          <p>
+            An iPhone app that scans QR codes with the camera or from a photo and saves the web
+            links in a personal visual library. You can name your links, search them and reopen
+            them with one tap from a Home Screen widget.
+          </p>
+          <p class="meta">iOS · Flutter · Swift · One-time purchase</p>
+        </article>
+        <article class="card">
           <p class="status">In development</p>
-          <h3>Next: utility apps</h3>
-          <p>More everyday tool apps are in research and planning.</p>
+          <h3>BirdPerch</h3>
+          <p>
+            An iPhone app where you create your own bird in 3D, interact with it, track its care
+            and get AI-assisted suggestions.
+          </p>
+          <p class="meta">iOS · Swift · Claude API · Subscription</p>
         </article>
       </section>
 
@@ -92,7 +109,6 @@ const jsonLd = {
           <div><dt>Name</dt><dd>{studio.name}</dd></div>
           <div><dt>Founder</dt><dd><a href={studio.linkedin}>{studio.founder}</a></dd></div>
           <div><dt>Founded</dt><dd>{studio.founded}</dd></div>
-          <div><dt>Legal form</dt><dd>Sole proprietorship registered in Türkiye</dd></div>
           <div><dt>Location</dt><dd>{studio.location}</dd></div>
           <div><dt>Contact</dt><dd><a href={`mailto:${studio.email}`}>{studio.email}</a></dd></div>
         </dl>
@@ -149,7 +165,6 @@ const jsonLd = {
       p { margin: 0 0 12px; }
       a { color: var(--accent); text-underline-offset: 3px; }
       .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 24px; margin-bottom: 16px; }
-      .card.muted { background: transparent; }
       .status { color: var(--accent); }
       dl { margin: 0; }
       dl div { display: flex; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--line); }

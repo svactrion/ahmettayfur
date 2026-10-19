@@ -16,6 +16,10 @@ const t = copy[lang];
 // English-language regardless of the page's locale — there is no separate
 // Turkish feed; only the dates follow the page's language.
 const posts = await getPosts(me.mediumHandle, lang);
+// Posts are written in Turkish or English. On the English page, a post
+// with Turkish letters in it gets lang="tr" on its title and excerpt so a
+// screen reader switches voice; the date stays in the page's language.
+const postLang = (p) => (lang === 'en' && /[çğıöşüÇĞİÖŞÜ]/.test(`${p.title} ${p.excerpt}`) ? 'tr' : undefined);
 ---
 
 <Base title={t.meta.title} description={t.meta.description}>
@@ -235,9 +239,9 @@ const posts = await getPosts(me.mediumHandle, lang);
       {
         posts.map((p) => (
           <a class="art-row" href={p.link} target="_blank" rel="noopener">
-            <h3>{p.title}</h3>
+            <h3 lang={postLang(p)}>{p.title}</h3>
             <span class="art-source">{p.source}</span>
-            <p class="art-excerpt">{p.excerpt}</p>
+            <p class="art-excerpt" lang={postLang(p)}>{p.excerpt}</p>
             <span class="art-date">{p.dateLabel}</span>
           </a>
         ))
@@ -257,7 +261,7 @@ const posts = await getPosts(me.mediumHandle, lang);
     <a class="contact-mail" href={`mailto:${me.email}`}>{me.email}</a>
     <p class="contact-note">{t.contactNote}</p>
     <div class="btn-row">
-      <a class="btn btn-secondary" href="/studio">Svactrion</a>
+      <a class="btn btn-secondary" href="/studio/">Svactrion</a>
       <a class="btn btn-secondary" href={me.linkedin} target="_blank" rel="noopener">LinkedIn</a>
       <a class="btn btn-secondary" href={me.medium} target="_blank" rel="noopener">Medium</a>
       <a class="btn btn-secondary" href={me.github} target="_blank" rel="noopener">GitHub</a>

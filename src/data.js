@@ -32,13 +32,13 @@ export const grammarlens = {
   appStoreUrl: '',
 
   // Permanent addresses given to Apple. Do not move these.
-  privacyUrl: '/products/grammarlens/privacy',
-  termsUrl: '/products/grammarlens/terms',
-  supportUrl: '/products/grammarlens/support',
-  caseStudyUrl: '/products/grammarlens/case-study',
+  privacyUrl: '/products/grammarlens/privacy/',
+  termsUrl: '/products/grammarlens/terms/',
+  supportUrl: '/products/grammarlens/support/',
+  caseStudyUrl: '/products/grammarlens/case-study/',
   sourceUrl: 'https://github.com/svactrion/GrammarLens',
 
-  // Card icon on the home page. Source: public/img/grammarlens-icon.png
+  // Card icon on the home page. Source: design/icons/grammarlens-icon.png
   // (the 1024×1024 App Store icon) — these are a 112×112 (2x of the 56px
   // card size) WebP with a PNG fallback, regenerated from that source if
   // it ever changes.
@@ -61,7 +61,7 @@ export const scanstash = {
   termsUrl: '/products/scanstash/terms/',
   supportUrl: '/products/scanstash/support/',
 
-  // Source: public/img/scanstash-icon.png (1254×1254). Same 112×112 WebP +
+  // Source: design/icons/scanstash-icon.png (1254×1254). Same 112×112 WebP +
   // PNG pair as the GrammarLens icon above.
   icon: {
     webp: '/img/scanstash-icon-112.webp',
@@ -87,7 +87,7 @@ export const birdperch = {
   // legal pages check against it instead.
   email: 'ahmet@ahmettayfur.com',
 
-  // Source: public/img/birdperch-icon.png (1024×1024). Same 112×112 WebP +
+  // Source: design/icons/birdperch-icon.png (1024×1024). Same 112×112 WebP +
   // PNG pair as the icons above.
   icon: {
     webp: '/img/birdperch-icon-112.webp',

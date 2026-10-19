@@ -86,6 +86,7 @@ export function scanstashLegalProps(doc, lang) {
   return {
     source: sources[doc][lang],
     lang,
+    noindex: doc !== 'support',
     description: t.description[doc],
     docLabel: t.docLabel[doc],
     productLine: t.productLine,

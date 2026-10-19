@@ -86,6 +86,7 @@ export function birdperchLegalProps(doc, lang) {
   return {
     source: sources[doc][lang],
     lang,
+    noindex: doc !== 'support',
     email: birdperch.email,
     // The support page has no effective-date line.
     dated: doc !== 'support',

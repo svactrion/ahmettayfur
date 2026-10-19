@@ -20,7 +20,7 @@ Ran into a problem or have a suggestion? Write to us at **ahmet@ahmettayfur.com*
 
 **How do I withdraw AI permission?** In Profile > AI permission. If you withdraw it, AI features stop working until you give permission again.
 
-**How do I delete my data?** Your bird, journal and settings stay only on your device; deleting the app is enough. To delete the anonymous usage counts on our server, email us the Support ID shown in Profile. See the [Privacy Policy](https://ahmettayfur.com/birdperch/privacy) for details.
+**How do I delete my data?** Your bird, journal and settings stay only on your device; deleting the app is enough. To delete the anonymous usage counts on our server, email us the Support ID shown in Profile. See the [Privacy Policy](https://ahmettayfur.com/products/birdperch/privacy/) for details.
 
 **Does Talk with my bird translate my bird's language?** No. It's an entertainment feature that sings back the rhythm and melody of your voice in your bird's chirps; the recording is processed only on your device.
 
@@ -30,4 +30,4 @@ Ran into a problem or have a suggestion? Write to us at **ahmet@ahmettayfur.com*
 
 ## Other pages
 
-[Terms of Use](https://ahmettayfur.com/birdperch/terms) · [Privacy Policy](https://ahmettayfur.com/birdperch/privacy)
+[Terms of Use](https://ahmettayfur.com/products/birdperch/terms/) · [Privacy Policy](https://ahmettayfur.com/products/birdperch/privacy/)
