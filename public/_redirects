@@ -2,10 +2,16 @@
 # The addresses under /products/ are the real ones; these only catch
 # anyone who typed or linked the short form. Server-side 301, not a
 # client-side redirect, so Apple's review team lands on real content.
-/grammarlens          /products/grammarlens          301
-/grammarlens/privacy  /products/grammarlens/privacy  301
-/grammarlens/terms    /products/grammarlens/terms    301
-/grammarlens/support  /products/grammarlens/support  301
+# Rules match the path exactly, so each one is listed with and without
+# the trailing slash.
+/grammarlens           /products/grammarlens          301
+/grammarlens/          /products/grammarlens          301
+/grammarlens/privacy   /products/grammarlens/privacy  301
+/grammarlens/privacy/  /products/grammarlens/privacy  301
+/grammarlens/terms     /products/grammarlens/terms    301
+/grammarlens/terms/    /products/grammarlens/terms    301
+/grammarlens/support   /products/grammarlens/support  301
+/grammarlens/support/  /products/grammarlens/support  301
 
 # Short addresses for the BirdPerch legal pages. The app's paywall and
 # settings link to /birdperch/{privacy,terms,support}; there is no product

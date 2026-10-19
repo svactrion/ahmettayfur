@@ -48,7 +48,7 @@ export const copy = {
     cta2: 'Read the articles',
 
     prodTitle: 'Products',
-    prodCount: 'Three in the works · more to come',
+    prodCount: 'Two in App Store review · one in development',
     caseStudy: 'Read the case study',
     source: 'GitHub',
     sourceLabel: 'GrammarLens source code on GitHub (opens in a new tab)',
@@ -106,7 +106,7 @@ export const copy = {
       // pages.
       {
         name: scanstash.name,
-        status: 'In development · device testing',
+        status: 'In App Store review',
         pricing: 'One-time purchase',
         kicker: 'QR-powered link library',
         desc: 'An iPhone app that scans QR codes with the camera or from a photo and saves the web links in a personal visual library. You can name your links, search them and reopen them with one tap from a Home Screen widget.',
@@ -131,6 +131,8 @@ export const copy = {
           { label: 'Terms', href: birdperch.termsUrl },
           { label: 'Support', href: birdperch.supportUrl },
         ],
+        facts: ['Solo project', 'No account', 'Real-time 3D'],
+        stack: ['Swift', 'Claude API', 'WidgetKit', 'RevenueCat', 'Cloudflare Workers'],
         icon: { ...birdperch.icon, alt: 'BirdPerch app icon' },
       },
     ],
@@ -166,7 +168,12 @@ export const copy = {
           {
             when: '2026 –',
             what: 'QR: ScanStash',
-            note: 'My second app: a visual library for links reached through QR codes. Flutter with native Swift for the widget and share extension, in 15 languages. In development, device testing ongoing.',
+            note: 'My second app: a visual library for links reached through QR codes. Flutter with native Swift for the widget and share extension, in 15 languages. Submitted for App Store review.',
+          },
+          {
+            when: '2026 –',
+            what: 'BirdPerch',
+            note: 'My third app: you create your own bird in 3D, track its care and get AI-assisted suggestions. Swift, with the Claude API behind my own Cloudflare server. In development.',
           },
         ],
       },
@@ -175,7 +182,7 @@ export const copy = {
         items: [
           {
             when: '2024 – 2025',
-            what: 'Junior Business Development Specialist',
+            what: 'Business Development Specialist',
             note: 'Auratech Consultancy — B2B sales funnel, HubSpot, data collection and cleaning.',
           },
           {
@@ -245,7 +252,7 @@ export const copy = {
     cta2: 'Yazıları oku',
 
     prodTitle: 'Ürünler',
-    prodCount: 'Üçü geliştirmede · yenileri yolda',
+    prodCount: 'İkisi App Store incelemesinde · biri geliştirmede',
     caseStudy: "Case study'yi oku",
     source: 'GitHub',
     sourceLabel: "GrammarLens kaynak kodu GitHub'da (yeni sekmede açılır)",
@@ -301,7 +308,7 @@ export const copy = {
       },
       {
         name: scanstash.name,
-        status: 'Geliştirme aşamasında · cihaz testleri sürüyor',
+        status: 'App Store incelemesinde',
         pricing: 'Tek seferlik satın alma',
         kicker: 'QR tabanlı bağlantı kütüphanesi',
         desc: "QR kodlarını kameradan veya fotoğraftan tarayarak web bağlantılarını kişisel bir görsel kütüphanede saklamanı sağlayan iPhone uygulaması. Bağlantılarını adlandırabilir, arayabilir ve ana ekran widget'ından tek dokunuşla yeniden açabilirsin.",
@@ -325,6 +332,8 @@ export const copy = {
           { label: 'Kullanım koşulları', href: birdperch.termsUrl },
           { label: 'Destek', href: birdperch.supportUrl },
         ],
+        facts: ['Tek kişilik proje', 'Hesapsız', 'Gerçek zamanlı 3D'],
+        stack: ['Swift', 'Claude API', 'WidgetKit', 'RevenueCat', 'Cloudflare Workers'],
         icon: { ...birdperch.icon, alt: 'BirdPerch uygulama simgesi' },
       },
     ],
@@ -360,7 +369,12 @@ export const copy = {
           {
             when: '2026 –',
             what: 'QR: ScanStash',
-            note: "İkinci uygulamam: QR kodlarıyla ulaşılan bağlantılar için görsel bir kütüphane. Flutter ile geliştirildi; widget ve paylaşım uzantısı Swift ile yazıldı, 15 dili destekliyor. Geliştirme aşamasında, cihaz testleri sürüyor.",
+            note: "İkinci uygulamam: QR kodlarıyla ulaşılan bağlantılar için görsel bir kütüphane. Flutter ile geliştirildi; widget ve paylaşım uzantısı Swift ile yazıldı, 15 dili destekliyor. App Store incelemesine gönderildi.",
+          },
+          {
+            when: '2026 –',
+            what: 'BirdPerch',
+            note: "Üçüncü uygulamam: kendi kuşunu 3D olarak oluşturuyor, bakımını takip ediyor ve yapay zekâ destekli öneriler alıyorsun. Swift ile geliştirildi; Claude API'ye kendi Cloudflare sunucum üzerinden bağlanıyor. Geliştirme aşamasında.",
           },
         ],
       },
@@ -369,7 +383,7 @@ export const copy = {
         items: [
           {
             when: '2024 – 2025',
-            what: 'Junior Business Development Specialist',
+            what: 'Business Development Specialist',
             note: "Auratech Consultancy — B2B satış funnel'ı, HubSpot, veri toplama ve temizleme.",
           },
           {

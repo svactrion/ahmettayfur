@@ -50,8 +50,8 @@ export const grammarlens = {
 
 export const scanstash = {
   name: 'QR: ScanStash',
-  // In development, not submitted for review. There is no product page and
-  // no App Store link yet; set these once the app is approved.
+  // In App Store review. There is no product page and no App Store link
+  // yet; set these once the app is approved.
   released: false,
   appStoreUrl: '',
 
