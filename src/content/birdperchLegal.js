@@ -35,7 +35,7 @@ const ui = {
     related: 'Related',
     otherLanguage: {
       privacy: 'Gizlilik Politikası (Türkçe)',
-      terms: 'Kullanım Koşulları (Türkçe)',
+      terms: 'Kullanım Şartları (Türkçe)',
       support: 'Destek (Türkçe)',
     },
     description: {
@@ -51,12 +51,12 @@ const ui = {
     productLine: 'iPhone için BirdPerch',
     contentsLabel: 'İçindekiler',
     privacy: 'Gizlilik Politikası',
-    terms: 'Kullanım Koşulları',
+    terms: 'Kullanım Şartları',
     support: 'Destek',
     footerPrivacy: 'Gizlilik',
-    footerTerms: 'Koşullar',
+    footerTerms: 'Şartlar',
     footerSupport: 'Destek',
-    docLabel: { privacy: 'Gizlilik', terms: 'Koşullar', support: 'Destek' },
+    docLabel: { privacy: 'Gizlilik', terms: 'Şartlar', support: 'Destek' },
     related: 'İlgili',
     otherLanguage: {
       privacy: 'Privacy Policy (English)',
@@ -65,7 +65,7 @@ const ui = {
     },
     description: {
       privacy: 'BirdPerch iPhone uygulamasının gizlilik politikası.',
-      terms: 'BirdPerch iPhone uygulamasının kullanım koşulları.',
+      terms: 'BirdPerch iPhone uygulamasının kullanım şartları.',
       support: 'BirdPerch iPhone uygulaması için yardım ve iletişim.',
     },
   },

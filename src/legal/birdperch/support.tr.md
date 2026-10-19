@@ -20,7 +20,7 @@ Bir sorunla mı karşılaştın ya da bir önerin mi var? Bize **ahmet@ahmettayf
 
 **Yapay zekâ iznini nasıl geri alırım?** Profil > AI izni bölümünden. İzni geri alırsan yapay zekâ özellikleri, yeniden izin verene kadar çalışmaz.
 
-**Verilerimi nasıl silerim?** Kuşun, günlüğün ve ayarların yalnız cihazında durur; uygulamayı silmen yeterli. Sunucudaki anonim kullanım sayılarının silinmesi için Profil'deki Destek kimliğini bize e-postayla gönder. Ayrıntılar için [Gizlilik Politikası](https://ahmettayfur.com/birdperch/privacy).
+**Verilerimi nasıl silerim?** Kuşun, günlüğün ve ayarların yalnız cihazında durur; uygulamayı silmen yeterli. Sunucudaki anonim kullanım sayılarının silinmesi için Profil'deki Destek kimliğini bize e-postayla gönder. Ayrıntılar için [Gizlilik Politikası](https://ahmettayfur.com/tr/products/birdperch/privacy/).
 
 **Kuşumla konuş kuşumun dilini çeviriyor mu?** Hayır. Sesinin ritmini ve tonlamasını kuşunun cıvıltılarıyla yeniden söyleyen bir eğlence özelliğidir; kayıt yalnız cihazında işlenir.
 
@@ -30,4 +30,4 @@ Bir sorunla mı karşılaştın ya da bir önerin mi var? Bize **ahmet@ahmettayf
 
 ## Diğer sayfalar
 
-[Kullanım Şartları](https://ahmettayfur.com/birdperch/terms) · [Gizlilik Politikası](https://ahmettayfur.com/birdperch/privacy)
+[Kullanım Şartları](https://ahmettayfur.com/tr/products/birdperch/terms/) · [Gizlilik Politikası](https://ahmettayfur.com/tr/products/birdperch/privacy/)
