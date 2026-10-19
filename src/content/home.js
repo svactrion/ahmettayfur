@@ -4,7 +4,7 @@
 // Astro.currentLocale — copy.en at "/", copy.tr at "/tr/". Edit text here,
 // never in HomePage.astro.
 
-import { grammarlens, scanstash } from '../data.js';
+import { grammarlens, scanstash, birdperch } from '../data.js';
 
 const productDocsEn = [
   { label: 'Privacy', href: grammarlens.privacyUrl },
@@ -48,12 +48,12 @@ export const copy = {
     cta2: 'Read the articles',
 
     prodTitle: 'Products',
-    prodCount: 'Two in the works · more to come',
+    prodCount: 'Three in the works · more to come',
     caseStudy: 'Read the case study',
     source: 'GitHub',
     sourceLabel: 'GrammarLens source code on GitHub (opens in a new tab)',
     nextKicker: 'Next',
-    nextTitle: 'Product 03 is in discovery',
+    nextTitle: 'Product 04 is in discovery',
     nextBody:
       'The next one starts the same way: a problem I keep running into myself, then research before a line of code.',
 
@@ -118,6 +118,20 @@ export const copy = {
         facts: ['Solo project', '15 languages', 'No account · on-device'],
         stack: ['Flutter / Dart', 'Swift', 'WidgetKit', 'WebKit'],
         icon: { ...scanstash.icon, alt: 'QR: ScanStash app icon' },
+      },
+      // Same as ScanStash: only the legal pages.
+      {
+        name: birdperch.name,
+        status: 'In development',
+        pricing: 'Subscription',
+        kicker: 'AI-powered bird care app',
+        desc: 'An iPhone app where you create your own bird in 3D, interact with it, track its care and get AI-assisted suggestions.',
+        docs: [
+          { label: 'Privacy', href: birdperch.privacyUrl },
+          { label: 'Terms', href: birdperch.termsUrl },
+          { label: 'Support', href: birdperch.supportUrl },
+        ],
+        icon: { ...birdperch.icon, alt: 'BirdPerch app icon' },
       },
     ],
 
@@ -231,12 +245,12 @@ export const copy = {
     cta2: 'Yazıları oku',
 
     prodTitle: 'Ürünler',
-    prodCount: 'İkisi geliştirmede · yenileri yolda',
+    prodCount: 'Üçü geliştirmede · yenileri yolda',
     caseStudy: "Case study'yi oku",
     source: 'GitHub',
     sourceLabel: "GrammarLens kaynak kodu GitHub'da (yeni sekmede açılır)",
     nextKicker: 'Sıradaki',
-    nextTitle: 'Üçüncü ürün keşif aşamasında',
+    nextTitle: 'Dördüncü ürün keşif aşamasında',
     nextBody:
       'O da aynı yoldan başlıyor: önce benim de sürekli karşılaştığım bir problem, sonra tek satır kod yazmadan önce araştırma.',
 
@@ -299,6 +313,19 @@ export const copy = {
         facts: ['Tek kişilik proje', '15 dil', 'Hesapsız · cihazda'],
         stack: ['Flutter / Dart', 'Swift', 'WidgetKit', 'WebKit'],
         icon: { ...scanstash.icon, alt: 'QR: ScanStash uygulama simgesi' },
+      },
+      {
+        name: birdperch.name,
+        status: 'Geliştirme aşamasında',
+        pricing: 'Abonelik',
+        kicker: 'Yapay zekâ destekli kuş bakım uygulaması',
+        desc: 'Kendi kuşunu 3D olarak oluşturduğun, onunla etkileşime girdiğin, bakımını takip ettiğin ve yapay zekâ destekli öneriler alabildiğin bir iPhone uygulaması.',
+        docs: [
+          { label: 'Gizlilik', href: birdperch.privacyUrl },
+          { label: 'Kullanım koşulları', href: birdperch.termsUrl },
+          { label: 'Destek', href: birdperch.supportUrl },
+        ],
+        icon: { ...birdperch.icon, alt: 'BirdPerch uygulama simgesi' },
       },
     ],
 

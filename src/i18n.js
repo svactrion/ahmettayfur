@@ -12,6 +12,9 @@ export const translatedPaths = [
   '/products/scanstash/privacy/',
   '/products/scanstash/terms/',
   '/products/scanstash/support/',
+  '/products/birdperch/privacy/',
+  '/products/birdperch/terms/',
+  '/products/birdperch/support/',
 ];
 
 // Strips a leading /tr (or /tr/) prefix, returning the English form of a

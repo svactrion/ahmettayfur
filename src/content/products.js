@@ -2,13 +2,13 @@
 //
 // The GrammarLens legal pages (privacy, terms, support) stay English-only
 // — see src/i18n.js — so their copy is not here, it lives straight in their
-// .astro files as before. ScanStash's legal pages are in both languages;
-// see src/content/scanstashLegal.js.
+// .astro files as before. ScanStash's and BirdPerch's legal pages are in
+// both languages; see src/content/scanstashLegal.js and birdperchLegal.js.
 //
 // src/components/ProductsPage.astro and GrammarLensPage.astro render
 // whichever of these matches Astro.currentLocale.
 
-import { grammarlens, scanstash } from '../data.js';
+import { grammarlens, scanstash, birdperch } from '../data.js';
 
 export const productsCopy = {
   en: {
@@ -17,7 +17,7 @@ export const productsCopy = {
       description: 'Products built and put in front of real users by Ahmet Emin Tayfur.',
     },
     intro: {
-      note: { label: 'Products', line1: '2 products', line2: '0 in the App Store' },
+      note: { label: 'Products', line1: '3 products', line2: '0 in the App Store' },
       title: 'Products',
       lede: "Things I've built far enough to put in front of someone who wasn't obliged to be nice about it.",
     },
@@ -42,6 +42,19 @@ export const productsCopy = {
         { label: 'Support', href: scanstash.supportUrl },
       ],
     },
+    // Same as ScanStash: no product page yet, only the legal pages.
+    birdperchEntry: {
+      note: { label: '03', line1: 'Flutter · iOS', line2: 'In development' },
+      cardTitle: birdperch.name,
+      cardText:
+        'An iPhone app where you create your own bird in 3D, interact with it, track its care and get AI-assisted suggestions.',
+      cardStatus: 'In development',
+      docs: [
+        { label: 'Privacy', href: birdperch.privacyUrl },
+        { label: 'Terms', href: birdperch.termsUrl },
+        { label: 'Support', href: birdperch.supportUrl },
+      ],
+    },
   },
 
   tr: {
@@ -50,7 +63,7 @@ export const productsCopy = {
       description: 'Ahmet Emin Tayfur’ın geliştirip gerçek kullanıcıların önüne çıkardığı ürünler.',
     },
     intro: {
-      note: { label: 'Ürünler', line1: '2 ürün', line2: "App Store'da henüz yok" },
+      note: { label: 'Ürünler', line1: '3 ürün', line2: "App Store'da henüz yok" },
       title: 'Ürünler',
       lede: 'Bana nazik davranmak zorunda olmayan birinin önüne koyabilecek kadar ilerlettiğim işler.',
     },
@@ -71,6 +84,18 @@ export const productsCopy = {
         { label: 'Gizlilik', href: scanstash.privacyUrl },
         { label: 'Kullanım koşulları', href: scanstash.termsUrl },
         { label: 'Destek', href: scanstash.supportUrl },
+      ],
+    },
+    birdperchEntry: {
+      note: { label: '03', line1: 'Flutter · iOS', line2: 'Geliştirme aşamasında' },
+      cardTitle: birdperch.name,
+      cardText:
+        'Kendi kuşunu 3D olarak oluşturduğun, onunla etkileşime girdiğin, bakımını takip ettiğin ve yapay zekâ destekli öneriler alabildiğin bir iPhone uygulaması.',
+      cardStatus: 'Geliştirme aşamasında',
+      docs: [
+        { label: 'Gizlilik', href: birdperch.privacyUrl },
+        { label: 'Kullanım koşulları', href: birdperch.termsUrl },
+        { label: 'Destek', href: birdperch.supportUrl },
       ],
     },
   },

@@ -9,9 +9,13 @@
 // numbered row. A "## Heading" without a number (the support page) becomes
 // a row numbered by its position. Inside a row, "### " is a subheading and
 // a block of "- " lines is a list. Inline markup: **bold**, `code`,
-// [text](url) and bare https:// URLs. A bold email address is rendered as
-// a mailto link to me.email, and the build fails if the file names a
-// different address.
+// [text](url) and bare https:// URLs. An email address, bold or bare, is
+// rendered as a mailto link to `email` (me.email unless the page passes
+// its own), and the build fails if the file names a different address. A
+// line ending in a backslash is a line break.
+//
+// `dated: false` is for a document with no "Last updated" line (BirdPerch
+// support): the side note then shows only the product line.
 import Legal from '../layouts/Legal.astro';
 import { me } from '../data.js';
 
@@ -28,10 +32,19 @@ const {
   homeHref,
   navLink,
   footerLinks,
+  email = me.email,
+  dated = true,
 } = Astro.props;
 
 const escape = (s) =>
   s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+function mailto(address) {
+  if (address !== email) {
+    throw new Error(`Legal text names ${address}, but this page's email is ${email}`);
+  }
+  return `<a href="mailto:${email}">${email}</a>`;
+}
 
 function inline(text) {
   // [text](url) and `code` are swapped out for placeholders first, so the
@@ -42,15 +55,12 @@ function inline(text) {
     .replace(/`([^`]+)`/g, (_, code) => hold(`<code>${code}</code>`))
     .replace(/\[([^\]]+)\]\((https:\/\/[^\s)]+)\)/g, (_, label, url) => hold(`<a href="${url}">${label}</a>`))
     .replace(/\*\*(.+?)\*\*/g, (_, inner) => {
-      if (/^[^\s@]+@[^\s@]+$/.test(inner)) {
-        if (inner !== me.email) {
-          throw new Error(`Legal text names ${inner}, but me.email is ${me.email}`);
-        }
-        return `<a href="mailto:${me.email}">${me.email}</a>`;
-      }
+      if (/^[^\s@]+@[^\s@]+$/.test(inner)) return hold(mailto(inner));
       return `<strong>${inner}</strong>`;
     })
     .replace(/https:\/\/[^\s<\u0000]+[^\s<.,;:)\u0000]/g, (url) => `<a href="${url}">${url}</a>`)
+    .replace(/[\w.+-]+@[\w-]+(?:\.[\w-]+)+/g, (address) => mailto(address))
+    .replace(/ ?\\\n/g, '<br />')
     .replace(/\u0000(\d+)\u0000/g, (_, i) => held[Number(i)]);
 }
 
@@ -67,7 +77,7 @@ const blocks = source.trim().split(/\n\s*\n/).map((b) => b.trim());
 const titleBlock = blocks.shift();
 if (!titleBlock.startsWith('# ')) throw new Error('Legal Markdown must start with "# Title"');
 const title = titleBlock.slice(2).trim();
-const updatedLine = blocks.shift();
+const updatedLine = dated ? blocks.shift() : null;
 
 const lede = [];
 const sections = [];
@@ -107,7 +117,7 @@ for (const block of blocks) {
   <section class="row">
     <aside class="note">
       <strong>{docLabel}</strong>
-      {productLine}<br />
+      {productLine}{updatedLine && <br />}
       {updatedLine}
     </aside>
     <div class="body">

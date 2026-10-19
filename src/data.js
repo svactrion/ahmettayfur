@@ -68,3 +68,29 @@ export const scanstash = {
     png: '/img/scanstash-icon-112.png',
   },
 };
+
+export const birdperch = {
+  name: 'BirdPerch',
+  // In development, not submitted for review. There is no product page and
+  // no App Store link yet; set these once the app is approved.
+  released: false,
+  appStoreUrl: '',
+
+  // Same EN/TR legal pages as ScanStash. The app's paywall and settings
+  // link to the short /birdperch/{privacy,terms,support} addresses, which
+  // public/_redirects sends here; don't move these without updating it.
+  privacyUrl: '/products/birdperch/privacy/',
+  termsUrl: '/products/birdperch/terms/',
+  supportUrl: '/products/birdperch/support/',
+
+  // The legal texts give this address rather than me.email; the BirdPerch
+  // legal pages check against it instead.
+  email: 'ahmet@ahmettayfur.com',
+
+  // Source: public/img/birdperch-icon.png (1024×1024). Same 112×112 WebP +
+  // PNG pair as the icons above.
+  icon: {
+    webp: '/img/birdperch-icon-112.webp',
+    png: '/img/birdperch-icon-112.png',
+  },
+};
