@@ -6,30 +6,30 @@ By downloading or using BirdPerch, you agree to these terms. Because you get the
 
 ## 1. The service
 
-BirdPerch is an app where you create your own bird in 3D, interact with it, track its care and get AI-assisted suggestions. It is provided by Ahmet Emin Tayfur.
+BirdPerch is an app where you create your own bird, interact with it, track its care and get AI-assisted suggestions. It is provided by Ahmet Emin Tayfur.
 
 ## 2. BirdPerch Plus subscription
 
 - Plus is an auto-renewing subscription with monthly and yearly options. Current prices are shown in the app in your local currency.
-- The yearly plan may include a 3-day free trial for eligible users. When the trial ends, the yearly price is charged unless you cancel.
+- The yearly plan may include a 3-day free trial for eligible users. Unless you cancel at least 24 hours before the trial ends, the yearly price is charged when it ends.
 - Payment is charged to your Apple account when you confirm the purchase (with a trial, when the trial ends).
 - The subscription renews automatically for the same period unless cancelled at least 24 hours before the end of the current period. The renewal is charged within the 24 hours before the period ends.
 - You can manage or cancel your subscription in Settings by tapping your name, then Subscriptions. Cancellation takes effect at the end of the current period.
 - Refund requests are subject to Apple's policies and are made at [reportaproblem.apple.com](https://reportaproblem.apple.com).
-- When Plus ends, your Plus-only choices return to their free equivalents; they come back if you subscribe again.
+- When Plus ends, your Plus-only choices return to their free equivalents; when you subscribe again, they come back on this device unless you changed them in the meantime.
 
 ## 3. AI features and their limits
 
 - **Gaia** provides general information. It is not a veterinarian, does not diagnose and does not recommend treatment. Make decisions about your bird's health with an avian veterinarian. In an emergency, see a vet right away.
-- **Cage analysis** is an estimate based only on a photo. It does not guarantee that a cage is safe and may miss risks; always check your cage yourself.
-- **Color finding** picks the closest look from the app's color options; an exact match is not guaranteed.
-- **Talk with my bird** is an entertainment feature; it does not understand words or translate into bird language.
-- **Bird journal** is a personal tracking tool, not a medical record.
-- AI answers may be inaccurate or incomplete. Usage allowances and limits for AI features are shown in the app and may change over time.
+- The score and results from **Let's look at the cage** are an estimate based only on a photo. They don't guarantee that a cage is safe and may miss risks; always check your cage yourself.
+- **Let's find its colors** picks the closest species and colors from the app's options; the species or colors may be wrong, and an exact match is not guaranteed.
+- **Talk with my bird** is an entertainment feature; it doesn't use AI, and your recording is processed only on your phone. It doesn't understand words or translate into bird language.
+- The **Journal** is a personal tracking tool, not a medical record.
+- AI answers may be inaccurate or incomplete. AI features have usage allowances; the app tells you when you're down to your last ones or have run out. These allowances may change over time.
 
 ## 4. Your content
 
-The messages and photos you send belong to you. You allow us to process them only to provide the feature you request. Do not send content that is unlawful or infringes others' rights.
+The messages and photos you send, and the journal entries you let Gaia read, belong to you. You allow us to process them, through our server and Anthropic's AI service, only to provide the feature you request. Do not send content that is unlawful or infringes others' rights.
 
 ## 5. Acceptable use
 
@@ -37,7 +37,7 @@ You agree not to misuse the app, attempt to bypass usage limits, reverse enginee
 
 ## 6. Intellectual property
 
-The app, including its designs, characters (including Gaia), images, sounds and software, belongs to Ahmet Emin Tayfur or is used under license. You receive a limited, non-transferable right to use it for personal, non-commercial purposes.
+The app, including its designs, characters (including Gaia), images, sounds and software, belongs to Ahmet Emin Tayfur or is used under license. You receive a limited, non-transferable right to use it for personal, non-commercial purposes. Recordings in Bird Sounds are used under their own licenses (public domain or CC BY-SA 3.0), which these terms don't restrict; credits and licenses are listed with each sound.
 
 ## 7. Limitation of liability
 
@@ -45,7 +45,7 @@ The app is provided “as is”. To the extent permitted by law, we do not guara
 
 ## 8. Changes
 
-We may update the app, its features and these terms. We will let you know in the app about significant changes. Continuing to use the app after a change means you accept the updated terms.
+We may update the app, its features and these terms. For significant changes, we update the effective date on this page and, where needed, also let you know in the app. Continuing to use the app after a change means you accept the updated terms.
 
 ## 9. Governing law
 

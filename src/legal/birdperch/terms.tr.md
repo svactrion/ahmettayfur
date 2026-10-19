@@ -6,30 +6,30 @@ BirdPerch'ü indirerek ya da kullanarak bu şartları kabul etmiş olursun. Uygu
 
 ## 1. Hizmet
 
-BirdPerch; kendi kuşunu 3D olarak oluşturduğun, onunla etkileşime girdiğin, bakımını takip ettiğin ve yapay zekâ destekli öneriler alabildiğin bir uygulamadır. Uygulama Ahmet Emin Tayfur tarafından sunulur.
+BirdPerch; kendi kuşunu oluşturduğun, onunla etkileşime girdiğin, bakımını takip ettiğin ve yapay zekâ destekli öneriler alabildiğin bir uygulamadır. Uygulama Ahmet Emin Tayfur tarafından sunulur.
 
 ## 2. BirdPerch Plus aboneliği
 
 - Plus; aylık ve yıllık seçenekleri olan, otomatik yenilenen bir aboneliktir. Güncel fiyatlar uygulama içinde, yerel para biriminle gösterilir.
-- Yıllık abonelikte, uygun kullanıcılara 3 günlük ücretsiz deneme sunulabilir. Deneme bittiğinde, iptal etmediysen yıllık ücret alınır.
+- Yıllık abonelikte, uygun kullanıcılara 3 günlük ücretsiz deneme sunulabilir. Deneme bitmeden en az 24 saat önce iptal etmezsen, deneme bitince yıllık ücret alınır.
 - Ödeme, satın almanı onayladığında (denemede, deneme bitince) Apple hesabından alınır.
 - Abonelik, dönem bitmeden en az 24 saat önce iptal edilmezse aynı süre için kendiliğinden yenilenir. Yenileme ücreti dönemin bitiminden önceki 24 saat içinde alınır.
 - Aboneliğini Ayarlar'da adına, ardından Abonelikler'e dokunarak yönetebilir ya da iptal edebilirsin. İptal, mevcut dönemin sonunda geçerli olur.
 - İade talepleri Apple'ın politikalarına tabidir ve [reportaproblem.apple.com](https://reportaproblem.apple.com) üzerinden yapılır.
-- Plus sona erdiğinde Plus'a özel seçimlerin ücretsiz karşılıklarına döner; yeniden abone olduğunda geri gelir.
+- Plus sona erdiğinde Plus'a özel seçimlerin ücretsiz karşılıklarına döner; yeniden abone olduğunda, arada değiştirmediysen bu cihazda geri gelir.
 
 ## 3. Yapay zekâ özellikleri ve sınırları
 
 - **Gaia** genel bilgi verir; veteriner değildir, teşhis koymaz ve tedavi önermez. Kuşunun sağlığıyla ilgili kararları bir kuş veterineriyle vermelisin. Acil bir durumda hemen bir veterinere başvur.
-- **Kafes analizi** yalnız fotoğrafa dayalı bir tahmindir. Kafesin güvenli olduğunu garanti etmez ve riskleri gözden kaçırabilir; kafesini her zaman kendin de kontrol et.
-- **Renk bulma** fotoğraftaki kuşa en yakın görünümü uygulamanın renk seçenekleri arasından bulur; birebir eşleşme garanti edilmez.
-- **Kuşumla konuş** bir eğlence özelliğidir; sözcükleri anlamaz ya da kuş diline çevirmez.
-- **Kuş günlüğü** kişisel bir takip aracıdır; tıbbi kayıt yerine geçmez.
-- Yapay zekâ cevapları hatalı ya da eksik olabilir. Yapay zekâ özelliklerinin kullanım hakları ve sınırları uygulama içinde gösterilir ve zaman içinde değişebilir.
+- **Kafesine bakalım**'ın puanı ve sonuçları yalnız fotoğrafa dayalı bir tahmindir. Kafesin güvenli olduğunu garanti etmez ve riskleri gözden kaçırabilir; kafesini her zaman kendin de kontrol et.
+- **Rengini bulalım**, fotoğraftaki kuşa en yakın türü ve renkleri uygulamadaki seçenekler arasından bulur; tür ya da renkler yanlış çıkabilir, birebir eşleşme garanti edilmez.
+- **Kuşumla konuş** bir eğlence özelliğidir; yapay zekâ kullanmaz ve kaydın yalnız telefonunda işlenir. Sözcükleri anlamaz ya da kuş diline çevirmez.
+- **Günlük**, kişisel bir takip aracıdır; tıbbi kayıt yerine geçmez.
+- Yapay zekâ cevapları hatalı ya da eksik olabilir. Yapay zekâ özelliklerinin kullanım hakları sınırlıdır; son haklarına geldiğinde ya da hakların bittiğinde uygulama içinde söyleriz. Bu haklar zaman içinde değişebilir.
 
 ## 4. İçeriğin
 
-Gönderdiğin mesajlar ve fotoğraflar sana aittir. Bunları, yalnız istediğin özelliği sunmak amacıyla işlememize izin verirsin. Başkalarının haklarını ihlal eden ya da yasa dışı içerik göndermemelisin.
+Gönderdiğin mesajlar, fotoğraflar ve Gaia'nın okumasına izin verdiğin günlük kayıtların sana aittir. Bunları yalnız istediğin özelliği sunmak için, sunucumuz üzerinden Anthropic'in yapay zekâ hizmetiyle işlememize izin verirsin. Başkalarının haklarını ihlal eden ya da yasa dışı içerik göndermemelisin.
 
 ## 5. Kabul edilebilir kullanım
 
@@ -37,7 +37,7 @@ Uygulamayı kötüye kullanmamayı, kullanım sınırlarını aşmaya çalışma
 
 ## 6. Fikri mülkiyet
 
-Uygulama; tasarımları, karakterleri (Gaia dahil), görselleri, sesleri ve yazılımıyla birlikte Ahmet Emin Tayfur'a aittir ya da lisanslı olarak kullanılır. Sana yalnız kişisel ve ticari olmayan kullanım için sınırlı, devredilemez bir kullanım hakkı verilir.
+Uygulama; tasarımları, karakterleri (Gaia dahil), görselleri, sesleri ve yazılımıyla birlikte Ahmet Emin Tayfur'a aittir ya da lisanslı olarak kullanılır. Sana yalnız kişisel ve ticari olmayan kullanım için sınırlı, devredilemez bir kullanım hakkı verilir. Kuş Sesleri'ndeki kayıtlar kendi lisanslarıyla (kamu malı ya da CC BY-SA 3.0) kullanılır ve bu şartlar onları kısıtlamaz; kaynak ve lisans bilgileri her sesin yanında yer alır.
 
 ## 7. Sorumluluğun sınırlandırılması
 
@@ -45,7 +45,7 @@ Uygulama “olduğu gibi” sunulur. Yasanın izin verdiği ölçüde; uygulaman
 
 ## 8. Değişiklikler
 
-Uygulamayı, özelliklerini ve bu şartları güncelleyebiliriz. Önemli değişikliklerde uygulama içinde bilgi veririz. Değişiklikten sonra kullanmaya devam etmen, güncel şartları kabul ettiğin anlamına gelir.
+Uygulamayı, özelliklerini ve bu şartları güncelleyebiliriz. Önemli değişikliklerde bu sayfadaki yürürlük tarihini güncelleriz ve gerektiğinde uygulama içinde de bilgi veririz. Değişiklikten sonra kullanmaya devam etmen, güncel şartları kabul ettiğin anlamına gelir.
 
 ## 9. Uygulanacak hukuk
 
