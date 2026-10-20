@@ -4,7 +4,7 @@ import { me } from '../../../data.js';
 
 const title = 'GrammarLens privacy policy';
 const description = 'What data GrammarLens collects, where it goes, and how long it is kept.';
-const updated = '16 October 2026';
+const updated = '20 October 2026';
 ---
 
 <Legal title={title} description={description} noindex>
@@ -20,9 +20,9 @@ const updated = '16 October 2026';
         GrammarLens has no accounts, never asks for your email, and shows no ads. Your
         name, your avatar and your entire practice history —
         including the Daily Test — stay on your phone; the Daily Test is scored on the
-        device and never leaves it. If you turn on AI feedback for Topic Practice, the
-        answer you type and the question it responds to are sent through our server to
-        Anthropic (Claude) so it can check your work — only after you've agreed to it
+        device and never leaves it. If you turn on AI feedback for practice sessions
+        (Topic Practice and practicing a weak spot), the answer you type and the
+        question it responds to are sent through our server to Anthropic (Claude) so it can check your work — only after you've agreed to it
         in the app, and you can withdraw that agreement at any time.
       </p>
 
@@ -31,7 +31,7 @@ const updated = '16 October 2026';
         <li><a href="#who-is-responsible">Who is responsible</a></li>
         <li><a href="#what-stays-on-your-device">What stays on your device</a></li>
         <li><a href="#the-daily-test">The Daily Test</a></li>
-        <li><a href="#permission-for-ai-feedback">Permission for AI feedback (Topic Practice)</a></li>
+        <li><a href="#permission-for-ai-feedback">Permission for AI feedback (practice sessions)</a></li>
         <li><a href="#what-our-server-keeps">What our server keeps</a></li>
         <li><a href="#anthropic-as-a-processor">Anthropic as a processor</a></li>
         <li><a href="#analytics-and-crash-reporting">Analytics and crash reporting</a></li>
@@ -87,8 +87,8 @@ const updated = '16 October 2026';
         </li>
       </ul>
       <p>
-        Your practice history for Topic Practice — the questions you're given and the
-        answers you type — is also stored on your device. The one exception: if you've
+        Your practice history (Topic Practice and weak-spot practice) — the
+        questions you're given and the answers you type — is also stored on your device. The one exception: if you've
         turned on AI feedback, the answers and matching questions from the session you
         submit are sent off-device for scoring; see <a href="#permission-for-ai-feedback">Permission for AI feedback</a> for exactly what that involves and how to control it.
       </p>
@@ -111,11 +111,8 @@ const updated = '16 October 2026';
       <h2 id="the-daily-test">The Daily Test</h2>
       <p>
         The very first day's test is built into the app itself, so it needs no network
-        request at all. On later days, the app asks our server for a new set — that
-        request includes only the anonymous device identifier used for daily limits
-        (see <a href="#what-our-server-keeps">What our server keeps</a>) and carries
-        nothing else about you or your history; the identifier itself is never
-        forwarded to Anthropic. Every Daily Test, on any day, is scored entirely on
+        request at all. On later days, the app asks our server for that day's set.
+        The request carries nothing about you or your history. Every Daily Test, on any day, is scored entirely on
         your device.
       </p>
     </div>
@@ -128,11 +125,12 @@ const updated = '16 October 2026';
       AI feedback
     </aside>
     <div class="body">
-      <h2 id="permission-for-ai-feedback">Permission for AI feedback (Topic Practice)</h2>
+      <h2 id="permission-for-ai-feedback">Permission for AI feedback (practice sessions)</h2>
       <p>
-        Topic Practice — where GrammarLens checks what you write and explains your
-        mistakes — is the only place your own words leave your device, and only once
-        you say yes.
+        Practice sessions — Topic Practice and practicing a weak spot ("Practice
+        this") — are where GrammarLens checks what you write and explains your
+        mistakes. They are the only place your own words leave your device, and only
+        once you say yes.
       </p>
       <p>
         Before you use it for the first time, the app shows a permission screen that
@@ -144,8 +142,8 @@ const updated = '16 October 2026';
       </p>
       <p>
         You can review or withdraw this permission at any time in Profile → Data.
-        Turning it off takes effect immediately; Topic Practice will ask again the next
-        time you use it.
+        Turning it off takes effect immediately; the app will ask again the next time
+        you start a practice session.
       </p>
       <p>
         Please don't type personal details — such as your full name, address or
@@ -208,7 +206,7 @@ const updated = '16 October 2026';
     <div class="body">
       <h2 id="anthropic-as-a-processor">Anthropic as a processor</h2>
       <p>
-        When you use Topic Practice with permission on, the answer you typed and the
+        When you use a practice session with permission on, the answer you typed and the
         matching question are processed by Anthropic to generate your feedback. How
         Anthropic retains that data, and whether it is used for training, is governed
         by Anthropic's own terms and policies, not ours to restate here. See
@@ -305,7 +303,7 @@ const updated = '16 October 2026';
       <ul>
         <li>Your name or your avatar</li>
         <li>
-          Your stored practice history (other than the Topic Practice answers you
+          Your stored practice history (other than the practice answers you
           choose to submit for feedback — see <a href="#permission-for-ai-feedback">Permission for AI feedback</a>)
         </li>
         <li>
