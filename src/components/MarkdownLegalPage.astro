@@ -9,7 +9,7 @@
 // numbered row. A "## Heading" without a number (the support page) becomes
 // a row numbered by its position. Inside a row, "### " is a subheading and
 // a block of "- " lines is a list. Inline markup: **bold**, `code`,
-// [text](url) and bare https:// URLs. An email address, bold or bare, is
+// [text](url), <https://…> and bare https:// URLs. An email address, bold or bare, is
 // rendered as a mailto link to `email` (me.email unless the page passes
 // its own), and the build fails if the file names a different address. A
 // line ending in a backslash is a line break.
@@ -57,6 +57,7 @@ function inline(text) {
   return escape(text)
     .replace(/`([^`]+)`/g, (_, code) => hold(`<code>${code}</code>`))
     .replace(/\[([^\]]+)\]\((https:\/\/[^\s)]+)\)/g, (_, label, url) => hold(`<a href="${url}">${label}</a>`))
+    .replace(/&lt;(https:\/\/[^\s]+?)&gt;/g, (_, url) => hold(`<a href="${url}">${url}</a>`))
     .replace(/\*\*(.+?)\*\*/g, (_, inner) => {
       if (/^[^\s@]+@[^\s@]+$/.test(inner)) return hold(mailto(inner));
       return `<strong>${inner}</strong>`;

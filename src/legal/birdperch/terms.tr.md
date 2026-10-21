@@ -1,6 +1,6 @@
 # BirdPerch Kullanım Şartları
 
-Yürürlük tarihi: 19 Ekim 2026
+Yürürlük tarihi: 21 Ekim 2026
 
 BirdPerch'ü indirerek ya da kullanarak bu şartları kabul etmiş olursun. Uygulamayı App Store'dan indirdiğin için Apple'ın [Standart Lisans Sözleşmesi (EULA)](https://www.apple.com/legal/internet-services/itunes/dev/stdeula/) de geçerlidir; bu şartlar onu tamamlar.
 
@@ -37,7 +37,7 @@ Uygulamayı kötüye kullanmamayı, kullanım sınırlarını aşmaya çalışma
 
 ## 6. Fikri mülkiyet
 
-Uygulama; tasarımları, karakterleri (Gaia dahil), görselleri, sesleri ve yazılımıyla birlikte Ahmet Emin Tayfur'a aittir ya da lisanslı olarak kullanılır. Sana yalnız kişisel ve ticari olmayan kullanım için sınırlı, devredilemez bir kullanım hakkı verilir. Kuş Sesleri'ndeki kayıtlar kendi lisanslarıyla (kamu malı ya da CC BY-SA 3.0) kullanılır ve bu şartlar onları kısıtlamaz; kaynak ve lisans bilgileri her sesin yanında yer alır.
+Uygulama; tasarımları, karakterleri (Gaia dahil), görselleri, sesleri ve yazılımıyla birlikte Ahmet Emin Tayfur'a aittir ya da lisanslı olarak kullanılır. Sana yalnız kişisel ve ticari olmayan kullanım için sınırlı, devredilemez bir kullanım hakkı verilir. Kuş Sesleri'ndeki kayıtlar kendi lisanslarıyla (kamu malı, CC0, CC BY ve CC BY-SA) kullanılır ve bu şartlar o lisansları kısıtlamaz; kaynak ve lisans bilgileri [Ses kaynakları](https://ahmettayfur.com/tr/products/birdperch/credits/) sayfasında listelenir.
 
 ## 7. Sorumluluğun sınırlandırılması
 

@@ -1,6 +1,6 @@
 # BirdPerch Terms of Use
 
-Effective date: 19 October 2026
+Effective date: 21 October 2026
 
 By downloading or using BirdPerch, you agree to these terms. Because you get the app from the App Store, Apple's [Standard License Agreement (EULA)](https://www.apple.com/legal/internet-services/itunes/dev/stdeula/) also applies; these terms supplement it.
 
@@ -37,7 +37,7 @@ You agree not to misuse the app, attempt to bypass usage limits, reverse enginee
 
 ## 6. Intellectual property
 
-The app, including its designs, characters (including Gaia), images, sounds and software, belongs to Ahmet Emin Tayfur or is used under license. You receive a limited, non-transferable right to use it for personal, non-commercial purposes. Recordings in Bird Sounds are used under their own licenses (public domain or CC BY-SA 3.0), which these terms don't restrict; credits and licenses are listed with each sound.
+The app, including its designs, characters (including Gaia), images, sounds and software, belongs to Ahmet Emin Tayfur or is used under license. You receive a limited, non-transferable right to use it for personal, non-commercial purposes. Recordings in Bird Sounds are used under their own licenses (public domain, CC0, CC BY and CC BY-SA), which these terms don't restrict; credits and licenses are listed on the [Sound credits](https://ahmettayfur.com/products/birdperch/credits/) page.
 
 ## 7. Limitation of liability
 

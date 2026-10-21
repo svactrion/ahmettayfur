@@ -83,6 +83,8 @@ export const birdperch = {
   privacyUrl: '/products/birdperch/privacy/',
   termsUrl: '/products/birdperch/terms/',
   supportUrl: '/products/birdperch/support/',
+  // Opened straight from the app (Profile › Sound credits), no redirect.
+  creditsUrl: '/products/birdperch/credits/',
 
   // The legal texts give this address rather than me.email; the BirdPerch
   // legal pages check against it instead.
