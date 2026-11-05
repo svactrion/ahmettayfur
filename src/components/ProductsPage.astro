@@ -3,7 +3,7 @@
 // Astro.currentLocale picks the language — see src/content/products.js.
 import Base from '../layouts/Base.astro';
 import { productsCopy } from '../content/products.js';
-import { scanstash, birdperch } from '../data.js';
+import { grammarlens, scanstash, birdperch } from '../data.js';
 import { localizeHref } from '../i18n.js';
 
 const lang = Astro.currentLocale ?? 'en';
@@ -35,6 +35,9 @@ const t = productsCopy[lang];
         <span class="card-text">{t.grammarlensEntry.cardText}</span>
         <span class="card-status">{t.grammarlensEntry.cardStatus}</span>
       </a>
+      <p class="card-docs">
+        <a href={grammarlens.appStoreUrl}>{t.grammarlensEntry.storeLinkText}</a>
+      </p>
     </div>
   </section>
 

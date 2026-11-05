@@ -1,10 +1,10 @@
 ---
 import Legal from '../../../layouts/Legal.astro';
-import { me } from '../../../data.js';
+import { me, grammarlens } from '../../../data.js';
 
 const title = 'GrammarLens support';
 const description = 'How to get help with GrammarLens, report a bug, or ask a question.';
-const updated = '16 October 2026';
+const updated = '5 November 2026';
 ---
 
 <Legal title={title} description={description}>
@@ -19,6 +19,9 @@ const updated = '16 October 2026';
       <p class="lede">
         Write to <a href={`mailto:${me.email}`}>{me.email}</a>. Include your device model and iOS version — it
         usually saves a round trip. Expect a reply within five business days.
+      </p>
+      <p>
+        <a href={grammarlens.appStoreUrl}>GrammarLens on the App Store</a>
       </p>
     </div>
   </section>
@@ -84,6 +87,15 @@ const updated = '16 October 2026';
         The app shows the full comparison on its Premium screen, and it always reflects
         what exists today — nothing is listed that is not built.
       </p>
+
+      {
+        grammarlens.v140Released && (
+          <>
+            <h2 class="h3">How do I change the interface language?</h2>
+            <p>Profile → Appearance → Language (available from version 1.4.0).</p>
+          </>
+        )
+      }
     </div>
   </section>
 

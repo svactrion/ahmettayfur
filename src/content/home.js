@@ -48,7 +48,7 @@ export const copy = {
     cta2: 'Read the articles',
 
     prodTitle: 'Products',
-    prodCount: 'Two in App Store review · one in development',
+    prodCount: 'One live on the App Store · one in App Store review · one in development',
     caseStudy: 'Read the case study',
     source: 'GitHub',
     nextKicker: 'Next',
@@ -90,13 +90,16 @@ export const copy = {
     products: [
       {
         name: 'GrammarLens',
-        status: 'In App Store review',
+        status: 'Live on the App Store — 1.3.0',
         pricing: 'Subscription',
         kicker: 'AI-powered learning app',
-        desc: "GrammarLens is an iOS app for English learners who speak fluently but can't reliably apply the grammar an exam like IELTS asks for. It builds practice around your own mistakes and explains them in plain language, not rule names. I did the research, wrote the PRD and made every product decision; AI coding agents wrote the code. Version 1.0 went to App Store review on 24 September 2026.",
+        desc: "GrammarLens is an iOS app for English learners who speak fluently but can't reliably apply the grammar an exam like IELTS asks for. It builds practice around your own mistakes and explains them in plain language, not rule names. I did the research, wrote the PRD and made every product decision; AI coding agents wrote the code. Version 1.3.0 went live on the App Store on 2 November 2026.",
         facts: ['4 interviews', '3 usability tests', 'Solo project'],
         stack: ['Flutter / Dart', 'Claude API', 'RevenueCat', 'Cloudflare Workers', 'Material 3'],
         caseHref: grammarlens.caseStudyUrl,
+        storeHref: grammarlens.appStoreUrl,
+        storeText: 'App Store',
+        storeLabel: 'GrammarLens on the App Store (opens in a new tab)',
         sourceHref: grammarlens.sourceUrl,
         sourceLabel: 'GrammarLens source code on GitHub (opens in a new tab)',
         docs: productDocsEn,
@@ -165,7 +168,7 @@ export const copy = {
           {
             when: 'July 2026 –',
             what: 'GrammarLens',
-            note: 'My own mobile product: user research, PRD, MVP, testing with seven people. Submitted for App Store review on 24 September 2026.',
+            note: 'My own mobile product: user research, PRD, MVP, testing with seven people. Live on the App Store since 2 November 2026.',
           },
           {
             when: 'September 2026 –',
@@ -254,7 +257,7 @@ export const copy = {
     cta2: 'Yazıları oku',
 
     prodTitle: 'Ürünler',
-    prodCount: 'İkisi App Store incelemesinde · biri geliştirmede',
+    prodCount: "Biri App Store'da yayında · biri App Store incelemesinde · biri geliştirmede",
     caseStudy: "Case study'yi oku",
     source: 'GitHub',
     nextKicker: 'Sıradaki',
@@ -296,13 +299,16 @@ export const copy = {
     products: [
       {
         name: 'GrammarLens',
-        status: 'App Store incelemesinde',
+        status: "App Store'da yayında — 1.3.0",
         pricing: 'Abonelik',
         kicker: 'Yapay zekâ destekli öğrenme uygulaması',
-        desc: "GrammarLens, İngilizceyi akıcı konuşan ama IELTS gibi bir sınavın istediği dilbilgisini güvenle uygulayamayanlar için bir iOS uygulaması. Kullanıcının kendi hatalarından yola çıkarak alıştırma üretiyor ve bu hataları kural adlarıyla değil, sade bir dille açıklıyor. Araştırmayı yaptım, PRD'yi yazdım ve bütün ürün kararlarını verdim; kodu yapay zekâ kodlama ajanları yazdı. 1.0 sürümü 24 Eylül 2026'da App Store incelemesine gönderildi.",
+        desc: "GrammarLens, İngilizceyi akıcı konuşan ama IELTS gibi bir sınavın istediği dilbilgisini güvenle uygulayamayanlar için bir iOS uygulaması. Kullanıcının kendi hatalarından yola çıkarak alıştırma üretiyor ve bu hataları kural adlarıyla değil, sade bir dille açıklıyor. Araştırmayı yaptım, PRD'yi yazdım ve bütün ürün kararlarını verdim; kodu yapay zekâ kodlama ajanları yazdı. 1.3.0 sürümü 2 Kasım 2026'da App Store'da yayına çıktı.",
         facts: ['4 görüşme', '3 kullanılabilirlik testi', 'Tek kişilik proje'],
         stack: ['Flutter / Dart', 'Claude API', 'RevenueCat', 'Cloudflare Workers', 'Material 3'],
         caseHref: grammarlens.caseStudyUrl,
+        storeHref: grammarlens.appStoreUrl,
+        storeText: 'App Store',
+        storeLabel: "GrammarLens App Store'da (yeni sekmede açılır)",
         sourceHref: grammarlens.sourceUrl,
         sourceLabel: "GrammarLens kaynak kodu GitHub'da (yeni sekmede açılır)",
         docs: productDocsTr,
@@ -368,7 +374,7 @@ export const copy = {
           {
             when: 'Temmuz 2026 –',
             what: 'GrammarLens',
-            note: "Kendi mobil ürünüm: kullanıcı araştırması, PRD, MVP, yedi kişiyle test. 24 Eylül 2026'da App Store incelemesine gönderildi.",
+            note: "Kendi mobil ürünüm: kullanıcı araştırması, PRD, MVP, yedi kişiyle test. 2 Kasım 2026'dan beri App Store'da yayında.",
           },
           {
             when: 'Eylül 2026 –',

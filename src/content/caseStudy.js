@@ -44,8 +44,8 @@ export const caseStudyCopy = {
     aside: {
       label: 'Case study',
       lines: ['Solo project.', 'July to September 2026.', 'Research, PRD, build, test, iterate, App Store submission.'],
-      status: 'Submitted for App Store review on 24 September 2026. Not yet approved.',
-      updated: 'Updated September 2026. An earlier version of this page covered the MVP only.',
+      status: 'Live on the App Store since 2 November 2026.',
+      updated: 'Updated November 2026. An earlier version of this page covered the MVP only.',
     },
     title: 'Building GrammarLens',
     subtitle: 'From a one-week MVP to the App Store: defining the problem when every AI call has a price.',
@@ -99,7 +99,7 @@ export const caseStudyCopy = {
         },
         {
           type: 'p',
-          html: 'Version 1.0 was submitted to App Store review on 24 September 2026. It is not approved yet, and there is no user data. So this is a record of decisions, not results.',
+          html: 'Version 1.0 was submitted to App Store review on 24 September 2026, and the app went live on 2 November 2026. This page was written before release, so it is a record of decisions, not results.',
         },
         {
           type: 'p',
@@ -539,8 +539,12 @@ export const caseStudyCopy = {
         heading: "5. Status, and how I'll know",
         blocks: [
           {
-            type: 'p',
-            html: "GrammarLens 1.0 was submitted to App Store review on 24 September 2026, together with its two subscriptions. It is not approved yet. Release is manual, so approval won't publish it on its own.",
+            type: 'ol',
+            items: [
+              '<strong>24 September 2026:</strong> version 1.0 submitted to App Store review for the first time, together with its two subscriptions.',
+              '<strong>2 November 2026:</strong> version 1.3.0 live on the App Store.',
+              '<strong>5 November 2026:</strong> version 1.4.0 submitted to App Store review.',
+            ],
           },
           {
             type: 'p',
@@ -584,8 +588,8 @@ export const caseStudyCopy = {
         'Temmuz–Eylül 2026.',
         'Araştırma, PRD, geliştirme, test, iterasyon, App Store başvurusu.',
       ],
-      status: "24 Eylül 2026'da App Store incelemesine gönderildi. Henüz onaylanmadı.",
-      updated: "Eylül 2026'da güncellendi. Bu sayfanın önceki sürümü yalnızca MVP'yi anlatıyordu.",
+      status: "2 Kasım 2026'dan beri App Store'da yayında.",
+      updated: "Kasım 2026'da güncellendi. Bu sayfanın önceki sürümü yalnızca MVP'yi anlatıyordu.",
     },
     title: "GrammarLens'i geliştirmek",
     subtitle:
@@ -639,7 +643,7 @@ export const caseStudyCopy = {
         },
         {
           type: 'p',
-          html: "1.0 sürümü 24 Eylül 2026'da App Store incelemesine gönderildi. Henüz onaylanmadı ve elimde kullanıcı verisi yok. Bu yüzden bu sayfa sonuçların değil, kararların kaydı.",
+          html: "1.0 sürümü 24 Eylül 2026'da App Store incelemesine gönderildi, uygulama 2 Kasım 2026'da yayına çıktı. Bu sayfa yayından önce yazıldı; bu yüzden sonuçların değil, kararların kaydı.",
         },
         {
           type: 'p',
@@ -1064,8 +1068,12 @@ export const caseStudyCopy = {
         heading: '5. Mevcut durum ve nasıl anlayacağım',
         blocks: [
           {
-            type: 'p',
-            html: "GrammarLens 1.0, iki aboneliğiyle birlikte 24 Eylül 2026'da App Store incelemesine gönderildi. Henüz onaylanmadı. Yayın manuel olduğu için onay, uygulamayı kendiliğinden yayına çıkarmayacak.",
+            type: 'ol',
+            items: [
+              "<strong>24 Eylül 2026:</strong> 1.0 sürümü, iki aboneliğiyle birlikte ilk kez App Store incelemesine gönderildi.",
+              "<strong>2 Kasım 2026:</strong> 1.3.0 sürümü App Store'da yayına çıktı.",
+              "<strong>5 Kasım 2026:</strong> 1.4.0 sürümü App Store incelemesine gönderildi.",
+            ],
           },
           {
             type: 'p',

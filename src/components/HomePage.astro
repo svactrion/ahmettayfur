@@ -120,6 +120,17 @@ const postLang = (p) => (lang === 'en' && /[çğıöşüÇĞİÖŞÜ]/.test(`${p
                         {t.caseStudy} <span aria-hidden="true">&rarr;</span>
                       </a>
                     )}
+                    {p.storeHref && (
+                      <a
+                        class="btn btn-secondary"
+                        href={p.storeHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={p.storeLabel}
+                      >
+                        {p.storeText} <span aria-hidden="true">&nearr;</span>
+                      </a>
+                    )}
                     {p.sourceHref && (
                       <a
                         class="btn btn-secondary"

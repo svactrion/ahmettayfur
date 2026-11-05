@@ -27,9 +27,13 @@ export const me = {
 
 export const grammarlens = {
   name: 'GrammarLens',
-  // Set to true and paste the URL once the app is approved.
-  released: false,
-  appStoreUrl: '',
+  released: true,
+  appStoreUrl: 'https://apps.apple.com/us/app/grammarlens-ai-english-tutor/id6811477346',
+  // Turns on the 1.4.0 copy: the interface-language line on the product page
+  // (EN + TR), the Turkish screenshots and feature names on the /tr/ product page
+  // and the language FAQ on the support page, and turns off the "in App Store review" line. Set to true only once 1.4.0 is live; the status
+  // line in src/content/products.js then needs its new version and date too.
+  v140Released: false,
 
   // Permanent addresses given to Apple. Do not move these.
   privacyUrl: '/products/grammarlens/privacy/',

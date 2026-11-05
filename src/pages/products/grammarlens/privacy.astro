@@ -4,7 +4,7 @@ import { me } from '../../../data.js';
 
 const title = 'GrammarLens privacy policy';
 const description = 'What data GrammarLens collects, where it goes, and how long it is kept.';
-const updated = '20 October 2026';
+const updated = '5 November 2026';
 ---
 
 <Legal title={title} description={description} noindex>
@@ -94,7 +94,7 @@ const updated = '20 October 2026';
       </p>
       <p>
         Separately, the learning goal you choose during onboarding, your text-size
-        preference and totals about your sessions — like how many questions you
+        preference, your interface language and totals about your sessions — like how many questions you
         answered or skipped — are sent to our analytics provider as numbers and
         category labels, never as text; see
         <a href="#analytics-and-crash-reporting">Analytics and crash reporting</a>.
@@ -240,12 +240,17 @@ const updated = '20 October 2026';
         <li>Steps through the paywall and purchase flow</li>
         <li>Your learning goal from onboarding — exam prep, work, everyday confidence, or skipped</li>
         <li>Your text-size preference</li>
+        <li>Your interface language</li>
         <li>Your AI-feedback permission decision (see <a href="#permission-for-ai-feedback">Permission for AI feedback</a>)</li>
       </ul>
       <p>
         The learning goal you choose during onboarding is sent with the app's usage
         analytics, never with your name. It helps us decide what to improve; it does
         not change your lessons.
+      </p>
+      <p>
+        The interface language you select in the app is sent with usage analytics, like
+        your learning goal — never with your name or any account identifier.
       </p>
       <p>
         The exact events inside these categories may change as the app evolves; what
@@ -259,6 +264,12 @@ const updated = '20 October 2026';
         language, and session counts and durations. Crashlytics additionally records
         technical details about a crash when one happens — device and app information,
         the error message, and where in the app it occurred.
+      </p>
+      <p>
+        Our server's host (Cloudflare) and Firebase receive your IP address as part of
+        any network request; Firebase derives an approximate region from it. We do not
+        store IP addresses in our own data; Cloudflare may retain them briefly in its
+        operational logs.
       </p>
       <p>
         This is not linked to your identity. GrammarLens does not use an advertising

@@ -13,6 +13,8 @@ import { localizeHref, hreflangFor } from '../i18n.js';
 
 const lang = Astro.currentLocale ?? 'en';
 const t = grammarlensPageCopy[lang];
+const gallery = grammarlens.v140Released && t.v140Gallery ? t.v140Gallery : t.gallery;
+const features = grammarlens.v140Released && t.v140WhatItDoes ? t.v140WhatItDoes : t.whatItDoes;
 ---
 
 <Base title={t.meta.title} description={t.meta.description}>
@@ -28,24 +30,42 @@ const t = grammarlensPageCopy[lang];
       <h1 class="display">{t.title}</h1>
       <p class="lede">{t.lede}</p>
       {
-        grammarlens.released ? (
+        grammarlens.released && (
           <p>
-            <a href={grammarlens.appStoreUrl}>{t.downloadLink}</a>
+            <a class="store-badge" href={grammarlens.appStoreUrl}>
+              <img src={t.badge.src} alt={t.downloadLink} width={t.badge.width} height={t.badge.height} />
+            </a>
           </p>
-        ) : (
-          <p>{t.notReleasedNote}</p>
         )
       }
+      {grammarlens.v140Released ? <p>{t.v140Note}</p> : <p>{t.reviewNote}</p>}
     </div>
   </section>
 
   <section class="row">
     <aside class="note">
-      <strong>{t.whatItDoes.label}</strong>
+      <strong>{t.gallery.label}</strong>
+    </aside>
+    <div class="body">
+      <ul class="gallery">
+        {
+          gallery.items.map((shot) => (
+            <li>
+              <img src={`${gallery.dir}/${shot.file}.webp`} alt={shot.alt} width="600" height="1304" loading="lazy" decoding="async" />
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="row">
+    <aside class="note">
+      <strong>{features.label}</strong>
     </aside>
     <div class="body">
       {
-        t.whatItDoes.items.map((item) => (
+        features.items.map((item) => (
           <>
             <h2 class="h3">{item.title}</h2>
             <p>
@@ -87,6 +107,50 @@ const t = grammarlensPageCopy[lang];
           ))
         }
       </ul>
+      <p class="last-updated">{t.lastUpdated}</p>
     </div>
   </section>
 </Base>
+
+<style>
+  /* Apple asks for at least 40px of badge height and clear space of a quarter
+     of that height around it. The image itself must not be altered. */
+  .store-badge {
+    display: inline-block;
+    padding: 12px 12px 12px 0;
+    line-height: 0;
+  }
+
+  .store-badge img {
+    display: block;
+    height: 48px;
+    width: auto;
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-left: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .gallery img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+  }
+
+  @media (max-width: 480px) {
+    .gallery {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .last-updated {
+    font-size: 13px;
+    color: var(--color-neutral-500);
+  }
+</style>

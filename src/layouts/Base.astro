@@ -42,7 +42,7 @@ const hreflangTr = isTranslated(path) ? new URL(withSlash(`/tr${enPath}`), Astro
 // twitter:image only exist on those pages — everywhere else keeps exactly
 // the tags it had before.
 const isGrammarLens = enPath.startsWith('/products/grammarlens');
-const ogImagePath = isGrammarLens ? '/grammarlens-og-v2.jpg' : '/og.jpg';
+const ogImagePath = isGrammarLens ? '/grammarlens-og-v3.jpg' : '/og.jpg';
 const ogImageWidth = isGrammarLens ? 1200 : 1200;
 const ogImageHeight = isGrammarLens ? 630 : 630;
 const ogImageAlt = isGrammarLens ? t.chrome.grammarlensOgAlt : null;
