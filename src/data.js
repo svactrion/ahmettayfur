@@ -76,8 +76,8 @@ export const scanstash = {
 
 export const birdperch = {
   name: 'BirdPerch',
-  // In development, not submitted for review. There is no product page and
-  // no App Store link yet; set these once the app is approved.
+  // In App Store review. There is no product page and no App Store link yet;
+  // set these once the app is approved.
   released: false,
   appStoreUrl: '',
 
@@ -99,5 +99,20 @@ export const birdperch = {
   icon: {
     webp: '/img/birdperch-icon-112.webp',
     png: '/img/birdperch-icon-112.png',
+  },
+};
+
+export const seher = {
+  name: 'Seher',
+  // In development. The repo is private, and there is no product page, no
+  // legal pages and no App Store link yet.
+  released: false,
+  appStoreUrl: '',
+
+  // Source: design/icons/seher-icon.png (1024×1024). Same 112×112 WebP + PNG
+  // pair as the icons above.
+  icon: {
+    webp: '/img/seher-icon-112.webp',
+    png: '/img/seher-icon-112.png',
   },
 };

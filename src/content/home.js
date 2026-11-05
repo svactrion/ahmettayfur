@@ -4,7 +4,7 @@
 // Astro.currentLocale — copy.en at "/", copy.tr at "/tr/". Edit text here,
 // never in HomePage.astro.
 
-import { grammarlens, scanstash, birdperch } from '../data.js';
+import { grammarlens, scanstash, birdperch, seher } from '../data.js';
 
 const productDocsEn = [
   { label: 'Privacy', href: grammarlens.privacyUrl },
@@ -48,13 +48,9 @@ export const copy = {
     cta2: 'Read the articles',
 
     prodTitle: 'Products',
-    prodCount: 'One live on the App Store · one in App Store review · one in development',
+    prodCount: 'One live on the App Store · two in App Store review · one in development',
     caseStudy: 'Read the case study',
     source: 'GitHub',
-    nextKicker: 'Next',
-    nextTitle: 'Product 04 is in discovery',
-    nextBody:
-      'The next one starts the same way: a problem I keep running into myself, then research before a line of code.',
 
     whoTitle: 'Who am I',
     whoBody: [
@@ -127,7 +123,7 @@ export const copy = {
       // Same as ScanStash: only the legal pages.
       {
         name: birdperch.name,
-        status: 'In development',
+        status: 'In App Store review',
         pricing: 'Subscription',
         kicker: 'AI-powered bird care app',
         desc: 'An iPhone app where you create your own bird in 3D, interact with it, track its care and get AI-assisted suggestions.',
@@ -139,6 +135,17 @@ export const copy = {
         facts: ['Solo project', 'No account', 'Real-time 3D'],
         stack: ['Swift', 'Claude API', 'WidgetKit', 'RevenueCat', 'Cloudflare Workers'],
         icon: { ...birdperch.icon, alt: 'BirdPerch app icon' },
+      },
+      // No product page, legal pages or public source yet: only the card.
+      {
+        name: 'Seher: Suhoor & Fajr Alarm',
+        status: 'In development',
+        pricing: 'Subscription',
+        kicker: 'Suhoor and fajr alarm app',
+        desc: 'An ad-free iOS app that wakes you for suhoor and fajr, and calculates prayer times on the device with the Diyanet method and global methods.',
+        facts: ['Solo project', 'No ads', 'Turkish + English'],
+        stack: ['Swift', 'SwiftUI', 'AlarmKit', 'WidgetKit', 'RevenueCat'],
+        icon: { ...seher.icon, alt: 'Seher app icon' },
       },
     ],
 
@@ -178,7 +185,12 @@ export const copy = {
           {
             when: 'October 2026 –',
             what: 'BirdPerch',
-            note: 'My third app: you create your own bird in 3D, track its care and get AI-assisted suggestions. Swift, with the Claude API behind my own Cloudflare server. In development.',
+            note: 'My third app: you create your own bird in 3D, track its care and get AI-assisted suggestions. Swift, with the Claude API behind my own Cloudflare server. Submitted for App Store review.',
+          },
+          {
+            when: 'October 2026 –',
+            what: 'Seher',
+            note: 'My fourth app: an ad-free alarm for suhoor and fajr, with prayer times calculated on the device. Swift, with AlarmKit and WidgetKit. In development.',
           },
         ],
       },
@@ -257,13 +269,9 @@ export const copy = {
     cta2: 'Yazıları oku',
 
     prodTitle: 'Ürünler',
-    prodCount: "Biri App Store'da yayında · biri App Store incelemesinde · biri geliştirmede",
+    prodCount: "Biri App Store'da yayında · ikisi App Store incelemesinde · biri geliştirmede",
     caseStudy: "Case study'yi oku",
     source: 'GitHub',
-    nextKicker: 'Sıradaki',
-    nextTitle: 'Dördüncü ürün keşif aşamasında',
-    nextBody:
-      'O da aynı yoldan başlıyor: önce benim de sürekli karşılaştığım bir problem, sonra tek satır kod yazmadan önce araştırma.',
 
     whoTitle: 'Ben kimim',
     whoBody: [
@@ -333,7 +341,7 @@ export const copy = {
       },
       {
         name: birdperch.name,
-        status: 'Geliştirme aşamasında',
+        status: 'App Store incelemesinde',
         pricing: 'Abonelik',
         kicker: 'Yapay zekâ destekli kuş bakım uygulaması',
         desc: 'Kendi kuşunu 3D olarak oluşturduğun, onunla etkileşime girdiğin, bakımını takip ettiğin ve yapay zekâ destekli öneriler alabildiğin bir iPhone uygulaması.',
@@ -345,6 +353,16 @@ export const copy = {
         facts: ['Tek kişilik proje', 'Hesapsız', 'Gerçek zamanlı 3D'],
         stack: ['Swift', 'Claude API', 'WidgetKit', 'RevenueCat', 'Cloudflare Workers'],
         icon: { ...birdperch.icon, alt: 'BirdPerch uygulama simgesi' },
+      },
+      {
+        name: 'Seher: Sahur Alarmı ve Namaz',
+        status: 'Geliştirme aşamasında',
+        pricing: 'Abonelik',
+        kicker: 'Sahur ve sabah alarmı uygulaması',
+        desc: 'Sahura ve sabaha uyandıran, vakitleri Diyanet yöntemiyle ve global yöntemlerle cihazda hesaplayan, reklamsız iOS uygulaması.',
+        facts: ['Tek kişilik proje', 'Reklamsız', 'Türkçe + İngilizce'],
+        stack: ['Swift', 'SwiftUI', 'AlarmKit', 'WidgetKit', 'RevenueCat'],
+        icon: { ...seher.icon, alt: 'Seher uygulama simgesi' },
       },
     ],
 
@@ -384,7 +402,12 @@ export const copy = {
           {
             when: 'Ekim 2026 –',
             what: 'BirdPerch',
-            note: "Üçüncü uygulamam: kendi kuşunu 3D olarak oluşturuyor, bakımını takip ediyor ve yapay zekâ destekli öneriler alıyorsun. Swift ile geliştirildi; Claude API'ye kendi Cloudflare sunucum üzerinden bağlanıyor. Geliştirme aşamasında.",
+            note: "Üçüncü uygulamam: kendi kuşunu 3D olarak oluşturuyor, bakımını takip ediyor ve yapay zekâ destekli öneriler alıyorsun. Swift ile geliştirildi; Claude API'ye kendi Cloudflare sunucum üzerinden bağlanıyor. App Store incelemesine gönderildi.",
+          },
+          {
+            when: 'Ekim 2026 –',
+            what: 'Seher',
+            note: 'Dördüncü uygulamam: sahur ve sabah için reklamsız bir alarm; vakitler cihazda hesaplanıyor. Swift ile geliştiriliyor; AlarmKit ve WidgetKit kullanıyor. Geliştirme aşamasında.',
           },
         ],
       },

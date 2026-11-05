@@ -112,6 +112,7 @@ const postLang = (p) => (lang === 'en' && /[çğıöşüÇĞİÖŞÜ]/.test(`${p
                 </div>
               )}
 
+              {(p.caseHref || p.sourceHref || p.docs) && (
               <div class="prod-foot">
                 {(p.caseHref || p.sourceHref) && (
                   <div class="prod-actions">
@@ -144,21 +145,18 @@ const postLang = (p) => (lang === 'en' && /[çğıöşüÇĞİÖŞÜ]/.test(`${p
                     )}
                   </div>
                 )}
-                <span class="prod-docs">
-                  {p.docs.map((l) => (
-                    <a href={localizeHref(l.href, lang)} hreflang={hreflangFor(l.href, lang)} aria-label={l.aria}>{l.label}</a>
-                  ))}
-                </span>
+                {p.docs && (
+                  <span class="prod-docs">
+                    {p.docs.map((l) => (
+                      <a href={localizeHref(l.href, lang)} hreflang={hreflangFor(l.href, lang)} aria-label={l.aria}>{l.label}</a>
+                    ))}
+                  </span>
+                )}
               </div>
+              )}
             </article>
           ))
         }
-
-        <article class="prod-next">
-          <span class="kicker kicker-accent">{t.nextKicker}</span>
-          <h3>{t.nextTitle}</h3>
-          <p>{t.nextBody}</p>
-        </article>
       </div>
     </div>
   </section>
@@ -689,32 +687,6 @@ const postLang = (p) => (lang === 'en' && /[çğıöşüÇĞİÖŞÜ]/.test(`${p
       flex-direction: column;
       align-self: stretch;
     }
-  }
-
-  .prod-next {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: var(--space-2);
-    padding: clamp(20px, 2.4vw, 28px);
-    border-radius: var(--radius-lg);
-    border: 1px dashed var(--color-neutral-800);
-  }
-
-  .prod-next h3 {
-    font-size: 18px;
-    line-height: 1.3;
-    letter-spacing: -0.02em;
-    margin: 6px 0 0;
-    color: var(--color-neutral-300);
-  }
-
-  .prod-next p {
-    margin: 8px 0 0;
-    font-size: 14px;
-    line-height: 1.6;
-    max-width: 44ch;
-    color: var(--color-neutral-400);
   }
 
   /* ---------- who am I ---------- */

@@ -3,7 +3,7 @@
 // Astro.currentLocale picks the language — see src/content/products.js.
 import Base from '../layouts/Base.astro';
 import { productsCopy } from '../content/products.js';
-import { grammarlens, scanstash, birdperch } from '../data.js';
+import { grammarlens, scanstash, birdperch, seher } from '../data.js';
 import { localizeHref } from '../i18n.js';
 
 const lang = Astro.currentLocale ?? 'en';
@@ -31,7 +31,13 @@ const t = productsCopy[lang];
     </aside>
     <div class="body">
       <a class="card" href={localizeHref('/products/grammarlens/', lang)}>
-        <span class="card-title">{t.grammarlensEntry.cardTitle}</span>
+        <span class="card-title card-title-icon">
+          <picture>
+            <source srcset={grammarlens.icon.webp} type="image/webp" />
+            <img src={grammarlens.icon.png} alt="" width="40" height="40" loading="lazy" />
+          </picture>
+          {t.grammarlensEntry.cardTitle}
+        </span>
         <span class="card-text">{t.grammarlensEntry.cardText}</span>
         <span class="card-status">{t.grammarlensEntry.cardStatus}</span>
       </a>
@@ -97,6 +103,27 @@ const t = productsCopy[lang];
           </>
         ))}
       </p>
+    </div>
+  </section>
+
+  <section class="row">
+    <aside class="note">
+      <strong>{t.seherEntry.note.label}</strong>
+      {t.seherEntry.note.line1}<br />
+      {t.seherEntry.note.line2}
+    </aside>
+    <div class="body">
+      <div class="card card-static">
+        <span class="card-title card-title-icon">
+          <picture>
+            <source srcset={seher.icon.webp} type="image/webp" />
+            <img src={seher.icon.png} alt="" width="40" height="40" loading="lazy" />
+          </picture>
+          {t.seherEntry.cardTitle}
+        </span>
+        <span class="card-text">{t.seherEntry.cardText}</span>
+        <span class="card-status">{t.seherEntry.cardStatus}</span>
+      </div>
     </div>
   </section>
 </Base>
