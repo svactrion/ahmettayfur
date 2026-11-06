@@ -54,10 +54,10 @@ export const grammarlens = {
 
 export const scanstash = {
   name: 'QR: ScanStash',
-  // In App Store review. There is no product page and no App Store link
-  // yet; set these once the app is approved.
-  released: false,
-  appStoreUrl: '',
+  // Live on the App Store since 6 November 2026. There is no product page
+  // yet; the cards link straight to the listing.
+  released: true,
+  appStoreUrl: 'https://apps.apple.com/tr/app/qr-scanstash/id6820834276',
 
   // English is the default; each legal page links to its Turkish version
   // under /tr. Meant as the stable addresses for a future App Store listing.
@@ -76,10 +76,10 @@ export const scanstash = {
 
 export const birdperch = {
   name: 'BirdPerch',
-  // In App Store review. There is no product page and no App Store link yet;
-  // set these once the app is approved.
-  released: false,
-  appStoreUrl: '',
+  // Live on the App Store since 6 November 2026. There is no product page
+  // yet; the cards link straight to the listing.
+  released: true,
+  appStoreUrl: 'https://apps.apple.com/tr/app/birdperch-ku%C5%9F-bak%C4%B1m-g%C3%BCnl%C3%BC%C4%9F%C3%BC/id6824694714',
 
   // Same EN/TR legal pages as ScanStash. The app's paywall and settings
   // link to the short /birdperch/{privacy,terms,support} addresses, which

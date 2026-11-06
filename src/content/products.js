@@ -17,7 +17,7 @@ export const productsCopy = {
       description: 'Products built and put in front of real users by Ahmet Emin Tayfur.',
     },
     intro: {
-      note: { label: 'Products', line1: '4 products', line2: '1 in the App Store' },
+      note: { label: 'Products', line1: '4 products', line2: '3 in the App Store' },
       title: 'Products',
       lede: "Things I've built far enough to put in front of someone who wasn't obliged to be nice about it.",
     },
@@ -29,27 +29,29 @@ export const productsCopy = {
       cardStatus: 'Live on the App Store — 1.3.0',
       storeLinkText: 'Download on the App Store',
     },
-    // No product page yet, so this card links nowhere; only its legal
-    // pages do.
+    // No product page yet, so this card links nowhere; the App Store link
+    // and the legal pages sit under it.
     scanstashEntry: {
-      note: { label: '02', line1: 'Flutter · Swift · iOS', line2: 'In App Store review' },
+      note: { label: '02', line1: 'Flutter · Swift · iOS', line2: 'Live on the App Store' },
       cardTitle: scanstash.name,
       cardText:
         'An iPhone app that scans QR codes with the camera or from a photo and saves the web links in a personal visual library. You can name your links, search them and reopen them with one tap from a Home Screen widget.',
-      cardStatus: 'Submitted for App Store review',
+      cardStatus: 'Live on the App Store',
+      storeLinkText: 'Download on the App Store',
       docs: [
         { label: 'Privacy', href: scanstash.privacyUrl },
         { label: 'Terms', href: scanstash.termsUrl },
         { label: 'Support', href: scanstash.supportUrl },
       ],
     },
-    // Same as ScanStash: no product page yet, only the legal pages.
+    // Same as ScanStash: no product page yet.
     birdperchEntry: {
-      note: { label: '03', line1: 'Swift · iOS', line2: 'In App Store review' },
+      note: { label: '03', line1: 'Swift · iOS', line2: 'Live on the App Store' },
       cardTitle: birdperch.name,
       cardText:
         'An iPhone app where you create your own bird in 3D, interact with it, track its care and get AI-assisted suggestions.',
-      cardStatus: 'Submitted for App Store review',
+      cardStatus: 'Live on the App Store',
+      storeLinkText: 'Download on the App Store',
       docs: [
         { label: 'Privacy', href: birdperch.privacyUrl },
         { label: 'Terms', href: birdperch.termsUrl },
@@ -72,7 +74,7 @@ export const productsCopy = {
       description: 'Ahmet Emin Tayfur’ın geliştirip gerçek kullanıcıların önüne çıkardığı ürünler.',
     },
     intro: {
-      note: { label: 'Ürünler', line1: '4 ürün', line2: "1'i App Store'da" },
+      note: { label: 'Ürünler', line1: '4 ürün', line2: "3'ü App Store'da" },
       title: 'Ürünler',
       lede: 'Bana nazik davranmak zorunda olmayan birinin önüne koyabilecek kadar ilerlettiğim işler.',
     },
@@ -85,11 +87,12 @@ export const productsCopy = {
       storeLinkText: "App Store'dan indir",
     },
     scanstashEntry: {
-      note: { label: '02', line1: 'Flutter · Swift · iOS', line2: 'App Store incelemesinde' },
+      note: { label: '02', line1: 'Flutter · Swift · iOS', line2: "App Store'da yayında" },
       cardTitle: scanstash.name,
       cardText:
         "QR kodlarını kameradan veya fotoğraftan tarayarak web bağlantılarını kişisel bir görsel kütüphanede saklamanı sağlayan iPhone uygulaması. Bağlantılarını adlandırabilir, arayabilir ve ana ekran widget'ından tek dokunuşla yeniden açabilirsin.",
-      cardStatus: 'App Store incelemesine gönderildi',
+      cardStatus: "App Store'da yayında",
+      storeLinkText: "App Store'dan indir",
       docs: [
         { label: 'Gizlilik', href: scanstash.privacyUrl },
         { label: 'Kullanım koşulları', href: scanstash.termsUrl },
@@ -97,11 +100,12 @@ export const productsCopy = {
       ],
     },
     birdperchEntry: {
-      note: { label: '03', line1: 'Swift · iOS', line2: 'App Store incelemesinde' },
+      note: { label: '03', line1: 'Swift · iOS', line2: "App Store'da yayında" },
       cardTitle: birdperch.name,
       cardText:
         'Kendi kuşunu 3D olarak oluşturduğun, onunla etkileşime girdiğin, bakımını takip ettiğin ve yapay zekâ destekli öneriler alabildiğin bir iPhone uygulaması.',
-      cardStatus: 'App Store incelemesine gönderildi',
+      cardStatus: "App Store'da yayında",
+      storeLinkText: "App Store'dan indir",
       docs: [
         { label: 'Gizlilik', href: birdperch.privacyUrl },
         { label: 'Kullanım koşulları', href: birdperch.termsUrl },

@@ -48,7 +48,7 @@ export const copy = {
     cta2: 'Read the articles',
 
     prodTitle: 'Products',
-    prodCount: 'One live on the App Store · two in App Store review · one in development',
+    prodCount: 'Three live on the App Store · one in development',
     caseStudy: 'Read the case study',
     source: 'GitHub',
 
@@ -101,11 +101,11 @@ export const copy = {
         docs: productDocsEn,
         icon: { ...grammarlens.icon, alt: 'GrammarLens app icon' },
       },
-      // No product page or case study yet; the legal pages and the
-      // source code.
+      // No product page or case study yet; the App Store link, the legal
+      // pages and the source code.
       {
         name: scanstash.name,
-        status: 'In App Store review',
+        status: 'Live on the App Store',
         pricing: 'One-time purchase',
         kicker: 'QR-powered link library',
         desc: 'An iPhone app that scans QR codes with the camera or from a photo and saves the web links in a personal visual library. You can name your links, search them and reopen them with one tap from a Home Screen widget.',
@@ -116,14 +116,17 @@ export const copy = {
         ],
         facts: ['Solo project', '15 languages', 'No account · on-device'],
         stack: ['Flutter / Dart', 'Swift', 'WidgetKit', 'WebKit'],
+        storeHref: scanstash.appStoreUrl,
+        storeText: 'App Store',
+        storeLabel: 'QR: ScanStash on the App Store (opens in a new tab)',
         sourceHref: scanstash.sourceUrl,
         sourceLabel: 'QR: ScanStash source code on GitHub (opens in a new tab)',
         icon: { ...scanstash.icon, alt: 'QR: ScanStash app icon' },
       },
-      // Same as ScanStash: only the legal pages.
+      // Same as ScanStash: the App Store link and the legal pages.
       {
         name: birdperch.name,
-        status: 'In App Store review',
+        status: 'Live on the App Store',
         pricing: 'Subscription',
         kicker: 'AI-powered bird care app',
         desc: 'An iPhone app where you create your own bird in 3D, interact with it, track its care and get AI-assisted suggestions.',
@@ -134,6 +137,9 @@ export const copy = {
         ],
         facts: ['Solo project', 'No account', 'Real-time 3D'],
         stack: ['Swift', 'Claude API', 'WidgetKit', 'RevenueCat', 'Cloudflare Workers'],
+        storeHref: birdperch.appStoreUrl,
+        storeText: 'App Store',
+        storeLabel: 'BirdPerch on the App Store (opens in a new tab)',
         icon: { ...birdperch.icon, alt: 'BirdPerch app icon' },
       },
       // No product page, legal pages or public source yet: only the card.
@@ -180,12 +186,12 @@ export const copy = {
           {
             when: 'September 2026 –',
             what: 'QR: ScanStash',
-            note: 'My second app: a visual library for links reached through QR codes. Flutter with native Swift for the widget and share extension, in 15 languages. Submitted for App Store review.',
+            note: 'My second app: a visual library for links reached through QR codes. Flutter with native Swift for the widget and share extension, in 15 languages. Live on the App Store since 6 November 2026.',
           },
           {
             when: 'October 2026 –',
             what: 'BirdPerch',
-            note: 'My third app: you create your own bird in 3D, track its care and get AI-assisted suggestions. Swift, with the Claude API behind my own Cloudflare server. Submitted for App Store review.',
+            note: 'My third app: you create your own bird in 3D, track its care and get AI-assisted suggestions. Swift, with the Claude API behind my own Cloudflare server. Live on the App Store since 6 November 2026.',
           },
           {
             when: 'October 2026 –',
@@ -269,7 +275,7 @@ export const copy = {
     cta2: 'Yazıları oku',
 
     prodTitle: 'Ürünler',
-    prodCount: "Biri App Store'da yayında · ikisi App Store incelemesinde · biri geliştirmede",
+    prodCount: "Üçü App Store'da yayında · biri geliştirmede",
     caseStudy: "Case study'yi oku",
     source: 'GitHub',
 
@@ -324,7 +330,7 @@ export const copy = {
       },
       {
         name: scanstash.name,
-        status: 'App Store incelemesinde',
+        status: "App Store'da yayında",
         pricing: 'Tek seferlik satın alma',
         kicker: 'QR tabanlı bağlantı kütüphanesi',
         desc: "QR kodlarını kameradan veya fotoğraftan tarayarak web bağlantılarını kişisel bir görsel kütüphanede saklamanı sağlayan iPhone uygulaması. Bağlantılarını adlandırabilir, arayabilir ve ana ekran widget'ından tek dokunuşla yeniden açabilirsin.",
@@ -335,13 +341,16 @@ export const copy = {
         ],
         facts: ['Tek kişilik proje', '15 dil', 'Hesapsız · cihazda'],
         stack: ['Flutter / Dart', 'Swift', 'WidgetKit', 'WebKit'],
+        storeHref: scanstash.appStoreUrl,
+        storeText: 'App Store',
+        storeLabel: "QR: ScanStash App Store'da (yeni sekmede açılır)",
         sourceHref: scanstash.sourceUrl,
         sourceLabel: "QR: ScanStash kaynak kodu GitHub'da (yeni sekmede açılır)",
         icon: { ...scanstash.icon, alt: 'QR: ScanStash uygulama simgesi' },
       },
       {
         name: birdperch.name,
-        status: 'App Store incelemesinde',
+        status: "App Store'da yayında",
         pricing: 'Abonelik',
         kicker: 'Yapay zekâ destekli kuş bakım uygulaması',
         desc: 'Kendi kuşunu 3D olarak oluşturduğun, onunla etkileşime girdiğin, bakımını takip ettiğin ve yapay zekâ destekli öneriler alabildiğin bir iPhone uygulaması.',
@@ -352,6 +361,9 @@ export const copy = {
         ],
         facts: ['Tek kişilik proje', 'Hesapsız', 'Gerçek zamanlı 3D'],
         stack: ['Swift', 'Claude API', 'WidgetKit', 'RevenueCat', 'Cloudflare Workers'],
+        storeHref: birdperch.appStoreUrl,
+        storeText: 'App Store',
+        storeLabel: "BirdPerch App Store'da (yeni sekmede açılır)",
         icon: { ...birdperch.icon, alt: 'BirdPerch uygulama simgesi' },
       },
       {
@@ -397,12 +409,12 @@ export const copy = {
           {
             when: 'Eylül 2026 –',
             what: 'QR: ScanStash',
-            note: "İkinci uygulamam: QR kodlarıyla ulaşılan bağlantılar için görsel bir kütüphane. Flutter ile geliştirildi; widget ve paylaşım uzantısı Swift ile yazıldı, 15 dili destekliyor. App Store incelemesine gönderildi.",
+            note: "İkinci uygulamam: QR kodlarıyla ulaşılan bağlantılar için görsel bir kütüphane. Flutter ile geliştirildi; widget ve paylaşım uzantısı Swift ile yazıldı, 15 dili destekliyor. 6 Kasım 2026'dan beri App Store'da yayında.",
           },
           {
             when: 'Ekim 2026 –',
             what: 'BirdPerch',
-            note: "Üçüncü uygulamam: kendi kuşunu 3D olarak oluşturuyor, bakımını takip ediyor ve yapay zekâ destekli öneriler alıyorsun. Swift ile geliştirildi; Claude API'ye kendi Cloudflare sunucum üzerinden bağlanıyor. App Store incelemesine gönderildi.",
+            note: "Üçüncü uygulamam: kendi kuşunu 3D olarak oluşturuyor, bakımını takip ediyor ve yapay zekâ destekli öneriler alıyorsun. Swift ile geliştirildi; Claude API'ye kendi Cloudflare sunucum üzerinden bağlanıyor. 6 Kasım 2026'dan beri App Store'da yayında.",
           },
           {
             when: 'Ekim 2026 –',

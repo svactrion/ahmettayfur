@@ -54,7 +54,7 @@ const t = productsCopy[lang];
       {t.scanstashEntry.note.line2}
     </aside>
     <div class="body">
-      <!-- No product page yet: same card, but not a link. -->
+      <!-- No product page yet: same card, but not a link. The App Store link is below. -->
       <div class="card card-static">
         <span class="card-title card-title-icon">
           <picture>
@@ -67,6 +67,8 @@ const t = productsCopy[lang];
         <span class="card-status">{t.scanstashEntry.cardStatus}</span>
       </div>
       <p class="card-docs">
+        <a href={scanstash.appStoreUrl}>{t.scanstashEntry.storeLinkText}</a>
+        <span aria-hidden="true">·</span>
         {t.scanstashEntry.docs.map((l, i) => (
           <>
             {i > 0 && <span aria-hidden="true">·</span>}
@@ -96,6 +98,8 @@ const t = productsCopy[lang];
         <span class="card-status">{t.birdperchEntry.cardStatus}</span>
       </div>
       <p class="card-docs">
+        <a href={birdperch.appStoreUrl}>{t.birdperchEntry.storeLinkText}</a>
+        <span aria-hidden="true">·</span>
         {t.birdperchEntry.docs.map((l, i) => (
           <>
             {i > 0 && <span aria-hidden="true">·</span>}

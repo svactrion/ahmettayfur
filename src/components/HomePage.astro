@@ -112,9 +112,9 @@ const postLang = (p) => (lang === 'en' && /[çğıöşüÇĞİÖŞÜ]/.test(`${p
                 </div>
               )}
 
-              {(p.caseHref || p.sourceHref || p.docs) && (
+              {(p.caseHref || p.storeHref || p.sourceHref || p.docs) && (
               <div class="prod-foot">
-                {(p.caseHref || p.sourceHref) && (
+                {(p.caseHref || p.storeHref || p.sourceHref) && (
                   <div class="prod-actions">
                     {p.caseHref && (
                       <a class="btn btn-primary" href={localizeHref(p.caseHref, lang)}>
